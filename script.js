@@ -98,3 +98,30 @@ slider.addEventListener("mouseleave", startSlider);
 
 // Start Slider
 startSlider();
+
+
+// =========================================================
+// footer
+// =========================================================
+
+document.querySelectorAll(".app-link").forEach(function (link) {
+
+    link.addEventListener("click", function (event) {
+
+        event.preventDefault();
+
+        const appLink = this.getAttribute("href");
+        const webLink = this.getAttribute("data-web");
+
+        // Try opening the original application
+        window.location.href = appLink;
+
+        // If the application is not installed,
+        // open the website after a short delay
+        setTimeout(function () {
+            window.location.href = webLink;
+        }, 1500);
+
+    });
+
+});
