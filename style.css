@@ -1914,3 +1914,448 @@ header {
         height: 68px;
     }
 }
+
+
+
+/* =========================================================
+   PREMIUM FOOTER
+========================================================= */
+
+.footer {
+    width: 100%;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(212, 160, 23, 0.06),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(212, 160, 23, 0.04),
+            transparent 28%
+        ),
+        #11110f;
+
+    color: #f4f0e7;
+
+    padding: 50px 7% 22px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-top: 1px solid rgba(212, 160, 23, 0.25);
+}
+
+
+/* =========================================================
+   TOP GOLDEN LINE
+========================================================= */
+
+.footer::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    width: 170px;
+    height: 2px;
+
+    transform: translateX(-50%);
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #d4a017,
+        #f2ca63,
+        #d4a017,
+        transparent
+    );
+
+    box-shadow:
+        0 0 14px rgba(212, 160, 23, 0.3);
+}
+
+
+/* =========================================================
+   MAIN FOOTER AREA
+========================================================= */
+
+.footer-container {
+    width: 100%;
+    max-width: 1150px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 120px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   FOOTER COLUMN
+========================================================= */
+
+.footer-column {
+    min-width: 0;
+}
+
+.footer-column h3 {
+    position: relative;
+
+    display: inline-block;
+
+    margin: 0 0 22px;
+
+    color: #e0b84f;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.5px;
+}
+
+
+/* Heading underline */
+
+.footer-column h3::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -8px;
+
+    width: 35px;
+    height: 2px;
+
+    background: #d4a017;
+
+    border-radius: 10px;
+
+    transition: width 0.3s ease;
+}
+
+.footer-column:hover h3::after {
+    width: 55px;
+}
+
+
+/* =========================================================
+   CUSTOMER SERVICE LINKS
+========================================================= */
+
+.footer-column ul {
+    list-style: none;
+
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li:last-child {
+    margin-bottom: 0;
+}
+
+.footer-column ul li a {
+    display: inline-block;
+
+    position: relative;
+
+    color: #c5c1b8;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    letter-spacing: 0.2px;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: #e4bd55;
+
+    transform: translateX(5px);
+}
+
+
+/* =========================================================
+   SOCIAL MEDIA
+========================================================= */
+
+.social-links {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.social-links a {
+    width: max-content;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: #c5c1b8;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.social-links a i {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(212, 160, 23, 0.45);
+
+    border-radius: 50%;
+
+    color: #d4a017;
+
+    font-size: 14px;
+
+    background: rgba(212, 160, 23, 0.025);
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #e4bd55;
+
+    transform: translateX(6px);
+}
+
+.social-links a:hover i {
+    background: #d4a017;
+
+    color: #11110f;
+
+    border-color: #d4a017;
+
+    transform: scale(1.08);
+
+    box-shadow:
+        0 4px 15px rgba(212, 160, 23, 0.2);
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.footer-divider {
+    width: 100%;
+    max-width: 1150px;
+
+    height: 1px;
+
+    margin: 32px auto;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(212, 160, 23, 0.28),
+        rgba(255, 255, 255, 0.07),
+        rgba(212, 160, 23, 0.28),
+        transparent
+    );
+}
+
+
+/* =========================================================
+   DESIGNER CREDIT
+========================================================= */
+
+.designer-credit {
+    width: 100%;
+
+    text-align: center;
+
+    margin: 0 auto;
+}
+
+.designer-credit p {
+    margin: 0 0 5px;
+
+    color: #99958c;
+
+    font-size: 13px;
+
+    letter-spacing: 0.6px;
+}
+
+.designer-credit h3 {
+    margin: 0 0 5px;
+
+    color: #e0b84f;
+
+    font-size: 22px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.7px;
+}
+
+.designer-credit span {
+    color: #77736c;
+
+    font-size: 12px;
+
+    letter-spacing: 0.4px;
+}
+
+
+/* =========================================================
+   COPYRIGHT
+========================================================= */
+
+.footer-bottom {
+    width: 100%;
+    max-width: 1150px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+
+    color: #77746d;
+
+    font-size: 12px;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .footer {
+        padding: 45px 6% 20px;
+    }
+
+    .footer-container {
+        column-gap: 60px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .footer {
+        padding: 42px 8% 20px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+
+        row-gap: 35px;
+    }
+
+    .footer-column h3 {
+        font-size: 17px;
+    }
+
+    .footer-column ul li a,
+    .social-links a {
+        font-size: 14px;
+    }
+
+    .footer-divider {
+        margin: 30px auto;
+    }
+
+    .designer-credit h3 {
+        font-size: 20px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+
+        justify-content: center;
+
+        text-align: center;
+
+        gap: 6px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .footer {
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
+    .footer-column h3 {
+        font-size: 16px;
+    }
+
+    .footer-column ul li a,
+    .social-links a {
+        font-size: 13px;
+    }
+
+    .designer-credit h3 {
+        font-size: 18px;
+    }
+
+}
