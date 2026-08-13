@@ -100,10 +100,12 @@ slider.addEventListener("mouseleave", startSlider);
 startSlider();
 
 
+
 // =========================================================
-// footer
+// FOLLOW US - SOCIAL MEDIA APP LINKS
 // =========================================================
 
+// Instagram & Facebook
 document.querySelectorAll(".app-link").forEach(function (link) {
 
     link.addEventListener("click", function (event) {
@@ -113,15 +115,38 @@ document.querySelectorAll(".app-link").forEach(function (link) {
         const appLink = this.getAttribute("href");
         const webLink = this.getAttribute("data-web");
 
-        // Try opening the original application
+        // Try to open the original application
         window.location.href = appLink;
 
-        // If the application is not installed,
-        // open the website after a short delay
+        // Fallback to website only if app does not open
         setTimeout(function () {
-            window.location.href = webLink;
-        }, 1500);
+
+            if (!document.hidden) {
+                window.location.href = webLink;
+            }
+
+        }, 1800);
 
     });
 
 });
+
+
+// =========================================================
+// WHATSAPP - APP ONLY
+// =========================================================
+
+const whatsappLink = document.querySelector(".whatsapp-app");
+
+if (whatsappLink) {
+
+    whatsappLink.addEventListener("click", function (event) {
+
+        event.preventDefault();
+
+        // Open WhatsApp application
+        window.location.href = this.getAttribute("href");
+
+    });
+
+}
