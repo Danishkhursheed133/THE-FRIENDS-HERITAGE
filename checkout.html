@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Complete your order securely with our easy checkout process.">
+
+    <title>Checkout | The Friends Heritage</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Checkout CSS -->
+    <link rel="stylesheet" href="checkout.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER / NAVBAR
+    ====================================================== -->
+
+    <header class="checkout-header">
+
+        <div class="checkout-navbar">
+
+            <!-- Logo / Brand -->
+            <a href="index.html" class="checkout-logo">
+                <img src="logo.png" alt="Brand Logo">
+                <span>The Friends Heritage</span>
+            </a>
+
+            <!-- Back to Cart -->
+            <a href="cart.html" class="back-cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+                Back to Cart
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         CHECKOUT MAIN
+    ====================================================== -->
+
+    <main class="checkout-container">
+
+        <!-- Page Heading -->
+        <div class="checkout-heading">
+
+            <span class="checkout-small-title">
+                <i class="fa-solid fa-lock"></i>
+                Secure Checkout
+            </span>
+
+            <h1>Complete Your Order</h1>
+
+            <p>
+                Enter your delivery details and review your order
+                before placing it.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             CHECKOUT CONTENT
+        ================================================== -->
+
+        <div class="checkout-grid">
+
+
+            <!-- =================================================
+                 LEFT SIDE
+            ================================================== -->
+
+            <section class="checkout-left">
+
+
+                <!-- =============================================
+                     CUSTOMER INFORMATION
+                ============================================== -->
+
+                <div class="checkout-card">
+
+                    <div class="card-title">
+
+                        <div class="title-icon">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <div>
+                            <h2>Customer Information</h2>
+                            <p>Enter your contact details</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="fullName">
+                                Full Name
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="fullName"
+                                name="fullName"
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                Mobile Number
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="Enter your mobile number"
+                                autocomplete="tel"
+                                maxlength="10"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                            <small>(Optional)</small>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            autocomplete="email"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     DELIVERY ADDRESS
+                ============================================== -->
+
+                <div class="checkout-card">
+
+                    <div class="card-title">
+
+                        <div class="title-icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+
+                        <div>
+                            <h2>Delivery Address</h2>
+                            <p>Where should we deliver your order?</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="address">
+                            House / Building / Street
+                            <span>*</span>
+                        </label>
+
+                        <textarea
+                            id="address"
+                            name="address"
+                            rows="3"
+                            placeholder="House no., building name, street, area..."
+                            autocomplete="street-address"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="city">
+                                City
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                placeholder="Enter your city"
+                                autocomplete="address-level2"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="state">
+                                State
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="state"
+                                name="state"
+                                placeholder="Enter your state"
+                                autocomplete="address-level1"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="pincode">
+                                PIN Code
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="pincode"
+                                name="pincode"
+                                placeholder="Enter 6-digit PIN code"
+                                inputmode="numeric"
+                                maxlength="6"
+                                autocomplete="postal-code"
+                                required
+                            >
+
+                            <!-- Delivery status will appear here -->
+                            <div
+                                id="deliveryStatus"
+                                class="delivery-status"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="landmark">
+                                Landmark
+                                <small>(Optional)</small>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="landmark"
+                                name="landmark"
+                                placeholder="Nearby landmark"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     PAYMENT METHOD
+                ============================================== -->
+
+                <div class="checkout-card">
+
+                    <div class="card-title">
+
+                        <div class="title-icon">
+                            <i class="fa-solid fa-credit-card"></i>
+                        </div>
+
+                        <div>
+                            <h2>Payment Method</h2>
+                            <p>Select your preferred payment option</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="payment-options">
+
+
+                        <!-- Cash on Delivery -->
+
+                        <label class="payment-option">
+
+                            <input
+                                type="radio"
+                                name="paymentMethod"
+                                value="cod"
+                                checked
+                            >
+
+                            <div class="payment-content">
+
+                                <div class="payment-icon">
+                                    <i class="fa-solid fa-money-bill-wave"></i>
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Cash on Delivery
+                                    </strong>
+
+                                    <span>
+                                        Pay when your order is delivered
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <i class="fa-solid fa-circle-check payment-check"></i>
+
+                        </label>
+
+
+                        <!-- Online Payment -->
+
+                        <label class="payment-option">
+
+                            <input
+                                type="radio"
+                                name="paymentMethod"
+                                value="online"
+                            >
+
+                            <div class="payment-content">
+
+                                <div class="payment-icon">
+                                    <i class="fa-solid fa-mobile-screen-button"></i>
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Online Payment
+                                    </strong>
+
+                                    <span>
+                                        UPI / Card / Other online methods
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <i class="fa-solid fa-circle-check payment-check"></i>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     CUSTOMER NOTE
+                ============================================== -->
+
+                <div class="checkout-card">
+
+                    <div class="card-title">
+
+                        <div class="title-icon">
+                            <i class="fa-solid fa-message"></i>
+                        </div>
+
+                        <div>
+                            <h2>Order Note</h2>
+                            <p>Any special instructions?</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="orderNote">
+                            Message
+                            <small>(Optional)</small>
+                        </label>
+
+                        <textarea
+                            id="orderNote"
+                            name="orderNote"
+                            rows="3"
+                            placeholder="Example: Please call before delivery..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 RIGHT SIDE — ORDER SUMMARY
+            ================================================== -->
+
+            <aside class="checkout-right">
+
+
+                <!-- =============================================
+                     ORDER ITEMS
+                ============================================== -->
+
+                <div class="checkout-card order-card">
+
+                    <div class="card-title">
+
+                        <div class="title-icon">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </div>
+
+                        <div>
+                            <h2>Your Order</h2>
+
+                            <p>
+                                <span id="checkoutItemCount">0</span>
+                                items
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Products will be inserted by checkout.js -->
+
+                    <div
+                        id="checkoutItems"
+                        class="checkout-items"
+                    >
+
+                        <!-- JavaScript will load cart products here -->
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     ORDER SUMMARY
+                ============================================== -->
+
+                <div class="checkout-card summary-card">
+
+                    <h2>Order Summary</h2>
+
+
+                    <div class="summary-row">
+
+                        <span>Subtotal</span>
+
+                        <strong id="checkoutSubtotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Delivery Charge
+                        </span>
+
+                        <strong id="deliveryCharge">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Delivery message -->
+
+                    <div
+                        id="deliveryMessage"
+                        class="delivery-message"
+                    >
+                        Enter your PIN code to calculate delivery charges.
+                    </div>
+
+
+                    <div class="summary-divider"></div>
+
+
+                    <div class="summary-total">
+
+                        <span>Total</span>
+
+                        <strong id="checkoutTotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Place Order -->
+
+                    <button
+                        type="button"
+                        id="placeOrderBtn"
+                        class="place-order-btn"
+                    >
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <span>
+                            Place Order
+                        </span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+                    <!-- WhatsApp Order -->
+
+                    <button
+                        type="button"
+                        id="whatsappOrderBtn"
+                        class="whatsapp-order-btn"
+                    >
+
+                        <i class="fa-brands fa-whatsapp"></i>
+
+                        Order via WhatsApp
+
+                    </button>
+
+
+                    <p class="secure-note">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        Your information is safe and secure.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     TRUST FEATURES
+                ============================================== -->
+
+                <div class="checkout-trust">
+
+                    <div class="trust-item">
+
+                        <i class="fa-solid fa-leaf"></i>
+
+                        <div>
+                            <strong>Quality Products</strong>
+                            <span>Carefully selected</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="trust-item">
+
+                        <i class="fa-solid fa-box"></i>
+
+                        <div>
+                            <strong>Secure Packaging</strong>
+                            <span>Packed with care</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="trust-item">
+
+                        <i class="fa-solid fa-truck-fast"></i>
+
+                        <div>
+                            <strong>Reliable Delivery</strong>
+                            <span>Delivered to your door</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="checkout-footer">
+
+        <p>
+            © 2026 The Friends Heritage. All Rights Reserved.
+        </p>
+
+        <p>
+            Designed & Developed by Danish Khursheed
+        </p>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         CHECKOUT JAVASCRIPT
+    ====================================================== -->
+
+    <script src="checkout.js"></script>
+
+</body>
+
+</html>

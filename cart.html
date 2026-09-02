@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Cart | The Friends Heritage</title>
+
+    <link rel="icon" href="logo.png">
+
+    <link rel="stylesheet" href="cart.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<header>
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+
+            <img
+                src="logo.png"
+                alt="The Friends Heritage Logo"
+            >
+
+            <span>
+                THE FRIENDS HERITAGE
+            </span>
+
+        </a>
+
+
+        <ul class="nav-links" id="navLinks">
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="index.html#shop">
+                    Shop
+                </a>
+            </li>
+
+            <li>
+                <a href="index.html#benefits">
+                    Benefits
+                </a>
+            </li>
+
+            <li>
+                <a href="about.html">
+                    About Us
+                </a>
+            </li>
+
+            <li>
+                <a href="contact.html">
+                    Contact Us
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="nav-icons">
+
+            <a
+                href="#"
+                aria-label="User Account"
+            >
+                <i class="fa-regular fa-user"></i>
+            </a>
+
+
+            <a
+                href="cart.html"
+                class="cart-icon active-cart"
+                aria-label="Shopping Cart"
+            >
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span
+                    class="cart-count"
+                    id="cartCount"
+                >
+                    0
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <div
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Open Menu"
+            role="button"
+            tabindex="0"
+        >
+            ☰
+        </div>
+
+    </nav>
+
+</header>
+
+
+<main class="cart-page">
+
+
+    <!-- CART HERO -->
+
+    <section class="cart-hero">
+
+        <span class="cart-label">
+            YOUR SELECTION
+        </span>
+
+        <h1>
+            Your Shopping
+            <span>Cart</span>
+        </h1>
+
+        <p>
+            Review your carefully selected Kashmir treasures
+            before placing your order.
+        </p>
+
+    </section>
+
+
+
+    <!-- CART SECTION -->
+
+    <section class="cart-section">
+
+        <div class="cart-container">
+
+
+            <!-- CART PRODUCTS -->
+
+            <div class="cart-products">
+
+                <div class="cart-products-header">
+
+                    <div>
+
+                        <span class="cart-small-label">
+                            SHOPPING BAG
+                        </span>
+
+                        <h2>
+                            Your Products
+                        </h2>
+
+                    </div>
+
+                    <span id="cartItemsCount">
+                        0 Items
+                    </span>
+
+                </div>
+
+
+                <!--
+                    JavaScript generates the product cards here.
+                    Each generated card should contain:
+
+                    - Small product image
+                    - Product name
+                    - Product details
+                    - Price
+                    - Quantity controls
+                    - Total price
+                    - Remove button
+                -->
+
+                <div
+                    class="cart-items"
+                    id="cartItems"
+                ></div>
+
+
+
+                <!-- EMPTY CART -->
+
+                <div
+                    class="empty-cart"
+                    id="emptyCart"
+                    style="display: none;"
+                >
+
+                    <div class="empty-cart-icon">
+
+                        <i class="fa-solid fa-cart-shopping"></i>
+
+                    </div>
+
+                    <h3>
+                        Your Cart is Empty
+                    </h3>
+
+                    <p>
+                        Looks like you haven't added any
+                        Kashmir treasures yet.
+                    </p>
+
+                    <a
+                        href="index.html#products"
+                        class="continue-shopping"
+                    >
+
+                        Explore Products
+
+                        <span>
+                            →
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- CONTINUE SHOPPING -->
+
+                <div class="continue-wrapper">
+
+                    <a
+                        href="index.html#products"
+                        class="continue-link"
+                    >
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Continue Shopping
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ORDER SUMMARY -->
+
+            <aside class="order-summary">
+
+
+                <div class="summary-header">
+
+                    <div>
+
+                        <span>
+                            YOUR ORDER
+                        </span>
+
+                        <h2>
+                            Order Summary
+                        </h2>
+
+                    </div>
+
+                    <i class="fa-solid fa-receipt"></i>
+
+                </div>
+
+
+
+                <div class="summary-body">
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong id="cartSubtotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Delivery
+                        </span>
+
+                        <strong id="deliveryCharge">
+                           ₹0 
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-divider"></div>
+
+
+                    <div class="summary-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="cartTotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <a
+                        href="checkout.html"
+                        class="checkout-btn"
+                        id="checkoutBtn"
+                    >
+
+                        <span>
+                            Proceed to Checkout
+                        </span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+
+                    <!-- SECURE CHECKOUT -->
+
+                    <div class="secure-checkout">
+
+                        <div class="secure-icon">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Secure Checkout
+                            </strong>
+
+                            <span>
+                                Your information is protected
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- TRUST SECTION -->
+
+    <section class="cart-trust">
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+
+                <i class="fa-solid fa-leaf"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    Natural Products
+                </strong>
+
+                <span>
+                    Carefully selected quality
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+
+                <i class="fa-solid fa-mountain"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    Kashmiri Heritage
+                </strong>
+
+                <span>
+                    Inspired by Kashmir
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+
+                <i class="fa-solid fa-truck-fast"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    Secure Delivery
+                </strong>
+
+                <span>
+                    Safe delivery across India
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+
+                <i class="fa-solid fa-award"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    Premium Quality
+                </strong>
+
+                <span>
+                    Quality you can trust
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+
+    <div class="footer-container">
+
+
+        <!-- CUSTOMER SERVICE -->
+
+        <div class="footer-column">
+
+            <h3>
+                Customer Service
+            </h3>
+
+            <ul>
+
+                <li>
+                    <a href="contact.html">
+                        Contact Us
+                    </a>
+                </li>
+
+                <li>
+                    <a href="shipping.html">
+                        Shipping &amp; Delivery
+                    </a>
+                </li>
+
+                <li>
+                    <a href="returns.html">
+                        Returns &amp; Refunds
+                    </a>
+                </li>
+
+                <li>
+                    <a href="terms.html">
+                        Terms &amp; Conditions
+                    </a>
+                </li>
+
+                <li>
+                    <a href="privacy.html">
+                        Privacy Policy
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+        <!-- FOLLOW US -->
+
+        <div class="footer-column social-column">
+
+            <h3>
+                Follow Us
+            </h3>
+
+            <div class="social-links">
+
+
+                <a
+                    href="#"
+                    aria-label="Instagram"
+                >
+
+                    <i class="fab fa-instagram"></i>
+
+                    <span>
+                        Instagram
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="#"
+                    aria-label="Facebook"
+                >
+
+                    <i class="fab fa-facebook-f"></i>
+
+                    <span>
+                        Facebook
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="#"
+                    aria-label="WhatsApp"
+                >
+
+                    <i class="fab fa-whatsapp"></i>
+
+                    <span>
+                        WhatsApp
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- DIVIDER -->
+
+    <div class="footer-divider"></div>
+
+
+
+    <!-- DESIGNER -->
+
+    <div class="designer-credit">
+
+        <p>
+            Designed &amp; Developed by
+        </p>
+
+        <h3>
+            Danish Khursheed
+        </h3>
+
+        <span>
+            Crafted with ❤️ &amp; creativity
+        </span>
+
+    </div>
+
+
+
+    <!-- DIVIDER -->
+
+    <div class="footer-divider"></div>
+
+
+
+    <!-- COPYRIGHT -->
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 The Friends Heritage
+        </p>
+
+        <p>
+            All Rights Reserved
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
