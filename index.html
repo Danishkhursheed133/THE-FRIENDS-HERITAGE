@@ -51,16 +51,10 @@
                     Home
                 </a>
             </li>
-
+            
             <li>
-                <a href="#shop">
+                <a href="shop.html">
                     Shop
-                </a>
-            </li>
-
-            <li>
-                <a href="#products">
-                    Products
                 </a>
             </li>
 
@@ -88,24 +82,28 @@
         <!-- Navbar Icons -->
         <div class="nav-icons">
 
+            <!-- User Account -->
             <a href="#" aria-label="User Account">
                 <i class="fa-regular fa-user"></i>
             </a>
 
+            <!-- Shopping Cart -->
             <a
-                href="#"
+                href="cart.html"
                 class="cart-icon"
                 aria-label="Shopping Cart"
+                title="Shopping Cart"
             >
-                <i class="fa-solid fa-cart-shopping"></i>
+            <i class="fa-solid fa-cart-shopping"></i>
 
-                <span class="cart-count">
-                    0
-                </span>
+            <span
+                class="cart-count"
+                id="cartCount"
+            >0</span>
+
             </a>
 
         </div>
-
 
         <!-- Mobile Menu -->
         <div
@@ -159,9 +157,11 @@
                     a healthier lifestyle.
                 </p>
 
-                <a href="#products" class="btn">
+                <a href="shop.html" class="btn">
                     Shop Now
                 </a>
+                
+                
 
             </div>
 
@@ -194,7 +194,7 @@
                     a healthier lifestyle.
                 </p>
 
-                <a href="#products" class="btn">
+                <a href="shop.html" class="btn">
                     Shop Now
                 </a>
 
@@ -229,7 +229,7 @@
                     rich in color, aroma and goodness.
                 </p>
 
-                <a href="#products" class="btn">
+                <a href="shop.html" class="btn">
                     Shop Now
                 </a>
 
@@ -301,21 +301,21 @@
         <div class="section-title">
 
             <h2>
-                Our Premium Products
+                Featured Products
             </h2>
 
             <p>
-                Natural • Pure • Handpicked
+                Our most loved products • Pure • Premium • Handpicked
             </p>
 
         </div>
 
 
         <a
-            href="#products"
-            class="see-more-btn"
+           href="shop.html"
+           class="see-more-btn"
         >
-            See More →
+            View All Products →
         </a>
 
     </div>
@@ -342,12 +342,13 @@
                 ₹599 / 500g
             </p>
 
-            <a
-                href="#"
-                class="product-btn"
-            >
-                Add to Cart
-            </a>
+            <a href="#"
+                class="product-btn add-to-cart"
+                data-name="Premium Almonds"
+                data-price="599"
+                data-image="slide1.jpg">
+                    Add to Cart
+        </a>
 
             <br>
             <br>
@@ -378,12 +379,13 @@
                 ₹699 / 500g
             </p>
 
-            <a
-                href="#"
-                class="product-btn"
-            >
-                Add to Cart
-            </a>
+            <a href="#"
+                class="product-btn add-to-cart"
+                data-name="Premium Walnuts"
+                data-price="699"
+            data-image="slide2.jpg">
+                    Add to Cart
+        </a>
 
             <br>
             <br>
@@ -414,12 +416,13 @@
                 ₹299 / 1g
             </p>
 
-            <a
-                href="#"
-                class="product-btn"
-            >
-                Add to Cart
-            </a>
+            <a href="#"
+                class="product-btn add-to-cart"
+                data-name="Kashmiri Saffron"
+                data-price="299"
+                data-image="slide3.jpg">
+                    Add to Cart
+        </a>
 
             <br>
             <br>
@@ -450,11 +453,12 @@
                 ₹1299 / 50g
             </p>
 
-            <a
-                href="#"
-                class="product-btn"
-            >
-                Add to Cart
+            <a href="#"
+                class="product-btn add-to-cart"
+                data-name="Pure Shilajit"
+                data-price="1299"
+                data-image="slide4.jpg">
+                    Add to Cart
             </a>
 
             <br>
@@ -941,16 +945,6 @@
 <script src="script.js"></script>
 
 
-
-
-
-
-
-<!-- =====================================================
-     JAVASCRIPT
-====================================================== -->
-
-<script src="script.js"></script>
 
 </body>
 
