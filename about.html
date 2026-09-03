@@ -69,12 +69,6 @@
             </li>
 
             <li>
-                <a href="index.html#products">
-                    Products
-                </a>
-            </li>
-
-            <li>
                 <a href="index.html#benefits">
                     Benefits
                 </a>
@@ -86,35 +80,70 @@
                 </a>
             </li>
 
+            <li>
+                <a href="contact.html">
+                    Contact Us
+                </a>
+            </li>
+
         </ul>
 
+        <!-- ================= NAVBAR ICONS ================= -->
 
-        <!-- Navbar Icons -->
         <div class="nav-icons">
+
+
+            <!-- USER ACCOUNT -->
 
             <a
                 href="#"
                 aria-label="User Account"
             >
+
                 <i class="fa-regular fa-user"></i>
+
             </a>
 
 
+
+            <!-- SHOPPING CART -->
+
             <a
-                href="#"
+                href="cart.html"
                 class="cart-icon"
                 aria-label="Shopping Cart"
+                title="Shopping Cart"
             >
 
                 <i class="fa-solid fa-cart-shopping"></i>
 
-                <span class="cart-count">
+                <span
+                    class="cart-count"
+                    id="cartCount"
+                >
                     0
                 </span>
 
             </a>
 
         </div>
+
+
+
+        <!-- ================= MOBILE MENU ================= -->
+
+        <div
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Open Menu"
+            role="button"
+            tabindex="0"
+        >
+
+            ☰
+
+        </div>
+         
 
 
         <!-- Mobile Menu -->
@@ -727,7 +756,7 @@
 
 
             <a
-                href="index.html#products"
+                href="shop.html#products"
                 class="cta-btn"
             >
 
@@ -793,6 +822,7 @@
 
 </script>
 
+<script src="script.js"></script>
 </body>
 
 </html>
