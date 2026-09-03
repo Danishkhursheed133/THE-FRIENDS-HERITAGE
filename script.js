@@ -14,8 +14,6 @@ if (menuToggle && navLinks) {
         navLinks.classList.toggle("active");
     });
 
-
-    // Close menu when a navigation link is clicked
     const menuItems = navLinks.querySelectorAll("a");
 
     menuItems.forEach(link => {
@@ -29,7 +27,6 @@ if (menuToggle && navLinks) {
 }
 
 
-
 // =========================================================
 // SLIDER
 // =========================================================
@@ -41,14 +38,18 @@ let currentSlide = 0;
 let autoSlide = null;
 
 
-// ---------------------------------------------------------
-// SHOW SLIDE
-// ---------------------------------------------------------
-
 function showSlide(index) {
 
     if (!slides.length) {
         return;
+    }
+
+    if (index >= slides.length) {
+        index = 0;
+    }
+
+    if (index < 0) {
+        index = slides.length - 1;
     }
 
     slides.forEach(slide => {
@@ -59,32 +60,15 @@ function showSlide(index) {
         dot.classList.remove("active");
     });
 
-
-    if (index >= slides.length) {
-        index = 0;
-    }
-
-    if (index < 0) {
-        index = slides.length - 1;
-    }
-
-
     slides[index].classList.add("active");
-
 
     if (dots[index]) {
         dots[index].classList.add("active");
     }
 
-
     currentSlide = index;
 }
 
-
-
-// ---------------------------------------------------------
-// NEXT SLIDE
-// ---------------------------------------------------------
 
 function nextSlide() {
 
@@ -92,17 +76,9 @@ function nextSlide() {
         return;
     }
 
-    currentSlide =
-        (currentSlide + 1) % slides.length;
-
-    showSlide(currentSlide);
+    showSlide(currentSlide + 1);
 }
 
-
-
-// ---------------------------------------------------------
-// PREVIOUS SLIDE
-// ---------------------------------------------------------
 
 function prevSlide() {
 
@@ -110,18 +86,9 @@ function prevSlide() {
         return;
     }
 
-    currentSlide =
-        (currentSlide - 1 + slides.length) %
-        slides.length;
-
-    showSlide(currentSlide);
+    showSlide(currentSlide - 1);
 }
 
-
-
-// ---------------------------------------------------------
-// START AUTO SLIDER
-// ---------------------------------------------------------
 
 function startSlider() {
 
@@ -132,34 +99,19 @@ function startSlider() {
     clearInterval(autoSlide);
 
     autoSlide = setInterval(() => {
-
         nextSlide();
-
     }, 3000);
 }
 
 
-
-// ---------------------------------------------------------
-// STOP AUTO SLIDER
-// ---------------------------------------------------------
-
 function stopSlider() {
-
     clearInterval(autoSlide);
 }
 
 
-
-// =========================================================
-// SLIDER BUTTONS
-// =========================================================
-
 const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".prev");
 
-
-// NEXT BUTTON
 
 if (nextBtn) {
 
@@ -176,9 +128,6 @@ if (nextBtn) {
 }
 
 
-
-// PREVIOUS BUTTON
-
 if (prevBtn) {
 
     prevBtn.addEventListener("click", () => {
@@ -193,11 +142,6 @@ if (prevBtn) {
 
 }
 
-
-
-// =========================================================
-// SLIDER DOTS
-// =========================================================
 
 dots.forEach((dot, index) => {
 
@@ -214,35 +158,22 @@ dots.forEach((dot, index) => {
 });
 
 
-
-// =========================================================
-// PAUSE SLIDER ON HOVER
-// =========================================================
-
 const slider = document.querySelector(".slider");
 
 if (slider) {
 
-    slider.addEventListener("mouseenter", () => {
+    slider.addEventListener(
+        "mouseenter",
+        stopSlider
+    );
 
-        stopSlider();
-
-    });
-
-
-    slider.addEventListener("mouseleave", () => {
-
-        startSlider();
-
-    });
+    slider.addEventListener(
+        "mouseleave",
+        startSlider
+    );
 
 }
 
-
-
-// =========================================================
-// START SLIDER
-// =========================================================
 
 if (slides.length) {
 
@@ -253,308 +184,960 @@ if (slides.length) {
 }
 
 
-
 // =========================================================
-// SOCIAL APP LINKS
-//
-// MOBILE:
-// App installed     → Open App
-// App not installed → Open Store
-//
-// DESKTOP:
-// Open Website
+// CART SYSTEM
 // =========================================================
 
-document.addEventListener("DOMContentLoaded", () => {
+let cart = JSON.parse(
+    localStorage.getItem("friendsHeritageCart")
+) || [];
 
 
-    const appLinks =
-        document.querySelectorAll(".app-link");
+// =========================================================
+// CART ELEMENTS
+// =========================================================
+
+const cartCountElements =
+    document.querySelectorAll(
+        ".cart-count, #cartCount"
+    );
 
 
-    appLinks.forEach(link => {
+const cartItemsContainer =
+    document.getElementById("cartItems");
 
 
-        link.addEventListener("click", function (event) {
+const cartItemsCount =
+    document.getElementById("cartItemsCount");
+
+
+const cartSubtotal =
+    document.getElementById("cartSubtotal");
+
+
+const cartTotal =
+    document.getElementById("cartTotal");
+
+
+const emptyCart =
+    document.getElementById("emptyCart");
+
+
+const checkoutBtn =
+    document.querySelector(".checkout-btn");
+
+
+// =========================================================
+// SAVE CART
+// =========================================================
+
+function saveCart() {
+
+    localStorage.setItem(
+        "friendsHeritageCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+// =========================================================
+// UPDATE CART COUNT
+// =========================================================
+
+function updateCartCount() {
+
+    const totalItems = cart.reduce(
+        (total, item) => {
+
+            return total +
+                Number(item.quantity || 0);
+
+        },
+        0
+    );
+
+
+    cartCountElements.forEach(element => {
+
+        element.textContent =
+            totalItems;
+
+    });
+
+}
+
+
+// =========================================================
+// ADD TO CART
+// =========================================================
+
+const addToCartButtons =
+    document.querySelectorAll(
+        ".add-to-cart"
+    );
+
+
+addToCartButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        function (event) {
 
             event.preventDefault();
 
 
-            // -------------------------------------------------
-            // GET DATA FROM HTML
-            // -------------------------------------------------
-
-            const app =
-                this.dataset.app;
-
-            const androidStore =
-                this.dataset.androidStore;
-
-            const iosStore =
-                this.dataset.iosStore;
-
-            const phone =
-                this.dataset.phone;
+            const name =
+                this.dataset.name;
 
 
-            // -------------------------------------------------
-            // DEVICE DETECTION
-            // -------------------------------------------------
-
-            const userAgent =
-                navigator.userAgent ||
-                navigator.vendor ||
-                window.opera;
+            const price =
+                Number(
+                    this.dataset.price
+                );
 
 
-            const isAndroid =
-                /android/i.test(userAgent);
+            const image =
+                this.dataset.image;
 
 
-            const isIOS =
-                /iPad|iPhone|iPod/.test(userAgent) &&
-                !window.MSStream;
-
-
-            const isMobile =
-                isAndroid || isIOS;
-
-
-
-            // =================================================
-            // DESKTOP
-            // =================================================
-
-            if (!isMobile) {
-
-
-                if (app === "instagram") {
-
-                    window.open(
-                        "https://www.instagram.com/friends_heritage/",
-                        "_blank",
-                        "noopener,noreferrer"
-                    );
-
-                }
-
-
-                else if (app === "facebook") {
-
-                    window.open(
-                        "https://www.facebook.com/friends_heritage",
-                        "_blank",
-                        "noopener,noreferrer"
-                    );
-
-                }
-
-
-                else if (app === "whatsapp") {
-
-                    window.open(
-                        "https://wa.me/" + phone,
-                        "_blank",
-                        "noopener,noreferrer"
-                    );
-
-                }
-
-
+            if (!name || !price) {
                 return;
+            }
+
+
+            const existingProduct =
+                cart.find(
+                    item =>
+                        item.name === name
+                );
+
+
+            if (existingProduct) {
+
+                existingProduct.quantity += 1;
+
+            }
+
+            else {
+
+                cart.push({
+
+                    name: name,
+
+                    price: price,
+
+                    image: image,
+
+                    quantity: 1
+
+                });
 
             }
 
 
+            saveCart();
 
-            // =================================================
-            // ANDROID
-            // =================================================
+            updateCartCount();
 
-            if (isAndroid) {
+            showAddedMessage(this);
 
+        }
+    );
 
-                let intentURL = "";
-
-
-                // -------------------------------------------------
-                // INSTAGRAM
-                // -------------------------------------------------
-
-                if (app === "instagram") {
-
-                    intentURL =
-                        "intent://user?username=friends_heritage" +
-                        "#Intent;" +
-                        "scheme=instagram;" +
-                        "package=com.instagram.android;" +
-                        "S.browser_fallback_url=" +
-                        encodeURIComponent(androidStore) +
-                        ";" +
-                        "end";
-
-                }
+});
 
 
-                // -------------------------------------------------
-                // FACEBOOK
-                // -------------------------------------------------
+// =========================================================
+// ADDED TO CART MESSAGE
+// =========================================================
 
-                else if (app === "facebook") {
+function showAddedMessage(button) {
 
-                    intentURL =
-                        "intent://profile/friends_heritage" +
-                        "#Intent;" +
-                        "scheme=fb;" +
-                        "package=com.facebook.katana;" +
-                        "S.browser_fallback_url=" +
-                        encodeURIComponent(androidStore) +
-                        ";" +
-                        "end";
-
-                }
+    const originalText =
+        button.textContent;
 
 
-                // -------------------------------------------------
-                // WHATSAPP
-                // -------------------------------------------------
-
-                else if (app === "whatsapp") {
-
-                    intentURL =
-                        "intent://send?phone=" +
-                        phone +
-                        "#Intent;" +
-                        "scheme=whatsapp;" +
-                        "package=com.whatsapp;" +
-                        "S.browser_fallback_url=" +
-                        encodeURIComponent(androidStore) +
-                        ";" +
-                        "end";
-
-                }
+    button.textContent =
+        "Added ✓";
 
 
-                // -------------------------------------------------
-                // OPEN ANDROID APP
-                // -------------------------------------------------
-
-                if (intentURL) {
-
-                    window.location.href =
-                        intentURL;
-
-                }
+    button.style.pointerEvents =
+        "none";
 
 
-                return;
+    setTimeout(() => {
 
-            }
-
-
-
-            // =================================================
-            // iPHONE / iPAD
-            // =================================================
-
-            if (isIOS) {
+        button.textContent =
+            originalText;
 
 
-                let appURL = "";
+        button.style.pointerEvents =
+            "auto";
+
+    }, 1200);
+
+}
 
 
-                // -------------------------------------------------
-                // INSTAGRAM
-                // -------------------------------------------------
+// =========================================================
+// DISPLAY CART
+// =========================================================
 
-                if (app === "instagram") {
+function displayCart() {
 
-                    appURL =
-                        "instagram://user?username=friends_heritage";
-
-                }
-
-
-                // -------------------------------------------------
-                // FACEBOOK
-                // -------------------------------------------------
-
-                else if (app === "facebook") {
-
-                    appURL =
-                        "fb://profile/friends_heritage";
-
-                }
+    if (!cartItemsContainer) {
+        return;
+    }
 
 
-                // -------------------------------------------------
-                // WHATSAPP
-                // -------------------------------------------------
-
-                else if (app === "whatsapp") {
-
-                    appURL =
-                        "whatsapp://send?phone=" +
-                        phone;
-
-                }
+    cartItemsContainer.innerHTML = "";
 
 
-                if (!appURL) {
+    if (cart.length === 0) {
+
+        if (emptyCart) {
+
+            emptyCart.style.display =
+                "block";
+
+        }
+
+
+        updateCartTotals();
+
+        return;
+    }
+
+
+    if (emptyCart) {
+
+        emptyCart.style.display =
+            "none";
+
+    }
+
+
+    cart.forEach((item, index) => {
+
+        const cartItem =
+            document.createElement("div");
+
+
+        cartItem.className =
+            "cart-item";
+
+
+        cartItem.innerHTML = `
+
+            <div class="cart-product-image">
+
+                <img
+                    src="${item.image}"
+                    alt="${item.name}"
+                >
+
+            </div>
+
+
+            <div class="cart-product-info">
+
+                <h3>
+                    ${item.name}
+                </h3>
+
+                <p>
+                    ₹${Number(item.price).toLocaleString("en-IN")} / unit
+                </p>
+
+            </div>
+
+
+            <div class="quantity-control">
+
+                <button
+                    type="button"
+                    class="decrease-btn"
+                    data-index="${index}"
+                    aria-label="Decrease quantity"
+                >
+                    −
+                </button>
+
+
+                <span>
+                    ${item.quantity}
+                </span>
+
+
+                <button
+                    type="button"
+                    class="increase-btn"
+                    data-index="${index}"
+                    aria-label="Increase quantity"
+                >
+                    +
+                </button>
+
+            </div>
+
+
+            <div class="cart-item-price">
+
+                ₹${(
+                    Number(item.price) *
+                    Number(item.quantity)
+                ).toLocaleString("en-IN")}
+
+            </div>
+
+
+            <button
+                type="button"
+                class="remove-item"
+                data-index="${index}"
+                aria-label="Remove ${item.name}"
+                title="Remove ${item.name}"
+            >
+
+                <i class="fa-solid fa-trash"></i>
+
+            </button>
+
+        `;
+
+
+        cartItemsContainer.appendChild(
+            cartItem
+        );
+
+    });
+
+
+    addCartButtonEvents();
+
+    updateCartTotals();
+
+}
+
+
+// =========================================================
+// QUANTITY + / - AND REMOVE
+// =========================================================
+
+function addCartButtonEvents() {
+
+    const increaseButtons =
+        document.querySelectorAll(
+            ".increase-btn"
+        );
+
+
+    const decreaseButtons =
+        document.querySelectorAll(
+            ".decrease-btn"
+        );
+
+
+    const removeButtons =
+        document.querySelectorAll(
+            ".remove-item"
+        );
+
+
+    // =====================================================
+    // INCREASE
+    // =====================================================
+
+    increaseButtons.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const index =
+                    Number(
+                        button.dataset.index
+                    );
+
+
+                if (!cart[index]) {
                     return;
                 }
 
 
-                // -------------------------------------------------
-                // TRY TO OPEN APP
-                // -------------------------------------------------
-
-                const startTime =
-                    Date.now();
+                cart[index].quantity += 1;
 
 
-                window.location.href =
-                    appURL;
+                saveCart();
+
+                displayCart();
+
+                updateCartCount();
+
+            }
+        );
+
+    });
 
 
-                // -------------------------------------------------
-                // APP NOT INSTALLED
-                // OPEN APP STORE
-                // -------------------------------------------------
+    // =====================================================
+    // DECREASE
+    // =====================================================
 
-                setTimeout(() => {
+    decreaseButtons.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const index =
+                    Number(
+                        button.dataset.index
+                    );
 
 
-                    const elapsedTime =
-                        Date.now() - startTime;
+                if (!cart[index]) {
+                    return;
+                }
 
 
-                    /*
-                     * If the browser is still active,
-                     * the app probably did not open.
-                     */
+                if (
+                    cart[index].quantity > 1
+                ) {
 
-                    if (
-                        elapsedTime >= 1500 &&
-                        document.visibilityState === "visible"
-                    ) {
+                    cart[index].quantity -= 1;
 
-                        if (iosStore) {
+                }
 
-                            window.location.href =
-                                iosStore;
+                else {
+
+                    cart.splice(
+                        index,
+                        1
+                    );
+
+                }
+
+
+                saveCart();
+
+                displayCart();
+
+                updateCartCount();
+
+            }
+        );
+
+    });
+
+
+    // =====================================================
+    // REMOVE PRODUCT
+    // =====================================================
+
+    removeButtons.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const index =
+                    Number(
+                        button.dataset.index
+                    );
+
+
+                if (!cart[index]) {
+                    return;
+                }
+
+
+                cart.splice(
+                    index,
+                    1
+                );
+
+
+                saveCart();
+
+                displayCart();
+
+                updateCartCount();
+
+            }
+        );
+
+    });
+
+}
+
+
+// =========================================================
+// CART TOTALS
+// =========================================================
+
+function updateCartTotals() {
+
+    const totalItems =
+        cart.reduce(
+            (total, item) => {
+
+                return total +
+                    Number(
+                        item.quantity || 0
+                    );
+
+            },
+            0
+        );
+
+
+    const subtotal =
+        cart.reduce(
+            (total, item) => {
+
+                return total +
+                    (
+                        Number(item.price || 0) *
+                        Number(item.quantity || 0)
+                    );
+
+            },
+            0
+        );
+
+
+    if (cartItemsCount) {
+
+        cartItemsCount.textContent =
+            totalItems;
+
+    }
+
+
+    if (cartSubtotal) {
+
+        cartSubtotal.textContent =
+            "₹" +
+            subtotal.toLocaleString(
+                "en-IN"
+            );
+
+    }
+
+
+    if (cartTotal) {
+
+        cartTotal.textContent =
+            "₹" +
+            subtotal.toLocaleString(
+                "en-IN"
+            );
+
+    }
+
+}
+
+
+// =========================================================
+// CART PAGE
+// =========================================================
+
+if (cartItemsContainer) {
+
+    displayCart();
+
+}
+
+
+// =========================================================
+// INITIAL CART COUNT
+// =========================================================
+
+updateCartCount();
+
+
+// =========================================================
+// CART ICON
+// =========================================================
+
+const cartIcon =
+    document.querySelector(
+        ".cart-icon"
+    );
+
+
+if (cartIcon) {
+
+    cartIcon.addEventListener(
+        "click",
+        (event) => {
+
+            event.preventDefault();
+
+
+            window.location.href =
+                "cart.html";
+
+        }
+    );
+
+}
+
+
+// =========================================================
+// CHECKOUT
+// =========================================================
+//
+// IMPORTANT:
+// Your cart is stored using:
+//
+// friendsHeritageCart
+//
+// If products exist in the cart,
+// clicking Proceed to Checkout
+// will now open checkout.html.
+//
+// No unnecessary alert.
+//
+
+if (checkoutBtn) {
+
+    checkoutBtn.addEventListener(
+        "click",
+        (event) => {
+
+            event.preventDefault();
+
+
+            // ---------------------------------------------
+            // CHECK EMPTY CART
+            // ---------------------------------------------
+
+            if (
+                !Array.isArray(cart) ||
+                cart.length === 0
+            ) {
+
+                alert(
+                    "Your cart is empty. Please add a product first."
+                );
+
+                return;
+
+            }
+
+
+            // ---------------------------------------------
+            // SAVE CART BEFORE CHECKOUT
+            // ---------------------------------------------
+
+            saveCart();
+
+
+            // ---------------------------------------------
+            // OPEN CHECKOUT PAGE
+            // ---------------------------------------------
+
+            window.location.href =
+                "checkout.html";
+
+        }
+    );
+
+}
+
+
+// =========================================================
+// SOCIAL APP LINKS
+// =========================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const appLinks =
+            document.querySelectorAll(
+                ".app-link"
+            );
+
+
+        appLinks.forEach(link => {
+
+            link.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+
+                    const app =
+                        this.dataset.app;
+
+
+                    const androidStore =
+                        this.dataset.androidStore;
+
+
+                    const iosStore =
+                        this.dataset.iosStore;
+
+
+                    const phone =
+                        this.dataset.phone;
+
+
+                    const userAgent =
+                        navigator.userAgent ||
+                        navigator.vendor ||
+                        window.opera;
+
+
+                    const isAndroid =
+                        /android/i.test(
+                            userAgent
+                        );
+
+
+                    const isIOS =
+                        /iPad|iPhone|iPod/.test(
+                            userAgent
+                        ) &&
+                        !window.MSStream;
+
+
+                    const isMobile =
+                        isAndroid ||
+                        isIOS;
+
+
+                    // =========================================
+                    // DESKTOP
+                    // =========================================
+
+                    if (!isMobile) {
+
+                        if (
+                            app ===
+                            "instagram"
+                        ) {
+
+                            window.open(
+                                "https://www.instagram.com/friends_heritage/",
+                                "_blank",
+                                "noopener,noreferrer"
+                            );
 
                         }
+
+
+                        else if (
+                            app ===
+                            "facebook"
+                        ) {
+
+                            window.open(
+                                "https://www.facebook.com/friends_heritage",
+                                "_blank",
+                                "noopener,noreferrer"
+                            );
+
+                        }
+
+
+                        else if (
+                            app ===
+                            "whatsapp"
+                        ) {
+
+                            window.open(
+                                "https://wa.me/" +
+                                phone,
+                                "_blank",
+                                "noopener,noreferrer"
+                            );
+
+                        }
+
+
+                        return;
 
                     }
 
 
-                }, 1800);
+                    // =========================================
+                    // ANDROID
+                    // =========================================
 
-            }
+                    if (isAndroid) {
+
+                        let intentURL = "";
+
+
+                        if (
+                            app ===
+                            "instagram"
+                        ) {
+
+                            intentURL =
+                                "intent://user?username=friends_heritage" +
+                                "#Intent;" +
+                                "scheme=instagram;" +
+                                "package=com.instagram.android;" +
+                                "S.browser_fallback_url=" +
+                                encodeURIComponent(
+                                    androidStore
+                                ) +
+                                ";" +
+                                "end";
+
+                        }
+
+
+                        else if (
+                            app ===
+                            "facebook"
+                        ) {
+
+                            intentURL =
+                                "intent://profile/friends_heritage" +
+                                "#Intent;" +
+                                "scheme=fb;" +
+                                "package=com.facebook.katana;" +
+                                "S.browser_fallback_url=" +
+                                encodeURIComponent(
+                                    androidStore
+                                ) +
+                                ";" +
+                                "end";
+
+                        }
+
+
+                        else if (
+                            app ===
+                            "whatsapp"
+                        ) {
+
+                            intentURL =
+                                "intent://send?phone=" +
+                                phone +
+                                "#Intent;" +
+                                "scheme=whatsapp;" +
+                                "package=com.whatsapp;" +
+                                "S.browser_fallback_url=" +
+                                encodeURIComponent(
+                                    androidStore
+                                ) +
+                                ";" +
+                                "end";
+
+                        }
+
+
+                        if (intentURL) {
+
+                            window.location.href =
+                                intentURL;
+
+                        }
+
+
+                        return;
+
+                    }
+
+
+                    // =========================================
+                    // iOS
+                    // =========================================
+
+                    if (isIOS) {
+
+                        let appURL = "";
+
+
+                        if (
+                            app ===
+                            "instagram"
+                        ) {
+
+                            appURL =
+                                "instagram://user?username=friends_heritage";
+
+                        }
+
+
+                        else if (
+                            app ===
+                            "facebook"
+                        ) {
+
+                            appURL =
+                                "fb://profile/friends_heritage";
+
+                        }
+
+
+                        else if (
+                            app ===
+                            "whatsapp"
+                        ) {
+
+                            appURL =
+                                "whatsapp://send?phone=" +
+                                phone;
+
+                        }
+
+
+                        if (!appURL) {
+                            return;
+                        }
+
+
+                        const startTime =
+                            Date.now();
+
+
+                        window.location.href =
+                            appURL;
+
+
+                        setTimeout(
+                            () => {
+
+                                const elapsedTime =
+                                    Date.now() -
+                                    startTime;
+
+
+                                if (
+                                    elapsedTime >= 1500 &&
+                                    document.visibilityState ===
+                                    "visible"
+                                ) {
+
+                                    if (iosStore) {
+
+                                        window.location.href =
+                                            iosStore;
+
+                                    }
+
+                                }
+
+                            },
+                            1800
+                        );
+
+                    }
+
+                }
+            );
 
         });
 
-    });
-
-});
+    }
+);
