@@ -3,28 +3,44 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<!-- Website Favicon -->
-<link rel="icon" href="logo.png">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<!-- Font Awesome -->
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Website Favicon -->
+    <link
+        rel="icon"
+        href="logo.png"
+    >
 
-<!-- Main Website CSS -->
-<link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
 
-<!-- About Page CSS -->
-<link rel="stylesheet" href="about.css">
+    <!-- Main Website CSS -->
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
-<title>About Us | The Friends Heritage</title>
+    <!-- About Page CSS -->
+    <link
+        rel="stylesheet"
+        href="about.css"
+    >
+
+    <title>About Us | The Friends Heritage</title>
 
 </head>
 
+
 <body>
+
 
 <!-- =====================================================
                      NAVBAR
@@ -34,7 +50,9 @@
 
     <nav class="navbar">
 
-        <!-- Logo -->
+
+        <!-- ================= LOGO ================= -->
+
         <div class="logo">
 
             <a href="index.html">
@@ -53,8 +71,13 @@
         </div>
 
 
-        <!-- Navigation Links -->
-        <ul class="nav-links" id="navLinks">
+
+        <!-- ================= NAVIGATION LINKS ================= -->
+
+        <ul
+            class="nav-links"
+            id="navLinks"
+        >
 
             <li>
                 <a href="index.html">
@@ -62,11 +85,13 @@
                 </a>
             </li>
 
+
             <li>
-                <a href="index.html#shop">
+                <a href="shop.html">
                     Shop
                 </a>
             </li>
+
 
             <li>
                 <a href="index.html#benefits">
@@ -74,11 +99,16 @@
                 </a>
             </li>
 
+
             <li>
-                <a href="about.html" class="active">
+                <a
+                    href="about.html"
+                    class="active"
+                >
                     About Us
                 </a>
             </li>
+
 
             <li>
                 <a href="contact.html">
@@ -87,6 +117,8 @@
             </li>
 
         </ul>
+
+
 
         <!-- ================= NAVBAR ICONS ================= -->
 
@@ -98,6 +130,7 @@
             <a
                 href="#"
                 aria-label="User Account"
+                title="User Account"
             >
 
                 <i class="fa-regular fa-user"></i>
@@ -143,21 +176,12 @@
             ☰
 
         </div>
-         
 
-
-        <!-- Mobile Menu -->
-        <div
-            class="menu-toggle"
-            id="menuToggle"
-            aria-label="Open Menu"
-        >
-            ☰
-        </div>
 
     </nav>
 
 </header>
+
 
 
 <!-- =====================================================
@@ -165,6 +189,7 @@
 ====================================================== -->
 
 <main>
+
 
 
     <!-- =================================================
@@ -198,6 +223,7 @@
             </div>
 
         </div>
+
 
 
         <!-- CENTER CONTENT -->
@@ -266,6 +292,7 @@
         </div>
 
 
+
         <!-- RIGHT IMAGE -->
 
         <div class="about-image about-image-right">
@@ -292,6 +319,7 @@
         </div>
 
     </section>
+
 
 
 
@@ -336,6 +364,7 @@
             </div>
 
 
+
             <!-- STORY CONTENT -->
 
             <div class="story-content">
@@ -376,6 +405,7 @@
             </div>
 
         </div>
+
 
 
 
@@ -425,6 +455,7 @@
 
 
 
+
             <!-- VISION -->
 
             <div class="value-card">
@@ -462,6 +493,7 @@
                 </div>
 
             </div>
+
 
 
 
@@ -505,6 +537,7 @@
         </div>
 
     </section>
+
 
 
 
@@ -556,6 +589,7 @@
 
 
 
+
     <!-- =================================================
                  WHY THE FRIENDS HERITAGE
     ================================================== -->
@@ -581,6 +615,7 @@
             </div>
 
         </div>
+
 
 
 
@@ -618,6 +653,7 @@
 
 
 
+
             <!-- FEATURE 2 -->
 
             <div class="why-item">
@@ -648,6 +684,7 @@
 
 
 
+
             <!-- FEATURE 3 -->
 
             <div class="why-item">
@@ -675,6 +712,7 @@
                 </div>
 
             </div>
+
 
 
 
@@ -709,6 +747,7 @@
         </div>
 
     </section>
+
 
 
 
@@ -771,6 +810,7 @@
         </div>
 
 
+
         <!-- PRODUCT VISUAL -->
 
         <div class="cta-product">
@@ -788,41 +828,13 @@
 
 
 
+
 <!-- =====================================================
                      JAVASCRIPT
 ====================================================== -->
 
-<script>
-
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
-
-    if (menuToggle && navLinks) {
-
-        menuToggle.addEventListener("click", function () {
-
-            navLinks.classList.toggle("active");
-
-        });
-
-
-        const navItems = navLinks.querySelectorAll("a");
-
-        navItems.forEach(function (link) {
-
-            link.addEventListener("click", function () {
-
-                navLinks.classList.remove("active");
-
-            });
-
-        });
-
-    }
-
-</script>
-
 <script src="script.js"></script>
+
 </body>
 
 </html>
