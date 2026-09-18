@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Account | The Friends Heritage</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="logo.png">
+
+    <!-- Font Awesome 6.5.1 -->
+   <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v6.5.1/css/all.css"
+    >
+
+    <!-- MAIN WEBSITE CSS -->
+    <!-- Controls Navbar + Footer -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- ACCOUNT PAGE CSS -->
+    <link rel="stylesheet" href="account.css">
+
+</head>
+
+
+<body class="account-body">
+
+    <!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<header class="header">
+
+    <nav class="navbar">
+
+        <!-- LOGO -->
+        <a href="index.html" class="logo">
+
+            <img
+                src="logo.png"
+                alt="The Friends Heritage Logo"
+            >
+
+            <span>
+                THE FRIENDS HERITAGE
+            </span>
+
+        </a>
+
+
+        <!-- MOBILE MENU BUTTON -->
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Open Menu"
+            type="button"
+        >
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+
+        <!-- NAVIGATION -->
+        <ul class="nav-links" id="navLinks">
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="shop.html">
+                    Shop
+                </a>
+            </li>
+
+            <li>
+                <a href="benefits.html">
+                    Benefits
+                </a>
+            </li>
+
+            <li>
+                <a href="about.html">
+                    About Us
+                </a>
+            </li>
+
+            <li>
+                <a href="contact.html">
+                    Contact Us
+                </a>
+            </li>
+
+
+            <!-- ACCOUNT -->
+            <li>
+
+                <a
+                    href="account.html"
+                    class="account-nav active"
+                    aria-label="My Account"
+                >
+
+                    <i class="fa-regular fa-user"></i>
+
+                </a>
+
+            </li>
+
+
+            <!-- CART -->
+            <li>
+
+                <a
+                    href="cart.html"
+                    class="cart-icon"
+                    aria-label="Shopping Cart"
+                >
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    <span id="cartCount">
+                        0
+                    </span>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================================================
+     ACCOUNT PAGE
+========================================================= -->
+
+<main class="account-page">
+
+
+    <!-- =====================================================
+         LOGIN SECTION
+    ====================================================== -->
+
+    <section
+        class="auth-section"
+        id="loginSection"
+    >
+
+        <div class="auth-card">
+
+            <div class="auth-icon">
+
+                <i class="fa-regular fa-user"></i>
+
+            </div>
+
+
+            <h1>
+                MY ACCOUNT
+            </h1>
+
+            <p class="auth-subtitle">
+                Login to manage your account and orders
+            </p>
+
+
+            <!-- LOGIN FORM -->
+
+            <form id="loginForm">
+
+
+                <!-- EMAIL / MOBILE -->
+
+                <div class="input-group">
+
+                    <label for="loginEmail">
+                        Email or Mobile Number
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-regular fa-user"></i>
+
+                        <input
+                            type="text"
+                            id="loginEmail"
+                            name="loginEmail"
+                            placeholder="Enter email or mobile number"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-group">
+
+                    <label for="loginPassword">
+                        Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            name="loginPassword"
+                            placeholder="Enter password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="loginPasswordToggle"
+                            aria-label="Show password"
+                        >
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORGOT PASSWORD -->
+
+                <div class="forgot-row">
+
+                    <button
+                        type="button"
+                        id="forgotPasswordBtn"
+                        class="forgot-btn"
+                    >
+                        Forgot Password?
+                    </button>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="auth-btn"
+                >
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                    Login
+
+                </button>
+
+
+                <!-- MESSAGE -->
+
+                <p
+                    id="loginMessage"
+                    class="form-message"
+                ></p>
+
+
+            </form>
+
+
+            <!-- DIVIDER -->
+
+            <div class="auth-divider">
+
+                <span>OR</span>
+
+            </div>
+
+
+            <!-- REGISTER -->
+
+            <button
+                type="button"
+                id="showRegisterBtn"
+                class="secondary-auth-btn"
+            >
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Create New Account
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         REGISTER SECTION
+    ====================================================== -->
+
+    <section
+        class="auth-section hidden"
+        id="registerSection"
+    >
+
+        <div class="auth-card">
+
+            <div class="auth-icon">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+            </div>
+
+
+            <h1>
+                CREATE ACCOUNT
+            </h1>
+
+            <p class="auth-subtitle">
+                Create your account with The Friends Heritage
+            </p>
+
+
+            <form id="registerForm">
+
+
+                <!-- NAME -->
+
+                <div class="input-group">
+
+                    <label for="registerName">
+                        Full Name
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-regular fa-user"></i>
+
+                        <input
+                            type="text"
+                            id="registerName"
+                            name="registerName"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL / MOBILE -->
+
+                <div class="input-group">
+
+                    <label for="registerEmail">
+                        Email or Mobile Number
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <input
+                            type="text"
+                            id="registerEmail"
+                            name="registerEmail"
+                            placeholder="Enter email or mobile number"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-group">
+
+                    <label for="registerPassword">
+                        Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="registerPassword"
+                            name="registerPassword"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="registerPasswordToggle"
+                            aria-label="Show password"
+                        >
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="input-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Confirm your password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="confirmPasswordToggle"
+                            aria-label="Show password"
+                        >
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REGISTER BUTTON -->
+
+                <button
+                    type="submit"
+                    class="auth-btn"
+                >
+
+                    <i class="fa-solid fa-user-check"></i>
+
+                    Create Account
+
+                </button>
+
+
+                <!-- MESSAGE -->
+
+                <p
+                    id="registerMessage"
+                    class="form-message"
+                ></p>
+
+
+            </form>
+
+
+            <!-- BACK TO LOGIN -->
+
+            <button
+                type="button"
+                id="backToLoginBtn"
+                class="back-login-btn"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Login
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DASHBOARD
+    ====================================================== -->
+
+    <section
+        class="dashboard-section hidden"
+        id="dashboardSection"
+    >
+
+        <div class="dashboard-container">
+
+
+            <!-- DASHBOARD HEADER -->
+
+            <div class="dashboard-header">
+
+                <div>
+
+                    <span class="dashboard-small-title">
+                        WELCOME BACK
+                    </span>
+
+                    <h1 id="welcomeUser">
+                        Welcome!
+                    </h1>
+
+                    <p>
+                        Manage your account, orders and personal details.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="logoutBtn"
+                    class="logout-btn"
+                >
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </button>
+
+            </div>
+
+
+
+            <!-- ACCOUNT CARDS -->
+
+            <div class="dashboard-cards">
+
+
+                <!-- ORDERS -->
+
+                <button
+                    type="button"
+                    class="dashboard-card"
+                    data-panel="ordersPanel"
+                >
+
+                    <span class="dashboard-card-icon">
+
+                        <i class="fa-solid fa-box-open"></i>
+
+                    </span>
+
+                    <span class="dashboard-card-content">
+
+                        <strong>
+                            My Orders
+                        </strong>
+
+                        <small>
+                            View your orders
+                        </small>
+
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right card-arrow"></i>
+
+                </button>
+
+
+                <!-- PROFILE -->
+
+                <button
+                    type="button"
+                    class="dashboard-card"
+                    data-panel="profilePanel"
+                >
+
+                    <span class="dashboard-card-icon">
+
+                        <i class="fa-regular fa-user"></i>
+
+                    </span>
+
+                    <span class="dashboard-card-content">
+
+                        <strong>
+                            My Profile
+                        </strong>
+
+                        <small>
+                            Personal information
+                        </small>
+
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right card-arrow"></i>
+
+                </button>
+
+
+                <!-- ADDRESS -->
+
+                <button
+                    type="button"
+                    class="dashboard-card"
+                    data-panel="addressPanel"
+                >
+
+                    <span class="dashboard-card-icon">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                    </span>
+
+                    <span class="dashboard-card-content">
+
+                        <strong>
+                            My Address
+                        </strong>
+
+                        <small>
+                            Manage delivery address
+                        </small>
+
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right card-arrow"></i>
+
+                </button>
+
+
+                <!-- PASSWORD -->
+
+                <button
+                    type="button"
+                    class="dashboard-card"
+                    data-panel="passwordPanel"
+                >
+
+                    <span class="dashboard-card-icon">
+
+                        <i class="fa-solid fa-key"></i>
+
+                    </span>
+
+                    <span class="dashboard-card-content">
+
+                        <strong>
+                            Change Password
+                        </strong>
+
+                        <small>
+                            Update your password
+                        </small>
+
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right card-arrow"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ORDERS PANEL
+            ================================================== -->
+
+            <div
+                class="dashboard-panel hidden"
+                id="ordersPanel"
+            >
+
+                <div class="panel-heading">
+
+                    <div>
+
+                        <span>
+                            ACCOUNT
+                        </span>
+
+                        <h2>
+                            My Orders
+                        </h2>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="close-panel"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-box-open"></i>
+
+                    <h3>
+                        No Orders Yet
+                    </h3>
+
+                    <p>
+                        Your orders will appear here after you place an order.
+                    </p>
+
+                    <a
+                        href="shop.html"
+                        class="panel-btn"
+                    >
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        Start Shopping
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PROFILE PANEL
+            ================================================== -->
+
+            <div
+                class="dashboard-panel hidden"
+                id="profilePanel"
+            >
+
+                <div class="panel-heading">
+
+                    <div>
+
+                        <span>
+                            ACCOUNT
+                        </span>
+
+                        <h2>
+                            My Profile
+                        </h2>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="close-panel"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                </div>
+
+
+                <form id="profileForm">
+
+                    <div class="profile-grid">
+
+                        <div class="input-group">
+
+                            <label for="profileName">
+                                Full Name
+                            </label>
+
+                            <div class="input-box">
+
+                                <i class="fa-regular fa-user"></i>
+
+                                <input
+                                    type="text"
+                                    id="profileName"
+                                    placeholder="Your name"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="profileContact">
+                                Email / Mobile
+                            </label>
+
+                            <div class="input-box">
+
+                                <i class="fa-solid fa-address-book"></i>
+
+                                <input
+                                    type="text"
+                                    id="profileContact"
+                                    placeholder="Email or mobile"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="panel-btn"
+                    >
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Save Changes
+
+                    </button>
+
+
+                    <p
+                        id="profileMessage"
+                        class="form-message"
+                    ></p>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ADDRESS PANEL
+            ================================================== -->
+
+            <div
+                class="dashboard-panel hidden"
+                id="addressPanel"
+            >
+
+                <div class="panel-heading">
+
+                    <div>
+
+                        <span>
+                            DELIVERY
+                        </span>
+
+                        <h2>
+                            My Address
+                        </h2>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="close-panel"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                </div>
+
+
+                <form id="addressForm">
+
+                    <div class="address-grid">
+
+
+                        <div class="input-group">
+
+                            <label for="addressName">
+                                Full Name
+                            </label>
+
+                            <div class="input-box">
+
+                                <i class="fa-regular fa-user"></i>
+
+                                <input
+                                    type="text"
+                                    id="addressName"
+                                    placeholder="Full name"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="addressPhone">
+                                Mobile Number
+                            </label>
+
+                            <div class="input-box">
+
+                                <i class="fa-solid fa-phone"></i>
+
+                                <input
+                                    type="tel"
+                                    id="addressPhone"
+                                    placeholder="Mobile number"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-group full-width">
+
+                            <label for="addressLine">
+                                Address
+                            </label>
+
+                            <div class="input-box">
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                <input
+                                    type="text"
+                                    id="addressLine"
+                                    placeholder="House / Street / Area"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="addressCity">
+                                City
+                            </label>
+
+                            <div class="input-box">
+
+                                <i class="fa-solid fa-city"></i>
+
+                                <input
+                                    type="text"
+                                    id="addressCity"
+                                    placeholder="City"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="addressState">
+                                State
+                            </label>
+
+                            <div class="input-box">
+
+                                <i class="fa-solid fa-map"></i>
+
+                                <input
+                                    type="text"
+                                    id="addressState"
+                                    placeholder="State"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="addressPincode">
+                                Pincode
+                            </label>
+
+                            <div class="input-box">
+
+                                <i class="fa-solid fa-location-crosshairs"></i>
+
+                                <input
+                                    type="text"
+                                    id="addressPincode"
+                                    placeholder="Pincode"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="panel-btn"
+                    >
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Save Address
+
+                    </button>
+
+
+                    <p
+                        id="addressMessage"
+                        class="form-message"
+                    ></p>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PASSWORD PANEL
+            ================================================== -->
+
+            <div
+                class="dashboard-panel hidden"
+                id="passwordPanel"
+            >
+
+                <div class="panel-heading">
+
+                    <div>
+
+                        <span>
+                            SECURITY
+                        </span>
+
+                        <h2>
+                            Change Password
+                        </h2>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="close-panel"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                </div>
+
+
+                <form id="passwordForm">
+
+
+                    <div class="input-group">
+
+                        <label for="currentPassword">
+                            Current Password
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                id="currentPassword"
+                                placeholder="Current password"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="newPassword">
+                            New Password
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-key"></i>
+
+                            <input
+                                type="password"
+                                id="newPassword"
+                                placeholder="New password"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="confirmNewPassword">
+                            Confirm New Password
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-key"></i>
+
+                            <input
+                                type="password"
+                                id="confirmNewPassword"
+                                placeholder="Confirm new password"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="panel-btn"
+                    >
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        Update Password
+
+                    </button>
+
+
+                    <p
+                        id="passwordMessage"
+                        class="form-message"
+                    ></p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- =========================================================
+     FORGOT PASSWORD MODAL
+========================================================= -->
+
+<div
+    class="modal hidden"
+    id="forgotModal"
+>
+
+    <div class="modal-overlay"></div>
+
+
+    <div class="modal-card">
+
+        <button
+            type="button"
+            class="modal-close"
+            id="closeForgotModal"
+            aria-label="Close"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <div class="modal-icon">
+
+            <i class="fa-solid fa-key"></i>
+
+        </div>
+
+
+        <h2>
+            Forgot Password?
+        </h2>
+
+        <p>
+            Enter your email or mobile number and we will help you reset your password.
+        </p>
+
+
+        <form id="forgotForm">
+
+            <div class="input-group">
+
+                <label for="forgotContact">
+                    Email or Mobile Number
+                </label>
+
+                <div class="input-box">
+
+                    <i class="fa-regular fa-user"></i>
+
+                    <input
+                        type="text"
+                        id="forgotContact"
+                        placeholder="Enter email or mobile number"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="auth-btn"
+            >
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+                Continue
+
+            </button>
+
+
+            <p
+                id="forgotMessage"
+                class="form-message"
+            ></p>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     FOOTER
+     SAME WEBSITE FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+
+        <!-- CUSTOMER SERVICE -->
+
+        <div class="footer-column">
+
+            <h3>
+                Customer Service
+            </h3>
+
+            <ul>
+
+                <li>
+                    <a href="contact.html">
+                        Contact Us
+                    </a>
+                </li>
+
+                <li>
+                    <a href="shipping.html">
+                        Shipping & Delivery
+                    </a>
+                </li>
+
+                <li>
+                    <a href="returns.html">
+                        Returns & Refunds
+                    </a>
+                </li>
+
+                <li>
+                    <a href="terms.html">
+                        Terms & Conditions
+                    </a>
+                </li>
+
+                <li>
+                    <a href="privacy.html">
+                        Privacy Policy
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- FOLLOW US -->
+
+        <div class="footer-column">
+
+            <h3>
+                Follow Us
+            </h3>
+
+            <ul>
+
+                <li>
+                    <a
+                        href="#"
+                        class="app-link"
+                        data-app="instagram"
+                        data-android-store="https://play.google.com/store/apps/details?id=com.instagram.android"
+                        data-ios-store="https://apps.apple.com/app/instagram/id389801252"
+                    >
+                        <i class="fa-brands fa-instagram"></i>
+                        Instagram
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="#"
+                        class="app-link"
+                        data-app="facebook"
+                        data-android-store="https://play.google.com/store/apps/details?id=com.facebook.katana"
+                        data-ios-store="https://apps.apple.com/app/facebook/id284882215"
+                    >
+                        <i class="fa-brands fa-facebook-f"></i>
+                        Facebook
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="https://wa.me/917051713047"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <i class="fa-brands fa-whatsapp"></i>
+                        WhatsApp
+                    </a>
+                </li>
+
+                <li>
+                    <a href="mailto:danishrather041@gmail.com">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        Email
+
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <p>
+            Designed & Developed by
+            <strong>
+                Danish Khursheed
+            </strong>
+        </p>
+
+        <p>
+            Crafted with ❤️ & creativity
+        </p>
+
+        <p>
+            © 2026 The Friends Heritage
+            <span>
+                All Rights Reserved.
+            </span>
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script src="account.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
