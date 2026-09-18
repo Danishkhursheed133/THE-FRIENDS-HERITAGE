@@ -1,16 +1,6 @@
 /* =========================================================
    THE FRIENDS HERITAGE
    MAIN SCRIPT.JS
-
-   Handles:
-   1. Mobile Navbar
-   2. Homepage Hero Slider
-   3. Homepage Add To Cart
-   4. Cart Badge
-   5. Social App Links
-
-   Cart Page Functions:
-   cart.js
 ========================================================= */
 
 
