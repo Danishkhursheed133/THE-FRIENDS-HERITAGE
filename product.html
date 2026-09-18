@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Product Details | The Friends Heritage</title>
+
+    <link
+        rel="icon"
+        href="logo.png"
+    >
+
+    <!-- Font Awesome 6.5.1 -->
+    <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v6.5.1/css/all.css"
+    >
+
+    <!-- Main Website CSS -->
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <!-- Product Page CSS -->
+    <link
+        rel="stylesheet"
+        href="product.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER / NAVBAR
+     CONTROLLED BY style.css
+========================================================= -->
+
+<header>
+
+    <nav class="navbar">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+
+            <img
+                src="logo.png"
+                alt="The Friends Heritage Logo"
+            >
+
+            <span>
+                THE FRIENDS HERITAGE
+            </span>
+
+        </a>
+
+
+        <ul
+            class="nav-links"
+            id="navLinks"
+        >
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="shop.html"
+                    class="active"
+                >
+                    Shop
+                </a>
+            </li>
+
+            <li>
+                <a href="benefits.html">
+                    Benefits
+                </a>
+            </li>
+
+            <li>
+                <a href="about.html">
+                    About Us
+                </a>
+            </li>
+
+            <li>
+                <a href="contact.html">
+                    Contact Us
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="nav-icons">
+
+            <a
+                href="account.html"
+                aria-label="My Account"
+            >
+                <i class="fa-regular fa-user"></i>
+            </a>
+
+
+            <a
+                href="cart.html"
+                class="cart-icon"
+                aria-label="Shopping Cart"
+            >
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span id="cartCount">
+                    0
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <div
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Open Menu"
+        >
+
+            <i class="fa-solid fa-bars"></i>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================================================
+     PRODUCT PAGE
+========================================================= -->
+
+<main class="product-page">
+
+
+    <!-- =====================================================
+         BREADCRUMB
+    ====================================================== -->
+
+    <div class="product-breadcrumb">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <i class="fa-solid fa-angle-right"></i>
+
+        <a href="shop.html">
+            Shop
+        </a>
+
+        <i class="fa-solid fa-angle-right"></i>
+
+        <span id="breadcrumbProduct">
+            Product
+        </span>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         PRODUCT MAIN SECTION
+    ====================================================== -->
+
+    <section class="product-main">
+
+
+        <!-- =================================================
+             PRODUCT IMAGE GALLERY
+        ================================================== -->
+
+        <div class="product-gallery">
+
+
+            <!-- Main Product Image -->
+
+            <div class="product-main-image">
+
+                <img
+                    id="mainProductImage"
+                    src="slide3.jpg"
+                    alt="Product Image"
+                >
+
+            </div>
+
+
+            <!-- Thumbnail Images -->
+
+            <div
+                class="product-thumbnails"
+                id="productThumbnails"
+            >
+
+                <button
+                    class="thumbnail active"
+                    type="button"
+                >
+
+                    <img
+                        src="slide3.jpg"
+                        alt="Product Image 1"
+                    >
+
+                </button>
+
+
+                <button
+                    class="thumbnail"
+                    type="button"
+                >
+
+                    <img
+                        src="slide3.jpg"
+                        alt="Product Image 2"
+                    >
+
+                </button>
+
+
+                <button
+                    class="thumbnail"
+                    type="button"
+                >
+
+                    <img
+                        src="slide3.jpg"
+                        alt="Product Image 3"
+                    >
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PRODUCT INFORMATION
+        ================================================== -->
+
+        <div class="product-details">
+
+
+            <span
+                class="product-detail-category"
+                id="productCategory"
+            >
+                SAFFRON
+            </span>
+
+
+            <h1 id="productName">
+                Pure Kashmiri Saffron
+            </h1>
+
+
+            <div class="product-rating">
+
+                <span class="stars">
+
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+
+                </span>
+
+                <span class="rating-text">
+                    Premium Quality
+                </span>
+
+            </div>
+
+
+            <!-- =================================================
+                 PRODUCT PRICE
+                 CURRENT PRICE + OLD CUT PRICE
+            ================================================== -->
+
+            <div class="product-detail-price">
+
+                <!-- Current / Selling Price -->
+
+                <span
+                    id="productPrice"
+                    class="current-price"
+                >
+                    ₹299
+                </span>
+
+
+                <!-- Original / Old Price -->
+
+                <span
+                    id="productOldPrice"
+                    class="old-price"
+                >
+                    ₹399
+                </span>
+
+            </div>
+
+
+            <p
+                class="product-short-description"
+                id="productShortDescription"
+            >
+                Premium quality Kashmiri saffron, carefully selected
+                and packed to preserve its natural aroma, colour and
+                quality.
+            </p>
+
+
+
+            <!-- =============================================
+                 VARIANTS
+            ============================================== -->
+
+            <div class="product-option-section">
+
+                <h3>
+                    Select Size
+                </h3>
+
+
+                <div
+                    class="detail-variants"
+                    id="productVariants"
+                >
+
+                    <button
+                        type="button"
+                        class="detail-variant active"
+                        data-price="299"
+                        data-old-price="399"
+                    >
+                        1g
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="detail-variant"
+                        data-price="549"
+                        data-old-price="699"
+                    >
+                        2g
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="detail-variant"
+                        data-price="1299"
+                        data-old-price="1599"
+                    >
+                        5g
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 QUANTITY
+            ============================================== -->
+
+            <div class="product-option-section">
+
+                <h3>
+                    Quantity
+                </h3>
+
+
+                <div class="detail-quantity">
+
+                    <button
+                        type="button"
+                        id="decreaseQuantity"
+                    >
+                        <i class="fa-solid fa-minus"></i>
+                    </button>
+
+
+                    <span id="productQuantity">
+                        1
+                    </span>
+
+
+                    <button
+                        type="button"
+                        id="increaseQuantity"
+                    >
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 ADD TO CART
+            ============================================== -->
+
+            <button
+                type="button"
+                class="detail-add-cart"
+                id="addProductToCart"
+            >
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                Add To Cart
+
+            </button>
+
+
+            <div
+                class="product-cart-message"
+                id="productCartMessage"
+            >
+            </div>
+
+
+
+            <!-- =============================================
+                 TRUST INFORMATION
+            ============================================== -->
+
+            <div class="product-trust">
+
+                <div class="trust-item">
+
+                    <i class="fa-solid fa-leaf"></i>
+
+                    <span>
+                        100% Natural
+                    </span>
+
+                </div>
+
+
+                <div class="trust-item">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <span>
+                        From Kashmir
+                    </span>
+
+                </div>
+
+
+                <div class="trust-item">
+
+                    <i class="fa-solid fa-shield-heart"></i>
+
+                    <span>
+                        Quality Guaranteed
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PRODUCT DESCRIPTION
+    ====================================================== -->
+
+    <section class="product-information">
+
+
+        <div class="information-heading">
+
+            <span>
+                DISCOVER THE PRODUCT
+            </span>
+
+            <h2>
+                About This Product
+            </h2>
+
+        </div>
+
+
+        <div class="information-content">
+
+            <p id="productDescription">
+
+                Discover the authentic taste and quality of premium
+                Kashmiri products from The Friends Heritage. Each
+                product is carefully selected and prepared to preserve
+                its natural character and traditional heritage.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         BENEFITS
+    ====================================================== -->
+
+    <section class="product-benefits">
+
+
+        <div class="information-heading">
+
+            <span>
+                WHY CHOOSE IT
+            </span>
+
+            <h2>
+                Benefits
+            </h2>
+
+        </div>
+
+
+        <div
+            class="benefits-grid"
+            id="productBenefits"
+        >
+
+            <div class="benefit-item">
+
+                <div class="benefit-icon">
+
+                    <i class="fa-solid fa-leaf"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        Naturally Selected
+                    </h3>
+
+                    <p>
+                        Carefully selected for quality and freshness.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="benefit-item">
+
+                <div class="benefit-icon">
+
+                    <i class="fa-solid fa-star"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        Premium Quality
+                    </h3>
+
+                    <p>
+                        Selected with care to maintain premium quality.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="benefit-item">
+
+                <div class="benefit-icon">
+
+                    <i class="fa-solid fa-mountain"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        Himalayan Origin
+                    </h3>
+
+                    <p>
+                        Inspired by the natural heritage of Kashmir.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="benefit-item">
+
+                <div class="benefit-icon">
+
+                    <i class="fa-solid fa-box-open"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        Carefully Packed
+                    </h3>
+
+                    <p>
+                        Packed carefully to maintain product quality.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PRODUCT INFORMATION TABLE
+    ====================================================== -->
+
+    <section class="product-specifications">
+
+
+        <div class="information-heading">
+
+            <span>
+                PRODUCT INFORMATION
+            </span>
+
+            <h2>
+                Details & Specifications
+            </h2>
+
+        </div>
+
+
+        <div class="specifications-box">
+
+
+            <div class="specification-row">
+
+                <span>
+                    Product
+                </span>
+
+                <strong id="specProductName">
+                    Pure Kashmiri Saffron
+                </strong>
+
+            </div>
+
+
+            <div class="specification-row">
+
+                <span>
+                    Category
+                </span>
+
+                <strong id="specCategory">
+                    Saffron
+                </strong>
+
+            </div>
+
+
+            <div class="specification-row">
+
+                <span>
+                    Origin
+                </span>
+
+                <strong id="specOrigin">
+                    Kashmir
+                </strong>
+
+            </div>
+
+
+            <div class="specification-row">
+
+                <span>
+                    Available Sizes
+                </span>
+
+                <strong id="specSizes">
+                    1g / 2g / 5g
+                </strong>
+
+            </div>
+
+
+            <div class="specification-row">
+
+                <span>
+                    Quality
+                </span>
+
+                <strong>
+                    Premium
+                </strong>
+
+            </div>
+
+
+            <div class="specification-row">
+
+                <span>
+                    Packaging
+                </span>
+
+                <strong>
+                    Secure & Hygienic
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         HOW TO USE
+    ====================================================== -->
+
+    <section class="product-usage">
+
+
+        <div class="usage-content">
+
+
+            <div class="information-heading">
+
+                <span>
+                    SIMPLE & EASY
+                </span>
+
+                <h2>
+                    How To Use
+                </h2>
+
+            </div>
+
+
+            <p id="productHowToUse">
+
+                Use according to your preferred recipe or traditional
+                preparation method. Follow the recommended quantity
+                for the best experience.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STORAGE
+    ====================================================== -->
+
+    <section class="product-storage">
+
+
+        <div class="storage-card">
+
+            <div class="storage-icon">
+
+                <i class="fa-solid fa-box"></i>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    STORAGE INFORMATION
+                </span>
+
+                <h2>
+                    Store With Care
+                </h2>
+
+                <p id="productStorage">
+
+                    Store in a cool, dry place away from direct sunlight
+                    and moisture. Keep the product properly sealed when
+                    not in use.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DELIVERY & RETURNS
+    ====================================================== -->
+
+    <section class="product-service-info">
+
+
+        <div class="service-card">
+
+            <i class="fa-solid fa-truck-fast"></i>
+
+            <div>
+
+                <h3>
+                    Delivery
+                </h3>
+
+                <p>
+                    Carefully packed and delivered to your doorstep.
+                </p>
+
+                <a href="shipping.html">
+                    Shipping & Delivery
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <i class="fa-solid fa-rotate-left"></i>
+
+            <div>
+
+                <h3>
+                    Returns
+                </h3>
+
+                <p>
+                    Please review our return and refund policy.
+                </p>
+
+                <a href="returns.html">
+                    Returns & Refunds
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FAQ
+    ====================================================== -->
+
+    <section class="product-faq">
+
+
+        <div class="information-heading">
+
+            <span>
+                NEED TO KNOW MORE?
+            </span>
+
+            <h2>
+                Frequently Asked Questions
+            </h2>
+
+        </div>
+
+
+        <div class="faq-list">
+
+
+            <details>
+
+                <summary>
+
+                    Is this product authentic?
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </summary>
+
+                <p id="faqAuthenticity">
+
+                    We carefully select our products and focus on
+                    quality, authenticity and responsible sourcing.
+
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+
+                    How is the product packed?
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </summary>
+
+                <p>
+
+                    Products are packed securely and hygienically to
+                    help maintain their quality during storage and
+                    delivery.
+
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+
+                    What sizes are available?
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </summary>
+
+                <p id="faqSizes">
+
+                    Available sizes depend on the selected product.
+
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+
+                    How can I order?
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </summary>
+
+                <p>
+
+                    Select your preferred variant and quantity, then
+                    click Add To Cart. You can continue to the cart and
+                    complete your order from there.
+
+                </p>
+
+            </details>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         BACK TO SHOP
+    ====================================================== -->
+
+    <section class="back-to-shop">
+
+        <a href="shop.html">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Continue Shopping
+
+        </a>
+
+    </section>
+
+
+</main>
+
+
+
+
+<!-- =========================================================
+     MAIN WEBSITE JAVASCRIPT
+========================================================= -->
+
+<script src="script.js"></script>
+
+
+<!-- =========================================================
+     PRODUCT PAGE JAVASCRIPT
+========================================================= -->
+
+<script src="product.js"></script>
+
+
+</body>
+
+</html>
