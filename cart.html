@@ -2,28 +2,73 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <!-- Website Title -->
     <title>Shopping Cart | The Friends Heritage</title>
 
-    <link rel="icon" href="logo.png">
+    <!-- Favicon -->
+    <link
+        rel="icon"
+        href="logo.png"
+    >
 
-    <link rel="stylesheet" href="cart.css">
-
+    <!-- =====================================================
+         MAIN CSS
+         Controls:
+         - Global styles
+         - Navbar
+         - Footer
+         - Mobile navbar
+    ====================================================== -->
     <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        href="style.css"
     >
+
+    <!-- =====================================================
+         CART CSS
+         Controls ONLY the shopping cart page
+    ====================================================== -->
+    <link
+        rel="stylesheet"
+        href="cart.css"
+    >
+
+    <!-- Font Awesome 6.5.1 -->
+    <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v6.5.1/css/all.css"
+    >
+
 </head>
 
+
 <body>
+
+
+<!-- =====================================================
+     NAVBAR
+     SAME NAVBAR AS HOME PAGE
+====================================================== -->
 
 <header>
 
     <nav class="navbar">
 
-        <a href="index.html" class="logo">
+
+        <!-- LOGO -->
+
+        <a
+            href="index.html"
+            class="logo"
+        >
 
             <img
                 src="logo.png"
@@ -37,7 +82,13 @@
         </a>
 
 
-        <ul class="nav-links" id="navLinks">
+
+        <!-- NAVIGATION LINKS -->
+
+        <ul
+            class="nav-links"
+            id="navLinks"
+        >
 
             <li>
                 <a href="index.html">
@@ -46,13 +97,13 @@
             </li>
 
             <li>
-                <a href="index.html#shop">
+                <a href="shop.html">
                     Shop
                 </a>
             </li>
 
             <li>
-                <a href="index.html#benefits">
+                <a href="benefits.html">
                     Benefits
                 </a>
             </li>
@@ -72,20 +123,33 @@
         </ul>
 
 
+
+        <!-- NAVBAR ICONS -->
+
         <div class="nav-icons">
 
+
+            <!-- ACCOUNT -->
+
             <a
-                href="#"
-                aria-label="User Account"
+                href="account.html"
+                aria-label="My Account"
+                title="My Account"
             >
+
                 <i class="fa-regular fa-user"></i>
+
             </a>
 
+
+
+            <!-- CART -->
 
             <a
                 href="cart.html"
                 class="cart-icon active-cart"
                 aria-label="Shopping Cart"
+                title="Shopping Cart"
             >
 
                 <i class="fa-solid fa-cart-shopping"></i>
@@ -102,6 +166,9 @@
         </div>
 
 
+
+        <!-- MOBILE MENU -->
+
         <div
             class="menu-toggle"
             id="menuToggle"
@@ -109,7 +176,9 @@
             role="button"
             tabindex="0"
         >
+
             ☰
+
         </div>
 
     </nav>
@@ -117,43 +186,64 @@
 </header>
 
 
+
+<!-- =====================================================
+     MAIN CART PAGE
+====================================================== -->
+
 <main class="cart-page">
 
 
-    <!-- CART HERO -->
+
+    <!-- =================================================
+         CART HERO
+    ================================================== -->
 
     <section class="cart-hero">
+
 
         <span class="cart-label">
             YOUR SELECTION
         </span>
+
 
         <h1>
             Your Shopping
             <span>Cart</span>
         </h1>
 
+
         <p>
             Review your carefully selected Kashmir treasures
             before placing your order.
         </p>
 
+
     </section>
 
 
 
-    <!-- CART SECTION -->
+    <!-- =================================================
+         CART SECTION
+    ================================================== -->
 
     <section class="cart-section">
+
 
         <div class="cart-container">
 
 
-            <!-- CART PRODUCTS -->
+            <!-- =================================================
+                 CART PRODUCTS
+            ================================================== -->
 
             <div class="cart-products">
 
+
+                <!-- PRODUCTS HEADER -->
+
                 <div class="cart-products-header">
+
 
                     <div>
 
@@ -167,34 +257,31 @@
 
                     </div>
 
+
                     <span id="cartItemsCount">
                         0 Items
                     </span>
 
+
                 </div>
 
 
-                <!--
-                    JavaScript generates the product cards here.
-                    Each generated card should contain:
 
-                    - Small product image
-                    - Product name
-                    - Product details
-                    - Price
-                    - Quantity controls
-                    - Total price
-                    - Remove button
-                -->
+                <!-- =================================================
+                     JAVASCRIPT CART ITEMS
+                ================================================== -->
 
                 <div
                     class="cart-items"
                     id="cartItems"
+                    aria-live="polite"
                 ></div>
 
 
 
-                <!-- EMPTY CART -->
+                <!-- =================================================
+                     EMPTY CART
+                ================================================== -->
 
                 <div
                     class="empty-cart"
@@ -202,23 +289,27 @@
                     style="display: none;"
                 >
 
+
                     <div class="empty-cart-icon">
 
                         <i class="fa-solid fa-cart-shopping"></i>
 
                     </div>
 
+
                     <h3>
                         Your Cart is Empty
                     </h3>
+
 
                     <p>
                         Looks like you haven't added any
                         Kashmir treasures yet.
                     </p>
 
+
                     <a
-                        href="index.html#products"
+                        href="shop.html"
                         class="continue-shopping"
                     >
 
@@ -230,16 +321,20 @@
 
                     </a>
 
+
                 </div>
 
 
 
-                <!-- CONTINUE SHOPPING -->
+                <!-- =================================================
+                     CONTINUE SHOPPING
+                ================================================== -->
 
                 <div class="continue-wrapper">
 
+
                     <a
-                        href="index.html#products"
+                        href="shop.html"
                         class="continue-link"
                     >
 
@@ -249,18 +344,25 @@
 
                     </a>
 
+
                 </div>
+
 
             </div>
 
 
 
-            <!-- ORDER SUMMARY -->
+            <!-- =================================================
+                 ORDER SUMMARY
+            ================================================== -->
 
             <aside class="order-summary">
 
 
+                <!-- SUMMARY HEADER -->
+
                 <div class="summary-header">
+
 
                     <div>
 
@@ -274,14 +376,20 @@
 
                     </div>
 
+
                     <i class="fa-solid fa-receipt"></i>
+
 
                 </div>
 
 
 
+                <!-- SUMMARY BODY -->
+
                 <div class="summary-body">
 
+
+                    <!-- SUBTOTAL -->
 
                     <div class="summary-row">
 
@@ -296,6 +404,9 @@
                     </div>
 
 
+
+                    <!-- DELIVERY -->
+
                     <div class="summary-row">
 
                         <span>
@@ -303,14 +414,20 @@
                         </span>
 
                         <strong id="deliveryCharge">
-                           ₹0 
+                            ₹0
                         </strong>
 
                     </div>
 
 
+
+                    <!-- DIVIDER -->
+
                     <div class="summary-divider"></div>
 
+
+
+                    <!-- TOTAL -->
 
                     <div class="summary-total">
 
@@ -325,10 +442,14 @@
                     </div>
 
 
+
+                    <!-- CHECKOUT BUTTON -->
+
                     <a
                         href="checkout.html"
                         class="checkout-btn"
                         id="checkoutBtn"
+                        aria-label="Proceed to Checkout"
                     >
 
                         <span>
@@ -341,15 +462,19 @@
 
 
 
-                    <!-- SECURE CHECKOUT -->
+                    <!-- =================================================
+                         SECURE CHECKOUT
+                    ================================================== -->
 
                     <div class="secure-checkout">
+
 
                         <div class="secure-icon">
 
                             <i class="fa-solid fa-shield-halved"></i>
 
                         </div>
+
 
                         <div>
 
@@ -363,30 +488,41 @@
 
                         </div>
 
+
                     </div>
+
 
                 </div>
 
+
             </aside>
 
+
         </div>
+
 
     </section>
 
 
 
-    <!-- TRUST SECTION -->
+    <!-- =================================================
+         TRUST SECTION
+    ================================================== -->
 
     <section class="cart-trust">
 
 
+        <!-- NATURAL PRODUCTS -->
+
         <div class="trust-item">
+
 
             <div class="trust-icon">
 
                 <i class="fa-solid fa-leaf"></i>
 
             </div>
+
 
             <div>
 
@@ -400,17 +536,22 @@
 
             </div>
 
+
         </div>
 
 
 
+        <!-- KASHMIRI HERITAGE -->
+
         <div class="trust-item">
+
 
             <div class="trust-icon">
 
                 <i class="fa-solid fa-mountain"></i>
 
             </div>
+
 
             <div>
 
@@ -424,17 +565,22 @@
 
             </div>
 
+
         </div>
 
 
 
+        <!-- SECURE DELIVERY -->
+
         <div class="trust-item">
+
 
             <div class="trust-icon">
 
                 <i class="fa-solid fa-truck-fast"></i>
 
             </div>
+
 
             <div>
 
@@ -448,17 +594,22 @@
 
             </div>
 
+
         </div>
 
 
 
+        <!-- PREMIUM QUALITY -->
+
         <div class="trust-item">
+
 
             <div class="trust-icon">
 
                 <i class="fa-solid fa-award"></i>
 
             </div>
+
 
             <div>
 
@@ -472,15 +623,21 @@
 
             </div>
 
+
         </div>
 
+
     </section>
+
 
 </main>
 
 
 
-<!-- FOOTER -->
+<!-- =====================================================
+     FOOTER
+     SAME FOOTER AS HOME PAGE
+====================================================== -->
 
 <footer class="footer">
 
@@ -495,6 +652,7 @@
             <h3>
                 Customer Service
             </h3>
+
 
             <ul>
 
@@ -542,6 +700,7 @@
                 Follow Us
             </h3>
 
+
             <div class="social-links">
 
 
@@ -559,6 +718,7 @@
                 </a>
 
 
+
                 <a
                     href="#"
                     aria-label="Facebook"
@@ -571,6 +731,7 @@
                     </span>
 
                 </a>
+
 
 
                 <a
@@ -586,41 +747,47 @@
 
                 </a>
 
+
             </div>
 
         </div>
+
 
     </div>
 
 
 
-    <!-- DIVIDER -->
+    <!-- FOOTER DIVIDER -->
 
     <div class="footer-divider"></div>
 
 
 
-    <!-- DESIGNER -->
+    <!-- DESIGNER CREDIT -->
 
     <div class="designer-credit">
+
 
         <p>
             Designed &amp; Developed by
         </p>
 
+
         <h3>
             Danish Khursheed
         </h3>
+
 
         <span>
             Crafted with ❤️ &amp; creativity
         </span>
 
+
     </div>
 
 
 
-    <!-- DIVIDER -->
+    <!-- FOOTER DIVIDER -->
 
     <div class="footer-divider"></div>
 
@@ -630,21 +797,31 @@
 
     <div class="footer-bottom">
 
+
         <p>
             © 2026 The Friends Heritage
         </p>
+
 
         <p>
             All Rights Reserved
         </p>
 
+
     </div>
+
 
 </footer>
 
 
 
+<!-- =====================================================
+     MAIN JAVASCRIPT
+====================================================== -->
+
 <script src="script.js"></script>
+<script src="cart.js"></script>
+
 
 </body>
 
