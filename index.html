@@ -2,36 +2,40 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Website Favicon -->
-<link rel="icon" href="logo.png">
+    <!-- Website Favicon -->
+    <link rel="icon" href="logo.png">
 
-<!-- Main CSS -->
-<link rel="stylesheet" href="style.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
 
-<!-- Font Awesome -->
-<link
+    <!-- Font Awesome -->
+   <link
     rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
->
+    href="https://use.fontawesome.com/releases/v6.5.1/css/all.css"
+    >
 
-<title>The Friends Heritage</title>
+    <title>The Friends Heritage</title>
 
 </head>
 
 <body>
+
 
 <!-- =====================================================
      NAVBAR
 ====================================================== -->
 
 <header>
+
     <nav class="navbar">
 
         <!-- Logo -->
         <div class="logo">
+
             <img
                 src="logo.png"
                 alt="The Friends Heritage Logo"
@@ -40,6 +44,7 @@
             <span>
                 THE FRIENDS HERITAGE
             </span>
+
         </div>
 
 
@@ -51,7 +56,7 @@
                     Home
                 </a>
             </li>
-            
+
             <li>
                 <a href="shop.html">
                     Shop
@@ -59,7 +64,7 @@
             </li>
 
             <li>
-                <a href="#benefits">
+                <a href="benefits.html">
                     Benefits
                 </a>
             </li>
@@ -83,9 +88,14 @@
         <div class="nav-icons">
 
             <!-- User Account -->
-            <a href="#" aria-label="User Account">
+            <a
+                href="account.html"
+                aria-label="My Account"
+                title="My Account"
+            >
                 <i class="fa-regular fa-user"></i>
             </a>
+
 
             <!-- Shopping Cart -->
             <a
@@ -94,16 +104,20 @@
                 aria-label="Shopping Cart"
                 title="Shopping Cart"
             >
-            <i class="fa-solid fa-cart-shopping"></i>
 
-            <span
-                class="cart-count"
-                id="cartCount"
-            >0</span>
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span
+                    class="cart-count"
+                    id="cartCount"
+                >
+                    0
+                </span>
 
             </a>
 
         </div>
+
 
         <!-- Mobile Menu -->
         <div
@@ -117,6 +131,7 @@
         </div>
 
     </nav>
+
 </header>
 
 
@@ -129,7 +144,11 @@
 
     <div class="slider">
 
-        <!-- Slide 1 -->
+
+        <!-- =================================================
+             SLIDE 1
+        ================================================== -->
+
         <div class="slide active">
 
             <img
@@ -142,33 +161,34 @@
             <div class="content">
 
                 <h1>
+
                     <u>
                         Premium Almonds,
                         <br>
                         Naturally Nutritious
                     </u>
+
                 </h1>
 
                 <p>
+
                     Packed with natural goodness,
                     <br>
                     protein, and energy for
-                    <br>
                     a healthier lifestyle.
-                </p>
 
-                <a href="shop.html" class="btn">
-                    Shop Now
-                </a>
-                
-                
+                </p>
 
             </div>
 
         </div>
 
 
-        <!-- Slide 2 -->
+
+        <!-- =================================================
+             SLIDE 2
+        ================================================== -->
+
         <div class="slide">
 
             <img
@@ -181,29 +201,33 @@
             <div class="content">
 
                 <h1>
+
                     <u>
                         Pure Walnuts,
                         <br>
                         Pure Strength
                     </u>
+
                 </h1>
 
                 <p>
+
                     Premium walnuts for
                     <br>
                     a healthier lifestyle.
-                </p>
 
-                <a href="shop.html" class="btn">
-                    Shop Now
-                </a>
+                </p>
 
             </div>
 
         </div>
 
 
-        <!-- Slide 3 -->
+
+        <!-- =================================================
+             SLIDE 3
+        ================================================== -->
+
         <div class="slide">
 
             <img
@@ -216,29 +240,33 @@
             <div class="content">
 
                 <h1>
+
                     <u>
                         Pure Saffron,
                         <br>
                         Pure Wellness
                     </u>
+
                 </h1>
 
                 <p>
+
                     Handpicked from the finest fields of Kashmir,
                     <br>
                     rich in color, aroma and goodness.
-                </p>
 
-                <a href="shop.html" class="btn">
-                    Shop Now
-                </a>
+                </p>
 
             </div>
 
         </div>
 
 
-        <!-- Slider Previous Button -->
+
+        <!-- =================================================
+             SLIDER PREVIOUS BUTTON
+        ================================================== -->
+
         <button
             class="prev"
             type="button"
@@ -248,7 +276,11 @@
         </button>
 
 
-        <!-- Slider Next Button -->
+
+        <!-- =================================================
+             SLIDER NEXT BUTTON
+        ================================================== -->
+
         <button
             class="next"
             type="button"
@@ -258,7 +290,11 @@
         </button>
 
 
-        <!-- Slider Dots -->
+
+        <!-- =================================================
+             SLIDER DOTS
+        ================================================== -->
+
         <div class="dots">
 
             <span
@@ -291,7 +327,7 @@
 
 
 <!-- =====================================================
-     PRODUCTS SECTION
+     FEATURED PRODUCTS
 ====================================================== -->
 
 <section id="shop">
@@ -311,9 +347,10 @@
         </div>
 
 
+        <!-- View All Products -->
         <a
-           href="shop.html"
-           class="see-more-btn"
+            href="shop.html"
+            class="see-more-btn"
         >
             View All Products →
         </a>
@@ -321,157 +358,231 @@
     </div>
 
 
+
     <div
         class="product-container"
         id="products"
     >
 
-        <!-- Product 1 -->
-        <div class="product-card">
+
+        <!-- =================================================
+             PRODUCT 1 - ALMONDS
+        ================================================== -->
+
+        <div
+            class="product-card"
+            data-price="599"
+        >
 
             <img
                 src="slide1.jpg"
                 alt="Premium Almonds"
             >
 
+
             <h3>
                 Premium Almonds
             </h3>
 
-            <p>
-                ₹599 / 500g
+
+            <!-- TWO PRICE SYSTEM -->
+            <p class="home-product-price">
+
+                <span class="current-price">
+                    ₹599
+                </span>
+
+                <span class="old-price">
+                    ₹699
+                </span>
+
+                <span class="product-weight">
+                    / 500g
+                </span>
+
             </p>
 
-            <a href="#"
+
+            <!-- ADD TO CART -->
+            <a
+                href="#"
                 class="product-btn add-to-cart"
                 data-name="Premium Almonds"
                 data-price="599"
-                data-image="slide1.jpg">
-                    Add to Cart
-        </a>
-
-            <br>
-            <br>
-
-            <a
-                href="#products"
-                class="btn"
+                data-old-price="699"
+                data-weight="500g"
+                data-image="slide1.jpg"
             >
-                Shop Now
+                Add to Cart
             </a>
 
         </div>
 
 
-        <!-- Product 2 -->
-        <div class="product-card">
+
+        <!-- =================================================
+             PRODUCT 2 - WALNUTS
+        ================================================== -->
+
+        <div
+            class="product-card"
+            data-price="699"
+        >
 
             <img
                 src="slide2.jpg"
                 alt="Premium Walnuts"
             >
 
+
             <h3>
                 Premium Walnuts
             </h3>
 
-            <p>
-                ₹699 / 500g
+
+            <!-- TWO PRICE SYSTEM -->
+            <p class="home-product-price">
+
+                <span class="current-price">
+                    ₹699
+                </span>
+
+                <span class="old-price">
+                    ₹849
+                </span>
+
+                <span class="product-weight">
+                    / 500g
+                </span>
+
             </p>
 
-            <a href="#"
+
+            <!-- ADD TO CART -->
+            <a
+                href="#"
                 class="product-btn add-to-cart"
                 data-name="Premium Walnuts"
                 data-price="699"
-            data-image="slide2.jpg">
-                    Add to Cart
-        </a>
-
-            <br>
-            <br>
-
-            <a
-                href="#products"
-                class="btn"
+                data-old-price="849"
+                data-weight="500g"
+                data-image="slide2.jpg"
             >
-                Shop Now
+                Add to Cart
             </a>
 
         </div>
 
 
-        <!-- Product 3 -->
-        <div class="product-card">
+
+        <!-- =================================================
+             PRODUCT 3 - SAFFRON
+        ================================================== -->
+
+        <div
+            class="product-card"
+            data-price="299"
+        >
 
             <img
                 src="slide3.jpg"
                 alt="Kashmiri Saffron"
             >
 
+
             <h3>
                 Kashmiri Saffron
             </h3>
 
-            <p>
-                ₹299 / 1g
+
+            <!-- TWO PRICE SYSTEM -->
+            <p class="home-product-price">
+
+                <span class="current-price">
+                    ₹299
+                </span>
+
+                <span class="old-price">
+                    ₹399
+                </span>
+
+                <span class="product-weight">
+                    / 1g
+                </span>
+
             </p>
 
-            <a href="#"
+
+            <!-- ADD TO CART -->
+            <a
+                href="#"
                 class="product-btn add-to-cart"
                 data-name="Kashmiri Saffron"
                 data-price="299"
-                data-image="slide3.jpg">
-                    Add to Cart
-        </a>
-
-            <br>
-            <br>
-
-            <a
-                href="#products"
-                class="btn"
+                data-old-price="399"
+                data-weight="1g"
+                data-image="slide3.jpg"
             >
-                Shop Now
+                Add to Cart
             </a>
 
         </div>
 
 
-        <!-- Product 4 -->
-        <div class="product-card">
+
+        <!-- =================================================
+             PRODUCT 4 - SHILAJIT
+        ================================================== -->
+
+        <div
+            class="product-card"
+            data-price="1299"
+        >
 
             <img
                 src="slide4.jpg"
                 alt="Pure Shilajit"
             >
 
+
             <h3>
                 Pure Shilajit
             </h3>
 
-            <p>
-                ₹1299 / 50g
+
+            <!-- TWO PRICE SYSTEM -->
+            <p class="home-product-price">
+
+                <span class="current-price">
+                    ₹1299
+                </span>
+
+                <span class="old-price">
+                    ₹1599
+                </span>
+
+                <span class="product-weight">
+                    / 50g
+                </span>
+
             </p>
 
-            <a href="#"
+
+            <!-- ADD TO CART -->
+            <a
+                href="#"
                 class="product-btn add-to-cart"
                 data-name="Pure Shilajit"
                 data-price="1299"
-                data-image="slide4.jpg">
-                    Add to Cart
-            </a>
-
-            <br>
-            <br>
-
-            <a
-                href="#products"
-                class="btn"
+                data-old-price="1599"
+                data-weight="50g"
+                data-image="slide4.jpg"
             >
-                Shop Now
+                Add to Cart
             </a>
 
         </div>
+
 
     </div>
 
@@ -500,6 +611,7 @@
 
     <div class="benefit-container">
 
+
         <!-- Benefit 1 -->
         <div class="benefit-box">
 
@@ -515,6 +627,7 @@
             </p>
 
         </div>
+
 
 
         <!-- Benefit 2 -->
@@ -534,6 +647,7 @@
         </div>
 
 
+
         <!-- Benefit 3 -->
         <div class="benefit-box">
 
@@ -549,6 +663,7 @@
             </p>
 
         </div>
+
 
 
         <!-- Benefit 4 -->
@@ -581,6 +696,7 @@
 
     <div class="about-wrapper">
 
+
         <!-- LEFT CONTENT -->
         <div class="about-text">
 
@@ -588,23 +704,34 @@
                 THE FRIENDS HERITAGE
             </span>
 
+
             <h2>
+
                 Pure Products.
+
                 <span>
                     Authentic Kashmir.
                 </span>
+
             </h2>
 
+
             <p>
+
                 Discover premium saffron, dry fruits and carefully
                 selected Himalayan products, brought to you with
                 a commitment to purity and quality.
+
             </p>
 
+
             <p>
+
                 From the valleys of Kashmir to your home, we focus
                 on authentic products and a premium experience.
+
             </p>
+
 
             <div class="about-line"></div>
 
@@ -614,14 +741,17 @@
                 href="about.html"
                 class="about-btn"
             >
+
                 Explore Our Story
 
                 <span>
                     →
                 </span>
+
             </a>
 
         </div>
+
 
 
         <!-- RIGHT IMAGE -->
@@ -675,8 +805,10 @@
     </div>
 
 
+
     <!-- ABOUT QUALITY POINTS -->
     <div class="about-points">
+
 
         <!-- Point 1 -->
         <div class="about-point">
@@ -698,6 +830,7 @@
         </div>
 
 
+
         <!-- Point 2 -->
         <div class="about-point">
 
@@ -716,6 +849,7 @@
             </div>
 
         </div>
+
 
 
         <!-- Point 3 -->
@@ -749,6 +883,7 @@
 
 <footer class="footer">
 
+
     <!-- ================= TOP FOOTER ================= -->
 
     <div class="footer-container">
@@ -758,7 +893,10 @@
 
         <div class="footer-column">
 
-            <h3>Customer Service</h3>
+            <h3>
+                Customer Service
+            </h3>
+
 
             <ul>
 
@@ -768,46 +906,65 @@
                     </a>
                 </li>
 
+
                 <li>
-                    <a href="#" class="app-link"
-                       data-app="whatsapp"
-                       data-phone="917051713047"
-                       data-android-store="https://play.google.com/store/apps/details?id=com.whatsapp"
-                       data-ios-store="https://apps.apple.com/app/whatsapp-messenger/id310633997">
 
+                    <a
+                        href="https://wa.me/917051713047"
+                        class="app-link"
+                        data-app="whatsapp"
+                        data-phone="917051713047"
+                        data-android-store="https://play.google.com/store/apps/details?id=com.whatsapp"
+                        data-ios-store="https://apps.apple.com/app/whatsapp-messenger/id310633997"
+                    >
                         WhatsApp
-
                     </a>
+
                 </li>
 
+
                 <li>
-                    <a href="mailto:youremail@example.com">
+
+                    <a href="mailto:danishrather041@gmail.com">
                         Email
                     </a>
+
                 </li>
 
+
                 <li>
+
                     <a href="shipping.html">
                         Shipping &amp; Delivery
                     </a>
+
                 </li>
 
+
                 <li>
+
                     <a href="returns.html">
                         Returns &amp; Refunds
                     </a>
+
                 </li>
 
+
                 <li>
+
                     <a href="terms.html">
                         Terms &amp; Conditions
                     </a>
+
                 </li>
 
+
                 <li>
+
                     <a href="privacy.html">
                         Privacy Policy
                     </a>
+
                 </li>
 
             </ul>
@@ -820,19 +977,23 @@
 
         <div class="footer-column social-column">
 
-            <h3>Follow Us</h3>
+            <h3>
+                Follow Us
+            </h3>
+
 
             <div class="social-links">
 
 
                 <!-- INSTAGRAM -->
-
-                <a href="#"
-                   class="app-link"
-                   data-app="instagram"
-                   data-android-store="https://play.google.com/store/apps/details?id=com.instagram.android"
-                   data-ios-store="https://apps.apple.com/app/instagram/id389801252"
-                   aria-label="Open Instagram">
+                <a
+                    href="https://www.instagram.com/friends_heritage/"
+                    class="app-link"
+                    data-app="instagram"
+                    data-android-store="https://play.google.com/store/apps/details?id=com.instagram.android"
+                    data-ios-store="https://apps.apple.com/app/instagram/id389801252"
+                    aria-label="Open Instagram"
+                >
 
                     <i class="fab fa-instagram"></i>
 
@@ -845,13 +1006,14 @@
 
 
                 <!-- FACEBOOK -->
-
-                <a href="#"
-                   class="app-link"
-                   data-app="facebook"
-                   data-android-store="https://play.google.com/store/apps/details?id=com.facebook.katana"
-                   data-ios-store="https://apps.apple.com/app/facebook/id284882215"
-                   aria-label="Open Facebook">
+                <a
+                    href="https://www.facebook.com/YOUR_USERNAME/"
+                    class="app-link"
+                    data-app="facebook"
+                    data-android-store="https://play.google.com/store/apps/details?id=com.facebook.katana"
+                    data-ios-store="https://apps.apple.com/app/facebook/id284882215"
+                    aria-label="Open Facebook"
+                >
 
                     <i class="fab fa-facebook-f"></i>
 
@@ -864,14 +1026,15 @@
 
 
                 <!-- WHATSAPP -->
-
-                <a href="#"
-                   class="app-link"
-                   data-app="whatsapp"
-                   data-phone="917051713047"
-                   data-android-store="https://play.google.com/store/apps/details?id=com.whatsapp"
-                   data-ios-store="https://apps.apple.com/app/whatsapp-messenger/id310633997"
-                   aria-label="Open WhatsApp">
+                <a
+                    href="https://wa.me/917051713047"
+                    class="app-link"
+                    data-app="whatsapp"
+                    data-phone="917051713047"
+                    data-android-store="https://play.google.com/store/apps/details?id=com.whatsapp"
+                    data-ios-store="https://apps.apple.com/app/whatsapp-messenger/id310633997"
+                    aria-label="Open WhatsApp"
+                >
 
                     <i class="fab fa-whatsapp"></i>
 
@@ -938,13 +1101,12 @@
 </footer>
 
 
+
 <!-- =========================================================
      JAVASCRIPT
 ========================================================= -->
 
 <script src="script.js"></script>
-
-
 
 </body>
 
