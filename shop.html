@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <!-- Website Favicon -->
+    <link
+        rel="icon"
+        href="logo.png"
+    >
+
+    <!-- Main CSS -->
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <!-- Shop Page CSS -->
+    <link
+        rel="stylesheet"
+        href="shop.css"
+    >
+
+    <!-- Font Awesome -->
+    <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v6.5.1/css/all.css"
+    >
+
+    <!-- Shop Background Image -->
+    <style>
+
+        .shop-page {
+            background:
+                linear-gradient(
+                    rgba(255, 248, 231, 0.88),
+                    rgba(255, 248, 231, 0.88)
+                ),
+                url("shop-bg.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+    </style>
+
+    <title>Shop | The Friends Heritage</title>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+====================================================== -->
+
+<header>
+
+    <nav class="navbar">
+
+        <!-- Logo -->
+        <div class="logo">
+
+            <img
+                src="logo.png"
+                alt="The Friends Heritage Logo"
+            >
+
+            <span>
+                THE FRIENDS HERITAGE
+            </span>
+
+        </div>
+
+
+        <!-- Navigation Links -->
+        <ul
+            class="nav-links"
+            id="navLinks"
+        >
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="shop.html"
+                    class="active"
+                >
+                    Shop
+                </a>
+            </li>
+
+            <li>
+                <a href="benefits.html">
+                    Benefits
+                </a>
+            </li>
+
+            <li>
+                <a href="about.html">
+                    About Us
+                </a>
+            </li>
+
+            <li>
+                <a href="contact.html">
+                    Contact Us
+                </a>
+            </li>
+
+        </ul>
+
+
+        <!-- Navbar Icons -->
+        <div class="nav-icons">
+
+            <!-- Account -->
+            <a
+                href="account.html"
+                aria-label="My Account"
+                title="My Account"
+            >
+                <i class="fa-regular fa-user"></i>
+            </a>
+
+
+            <!-- Cart -->
+            <a
+                href="cart.html"
+                class="cart-icon"
+                aria-label="Shopping Cart"
+                title="Shopping Cart"
+            >
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span
+                    class="cart-count"
+                    id="cartCount"
+                >
+                    0
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- Mobile Menu -->
+        <div
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Open Menu"
+            role="button"
+            tabindex="0"
+        >
+            ☰
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     SHOP PAGE
+====================================================== -->
+
+<main class="shop-page">
+
+
+    <!-- =================================================
+         SHOP HERO
+    ================================================== -->
+
+    <section class="shop-hero">
+
+        <div class="shop-hero-overlay"></div>
+
+        <div class="shop-hero-content">
+
+            <span class="shop-eyebrow">
+                THE FRIENDS HERITAGE
+            </span>
+
+            <h1>
+                Discover Our
+                <span>
+                    Premium Collection
+                </span>
+            </h1>
+
+            <p>
+                Explore authentic Kashmiri saffron,
+                premium dry fruits and carefully
+                selected Himalayan products.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SHOP CONTENT
+    ================================================== -->
+
+    <section class="shop-content">
+
+
+        <!-- =================================================
+             SHOP HEADER
+        ================================================== -->
+
+        <div class="shop-heading">
+
+            <div>
+
+                <span class="shop-small-title">
+                    OUR COLLECTION
+                </span>
+
+                <h2>
+                    Shop Premium Products
+                </h2>
+
+                <p>
+                    Pure • Premium • Handpicked
+                </p>
+
+            </div>
+
+
+            <!-- Product Count -->
+            <div class="product-count">
+
+                <strong id="productCount">
+                    8
+                </strong>
+
+                <span>
+                    Products
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FILTER / SORT BAR
+        ================================================== -->
+
+        <div class="shop-toolbar">
+
+
+            <!-- Categories -->
+            <div class="category-filter">
+
+                <button
+                    type="button"
+                    class="category-btn active"
+                    data-category="all"
+                >
+                    All Products
+                </button>
+
+                <button
+                    type="button"
+                    class="category-btn"
+                    data-category="saffron"
+                >
+                    Saffron
+                </button>
+
+                <button
+                    type="button"
+                    class="category-btn"
+                    data-category="dry-fruits"
+                >
+                    Dry Fruits
+                </button>
+
+                <button
+                    type="button"
+                    class="category-btn"
+                    data-category="himalayan"
+                >
+                    Himalayan
+                </button>
+
+            </div>
+
+
+            <!-- Sort -->
+            <div class="sort-box">
+
+                <label for="sortProducts">
+                    Sort By
+                </label>
+
+                <select id="sortProducts">
+
+                    <option value="default">
+                        Featured
+                    </option>
+
+                    <option value="low-high">
+                        Price: Low to High
+                    </option>
+
+                    <option value="high-low">
+                        Price: High to Low
+                    </option>
+
+                    <option value="name">
+                        Name: A to Z
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PRODUCT GRID
+        ================================================== -->
+
+        <div
+            class="shop-product-grid"
+            id="shopProducts"
+        >
+
+
+            <!-- =================================================
+                 PRODUCT 1 - SAFFRON
+            ================================================== -->
+
+            <article
+                class="shop-product-card"
+                data-category="saffron"
+                data-price="299"
+                data-name="Kashmiri Saffron"
+            >
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        Bestseller
+                    </span>
+
+                    <img
+                        src="slide3.jpg"
+                        alt="Kashmiri Saffron"
+                    >
+
+                    <button
+                        type="button"
+                        class="quick-view"
+                        aria-label="View Kashmiri Saffron"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        SAFFRON
+                    </span>
+
+                    <h3>
+                        Kashmiri Saffron
+                    </h3>
+
+                    <p class="product-description">
+                        Premium Kashmiri saffron with
+                        rich aroma, color and purity.
+                    </p>
+
+
+                    <!-- Variant -->
+                    <div class="product-option">
+
+                        <label>
+                            Select Weight
+                        </label>
+
+                        <select class="product-variant">
+
+                            <option
+                                value="299"
+                                data-weight="1g"
+                            >
+                                1g — ₹299
+                            </option>
+
+                            <option
+                                value="549"
+                                data-weight="2g"
+                            >
+                                2g — ₹549
+                            </option>
+
+                            <option
+                                value="1299"
+                                data-weight="5g"
+                            >
+                                5g — ₹1,299
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="product-bottom">
+
+                        <div class="product-price">
+                            <span class="current-price">₹299</span>
+                            <span class="old-price">₹399</span>
+                        </div>
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                class="quantity-minus"
+                            >
+                                −
+                            </button>
+
+                            <span class="quantity">
+                                1
+                            </span>
+
+                            <button
+                                type="button"
+                                class="quantity-plus"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="add-cart-btn"
+                        data-name="Kashmiri Saffron"
+                        data-price="299"
+                        data-image="slide3.jpg"
+                    >
+
+                        <i class="fa-solid fa-cart-plus"></i>
+
+                        Add to Cart
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PRODUCT 2 - ALMONDS
+            ================================================== -->
+
+            <article
+                class="shop-product-card"
+                data-category="dry-fruits"
+                data-price="599"
+                data-name="Premium Almonds"
+            >
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        Premium
+                    </span>
+
+                    <img
+                        src="slide1.jpg"
+                        alt="Premium Almonds"
+                    >
+
+                    <button
+                        type="button"
+                        class="quick-view"
+                        aria-label="View Premium Almonds"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        DRY FRUITS
+                    </span>
+
+                    <h3>
+                        Premium Almonds
+                    </h3>
+
+                    <p class="product-description">
+                        Naturally nutritious almonds,
+                        carefully selected for premium quality.
+                    </p>
+
+
+                    <div class="product-option">
+
+                        <label>
+                            Select Weight
+                        </label>
+
+                        <select class="product-variant">
+
+                            <option
+                                value="599"
+                                data-weight="500g"
+                            >
+                                500g — ₹599
+                            </option>
+
+                            <option
+                                value="1099"
+                                data-weight="1kg"
+                            >
+                                1kg — ₹1,099
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="product-bottom">
+
+                        <div class="product-price">
+                            ₹599
+                        </div>
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                class="quantity-minus"
+                            >
+                                −
+                            </button>
+
+                            <span class="quantity">
+                                1
+                            </span>
+
+                            <button
+                                type="button"
+                                class="quantity-plus"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="add-cart-btn"
+                        data-name="Premium Almonds"
+                        data-price="599"
+                        data-image="slide1.jpg"
+                    >
+
+                        <i class="fa-solid fa-cart-plus"></i>
+
+                        Add to Cart
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PRODUCT 3 - WALNUTS
+            ================================================== -->
+
+            <article
+                class="shop-product-card"
+                data-category="dry-fruits"
+                data-price="699"
+                data-name="Premium Walnuts"
+            >
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        Popular
+                    </span>
+
+                    <img
+                        src="slide2.jpg"
+                        alt="Premium Walnuts"
+                    >
+
+                    <button
+                        type="button"
+                        class="quick-view"
+                        aria-label="View Premium Walnuts"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        DRY FRUITS
+                    </span>
+
+                    <h3>
+                        Premium Walnuts
+                    </h3>
+
+                    <p class="product-description">
+                        Premium Kashmiri walnuts with
+                        rich taste and natural goodness.
+                    </p>
+
+
+                    <div class="product-option">
+
+                        <label>
+                            Select Weight
+                        </label>
+
+                        <select class="product-variant">
+
+                            <option
+                                value="699"
+                                data-weight="500g"
+                            >
+                                500g — ₹699
+                            </option>
+
+                            <option
+                                value="1299"
+                                data-weight="1kg"
+                            >
+                                1kg — ₹1,299
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="product-bottom">
+
+                        <div class="product-price">
+                            ₹699
+                        </div>
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                class="quantity-minus"
+                            >
+                                −
+                            </button>
+
+                            <span class="quantity">
+                                1
+                            </span>
+
+                            <button
+                                type="button"
+                                class="quantity-plus"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="add-cart-btn"
+                        data-name="Premium Walnuts"
+                        data-price="699"
+                        data-image="slide2.jpg"
+                    >
+
+                        <i class="fa-solid fa-cart-plus"></i>
+
+                        Add to Cart
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PRODUCT 4 - SHILAJIT
+            ================================================== -->
+
+            <article
+                class="shop-product-card"
+                data-category="himalayan"
+                data-price="1299"
+                data-name="Pure Shilajit"
+            >
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        Premium
+                    </span>
+
+                    <img
+                        src="slide4.jpg"
+                        alt="Pure Shilajit"
+                    >
+
+                    <button
+                        type="button"
+                        class="quick-view"
+                        aria-label="View Pure Shilajit"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        HIMALAYAN
+                    </span>
+
+                    <h3>
+                        Pure Shilajit
+                    </h3>
+
+                    <p class="product-description">
+                        Carefully selected Himalayan
+                        shilajit presented in premium packaging.
+                    </p>
+
+
+                    <div class="product-option">
+
+                        <label>
+                            Select Weight
+                        </label>
+
+                        <select class="product-variant">
+
+                            <option
+                                value="1299"
+                                data-weight="50g"
+                            >
+                                50g — ₹1,299
+                            </option>
+
+                            <option
+                                value="2299"
+                                data-weight="100g"
+                            >
+                                100g — ₹2,299
+                            </option>
+
+                            <option
+                                value="4999"
+                                data-weight="250g"
+                            >
+                                250g — ₹4,999
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="product-bottom">
+
+                        <div class="product-price">
+                            ₹1,299
+                        </div>
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                class="quantity-minus"
+                            >
+                                −
+                            </button>
+
+                            <span class="quantity">
+                                1
+                            </span>
+
+                            <button
+                                type="button"
+                                class="quantity-plus"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="add-cart-btn"
+                        data-name="Pure Shilajit"
+                        data-price="1299"
+                        data-image="slide4.jpg"
+                    >
+
+                        <i class="fa-solid fa-cart-plus"></i>
+
+                        Add to Cart
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PRODUCT 5 - KAHWA
+            ================================================== -->
+
+            <article
+                class="shop-product-card"
+                data-category="himalayan"
+                data-price="399"
+                data-name="Kashmiri Kahwa"
+            >
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        New
+                    </span>
+
+                    <img
+                        src="kahwa.jpg"
+                        alt="Kashmiri Kahwa"
+                    >
+
+                    <button
+                        type="button"
+                        class="quick-view"
+                        aria-label="View Kashmiri Kahwa"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        HIMALAYAN
+                    </span>
+
+                    <h3>
+                        Kashmiri Kahwa
+                    </h3>
+
+                    <p class="product-description">
+                        Traditional Kashmiri kahwa blend
+                        crafted for a rich aromatic experience.
+                    </p>
+
+
+                    <div class="product-option">
+
+                        <label>
+                            Select Weight
+                        </label>
+
+                        <select class="product-variant">
+
+                            <option
+                                value="399"
+                                data-weight="250g"
+                            >
+                                250g — ₹399
+                            </option>
+
+                            <option
+                                value="699"
+                                data-weight="500g"
+                            >
+                                500g — ₹699
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="product-bottom">
+
+                        <div class="product-price">
+                            ₹399
+                        </div>
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                class="quantity-minus"
+                            >
+                                −
+                            </button>
+
+                            <span class="quantity">
+                                1
+                            </span>
+
+                            <button
+                                type="button"
+                                class="quantity-plus"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="add-cart-btn"
+                        data-name="Kashmiri Kahwa"
+                        data-price="399"
+                        data-image="kahwa.jpg"
+                    >
+
+                        <i class="fa-solid fa-cart-plus"></i>
+
+                        Add to Cart
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PRODUCT 6 - CASHEWS
+            ================================================== -->
+
+            <article
+                class="shop-product-card"
+                data-category="dry-fruits"
+                data-price="799"
+                data-name="Premium Cashews"
+            >
+
+                <div class="product-image">
+
+                    <img
+                        src="cashews.jpg"
+                        alt="Premium Cashews"
+                    >
+
+                    <button
+                        type="button"
+                        class="quick-view"
+                        aria-label="View Premium Cashews"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        DRY FRUITS
+                    </span>
+
+                    <h3>
+                        Premium Cashews
+                    </h3>
+
+                    <p class="product-description">
+                        Creamy, crunchy and carefully
+                        selected premium cashews.
+                    </p>
+
+
+                    <div class="product-option">
+
+                        <label>
+                            Select Weight
+                        </label>
+
+                        <select class="product-variant">
+
+                            <option
+                                value="799"
+                                data-weight="500g"
+                            >
+                                500g — ₹799
+                            </option>
+
+                            <option
+                                value="1499"
+                                data-weight="1kg"
+                            >
+                                1kg — ₹1,499
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="product-bottom">
+
+                        <div class="product-price">
+                            ₹799
+                        </div>
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                class="quantity-minus"
+                            >
+                                −
+                            </button>
+
+                            <span class="quantity">
+                                1
+                            </span>
+
+                            <button
+                                type="button"
+                                class="quantity-plus"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="add-cart-btn"
+                        data-name="Premium Cashews"
+                        data-price="799"
+                        data-image="cashews.jpg"
+                    >
+
+                        <i class="fa-solid fa-cart-plus"></i>
+
+                        Add to Cart
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PRODUCT 7 - RAISINS
+            ================================================== -->
+
+            <article
+                class="shop-product-card"
+                data-category="dry-fruits"
+                data-price="499"
+                data-name="Premium Raisins"
+            >
+
+                <div class="product-image">
+
+                    <img
+                        src="raisins.jpg"
+                        alt="Premium Raisins"
+                    >
+
+                    <button
+                        type="button"
+                        class="quick-view"
+                        aria-label="View Premium Raisins"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        DRY FRUITS
+                    </span>
+
+                    <h3>
+                        Premium Raisins
+                    </h3>
+
+                    <p class="product-description">
+                        Naturally sweet premium raisins,
+                        selected for quality and freshness.
+                    </p>
+
+
+                    <div class="product-option">
+
+                        <label>
+                            Select Weight
+                        </label>
+
+                        <select class="product-variant">
+
+                            <option
+                                value="499"
+                                data-weight="500g"
+                            >
+                                500g — ₹499
+                            </option>
+
+                            <option
+                                value="899"
+                                data-weight="1kg"
+                            >
+                                1kg — ₹899
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="product-bottom">
+
+                        <div class="product-price">
+                            ₹499
+                        </div>
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                class="quantity-minus"
+                            >
+                                −
+                            </button>
+
+                            <span class="quantity">
+                                1
+                            </span>
+
+                            <button
+                                type="button"
+                                class="quantity-plus"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="add-cart-btn"
+                        data-name="Premium Raisins"
+                        data-price="499"
+                        data-image="raisins.jpg"
+                    >
+
+                        <i class="fa-solid fa-cart-plus"></i>
+
+                        Add to Cart
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PRODUCT 8 - HONEY
+            ================================================== -->
+
+            <article
+                class="shop-product-card"
+                data-category="himalayan"
+                data-price="549"
+                data-name="Kashmiri Honey"
+            >
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        Natural
+                    </span>
+
+                    <img
+                        src="honey.jpg"
+                        alt="Kashmiri Honey"
+                    >
+
+                    <button
+                        type="button"
+                        class="quick-view"
+                        aria-label="View Kashmiri Honey"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        HIMALAYAN
+                    </span>
+
+                    <h3>
+                        Kashmiri Honey
+                    </h3>
+
+                    <p class="product-description">
+                        Naturally sourced honey with
+                        a rich and authentic Himalayan taste.
+                    </p>
+
+
+                    <div class="product-option">
+
+                        <label>
+                            Select Weight
+                        </label>
+
+                        <select class="product-variant">
+
+                            <option
+                                value="549"
+                                data-weight="500g"
+                            >
+                                500g — ₹549
+                            </option>
+
+                            <option
+                                value="999"
+                                data-weight="1kg"
+                            >
+                                1kg — ₹999
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="product-bottom">
+
+                        <div class="product-price">
+                            ₹549
+                        </div>
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                class="quantity-minus"
+                            >
+                                −
+                            </button>
+
+                            <span class="quantity">
+                                1
+                            </span>
+
+                            <button
+                                type="button"
+                                class="quantity-plus"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="add-cart-btn"
+                        data-name="Kashmiri Honey"
+                        data-price="549"
+                        data-image="honey.jpg"
+                    >
+
+                        <i class="fa-solid fa-cart-plus"></i>
+
+                        Add to Cart
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             NO PRODUCTS MESSAGE
+        ================================================== -->
+
+        <div
+            class="no-products"
+            id="noProducts"
+        >
+
+            <i class="fa-solid fa-box-open"></i>
+
+            <h3>
+                No Products Found
+            </h3>
+
+            <p>
+                We couldn't find products in this category.
+            </p>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+
+    <!-- TOP FOOTER -->
+
+    <div class="footer-container">
+
+
+        <!-- CUSTOMER SERVICE -->
+
+        <div class="footer-column">
+
+            <h3>
+                Customer Service
+            </h3>
+
+            <ul>
+
+                <li>
+                    <a href="contact.html">
+                        Contact Us
+                    </a>
+                </li>
+
+                <li>
+
+                    <a
+                        href="https://wa.me/917051713047"
+                        class="app-link"
+                        data-app="whatsapp"
+                        data-phone="917051713047"
+                        data-android-store="https://play.google.com/store/apps/details?id=com.whatsapp"
+                        data-ios-store="https://apps.apple.com/app/whatsapp-messenger/id310633997"
+                    >
+                        WhatsApp
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="mailto:danishrather041@gmail.com">
+                        Email
+                    </a>
+
+                </li>
+
+                <li>
+                    <a href="shipping.html">
+                        Shipping &amp; Delivery
+                    </a>
+                </li>
+
+                <li>
+                    <a href="returns.html">
+                        Returns &amp; Refunds
+                    </a>
+                </li>
+
+                <li>
+                    <a href="terms.html">
+                        Terms &amp; Conditions
+                    </a>
+                </li>
+
+                <li>
+                    <a href="privacy.html">
+                        Privacy Policy
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+        <!-- FOLLOW US -->
+
+        <div class="footer-column social-column">
+
+            <h3>
+                Follow Us
+            </h3>
+
+            <div class="social-links">
+
+
+                <!-- INSTAGRAM -->
+
+                <a
+                    href="https://www.instagram.com/friends_heritage/"
+                    class="app-link"
+                    data-app="instagram"
+                    data-android-store="https://play.google.com/store/apps/details?id=com.instagram.android"
+                    data-ios-store="https://apps.apple.com/app/instagram/id389801252"
+                    aria-label="Open Instagram"
+                >
+
+                    <i class="fab fa-instagram"></i>
+
+                    <span>
+                        Instagram
+                    </span>
+
+                </a>
+
+
+
+                <!-- FACEBOOK -->
+
+                <a
+                    href="https://www.facebook.com/YOUR_USERNAME/"
+                    class="app-link"
+                    data-app="facebook"
+                    data-android-store="https://play.google.com/store/apps/details?id=com.facebook.katana"
+                    data-ios-store="https://apps.apple.com/app/facebook/id284882215"
+                    aria-label="Open Facebook"
+                >
+
+                    <i class="fab fa-facebook-f"></i>
+
+                    <span>
+                        Facebook
+                    </span>
+
+                </a>
+
+
+
+                <!-- WHATSAPP -->
+
+                <a
+                    href="https://wa.me/917051713047"
+                    class="app-link"
+                    data-app="whatsapp"
+                    data-phone="917051713047"
+                    data-android-store="https://play.google.com/store/apps/details?id=com.whatsapp"
+                    data-ios-store="https://apps.apple.com/app/whatsapp-messenger/id310633997"
+                    aria-label="Open WhatsApp"
+                >
+
+                    <i class="fab fa-whatsapp"></i>
+
+                    <span>
+                        WhatsApp
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- DIVIDER -->
+
+    <div class="footer-divider"></div>
+
+
+
+    <!-- DESIGNER -->
+
+    <div class="designer-credit">
+
+        <p>
+            Designed &amp; Developed by
+        </p>
+
+        <h3>
+            Danish Khursheed
+        </h3>
+
+        <span>
+            Crafted with ❤️ &amp; creativity
+        </span>
+
+    </div>
+
+
+
+    <!-- DIVIDER -->
+
+    <div class="footer-divider"></div>
+
+
+
+    <!-- COPYRIGHT -->
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 The Friends Heritage
+        </p>
+
+        <p>
+            All Rights Reserved
+        </p>
+
+    </div>
+
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script src="script.js"></script>
+
+<script src="shop.js"></script>
+
+
+</body>
+
+</html>
