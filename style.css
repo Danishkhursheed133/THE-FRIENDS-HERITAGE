@@ -1,4 +1,11 @@
 /* =========================================================
+   THE FRIENDS HERITAGE
+   MAIN STYLE.CSS
+   FINAL CLEAN VERSION
+========================================================= */
+
+
+/* =========================================================
    RESET
 ========================================================= */
 
@@ -31,17 +38,22 @@ header {
     width: 100%;
     margin: 0;
     padding: 0;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
     z-index: 1000;
 }
 
 .navbar {
     width: 100%;
     min-height: 70px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     padding: 15px 8%;
+
     background: #2c3e50;
     color: #ffffff;
 }
@@ -55,21 +67,31 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
+
+    text-decoration: none;
+    color: #ffffff;
 }
 
 .logo img {
     width: 40px;
     height: 40px;
+
     object-fit: cover;
+
     border-radius: 50%;
+
     background: #ffffff;
     padding: 5px;
+
     display: block;
 }
 
 .logo span {
+    color: #ffffff;
+
     font-size: 22px;
     font-weight: bold;
+
     white-space: nowrap;
 }
 
@@ -80,18 +102,25 @@ header {
 
 .nav-links {
     list-style: none;
+
     display: flex;
     align-items: center;
+
     gap: 25px;
+
     margin: 0;
     padding: 0;
 }
 
 .nav-links a {
     text-decoration: none;
+
     color: #ffffff;
+
     font-size: 16px;
+
     position: relative;
+
     transition: 0.3s ease;
 }
 
@@ -102,12 +131,17 @@ header {
 
 .nav-links a::after {
     content: "";
+
     position: absolute;
+
     width: 0;
     height: 2px;
+
     background: #f1c40f;
+
     left: 0;
     bottom: -5px;
+
     transition: 0.3s ease;
 }
 
@@ -128,9 +162,13 @@ header {
 
 .nav-icons a {
     color: #ffffff;
+
     font-size: 22px;
+
     margin-left: 15px;
+
     text-decoration: none;
+
     transition: 0.3s ease;
 }
 
@@ -145,25 +183,33 @@ header {
 
 .cart-icon {
     position: relative;
+
     color: rgba(227, 217, 176, 0.8);
+
     transition: 0.3s ease;
 }
 
 .cart-icon:hover {
-    color: rgb(181, 118, 118);
+    color: #f1c40f;
 }
 
 .cart-icon span {
     position: absolute;
+
     top: -8px;
     right: -10px;
+
     width: 18px;
     height: 18px;
+
     background: #f1c40f;
     color: #000000;
+
     border-radius: 50%;
+
     font-size: 11px;
     font-weight: bold;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -176,9 +222,13 @@ header {
 
 .menu-toggle {
     display: none;
+
     font-size: 28px;
+
     cursor: pointer;
+
     color: #ffffff;
+
     user-select: none;
 }
 
@@ -189,26 +239,34 @@ header {
 
 .hero {
     width: 100%;
-    height: calc(100vh - 70px);
+    height: 85vh;
+
     margin: 0;
-    padding: 0;
+    padding: 70px 0 0;
+
     overflow: hidden;
+
     position: relative;
 }
 
 .slider {
     width: 100%;
     height: 100%;
+
     position: relative;
 }
 
 .slide {
     position: absolute;
+
     top: 0;
     left: 0;
+
     width: 100%;
     height: 100%;
+
     opacity: 0;
+
     transition: opacity 0.8s ease;
 }
 
@@ -224,18 +282,21 @@ header {
 .slide img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
     object-position: center;
+
     display: block;
 }
 
 
 /* =========================================================
-   OVERLAY
+   HERO OVERLAY
 ========================================================= */
 
 .overlay {
     position: absolute;
+
     inset: 0;
 
     background: linear-gradient(
@@ -253,51 +314,73 @@ header {
 
 .content {
     position: absolute;
+
     left: 8%;
     top: 50%;
+
     transform: translateY(-50%);
+
     color: #ffffff;
+
     z-index: 10;
 }
 
 .content h1 {
     font-size: 70px;
+
     margin-bottom: 15px;
+
     line-height: 1.1;
 }
 
 .content p {
     font-size: 24px;
+
     margin-bottom: 20px;
+
     line-height: 1.5;
 }
 
 
 /* =========================================================
-   BUTTON
+   GENERAL BUTTON
 ========================================================= */
 
 .btn {
     display: inline-block;
+
     padding: 14px 32px;
+
     background: #f1c40f;
     color: #222222;
+
     text-decoration: none;
+
     font-size: 16px;
     font-weight: 600;
+
     border-radius: 50px;
+
     transition: all 0.3s ease;
+
     box-shadow: 0 5px 15px rgba(241, 196, 15, 0.3);
+
+    cursor: pointer;
+
+    border: none;
 }
 
 .btn:hover {
     background: #ffd700;
+
     transform: translateY(-3px);
+
     box-shadow: 0 8px 20px rgba(241, 196, 15, 0.5);
 }
 
 .btn::after {
     content: " →";
+
     transition: 0.3s ease;
 }
 
@@ -313,15 +396,25 @@ header {
 .prev,
 .next {
     position: absolute;
+
     top: 50%;
+
     transform: translateY(-50%);
+
     background: rgba(0, 0, 0, 0.5);
+
     color: #ffffff;
+
     border: none;
+
     font-size: 30px;
+
     padding: 10px 15px;
+
     cursor: pointer;
+
     z-index: 20;
+
     transition: 0.3s ease;
 }
 
@@ -336,45 +429,28 @@ header {
 .prev:hover,
 .next:hover {
     background: #f1c40f;
+
     color: #000000;
 }
 
 
 /* =========================================================
-   SLIDER DOTS
+   SLIDER DOTS HIDDEN
 ========================================================= */
 
-.dots {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
-    z-index: 20;
-}
-
+.dots,
 .dot {
-    width: 12px;
-    height: 12px;
-    margin: 0 5px;
-    background: #bbbbbb;
-    display: inline-block;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-
-.dot.active {
-    background: #f1c40f;
-    transform: scale(1.15);
+    display: none !important;
 }
 
 
 /* =========================================================
-   SHOP SECTION
+   FEATURED PRODUCTS / SHOP SECTION
 ========================================================= */
 
 #shop {
     width: 100%;
+
     padding: 80px 8%;
 
     background: linear-gradient(
@@ -391,11 +467,17 @@ header {
 
 .section-header {
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
+
     margin-bottom: 50px;
+
     background: #e9d3d3;
+
     padding: 20px 30px;
+
     border-radius: 10px;
 }
 
@@ -406,34 +488,42 @@ header {
 
 .section-title {
     text-align: center;
+
     margin-bottom: 50px;
 }
 
 .section-title h2 {
     font-size: 42px;
+
     color: #2c3e50;
 }
 
 .section-title p {
     color: #777777;
+
     margin-top: 10px;
 }
 
 
 /* =========================================================
-   SEE MORE
+   VIEW ALL PRODUCTS
 ========================================================= */
 
 .see-more-btn {
     text-decoration: none;
+
     color: #2c3e50;
+
     font-weight: 600;
+
     font-size: 18px;
+
     transition: 0.3s ease;
 }
 
 .see-more-btn:hover {
     color: #86867c;
+
     transform: translateX(5px);
 }
 
@@ -462,18 +552,30 @@ header {
 
 .product-card {
     background: rgb(215, 236, 239);
+
     border-radius: 15px;
+
     overflow: hidden;
+
     text-align: center;
 
     box-shadow:
         0 5px 15px rgba(0, 0, 0, 0.1);
 
     transition: 0.3s ease;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
 }
 
 .product-card:hover {
     transform: translateY(-10px);
+
+    box-shadow:
+        0 15px 30px rgba(44, 62, 80, 0.15);
 }
 
 
@@ -483,47 +585,133 @@ header {
 
 .product-card img {
     width: 100%;
+
     height: 250px;
+
     object-fit: cover;
+
     display: block;
 }
 
 
 /* =========================================================
-   PRODUCT TEXT
+   PRODUCT TITLE
 ========================================================= */
 
 .product-card h3 {
     margin-top: 15px;
-    color: #2c3e50;
-}
 
-.product-card p {
-    margin: 10px 0;
-    font-weight: bold;
-    color: #f45656;
+    color: #2c3e50;
+
+    font-size: 20px;
+
+    font-weight: 700;
 }
 
 
 /* =========================================================
-   PRODUCT BUTTON
+   HOME PRODUCT PRICE
+========================================================= */
+
+.home-product-price {
+    margin: 10px 0 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CURRENT / SELLING PRICE
+========================================================= */
+
+.home-product-price .current-price {
+    color: #c49a27;
+
+    font-size: 21px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   OLD / ORIGINAL PRICE
+========================================================= */
+
+.home-product-price .old-price {
+    color: #888888;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    text-decoration: line-through;
+
+    text-decoration-thickness: 2px;
+}
+
+
+/* =========================================================
+   PRODUCT WEIGHT
+========================================================= */
+
+.home-product-price .product-weight {
+    color: #555555;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   ADD TO CART BUTTON
 ========================================================= */
 
 .product-btn {
     display: inline-block;
-    margin-bottom: 20px;
+
+    margin: 5px 0 18px;
+
     padding: 10px 20px;
+
     background: #cff8cd;
+
     color: #141212;
+
     text-decoration: none;
+
     border-radius: 30px;
+
     font-weight: 600;
+
     transition: 0.3s ease;
+
+    cursor: pointer;
+
+    border: none;
+
+    font-family: inherit;
+
+    font-size: 15px;
 }
 
 .product-btn:hover {
     background: #b5e9b2;
+
     transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -533,6 +721,7 @@ header {
 
 #benefits {
     width: 100%;
+
     padding: 90px 8%;
 
     background: linear-gradient(
@@ -544,18 +733,23 @@ header {
 
 #benefits .section-title {
     text-align: center;
+
     margin-bottom: 60px;
 }
 
 #benefits .section-title h2 {
     font-size: 42px;
+
     color: #2c3e50;
+
     font-weight: 700;
 }
 
 #benefits .section-title p {
     color: #7b6a4d;
+
     font-size: 18px;
+
     margin-top: 10px;
 }
 
@@ -582,8 +776,11 @@ header {
 
 .benefit-box {
     background: #ffffff;
+
     padding: 40px 30px;
+
     border-radius: 20px;
+
     text-align: center;
 
     transition: 0.4s ease;
@@ -591,7 +788,8 @@ header {
     box-shadow:
         0 15px 35px rgba(0, 0, 0, 0.08);
 
-    border: 1px solid rgba(212, 175, 55, 0.25);
+    border:
+        1px solid rgba(212, 175, 55, 0.25);
 }
 
 .benefit-box:hover {
@@ -612,6 +810,7 @@ header {
     border-radius: 50%;
 
     background: #fff5d9;
+
     color: #d4af37;
 
     font-size: 38px;
@@ -623,19 +822,25 @@ header {
 
 .benefit-box:hover i {
     background: #d4af37;
+
     color: #ffffff;
+
     transform: scale(1.1);
 }
 
 .benefit-box h3 {
     font-size: 24px;
+
     color: #2c3e50;
+
     margin-bottom: 15px;
 }
 
 .benefit-box p {
     color: #666666;
+
     line-height: 1.8;
+
     font-size: 15px;
 }
 
@@ -646,6 +851,7 @@ header {
 
 .about-section {
     position: relative;
+
     padding: 110px 8%;
 
     background:
@@ -671,6 +877,7 @@ header {
 
 .about-wrapper {
     max-width: 1200px;
+
     margin: auto;
 
     display: grid;
@@ -717,6 +924,7 @@ header {
 
 .about-text h2 span {
     display: block;
+
     color: #b68a20;
 }
 
@@ -737,6 +945,7 @@ header {
 
 .about-line {
     width: 70px;
+
     height: 3px;
 
     background: #c49a27;
@@ -780,6 +989,7 @@ header {
 
 .about-btn span {
     font-size: 20px;
+
     transition: 0.3s ease;
 }
 
@@ -827,7 +1037,6 @@ header {
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
     border-radius: 50%;
@@ -886,7 +1095,7 @@ header {
     border: 10px solid #ffffff;
 
     box-shadow:
-        0 20px 45px rgba(0, 0, 0, 0.20),
+        0 20px 45px rgba(0, 0, 0, 0.2),
         0 0 0 5px rgba(196, 154, 39, 0.15);
 
     transition: 0.6s ease;
@@ -1108,16 +1317,15 @@ header {
 
 
 /* =========================================================
-   PREMIUM MOBILE RESPONSIVE DESIGN
+   MOBILE RESPONSIVE
 ========================================================= */
 
 @media (max-width: 768px) {
 
-    /* ================= GLOBAL ================= */
-
     html,
     body {
         width: 100%;
+
         overflow-x: hidden;
     }
 
@@ -1126,10 +1334,13 @@ header {
     }
 
 
-    /* ================= NAVBAR ================= */
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
 
     .navbar {
         width: 100%;
+
         min-height: 68px;
 
         padding: 10px 5%;
@@ -1139,12 +1350,14 @@ header {
 
     .logo {
         gap: 8px;
+
         min-width: 0;
     }
 
     .logo img {
         width: 36px;
         height: 36px;
+
         flex-shrink: 0;
     }
 
@@ -1193,7 +1406,9 @@ header {
     }
 
 
-    /* ================= MOBILE NAVIGATION ================= */
+    /* =====================================================
+       MOBILE NAVIGATION
+    ===================================================== */
 
     .nav-links {
         position: fixed;
@@ -1208,9 +1423,11 @@ header {
 
         padding: 50px 25px;
 
-        background: rgba(44, 62, 80, 0.98);
+        background:
+            rgba(44, 62, 80, 0.98);
 
         backdrop-filter: blur(15px);
+
         -webkit-backdrop-filter: blur(15px);
 
         display: flex;
@@ -1237,6 +1454,7 @@ header {
 
     .nav-links li {
         width: 100%;
+
         text-align: center;
     }
 
@@ -1249,14 +1467,18 @@ header {
     }
 
 
-    /* ================= HERO ================= */
+    /* =====================================================
+       HERO
+    ===================================================== */
 
     .hero {
         width: 100%;
 
-        height: 78vh;
+        height: 82vh;
 
         min-height: 520px;
+
+        padding-top: 68px;
     }
 
     .slide img {
@@ -1274,6 +1496,7 @@ header {
 
     .content {
         left: 6%;
+
         right: 6%;
 
         top: auto;
@@ -1286,7 +1509,8 @@ header {
     }
 
     .content h1 {
-        font-size: clamp(30px, 8vw, 44px);
+        font-size:
+            clamp(30px, 8vw, 44px);
 
         line-height: 1.15;
 
@@ -1301,16 +1525,10 @@ header {
         margin-bottom: 20px;
     }
 
-    .btn {
-        padding: 12px 24px;
 
-        font-size: 14px;
-
-        min-height: 44px;
-    }
-
-
-    /* ================= SLIDER BUTTONS ================= */
+    /* =====================================================
+       SLIDER ARROWS
+    ===================================================== */
 
     .prev,
     .next {
@@ -1342,21 +1560,9 @@ header {
     }
 
 
-    /* ================= DOTS ================= */
-
-    .dots {
-        bottom: 22px;
-    }
-
-    .dot {
-        width: 9px;
-        height: 9px;
-
-        margin: 0 4px;
-    }
-
-
-    /* ================= SHOP ================= */
+    /* =====================================================
+       SHOP
+    ===================================================== */
 
     #shop {
         padding: 65px 5%;
@@ -1368,7 +1574,8 @@ header {
 
     .section-title h2,
     #benefits .section-title h2 {
-        font-size: clamp(28px, 7vw, 34px);
+        font-size:
+            clamp(28px, 7vw, 34px);
 
         line-height: 1.2;
     }
@@ -1399,7 +1606,9 @@ header {
     }
 
 
-    /* ================= PRODUCTS ================= */
+    /* =====================================================
+       PRODUCTS
+    ===================================================== */
 
     .product-container {
         width: 100%;
@@ -1430,30 +1639,46 @@ header {
         margin: 13px 8px 0;
     }
 
-    .product-card p {
-        font-size: 14px;
+
+    /* =====================================================
+       MOBILE HOME PRODUCT PRICE
+    ===================================================== */
+
+    .home-product-price {
+        gap: 6px;
 
         margin: 8px 0 12px;
     }
 
+    .home-product-price .current-price {
+        font-size: 17px;
+    }
+
+    .home-product-price .old-price {
+        font-size: 13px;
+    }
+
+    .home-product-price .product-weight {
+        font-size: 12px;
+    }
+
+
+    /* =====================================================
+       ADD TO CART
+    ===================================================== */
+
     .product-btn {
         padding: 9px 14px;
 
-        margin-bottom: 15px;
+        margin-bottom: 10px;
 
         font-size: 13px;
     }
 
-    .product-card .btn {
-        padding: 9px 15px;
 
-        font-size: 12px;
-
-        margin-bottom: 15px;
-    }
-
-
-    /* ================= BENEFITS ================= */
+    /* =====================================================
+       BENEFITS
+    ===================================================== */
 
     #benefits {
         padding: 70px 5%;
@@ -1493,7 +1718,9 @@ header {
     }
 
 
-    /* ================= ABOUT ================= */
+    /* =====================================================
+       ABOUT
+    ===================================================== */
 
     .about-section {
         padding: 75px 5%;
@@ -1518,7 +1745,8 @@ header {
     }
 
     .about-text h2 {
-        font-size: clamp(32px, 9vw, 40px);
+        font-size:
+            clamp(32px, 9vw, 40px);
 
         line-height: 1.15;
 
@@ -1542,7 +1770,9 @@ header {
     }
 
 
-    /* ================= ABOUT IMAGE ================= */
+    /* =====================================================
+       ABOUT IMAGE
+    ===================================================== */
 
     .about-visual {
         width: 100%;
@@ -1558,11 +1788,13 @@ header {
 
     .about-image-card {
         width: 285px;
+
         height: 285px;
     }
 
     .about-image-card img {
         width: 260px;
+
         height: 260px;
 
         border-width: 7px;
@@ -1570,22 +1802,28 @@ header {
 
     .about-image-card::before {
         width: 305px;
+
         height: 305px;
     }
 
     .about-image-card::after {
         width: 335px;
+
         height: 335px;
     }
 
 
-    /* ================= ABOUT BADGE ================= */
+    /* =====================================================
+       ABOUT BADGE
+    ===================================================== */
 
     .about-badge {
         width: 88px;
+
         height: 88px;
 
         left: 0;
+
         bottom: 12px;
 
         border-width: 4px;
@@ -1602,13 +1840,17 @@ header {
     }
 
 
-    /* ================= ORIGIN BADGE ================= */
+    /* =====================================================
+       ORIGIN BADGE
+    ===================================================== */
 
     .about-origin {
         width: 88px;
+
         height: 88px;
 
         right: 0;
+
         top: 8px;
 
         border-width: 2px;
@@ -1629,7 +1871,9 @@ header {
     }
 
 
-    /* ================= ABOUT POINTS ================= */
+    /* =====================================================
+       ABOUT POINTS
+    ===================================================== */
 
     .about-points {
         grid-template-columns: 1fr;
@@ -1651,6 +1895,7 @@ header {
         min-width: 52px;
 
         width: 52px;
+
         height: 52px;
 
         font-size: 19px;
@@ -1663,6 +1908,7 @@ header {
     .about-point p {
         font-size: 13px;
     }
+
 }
 
 
@@ -1680,6 +1926,7 @@ header {
 
     .logo img {
         width: 34px;
+
         height: 34px;
     }
 
@@ -1706,20 +1953,26 @@ header {
     .nav-links {
         top: 64px;
 
-        height: calc(100vh - 64px);
+        height:
+            calc(100vh - 64px);
     }
 
 
-    /* ================= HERO ================= */
+    /* =====================================================
+       HERO
+    ===================================================== */
 
     .hero {
-        height: 76vh;
+        height: 80vh;
 
         min-height: 500px;
+
+        padding-top: 64px;
     }
 
     .content {
         left: 5%;
+
         right: 5%;
 
         bottom: 75px;
@@ -1737,18 +1990,15 @@ header {
         line-height: 1.5;
     }
 
-    .content .btn {
-        font-size: 13px;
 
-        padding: 11px 21px;
-    }
-
-
-    /* ================= ARROWS ================= */
+    /* =====================================================
+       ARROWS
+    ===================================================== */
 
     .prev,
     .next {
         width: 36px;
+
         height: 36px;
 
         font-size: 18px;
@@ -1763,7 +2013,9 @@ header {
     }
 
 
-    /* ================= PRODUCTS ================= */
+    /* =====================================================
+       PRODUCTS
+    ===================================================== */
 
     .product-container {
         grid-template-columns: 1fr;
@@ -1779,12 +2031,31 @@ header {
         font-size: 18px;
     }
 
-    .product-card p {
-        font-size: 15px;
+
+    /* =====================================================
+       PRODUCT PRICE
+    ===================================================== */
+
+    .home-product-price {
+        gap: 6px;
+    }
+
+    .home-product-price .current-price {
+        font-size: 18px;
+    }
+
+    .home-product-price .old-price {
+        font-size: 13px;
+    }
+
+    .home-product-price .product-weight {
+        font-size: 13px;
     }
 
 
-    /* ================= ABOUT ================= */
+    /* =====================================================
+       ABOUT
+    ===================================================== */
 
     .about-section {
         padding: 65px 5%;
@@ -1804,26 +2075,31 @@ header {
 
     .about-image-card {
         width: 245px;
+
         height: 245px;
     }
 
     .about-image-card img {
         width: 225px;
+
         height: 225px;
     }
 
     .about-image-card::before {
         width: 265px;
+
         height: 265px;
     }
 
     .about-image-card::after {
         width: 290px;
+
         height: 290px;
     }
 
     .about-badge {
         width: 75px;
+
         height: 75px;
 
         left: 0;
@@ -1835,6 +2111,7 @@ header {
 
     .about-origin {
         width: 75px;
+
         height: 75px;
 
         right: 0;
@@ -1847,6 +2124,7 @@ header {
     .about-origin strong {
         font-size: 10px;
     }
+
 }
 
 
@@ -1871,7 +2149,9 @@ header {
     }
 
 
-    /* HERO */
+    /* =====================================================
+       HERO
+    ===================================================== */
 
     .hero {
         min-height: 480px;
@@ -1886,35 +2166,42 @@ header {
     }
 
 
-    /* ABOUT */
+    /* =====================================================
+       ABOUT
+    ===================================================== */
 
     .about-image-card {
         width: 220px;
+
         height: 220px;
     }
 
     .about-image-card img {
         width: 202px;
+
         height: 202px;
     }
 
     .about-image-card::before {
         width: 240px;
+
         height: 240px;
     }
 
     .about-image-card::after {
         width: 265px;
+
         height: 265px;
     }
 
     .about-badge,
     .about-origin {
         width: 68px;
+
         height: 68px;
     }
-}
 
+}
 
 
 /* =========================================================
@@ -1930,11 +2217,13 @@ header {
             rgba(212, 160, 23, 0.06),
             transparent 30%
         ),
+
         radial-gradient(
             circle at 15% 80%,
             rgba(212, 160, 23, 0.04),
             transparent 28%
         ),
+
         #11110f;
 
     color: #f4f0e7;
@@ -1945,7 +2234,8 @@ header {
 
     overflow: hidden;
 
-    border-top: 1px solid rgba(212, 160, 23, 0.25);
+    border-top:
+        1px solid rgba(212, 160, 23, 0.25);
 }
 
 
@@ -1962,18 +2252,20 @@ header {
     left: 50%;
 
     width: 170px;
+
     height: 2px;
 
     transform: translateX(-50%);
 
-    background: linear-gradient(
-        90deg,
-        transparent,
-        #d4a017,
-        #f2ca63,
-        #d4a017,
-        transparent
-    );
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #d4a017,
+            #f2ca63,
+            #d4a017,
+            transparent
+        );
 
     box-shadow:
         0 0 14px rgba(212, 160, 23, 0.3);
@@ -1986,6 +2278,7 @@ header {
 
 .footer-container {
     width: 100%;
+
     max-width: 1150px;
 
     margin: 0 auto;
@@ -2026,18 +2319,17 @@ header {
     letter-spacing: 1.5px;
 }
 
-
-/* Heading underline */
-
 .footer-column h3::after {
     content: "";
 
     position: absolute;
 
     left: 0;
+
     bottom: -8px;
 
     width: 35px;
+
     height: 2px;
 
     background: #d4a017;
@@ -2060,6 +2352,7 @@ header {
     list-style: none;
 
     padding: 0;
+
     margin: 0;
 }
 
@@ -2130,14 +2423,17 @@ header {
 
 .social-links a i {
     width: 35px;
+
     height: 35px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
-    border: 1px solid rgba(212, 160, 23, 0.45);
+    border:
+        1px solid rgba(212, 160, 23, 0.45);
 
     border-radius: 50%;
 
@@ -2145,7 +2441,8 @@ header {
 
     font-size: 14px;
 
-    background: rgba(212, 160, 23, 0.025);
+    background:
+        rgba(212, 160, 23, 0.025);
 
     transition:
         background 0.3s ease,
@@ -2176,25 +2473,27 @@ header {
 
 
 /* =========================================================
-   DIVIDER
+   FOOTER DIVIDER
 ========================================================= */
 
 .footer-divider {
     width: 100%;
+
     max-width: 1150px;
 
     height: 1px;
 
     margin: 32px auto;
 
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(212, 160, 23, 0.28),
-        rgba(255, 255, 255, 0.07),
-        rgba(212, 160, 23, 0.28),
-        transparent
-    );
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(212, 160, 23, 0.28),
+            rgba(255, 255, 255, 0.07),
+            rgba(212, 160, 23, 0.28),
+            transparent
+        );
 }
 
 
@@ -2247,6 +2546,7 @@ header {
 
 .footer-bottom {
     width: 100%;
+
     max-width: 1150px;
 
     margin: 0 auto;
@@ -2272,7 +2572,7 @@ header {
 
 
 /* =========================================================
-   TABLET
+   TABLET FOOTER
 ========================================================= */
 
 @media (max-width: 800px) {
@@ -2289,7 +2589,7 @@ header {
 
 
 /* =========================================================
-   MOBILE
+   MOBILE FOOTER
 ========================================================= */
 
 @media (max-width: 600px) {
@@ -2335,13 +2635,14 @@ header {
 
 
 /* =========================================================
-   SMALL MOBILE
+   SMALL MOBILE FOOTER
 ========================================================= */
 
 @media (max-width: 380px) {
 
     .footer {
         padding-left: 7%;
+
         padding-right: 7%;
     }
 
