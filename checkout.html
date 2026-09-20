@@ -3,13 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-        content="Complete your order securely with our easy checkout process.">
-
     <title>Checkout | The Friends Heritage</title>
+
+    <meta name="description"
+        content="Complete your order securely with The Friends Heritage.">
 
     <!-- Font Awesome -->
     <link rel="stylesheet"
@@ -22,22 +21,23 @@
 <body>
 
     <!-- =====================================================
-         HEADER / NAVBAR
+         HEADER
     ====================================================== -->
 
     <header class="checkout-header">
 
         <div class="checkout-navbar">
 
-            <!-- Logo / Brand -->
             <a href="index.html" class="checkout-logo">
-                <img src="logo.png" alt="Brand Logo">
-                <span>The Friends Heritage</span>
+                <img src="logo.png" alt="The Friends Heritage Logo">
+                <div>
+                    <span>THE FRIENDS</span>
+                    <strong>HERITAGE</strong>
+                </div>
             </a>
 
-            <!-- Back to Cart -->
             <a href="cart.html" class="back-cart">
-                <i class="fa-solid fa-cart-shopping"></i>
+                <i class="fa-solid fa-arrow-left"></i>
                 Back to Cart
             </a>
 
@@ -47,35 +47,27 @@
 
 
     <!-- =====================================================
-         CHECKOUT MAIN
+         MAIN CHECKOUT
     ====================================================== -->
 
     <main class="checkout-container">
 
-        <!-- Page Heading -->
         <div class="checkout-heading">
+            <span class="heading-line"></span>
 
-            <span class="checkout-small-title">
-                <i class="fa-solid fa-lock"></i>
-                Secure Checkout
-            </span>
+            <p>THE FRIENDS HERITAGE</p>
 
             <h1>Complete Your Order</h1>
 
-            <p>
-                Enter your delivery details and review your order
-                before placing it.
-            </p>
+            <span class="heading-subtitle">
+                Premium products, carefully packed for you.
+            </span>
 
+            <span class="heading-line"></span>
         </div>
 
 
-        <!-- =================================================
-             CHECKOUT CONTENT
-        ================================================== -->
-
         <div class="checkout-grid">
-
 
             <!-- =================================================
                  LEFT SIDE
@@ -84,83 +76,86 @@
             <section class="checkout-left">
 
 
-                <!-- =============================================
-                     CUSTOMER INFORMATION
-                ============================================== -->
+                <!-- CUSTOMER INFORMATION -->
 
                 <div class="checkout-card">
 
-                    <div class="card-title">
-
-                        <div class="title-icon">
-                            <i class="fa-solid fa-user"></i>
+                    <div class="card-heading">
+                        <div class="card-icon">
+                            <i class="fa-regular fa-user"></i>
                         </div>
 
                         <div>
                             <h2>Customer Information</h2>
                             <p>Enter your contact details</p>
                         </div>
-
                     </div>
 
 
-                    <div class="form-row">
+                    <div class="input-grid">
 
-                        <div class="form-group">
-
+                        <div class="input-group full-width">
                             <label for="fullName">
-                                Full Name
-                                <span>*</span>
+                                Full Name <span>*</span>
                             </label>
 
-                            <input
-                                type="text"
-                                id="fullName"
-                                name="fullName"
-                                placeholder="Enter your full name"
-                                autocomplete="name"
-                                required
-                            >
+                            <div class="input-wrapper">
+                                <i class="fa-regular fa-user"></i>
 
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    name="fullName"
+                                    placeholder="Enter your full name"
+                                    autocomplete="name">
+                            </div>
                         </div>
 
 
-                        <div class="form-group">
+                        <div class="input-group">
 
                             <label for="phone">
-                                Mobile Number
-                                <span>*</span>
+                                Mobile Number <span>*</span>
                             </label>
 
-                            <input
-                                type="tel"
-                                id="phone"
-                                name="phone"
-                                placeholder="Enter your mobile number"
-                                autocomplete="tel"
-                                maxlength="10"
-                                required
-                            >
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-phone"></i>
+
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    placeholder="10-digit mobile number"
+                                    maxlength="10"
+                                    inputmode="numeric"
+                                    autocomplete="tel">
+
+                            </div>
 
                         </div>
 
-                    </div>
 
+                        <div class="input-group">
 
-                    <div class="form-group">
+                            <label for="email">
+                                Email Address
+                            </label>
 
-                        <label for="email">
-                            Email Address
-                            <small>(Optional)</small>
-                        </label>
+                            <div class="input-wrapper">
 
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Enter your email address"
-                            autocomplete="email"
-                        >
+                                <i class="fa-regular fa-envelope"></i>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="your@email.com"
+                                    autocomplete="email">
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -168,15 +163,15 @@
 
 
 
-                <!-- =============================================
+                <!-- =================================================
                      DELIVERY ADDRESS
-                ============================================== -->
+                ================================================== -->
 
                 <div class="checkout-card">
 
-                    <div class="card-title">
+                    <div class="card-heading">
 
-                        <div class="title-icon">
+                        <div class="card-icon">
                             <i class="fa-solid fa-location-dot"></i>
                         </div>
 
@@ -188,133 +183,143 @@
                     </div>
 
 
-                    <div class="form-group">
+                    <div class="input-grid">
 
-                        <label for="address">
-                            House / Building / Street
-                            <span>*</span>
-                        </label>
+                        <div class="input-group full-width">
 
-                        <textarea
-                            id="address"
-                            name="address"
-                            rows="3"
-                            placeholder="House no., building name, street, area..."
-                            autocomplete="street-address"
-                            required
-                        ></textarea>
-
-                    </div>
-
-
-                    <div class="form-row">
-
-                        <div class="form-group">
-
-                            <label for="city">
-                                City
-                                <span>*</span>
+                            <label for="address">
+                                Complete Address <span>*</span>
                             </label>
 
-                            <input
-                                type="text"
-                                id="city"
-                                name="city"
-                                placeholder="Enter your city"
-                                autocomplete="address-level2"
-                                required
-                            >
+                            <div class="input-wrapper textarea-wrapper">
+
+                                <i class="fa-solid fa-house"></i>
+
+                                <textarea
+                                    id="address"
+                                    name="address"
+                                    placeholder="House / Street / Area"
+                                    rows="3"></textarea>
+
+                            </div>
 
                         </div>
 
 
-                        <div class="form-group">
-
-                            <label for="state">
-                                State
-                                <span>*</span>
-                            </label>
-
-                            <input
-                                type="text"
-                                id="state"
-                                name="state"
-                                placeholder="Enter your state"
-                                autocomplete="address-level1"
-                                required
-                            >
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-row">
-
-                        <div class="form-group">
+                        <div class="input-group">
 
                             <label for="pincode">
-                                PIN Code
-                                <span>*</span>
+                                PIN Code <span>*</span>
                             </label>
 
-                            <input
-                                type="text"
-                                id="pincode"
-                                name="pincode"
-                                placeholder="Enter 6-digit PIN code"
-                                inputmode="numeric"
-                                maxlength="6"
-                                autocomplete="postal-code"
-                                required
-                            >
+                            <div class="input-wrapper">
 
-                            <!-- Delivery status will appear here -->
-                            <div
-                                id="deliveryStatus"
-                                class="delivery-status"
-                            ></div>
+                                <i class="fa-solid fa-map-pin"></i>
+
+                                <input
+                                    type="text"
+                                    id="pincode"
+                                    name="pincode"
+                                    placeholder="6-digit PIN"
+                                    maxlength="6"
+                                    inputmode="numeric"
+                                    autocomplete="postal-code">
+
+                            </div>
+
+                            <div id="deliveryStatus" class="delivery-status"></div>
 
                         </div>
 
 
-                        <div class="form-group">
+                        <div class="input-group">
+
+                            <label for="city">
+                                Town / City <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-city"></i>
+
+                                <input
+                                    type="text"
+                                    id="city"
+                                    name="city"
+                                    placeholder="Town / City"
+                                    autocomplete="address-level2">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="state">
+                                State <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-map"></i>
+
+                                <input
+                                    type="text"
+                                    id="state"
+                                    name="state"
+                                    placeholder="State"
+                                    autocomplete="address-level1">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-group">
 
                             <label for="landmark">
                                 Landmark
-                                <small>(Optional)</small>
                             </label>
 
-                            <input
-                                type="text"
-                                id="landmark"
-                                name="landmark"
-                                placeholder="Nearby landmark"
-                            >
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-location-crosshairs"></i>
+
+                                <input
+                                    type="text"
+                                    id="landmark"
+                                    name="landmark"
+                                    placeholder="Nearby landmark">
+
+                            </div>
 
                         </div>
 
                     </div>
+
+
+                    <div id="deliveryMessage" class="delivery-message"></div>
 
                 </div>
 
 
 
-                <!-- =============================================
-                     PAYMENT METHOD
-                ============================================== -->
+                <!-- =================================================
+                     PAYMENT
+                ================================================== -->
 
                 <div class="checkout-card">
 
-                    <div class="card-title">
+                    <div class="card-heading">
 
-                        <div class="title-icon">
-                            <i class="fa-solid fa-credit-card"></i>
+                        <div class="card-icon">
+                            <i class="fa-solid fa-wallet"></i>
                         </div>
 
                         <div>
                             <h2>Payment Method</h2>
-                            <p>Select your preferred payment option</p>
+                            <p>Select how you want to pay</p>
                         </div>
 
                     </div>
@@ -322,8 +327,7 @@
 
                     <div class="payment-options">
 
-
-                        <!-- Cash on Delivery -->
+                        <!-- COD -->
 
                         <label class="payment-option">
 
@@ -331,10 +335,9 @@
                                 type="radio"
                                 name="paymentMethod"
                                 value="cod"
-                                checked
-                            >
+                                checked>
 
-                            <div class="payment-content">
+                            <div class="payment-option-content">
 
                                 <div class="payment-icon">
                                     <i class="fa-solid fa-money-bill-wave"></i>
@@ -342,56 +345,129 @@
 
                                 <div>
 
-                                    <strong>
-                                        Cash on Delivery
-                                    </strong>
+                                    <strong>Cash on Delivery</strong>
 
                                     <span>
-                                        Pay when your order is delivered
+                                        Pay when your order arrives.
                                     </span>
 
                                 </div>
 
-                            </div>
+                                <i class="fa-solid fa-check payment-check"></i>
 
-                            <i class="fa-solid fa-circle-check payment-check"></i>
+                            </div>
 
                         </label>
 
 
-                        <!-- Online Payment -->
+                        <!-- ONLINE -->
 
                         <label class="payment-option">
 
                             <input
                                 type="radio"
                                 name="paymentMethod"
-                                value="online"
-                            >
+                                value="online">
 
-                            <div class="payment-content">
+                            <div class="payment-option-content">
 
                                 <div class="payment-icon">
-                                    <i class="fa-solid fa-mobile-screen-button"></i>
+                                    <i class="fa-solid fa-qrcode"></i>
                                 </div>
 
                                 <div>
 
-                                    <strong>
-                                        Online Payment
-                                    </strong>
+                                    <strong>Online Payment</strong>
 
                                     <span>
-                                        UPI / Card / Other online methods
+                                        Pay securely using UPI QR.
                                     </span>
 
                                 </div>
 
+                                <i class="fa-solid fa-check payment-check"></i>
+
                             </div>
 
-                            <i class="fa-solid fa-circle-check payment-check"></i>
-
                         </label>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         UPI QR SECTION
+                    ================================================== -->
+
+                    <div id="upiPaymentBox" class="upi-payment-box hidden">
+
+                        <div class="upi-header">
+
+                            <div class="upi-title-icon">
+                                <i class="fa-solid fa-qrcode"></i>
+                            </div>
+
+                            <div>
+                                <h3>Pay Using UPI</h3>
+
+                                <p>
+                                    Scan the QR code using any UPI app.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="qr-container">
+
+                            <!--
+                                PUT YOUR QR IMAGE HERE
+
+                                File name:
+                                upi-qr.png
+
+                                Keep the image in the same folder
+                                as checkout.html.
+                            -->
+
+                            <img
+                                src="upi-qr.png"
+                                alt="The Friends Heritage UPI QR Code"
+                                class="upi-qr"
+                                id="upiQrImage">
+
+                        </div>
+
+
+                        <div class="upi-details">
+
+                            <p>
+                                <i class="fa-solid fa-mobile-screen-button"></i>
+                                Open Google Pay, PhonePe, Paytm or another UPI app.
+                            </p>
+
+                            <p>
+                                <i class="fa-solid fa-qrcode"></i>
+                                Scan the QR code and complete your payment.
+                            </p>
+
+                            <p>
+                                <i class="fa-solid fa-circle-check"></i>
+                                After payment, place your order below.
+                            </p>
+
+                        </div>
+
+
+                        <div class="payment-note">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                            <span>
+                                Please make sure the payment is completed before
+                                placing an online-payment order.
+                            </span>
+
+                        </div>
 
                     </div>
 
@@ -399,102 +475,82 @@
 
 
 
-                <!-- =============================================
-                     CUSTOMER NOTE
-                ============================================== -->
+                <!-- =================================================
+                     ORDER NOTE
+                ================================================== -->
 
                 <div class="checkout-card">
 
-                    <div class="card-title">
+                    <div class="card-heading">
 
-                        <div class="title-icon">
-                            <i class="fa-solid fa-message"></i>
+                        <div class="card-icon">
+                            <i class="fa-regular fa-note-sticky"></i>
                         </div>
 
                         <div>
                             <h2>Order Note</h2>
-                            <p>Any special instructions?</p>
+                            <p>Anything we should know?</p>
                         </div>
 
                     </div>
 
 
-                    <div class="form-group">
+                    <div class="input-group">
 
-                        <label for="orderNote">
-                            Message
-                            <small>(Optional)</small>
-                        </label>
+                        <div class="input-wrapper textarea-wrapper">
 
-                        <textarea
-                            id="orderNote"
-                            name="orderNote"
-                            rows="3"
-                            placeholder="Example: Please call before delivery..."
-                        ></textarea>
+                            <i class="fa-regular fa-message"></i>
+
+                            <textarea
+                                id="orderNote"
+                                name="orderNote"
+                                rows="4"
+                                placeholder="Optional note for your order..."></textarea>
+
+                        </div>
 
                     </div>
 
                 </div>
+
 
             </section>
 
 
 
-            <!-- =================================================
-                 RIGHT SIDE — ORDER SUMMARY
-            ================================================== -->
+            <!-- =====================================================
+                 RIGHT SIDE
+            ====================================================== -->
 
             <aside class="checkout-right">
 
 
-                <!-- =============================================
-                     ORDER ITEMS
-                ============================================== -->
+                <!-- ORDER SUMMARY -->
 
-                <div class="checkout-card order-card">
+                <div class="summary-card">
 
-                    <div class="card-title">
-
-                        <div class="title-icon">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                        </div>
+                    <div class="summary-heading">
 
                         <div>
-                            <h2>Your Order</h2>
+                            <span>YOUR ORDER</span>
+                            <h2>Order Summary</h2>
+                        </div>
 
-                            <p>
-                                <span id="checkoutItemCount">0</span>
-                                items
-                            </p>
-
+                        <div class="item-count">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            <span id="checkoutItemCount">0</span>
                         </div>
 
                     </div>
 
-
-                    <!-- Products will be inserted by checkout.js -->
 
                     <div
                         id="checkoutItems"
-                        class="checkout-items"
-                    >
-
-                        <!-- JavaScript will load cart products here -->
-
+                        class="checkout-items">
                     </div>
 
-                </div>
 
-
-
-                <!-- =============================================
-                     ORDER SUMMARY
-                ============================================== -->
-
-                <div class="checkout-card summary-card">
-
-                    <h2>Order Summary</h2>
+                    <div class="summary-divider"></div>
 
 
                     <div class="summary-row">
@@ -510,9 +566,7 @@
 
                     <div class="summary-row">
 
-                        <span>
-                            Delivery Charge
-                        </span>
+                        <span>Delivery Charges</span>
 
                         <strong id="deliveryCharge">
                             ₹0
@@ -521,13 +575,9 @@
                     </div>
 
 
-                    <!-- Delivery message -->
-
                     <div
                         id="deliveryMessage"
-                        class="delivery-message"
-                    >
-                        Enter your PIN code to calculate delivery charges.
+                        class="delivery-message summary-delivery-message">
                     </div>
 
 
@@ -536,7 +586,7 @@
 
                     <div class="summary-total">
 
-                        <span>Total</span>
+                        <span>Total Amount</span>
 
                         <strong id="checkoutTotal">
                             ₹0
@@ -545,65 +595,68 @@
                     </div>
 
 
-                    <!-- Place Order -->
+                    <!-- INLINE FEEDBACK -->
+                    <div
+                        id="checkoutFormMessage"
+                        class="checkout-form-message">
+                    </div>
+
+
+                    <!-- PLACE ORDER -->
 
                     <button
                         type="button"
                         id="placeOrderBtn"
-                        class="place-order-btn"
-                    >
+                        class="place-order-btn">
 
                         <i class="fa-solid fa-lock"></i>
 
-                        <span>
-                            Place Order
-                        </span>
-
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <span>Place Order</span>
 
                     </button>
 
 
-                    <!-- WhatsApp Order -->
+                    <!-- WHATSAPP -->
 
                     <button
                         type="button"
                         id="whatsappOrderBtn"
-                        class="whatsapp-order-btn"
-                    >
+                        class="whatsapp-order-btn">
 
                         <i class="fa-brands fa-whatsapp"></i>
 
-                        Order via WhatsApp
+                        <span>Order via WhatsApp</span>
 
                     </button>
 
 
-                    <p class="secure-note">
+                    <div class="secure-note">
 
                         <i class="fa-solid fa-shield-halved"></i>
 
-                        Your information is safe and secure.
+                        <span>
+                            Your order details are handled securely.
+                        </span>
 
-                    </p>
+                    </div>
 
                 </div>
 
 
 
-                <!-- =============================================
-                     TRUST FEATURES
-                ============================================== -->
+                <!-- TRUST CARDS -->
 
                 <div class="checkout-trust">
 
                     <div class="trust-item">
 
-                        <i class="fa-solid fa-leaf"></i>
+                        <div class="trust-icon">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
 
                         <div>
-                            <strong>Quality Products</strong>
-                            <span>Carefully selected</span>
+                            <strong>100% Natural</strong>
+                            <span>Authentic products</span>
                         </div>
 
                     </div>
@@ -611,11 +664,13 @@
 
                     <div class="trust-item">
 
-                        <i class="fa-solid fa-box"></i>
+                        <div class="trust-icon">
+                            <i class="fa-solid fa-box-open"></i>
+                        </div>
 
                         <div>
-                            <strong>Secure Packaging</strong>
-                            <span>Packed with care</span>
+                            <strong>Carefully Packed</strong>
+                            <span>Quality checked</span>
                         </div>
 
                     </div>
@@ -623,11 +678,13 @@
 
                     <div class="trust-item">
 
-                        <i class="fa-solid fa-truck-fast"></i>
+                        <div class="trust-icon">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
 
                         <div>
-                            <strong>Reliable Delivery</strong>
-                            <span>Delivered to your door</span>
+                            <strong>Customer Support</strong>
+                            <span>We're here to help</span>
                         </div>
 
                     </div>
@@ -648,21 +705,74 @@
 
     <footer class="checkout-footer">
 
-        <p>
-            © 2026 The Friends Heritage. All Rights Reserved.
-        </p>
+        <div class="footer-brand">
 
-        <p>
-            Designed & Developed by Danish Khursheed
-        </p>
+            <img
+                src="logo.png"
+                alt="The Friends Heritage Logo">
+
+            <p>
+                Pure Products. Authentic Kashmir.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="shipping.html">
+                Shipping & Delivery
+            </a>
+
+            <a href="returns.html">
+                Returns & Refunds
+            </a>
+
+            <a href="terms.html">
+                Terms
+            </a>
+
+            <a href="privacy.html">
+                Privacy
+            </a>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 The Friends Heritage
+            </p>
+
+            <p>
+                Designed & Developed by Danish Khursheed
+            </p>
+
+        </div>
 
     </footer>
 
 
 
     <!-- =====================================================
-         CHECKOUT JAVASCRIPT
+         EMAILJS
     ====================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script>
+        emailjs.init({
+            publicKey: "18orRcmHkRy0Z--QL"
+        });
+    </script>
+
+
+    <!-- CHECKOUT JS -->
 
     <script src="checkout.js"></script>
 
