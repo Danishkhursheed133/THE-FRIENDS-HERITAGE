@@ -1,20 +1,7 @@
 /* =========================================================
    THE FRIENDS HERITAGE
    CHECKOUT.JS
-
-   FEATURES:
-
-   1. Display cart
-   2. Calculate subtotal
-   3. Calculate delivery charges
-   4. PIN CODE -> TOWN / POST OFFICE
-   5. Online UPI QR payment
-   6. Cash on Delivery
-   7. WhatsApp order
-   8. EmailJS order email
-   9. Save order to account
-   10. No alert / confirm popups
-   11. Does NOT modify CSS
+   Final Checkout + Order System
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -27,13 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const USERS_STORAGE_KEY = "friendsHeritageUsers";
     const CURRENT_USER_KEY = "friendsHeritageCurrentUser";
     const LATEST_ORDER_KEY = "friendsHeritageLatestOrder";
-
-    const BUSINESS_STATE = "Kashmir";
-
-    const DELIVERY_CHARGES = {
-        sameState: 100,
-        otherState: 200
-    };
 
     const WHATSAPP_NUMBER = "917051713047";
 
@@ -89,9 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const checkoutSubtotal =
         document.getElementById("checkoutSubtotal");
 
-    const deliveryChargeElement =
-        document.getElementById("deliveryCharge");
-
     const checkoutTotal =
         document.getElementById("checkoutTotal");
 
@@ -126,7 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
         checkoutItems,
         checkoutItemCount,
         checkoutSubtotal,
-        deliveryChargeElement,
         checkoutTotal,
         placeOrderBtn,
         whatsappOrderBtn,
@@ -134,14 +110,14 @@ document.addEventListener("DOMContentLoaded", function () {
         upiPaymentBox
     ];
 
-    if (requiredElements.some(function (element) {
-        return !element;
-    })) {
-
+    if (
+        requiredElements.some(function (element) {
+            return !element;
+        })
+    ) {
         console.error(
             "Checkout error: One or more required HTML elements are missing."
         );
-
         return;
     }
 
@@ -154,6 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return "₹" +
             Number(amount || 0).toLocaleString("en-IN");
+
     }
 
 
@@ -189,7 +166,9 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return [];
+
         }
+
     }
 
 
@@ -206,13 +185,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 JSON.stringify(cart)
             );
 
+            return true;
+
         } catch (error) {
 
             console.error(
                 "Cart save error:",
                 error
             );
+
+            return false;
+
         }
+
     }
 
 
@@ -228,6 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
             item.title ||
             "Product"
         );
+
     }
 
 
@@ -239,6 +225,7 @@ document.addEventListener("DOMContentLoaded", function () {
             item.img ||
             "logo.png"
         );
+
     }
 
 
@@ -254,6 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
             0;
 
         return Number(price) || 0;
+
     }
 
 
@@ -266,6 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
             getProductPrice(item);
 
         return Number(originalPrice) || 0;
+
     }
 
 
@@ -277,6 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return quantity > 0
             ? quantity
             : 1;
+
     }
 
 
@@ -288,6 +278,7 @@ document.addEventListener("DOMContentLoaded", function () {
             item.size ||
             ""
         );
+
     }
 
 
@@ -312,37 +303,19 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             0
         );
+
     }
 
 
     /* =====================================================
-       GET DELIVERY CHARGE
+       DELIVERY
+       NO DELIVERY CHARGES
     ===================================================== */
 
     function getDeliveryCharge() {
 
-        const enteredState =
-            stateInput.value
-                .trim()
-                .toLowerCase();
+        return 0;
 
-        if (!enteredState) {
-            return 0;
-        }
-
-        const businessState =
-            BUSINESS_STATE.toLowerCase();
-
-        if (
-            enteredState === businessState ||
-            enteredState.includes(businessState) ||
-            businessState.includes(enteredState)
-        ) {
-
-            return DELIVERY_CHARGES.sameState;
-        }
-
-        return DELIVERY_CHARGES.otherState;
     }
 
 
@@ -352,27 +325,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateDeliveryMessage() {
 
-        const state =
-            stateInput.value.trim();
-
-        const charge =
-            getDeliveryCharge();
-
         deliveryMessages.forEach(
             function (message) {
 
-                if (!state) {
+                message.textContent = "";
 
-                    message.textContent = "";
+                message.classList.remove(
+                    "show",
+                    "success",
+                    "error",
+                    "loading"
+                );
 
-                    return;
-                }
-
-                message.textContent =
-                    "Delivery charge: " +
-                    formatCurrency(charge);
             }
         );
+
     }
 
 
@@ -388,30 +355,22 @@ document.addEventListener("DOMContentLoaded", function () {
         const subtotal =
             calculateSubtotal(cart);
 
-        const deliveryCharge =
-            getDeliveryCharge();
-
         const total =
-            subtotal + deliveryCharge;
-
+            subtotal;
 
         checkoutSubtotal.textContent =
             formatCurrency(subtotal);
 
-        deliveryChargeElement.textContent =
-            formatCurrency(deliveryCharge);
-
         checkoutTotal.textContent =
             formatCurrency(total);
 
-
         updateDeliveryMessage();
+
     }
 
 
     /* =====================================================
        ESCAPE HTML
-       Prevents product text from breaking markup.
     ===================================================== */
 
     function escapeHTML(value) {
@@ -422,6 +381,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .replace(/>/g, "&gt;")
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
+
     }
 
 
@@ -443,19 +403,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
             checkoutItems.innerHTML = `
                 <div class="checkout-empty">
+
                     <i class="fa-solid fa-cart-shopping"></i>
+
                     <p>Your cart is empty.</p>
+
                 </div>
             `;
 
             checkoutItemCount.textContent = "0";
 
             placeOrderBtn.disabled = true;
+
             whatsappOrderBtn.disabled = true;
 
             updateOrderSummary();
 
             return;
+
         }
 
 
@@ -504,6 +469,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             ${formatCurrency(originalPrice)}
                         </span>
                     `;
+
                 }
 
 
@@ -529,12 +495,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         ${
                             variant
-                            ? `
-                                <div class="checkout-item-variant">
-                                    ${escapeHTML(variant)}
-                                </div>
-                            `
-                            : ""
+                                ? `
+                                    <div class="checkout-item-variant">
+                                        ${escapeHTML(variant)}
+                                    </div>
+                                `
+                                : ""
                         }
 
 
@@ -550,7 +516,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                     <div class="checkout-item-quantity">
+
                         × ${quantity}
+
                     </div>
 
                 `;
@@ -559,6 +527,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 checkoutItems.appendChild(
                     itemElement
                 );
+
             }
         );
 
@@ -566,15 +535,14 @@ document.addEventListener("DOMContentLoaded", function () {
         checkoutItemCount.textContent =
             totalQuantity;
 
-
         placeOrderBtn.disabled =
             false;
 
         whatsappOrderBtn.disabled =
             false;
 
-
         updateOrderSummary();
+
     }
 
 
@@ -598,6 +566,7 @@ document.addEventListener("DOMContentLoaded", function () {
             behavior: "smooth",
             block: "nearest"
         });
+
     }
 
 
@@ -612,6 +581,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         checkoutFormMessage.className =
             "checkout-form-message";
+
     }
 
 
@@ -621,9 +591,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function isValidPhone(phone) {
 
-        return /^[6-9]\d{9}$/.test(
-            phone
-        );
+        return /^[6-9]\d{9}$/.test(phone);
+
     }
 
 
@@ -640,6 +609,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
             email
         );
+
     }
 
 
@@ -660,6 +630,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
 
 
@@ -694,6 +665,7 @@ document.addEventListener("DOMContentLoaded", function () {
             fullNameInput.focus();
 
             return false;
+
         }
 
 
@@ -706,6 +678,7 @@ document.addEventListener("DOMContentLoaded", function () {
             phoneInput.focus();
 
             return false;
+
         }
 
 
@@ -718,6 +691,7 @@ document.addEventListener("DOMContentLoaded", function () {
             emailInput.focus();
 
             return false;
+
         }
 
 
@@ -730,6 +704,7 @@ document.addEventListener("DOMContentLoaded", function () {
             addressInput.focus();
 
             return false;
+
         }
 
 
@@ -742,6 +717,7 @@ document.addEventListener("DOMContentLoaded", function () {
             cityInput.focus();
 
             return false;
+
         }
 
 
@@ -754,6 +730,7 @@ document.addEventListener("DOMContentLoaded", function () {
             stateInput.focus();
 
             return false;
+
         }
 
 
@@ -766,10 +743,12 @@ document.addEventListener("DOMContentLoaded", function () {
             pincodeInput.focus();
 
             return false;
+
         }
 
 
         return true;
+
     }
 
 
@@ -787,6 +766,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return selected
             ? selected.value
             : "cod";
+
     }
 
 
@@ -798,9 +778,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (method === "online") {
 
             return "Online Payment / UPI";
+
         }
 
         return "Cash on Delivery";
+
     }
 
 
@@ -825,7 +807,9 @@ document.addEventListener("DOMContentLoaded", function () {
             upiPaymentBox.classList.add(
                 "hidden"
             );
+
         }
+
     }
 
 
@@ -837,7 +821,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const now =
             new Date();
-
 
         const year =
             now.getFullYear();
@@ -878,6 +861,7 @@ document.addEventListener("DOMContentLoaded", function () {
             minutes +
             seconds
         );
+
     }
 
 
@@ -890,22 +874,21 @@ document.addEventListener("DOMContentLoaded", function () {
         const cart =
             getCart();
 
-
         const subtotal =
             calculateSubtotal(cart);
 
         const deliveryCharge =
-            getDeliveryCharge();
+            0;
 
         const total =
-            subtotal + deliveryCharge;
+            subtotal;
 
 
         const paymentValue =
             getPaymentMethod();
 
 
-        const order = {
+        return {
 
             orderId:
                 createOrderId(),
@@ -929,6 +912,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 email:
                     emailInput.value.trim()
+
             },
 
 
@@ -948,11 +932,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 landmark:
                     landmarkInput.value.trim()
+
             },
 
 
             items:
-
                 cart.map(
                     function (item) {
 
@@ -975,7 +959,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                             quantity:
                                 getProductQuantity(item)
+
                         };
+
                     }
                 ),
 
@@ -1009,10 +995,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             status:
                 "Order Placed"
+
         };
 
-
-        return order;
     }
 
 
@@ -1042,7 +1027,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 !currentUser ||
                 typeof currentUser !== "object"
             ) {
-
                 return null;
             }
 
@@ -1056,7 +1040,9 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return null;
+
         }
+
     }
 
 
@@ -1092,7 +1078,9 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return [];
+
         }
+
     }
 
 
@@ -1119,22 +1107,27 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             return false;
+
         }
+
+    }
+
+
+    /* =====================================================
+       NORMALIZE PHONE
+    ===================================================== */
+
+    function normalizePhone(value) {
+
+        return String(value || "")
+            .replace(/\D/g, "")
+            .slice(-10);
+
     }
 
 
     /* =====================================================
        FIND ACCOUNT FOR ORDER
-
-       This is intentionally flexible.
-
-       It can find the account using:
-
-       1. Logged-in user's email
-       2. Logged-in user's contact
-       3. Logged-in user's phone
-       4. Checkout email
-       5. Checkout phone
     ===================================================== */
 
     function findUserIndex(users, order) {
@@ -1172,11 +1165,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const currentPhone =
             currentUser &&
-            currentUser.phone
-                ? String(
-                    currentUser.phone
+            (
+                currentUser.phone ||
+                currentUser.contact
+            )
+                ? normalizePhone(
+                    currentUser.phone ||
+                    currentUser.contact
                 )
-                    .replace(/\D/g, "")
                 : "";
 
 
@@ -1191,16 +1187,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const orderPhone =
-            order.customer.phone
-                ? String(
-                    order.customer.phone
-                )
-                    .replace(/\D/g, "")
-                : "";
+            normalizePhone(
+                order.customer.phone
+            );
 
 
         /* -------------------------------------------------
-           FIRST: MATCH LOGGED-IN USER EMAIL
+           LOGGED-IN EMAIL
         ------------------------------------------------- */
 
         if (currentEmail) {
@@ -1217,17 +1210,19 @@ document.addEventListener("DOMContentLoaded", function () {
                                 .toLowerCase() ===
                             currentEmail
                         );
+
                     }
                 );
 
             if (index !== -1) {
                 return index;
             }
+
         }
 
 
         /* -------------------------------------------------
-           SECOND: MATCH LOGGED-IN CONTACT
+           LOGGED-IN CONTACT
         ------------------------------------------------- */
 
         if (currentContact) {
@@ -1236,11 +1231,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 users.findIndex(
                     function (user) {
 
-                        if (!user) {
-                            return false;
-                        }
-
                         const userContact =
+                            user &&
                             user.contact
                                 ? String(
                                     user.contact
@@ -1254,17 +1246,19 @@ document.addEventListener("DOMContentLoaded", function () {
                             userContact ===
                             currentContact
                         );
+
                     }
                 );
 
             if (index !== -1) {
                 return index;
             }
+
         }
 
 
         /* -------------------------------------------------
-           THIRD: MATCH LOGGED-IN PHONE
+           LOGGED-IN PHONE
         ------------------------------------------------- */
 
         if (currentPhone) {
@@ -1278,29 +1272,29 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
 
                         const userPhone =
-                            user.phone
-                                ? String(
-                                    user.phone
-                                )
-                                    .replace(/\D/g, "")
-                                : "";
+                            normalizePhone(
+                                user.phone ||
+                                user.contact
+                            );
 
                         return (
                             userPhone &&
                             userPhone ===
                             currentPhone
                         );
+
                     }
                 );
 
             if (index !== -1) {
                 return index;
             }
+
         }
 
 
         /* -------------------------------------------------
-           FOURTH: MATCH CHECKOUT EMAIL
+           CHECKOUT EMAIL
         ------------------------------------------------- */
 
         if (orderEmail) {
@@ -1317,17 +1311,19 @@ document.addEventListener("DOMContentLoaded", function () {
                                 .toLowerCase() ===
                             orderEmail
                         );
+
                     }
                 );
 
             if (index !== -1) {
                 return index;
             }
+
         }
 
 
         /* -------------------------------------------------
-           FIFTH: MATCH CHECKOUT PHONE
+           CHECKOUT PHONE
         ------------------------------------------------- */
 
         if (orderPhone) {
@@ -1341,20 +1337,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
 
                         const userPhone =
-                            user.phone
-                                ? String(
-                                    user.phone
-                                )
-                                    .replace(/\D/g, "")
-                                : "";
+                            normalizePhone(
+                                user.phone
+                            );
 
                         const userContact =
-                            user.contact
-                                ? String(
-                                    user.contact
-                                )
-                                    .replace(/\D/g, "")
-                                : "";
+                            normalizePhone(
+                                user.contact
+                            );
 
                         return (
                             (
@@ -1368,38 +1358,24 @@ document.addEventListener("DOMContentLoaded", function () {
                                 orderPhone
                             )
                         );
+
                     }
                 );
 
             if (index !== -1) {
                 return index;
             }
+
         }
 
 
         return -1;
+
     }
 
 
     /* =====================================================
        SAVE ORDER TO ACCOUNT
-
-       IMPORTANT:
-
-       The order is saved in:
-
-       friendsHeritageUsers
-          -> matching user
-          -> orders[]
-
-       AND:
-
-       friendsHeritageCurrentUser
-          -> orders[]
-
-       AND:
-
-       friendsHeritageLatestOrder
     ===================================================== */
 
     function saveOrderToAccount(order) {
@@ -1416,30 +1392,19 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-            /* ---------------------------------------------
-               GET USERS
-            --------------------------------------------- */
-
             const users =
                 getUsers();
 
 
             if (!users.length) {
 
-                console.warn(
-                    "No registered users found."
-                );
-
                 return {
                     success: false,
                     reason: "no-users"
                 };
+
             }
 
-
-            /* ---------------------------------------------
-               FIND USER
-            --------------------------------------------- */
 
             const userIndex =
                 findUserIndex(
@@ -1450,20 +1415,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (userIndex === -1) {
 
-                console.warn(
-                    "Could not find matching account for order."
-                );
-
                 return {
                     success: false,
                     reason: "user-not-found"
                 };
+
             }
 
-
-            /* ---------------------------------------------
-               MAKE SURE ORDERS EXISTS
-            --------------------------------------------- */
 
             if (
                 !Array.isArray(
@@ -1472,12 +1430,9 @@ document.addEventListener("DOMContentLoaded", function () {
             ) {
 
                 users[userIndex].orders = [];
+
             }
 
-
-            /* ---------------------------------------------
-               PREVENT SAME ORDER FROM BEING SAVED TWICE
-            --------------------------------------------- */
 
             const alreadyExists =
                 users[userIndex].orders.some(
@@ -1488,6 +1443,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             existingOrder.orderId ===
                             order.orderId
                         );
+
                     }
                 );
 
@@ -1497,12 +1453,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 users[userIndex].orders.unshift(
                     order
                 );
+
             }
 
-
-            /* ---------------------------------------------
-               SAVE USERS
-            --------------------------------------------- */
 
             const usersSaved =
                 saveUsers(users);
@@ -1514,12 +1467,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     success: false,
                     reason: "users-save-failed"
                 };
+
             }
 
-
-            /* ---------------------------------------------
-               UPDATE CURRENT USER
-            --------------------------------------------- */
 
             localStorage.setItem(
                 CURRENT_USER_KEY,
@@ -1530,7 +1480,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             console.log(
-                "Order successfully saved to account:",
+                "Order saved to My Orders:",
                 order.orderId
             );
 
@@ -1552,7 +1502,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 success: false,
                 reason: "exception"
             };
+
         }
+
     }
 
 
@@ -1573,6 +1525,7 @@ document.addEventListener("DOMContentLoaded", function () {
                               ")"
                             : "";
 
+
                     return (
                         item.name +
                         variant +
@@ -1584,9 +1537,11 @@ document.addEventListener("DOMContentLoaded", function () {
                             item.quantity
                         )
                     );
+
                 }
             )
             .join("\n");
+
     }
 
 
@@ -1604,6 +1559,7 @@ document.addEventListener("DOMContentLoaded", function () {
             throw new Error(
                 "EmailJS is not loaded."
             );
+
         }
 
 
@@ -1655,7 +1611,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             delivery_charge:
                 formatCurrency(
-                    order.deliveryCharge
+                    0
                 ),
 
             total:
@@ -1678,6 +1634,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             store_email:
                 STORE_EMAIL
+
         };
 
 
@@ -1702,6 +1659,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         return response;
+
     }
 
 
@@ -1721,6 +1679,7 @@ document.addEventListener("DOMContentLoaded", function () {
             whatsappOrderBtn.disabled =
                 true;
 
+
             placeOrderBtn.innerHTML = `
                 <i class="fa-solid fa-spinner fa-spin"></i>
                 <span>Processing Order...</span>
@@ -1730,6 +1689,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const hasCart =
                 getCart().length > 0;
+
 
             placeOrderBtn.disabled =
                 !hasCart;
@@ -1742,7 +1702,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 <i class="fa-solid fa-lock"></i>
                 <span>Place Order</span>
             `;
+
         }
+
     }
 
 
@@ -1752,21 +1714,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function placeOrder() {
 
+        if (
+            placeOrderBtn.disabled
+        ) {
+            return;
+        }
+
+
         clearMessage();
 
-
-        /* ---------------------------------------------
-           VALIDATE
-        --------------------------------------------- */
 
         if (!validateCheckout()) {
             return;
         }
 
-
-        /* ---------------------------------------------
-           CREATE ORDER
-        --------------------------------------------- */
 
         const order =
             createOrder();
@@ -1777,9 +1738,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         try {
 
-            /* -----------------------------------------
-               SAVE ORDER TO ACCOUNT FIRST
-            ----------------------------------------- */
+            /* ---------------------------------------------
+               SEND EMAIL FIRST
+            --------------------------------------------- */
+
+            await sendOrderEmail(order);
+
+
+            /* ---------------------------------------------
+               SAVE TO ACCOUNT
+            --------------------------------------------- */
 
             const accountResult =
                 saveOrderToAccount(order);
@@ -1791,18 +1759,9 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-            /* -----------------------------------------
-               SEND EMAIL
-            ----------------------------------------- */
-
-            await sendOrderEmail(order);
-
-
-            /* -----------------------------------------
-               EMAIL SUCCESS
-
-               Now clear cart.
-            ----------------------------------------- */
+            /* ---------------------------------------------
+               CLEAR CART
+            --------------------------------------------- */
 
             saveCart([]);
 
@@ -1810,9 +1769,9 @@ document.addEventListener("DOMContentLoaded", function () {
             displayCheckoutItems();
 
 
-            /* -----------------------------------------
-               SUCCESS MESSAGE
-            ----------------------------------------- */
+            /* ---------------------------------------------
+               SUCCESS
+            --------------------------------------------- */
 
             if (
                 accountResult &&
@@ -1834,6 +1793,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     ".",
                     "success"
                 );
+
             }
 
 
@@ -1846,15 +1806,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             showMessage(
-                "We could not send your order email. Your cart has been kept. Please check your EmailJS template settings and try again.",
+                "We could not complete your order email. Your cart has been kept. Please check your EmailJS service/template settings and try again.",
                 "error"
             );
-
 
         } finally {
 
             setButtonLoading(false);
+
         }
+
     }
 
 
@@ -1912,6 +1873,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Email: " +
                 order.customer.email +
                 "\n";
+
         }
 
 
@@ -1949,6 +1911,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Landmark: " +
                 order.address.landmark +
                 "\n";
+
         }
 
 
@@ -1976,6 +1939,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         " (" +
                         item.variant +
                         ")";
+
                 }
 
 
@@ -1993,6 +1957,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 message += "\n";
+
             }
         );
 
@@ -2011,11 +1976,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         message +=
-            "Delivery: " +
-            formatCurrency(
-                order.deliveryCharge
-            ) +
-            "\n";
+            "Delivery: ₹0\n";
 
 
         message +=
@@ -2040,6 +2001,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "\n📝 Note: " +
                 order.orderNote +
                 "\n";
+
         }
 
 
@@ -2052,6 +2014,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         return message;
+
     }
 
 
@@ -2060,6 +2023,13 @@ document.addEventListener("DOMContentLoaded", function () {
     ===================================================== */
 
     function sendWhatsAppOrder() {
+
+        if (
+            whatsappOrderBtn.disabled
+        ) {
+            return;
+        }
+
 
         clearMessage();
 
@@ -2073,10 +2043,6 @@ document.addEventListener("DOMContentLoaded", function () {
             createOrder();
 
 
-        /* ---------------------------------------------
-           SAVE ORDER TO ACCOUNT
-        --------------------------------------------- */
-
         const accountResult =
             saveOrderToAccount(order);
 
@@ -2087,19 +2053,11 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-        /* ---------------------------------------------
-           CREATE MESSAGE
-        --------------------------------------------- */
-
         const message =
             createWhatsAppMessage(
                 order
             );
 
-
-        /* ---------------------------------------------
-           CORRECT WHATSAPP URL
-        --------------------------------------------- */
 
         const whatsappURL =
             "https://wa.me/" +
@@ -2110,10 +2068,6 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        /* ---------------------------------------------
-           TRY NEW TAB FIRST
-        --------------------------------------------- */
-
         const newWindow =
             window.open(
                 whatsappURL,
@@ -2121,25 +2075,15 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        /* ---------------------------------------------
-           POPUP BLOCKED
-
-           Instead of an alert, navigate
-           directly to WhatsApp.
-        --------------------------------------------- */
-
         if (!newWindow) {
 
             window.location.href =
                 whatsappURL;
 
             return;
+
         }
 
-
-        /* ---------------------------------------------
-           MESSAGE
-        --------------------------------------------- */
 
         if (
             accountResult &&
@@ -2157,12 +2101,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Your WhatsApp order message is ready.",
                 "success"
             );
+
         }
+
     }
 
 
     /* =====================================================
-       PIN CODE -> TOWN / POST OFFICE
+       PIN CODE → TOWN / POST OFFICE
     ===================================================== */
 
     let pincodeTimer = null;
@@ -2183,6 +2129,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "delivery-status";
 
             return;
+
         }
 
 
@@ -2194,10 +2141,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         try {
-
-            /* -----------------------------------------
-               CORRECT INDIA POST API URL
-            ----------------------------------------- */
 
             const response =
                 await fetch(
@@ -2211,6 +2154,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 throw new Error(
                     "PIN lookup failed"
                 );
+
             }
 
 
@@ -2232,6 +2176,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 throw new Error(
                     "Invalid PIN"
                 );
+
             }
 
 
@@ -2239,23 +2184,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 data[0].PostOffice;
 
 
-            /* -----------------------------------------
-               FIRST POST OFFICE
-            ----------------------------------------- */
-
             const firstOffice =
                 postOffices[0];
 
-
-            /*
-               Prefer:
-
-               Name
-               Block
-               Taluk
-
-               instead of District.
-            */
 
             const town =
                 firstOffice.Name ||
@@ -2270,15 +2201,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 "";
 
 
-            /* -----------------------------------------
-               PUT TOWN / POST OFFICE
-               INTO CITY FIELD
-            ----------------------------------------- */
-
             if (town) {
 
                 cityInput.value =
                     town;
+
             }
 
 
@@ -2286,13 +2213,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 stateInput.value =
                     state;
+
             }
 
 
             deliveryStatus.textContent =
                 "Town found: " +
                 town;
-
 
             deliveryStatus.className =
                 "delivery-status success";
@@ -2314,7 +2241,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             deliveryStatus.className =
                 "delivery-status error";
+
         }
+
     }
 
 
@@ -2326,13 +2255,13 @@ document.addEventListener("DOMContentLoaded", function () {
         "input",
         function () {
 
-            /* Only numbers */
-
             this.value =
-                this.value.replace(
-                    /\D/g,
-                    ""
-                ).slice(0, 6);
+                this.value
+                    .replace(
+                        /\D/g,
+                        ""
+                    )
+                    .slice(0, 6);
 
 
             clearTimeout(
@@ -2357,24 +2286,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 deliveryStatus.className =
                     "delivery-status";
+
             }
+
         }
-    );
-
-
-    /* =====================================================
-       STATE INPUT
-    ===================================================== */
-
-    stateInput.addEventListener(
-        "input",
-        updateOrderSummary
-    );
-
-
-    stateInput.addEventListener(
-        "change",
-        updateOrderSummary
     );
 
 
@@ -2393,6 +2308,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         ""
                     )
                     .slice(0, 10);
+
         }
     );
 
@@ -2414,6 +2330,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "change",
                 updatePaymentDisplay
             );
+
         }
     );
 
@@ -2447,5 +2364,10 @@ document.addEventListener("DOMContentLoaded", function () {
     updatePaymentDisplay();
 
     updateOrderSummary();
+
+
+    console.log(
+        "The Friends Heritage checkout initialized successfully."
+    );
 
 });
