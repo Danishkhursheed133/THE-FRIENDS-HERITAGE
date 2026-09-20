@@ -2,19 +2,6 @@
 /* =========================================================
    THE FRIENDS HERITAGE
    CONTACT.JS
-
-   Handles:
-   1. Contact form validation
-   2. EmailJS message sending
-   3. WhatsApp contact links
-   4. Google Maps location
-   5. Form success/error messages
-   6. Mobile navbar
-   7. Cart count
-
-   IMPORTANT:
-   This file does NOT create, replace or rebuild
-   any contact-section HTML.
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
