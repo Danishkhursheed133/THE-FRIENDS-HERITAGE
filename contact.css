@@ -1,815 +1,1036 @@
-<!DOCTYPE html>
-<html lang="en">
+/* =========================================================
+   THE FRIENDS HERITAGE
+   CONTACT PAGE CSS
+   IMPORTANT:
+   Navbar + Footer are controlled ONLY by style.css
+   ========================================================= */
 
-<head>
 
-    <meta charset="UTF-8">
+/* =========================================================
+   CONTACT SECTION
+   ========================================================= */
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+.contact-section {
+    width: 100%;
+    min-height: calc(100vh - 80px);
 
-    <!-- Website Favicon -->
-    <link
-        rel="icon"
-        href="logo.png"
-    >
+    padding: 90px 7% 100px;
 
-    <!-- Main CSS -->
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    background:
+        radial-gradient(
+            circle at 10% 15%,
+            rgba(196, 154, 39, 0.07),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            rgba(196, 154, 39, 0.06),
+            transparent 25%
+        ),
+        #f8f6f1;
 
-    <!-- Contact Page CSS -->
-    <link
-        rel="stylesheet"
-        href="contact.css"
-    >
+    position: relative;
+    overflow: hidden;
+}
 
-    <!-- Font Awesome -->
-    <link
-        rel="stylesheet"
-        href="https://use.fontawesome.com/releases/v6.5.1/css/all.css"
-    >
 
-    <title>
-        Contact Us | The Friends Heritage
-    </title>
+/* Decorative background circles */
 
-</head>
+.contact-section::before {
+    content: "";
 
+    position: absolute;
 
-<body>
+    width: 330px;
+    height: 330px;
 
+    left: -170px;
+    top: 100px;
 
-<!-- =====================================================
-     NAVBAR
-====================================================== -->
+    border: 1px solid rgba(166, 124, 0, 0.10);
 
-<header>
+    border-radius: 50%;
 
-    <nav class="navbar">
+    pointer-events: none;
+}
 
+.contact-section::after {
+    content: "";
 
-        <!-- ================= LOGO ================= -->
+    position: absolute;
 
-        <div class="logo">
+    width: 260px;
+    height: 260px;
 
-            <img
-                src="logo.png"
-                alt="The Friends Heritage Logo"
-            >
+    right: -130px;
+    bottom: 80px;
 
-            <span>
-                THE FRIENDS HERITAGE
-            </span>
+    border: 1px solid rgba(166, 124, 0, 0.10);
 
-        </div>
+    border-radius: 50%;
 
+    pointer-events: none;
+}
 
-        <!-- ================= NAVIGATION ================= -->
 
-        <ul
-            class="nav-links"
-            id="navLinks"
-        >
+/* =========================================================
+   CONTACT HEADING
+   ========================================================= */
 
-            <li>
-                <a href="index.html">
-                    Home
-                </a>
-            </li>
+.contact-heading {
+    width: 100%;
+    max-width: 800px;
 
-            <li>
-                <a href="shop.html">
-                    Shop
-                </a>
-            </li>
+    margin: 0 auto 65px;
 
-            <li>
-                <a href="benefits.html">
-                    Benefits
-                </a>
-            </li>
+    text-align: center;
 
-            <li>
-                <a href="about.html">
-                    About Us
-                </a>
-            </li>
+    position: relative;
+    z-index: 2;
+}
 
-            <li>
-                <a
-                    href="contact.html"
-                    class="active"
-                >
-                    Contact Us
-                </a>
-            </li>
 
-        </ul>
+.contact-label {
+    display: inline-block;
 
+    margin-bottom: 12px;
 
-        <!-- ================= NAVBAR ICONS ================= -->
+    font-size: 12px;
+    font-weight: 800;
 
-        <div class="nav-icons">
+    letter-spacing: 3px;
 
+    text-transform: uppercase;
 
-            <!-- ACCOUNT -->
+    color: #a67c00;
+}
 
-            <a
-                href="account.html"
-                aria-label="My Account"
-                title="My Account"
-            >
 
-                <i class="fa-regular fa-user"></i>
+.contact-heading h1 {
+    margin: 0 0 18px;
 
-            </a>
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
+    font-size: clamp(40px, 5vw, 56px);
 
-            <!-- CART -->
+    line-height: 1.12;
 
-            <a
-                href="cart.html"
-                class="cart-icon"
-                aria-label="Shopping Cart"
-                title="Shopping Cart"
-            >
+    font-weight: 500;
 
-                <i class="fa-solid fa-cart-shopping"></i>
+    color: #263746;
+}
 
-                <span
-                    class="cart-count"
-                    id="cartCount"
-                >
-                    0
-                </span>
 
-            </a>
+.contact-heading h1::after {
+    content: "";
 
-        </div>
+    display: block;
 
+    width: 55px;
+    height: 2px;
 
-        <!-- ================= MOBILE MENU ================= -->
+    margin: 20px auto 0;
 
-        <div
-            class="menu-toggle"
-            id="menuToggle"
-            aria-label="Open Menu"
-            role="button"
-            tabindex="0"
-        >
-            ☰
-        </div>
+    background:
+        linear-gradient(
+            to right,
+            transparent,
+            #c49a27,
+            transparent
+        );
+}
 
-    </nav>
 
-</header>
+.contact-heading p {
+    max-width: 650px;
 
+    margin: 0 auto;
 
+    font-size: 16px;
 
-<!-- =====================================================
-     CONTACT PAGE
-====================================================== -->
+    line-height: 1.8;
 
-<main>
+    color: #666;
+}
 
 
-    <!-- =================================================
-         CONTACT SECTION
-    ================================================== -->
+/* =========================================================
+   CONTACT CONTAINER
+   ========================================================= */
 
-    <section class="contact-section">
+.contact-container {
+    width: 100%;
+    max-width: 1200px;
 
+    margin: 0 auto;
 
-        <!-- ================= HEADING ================= -->
+    display: grid;
 
-        <div class="contact-heading">
+    grid-template-columns:
+        0.9fr 1.1fr;
 
-            <span class="contact-label">
-                THE FRIENDS HERITAGE
-            </span>
+    gap: 45px;
 
-            <h1>
-                Get In Touch
-            </h1>
+    align-items: stretch;
 
-            <p>
-                Have a question about our products, your order,
-                delivery or anything else? We are here to help.
-            </p>
+    position: relative;
+    z-index: 2;
+}
 
-        </div>
 
+/* =========================================================
+   CONTACT INFORMATION CARD
+   ========================================================= */
 
+.contact-info {
+    width: 100%;
 
-        <!-- =================================================
-             CONTACT CONTAINER
-        ================================================== -->
+    padding: 45px 40px;
 
-        <div class="contact-container">
+    border-radius: 25px;
 
+    background: rgba(255, 255, 255, 0.96);
 
-            <!-- =================================================
-                 LEFT SIDE
-            ================================================== -->
+    border: 1px solid rgba(196, 154, 39, 0.14);
 
-            <div class="contact-info">
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.08);
 
+    position: relative;
 
-                <span class="contact-small-title">
-                    CONTACT US
-                </span>
+    overflow: hidden;
+}
 
 
-                <h2>
-                    We'd Love To Hear From You
-                </h2>
+/* Gold top line */
 
+.contact-info::before {
+    content: "";
 
-                <p class="contact-description">
-                    Whether you want to know more about our
-                    saffron, dry fruits or other premium
-                    products, feel free to reach out to us.
-                </p>
+    position: absolute;
 
+    top: 0;
+    left: 35px;
+    right: 35px;
 
+    height: 3px;
 
-                <!-- ================= CALL ================= -->
+    border-radius: 0 0 10px 10px;
 
-                <a
-                    href="tel:+917051713047"
-                    class="contact-item"
-                    aria-label="Call The Friends Heritage"
-                >
+    background:
+        linear-gradient(
+            to right,
+            transparent,
+            #c49a27,
+            transparent
+        );
+}
 
-                    <div class="contact-icon">
 
-                        <i class="fa-solid fa-phone"></i>
+/* =========================================================
+   CONTACT SMALL TITLE
+   ========================================================= */
 
-                    </div>
+.contact-small-title {
+    display: inline-block;
 
+    margin-bottom: 12px;
 
-                    <div class="contact-details">
+    font-size: 11px;
 
-                        <h3>
-                            Call Us
-                        </h3>
+    font-weight: 800;
 
-                        <span>
-                            +91 70517 13047
-                        </span>
+    letter-spacing: 2.5px;
 
-                    </div>
+    color: #a67c00;
+}
 
 
-                    <i
-                        class="fa-solid fa-arrow-right contact-arrow"
-                    ></i>
+/* =========================================================
+   CONTACT INFO HEADING
+   ========================================================= */
 
-                </a>
+.contact-info h2 {
+    margin: 0 0 18px;
 
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
+    font-size: 34px;
 
-                <!-- ================= WHATSAPP ================= -->
+    line-height: 1.2;
 
-                <a
-                    href="https://wa.me/917051713047"
-                    class="contact-item"
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="Chat with us on WhatsApp"
-                >
+    font-weight: 500;
 
-                    <div class="contact-icon whatsapp-icon">
+    color: #263746;
+}
 
-                        <i class="fa-brands fa-whatsapp"></i>
 
-                    </div>
+/* =========================================================
+   CONTACT DESCRIPTION
+   ========================================================= */
 
+.contact-description {
+    margin-bottom: 32px;
 
-                    <div class="contact-details">
+    font-size: 14px;
 
-                        <h3>
-                            WhatsApp
-                        </h3>
+    line-height: 1.85;
 
-                        <span>
-                            Chat With Us
-                        </span>
+    color: #666;
+}
 
-                    </div>
 
+/* =========================================================
+   CLICKABLE CONTACT ITEM
+   ========================================================= */
 
-                    <i
-                        class="fa-solid fa-arrow-right contact-arrow"
-                    ></i>
+.contact-item {
+    position: relative;
 
-                </a>
+    display: flex;
 
+    align-items: center;
 
+    width: 100%;
 
-                <!-- ================= EMAIL ================= -->
+    gap: 17px;
 
-                <a
-                    href="mailto:danishrather041@gmail.com"
-                    class="contact-item"
-                    aria-label="Send us an email"
-                >
+    margin-bottom: 15px;
 
-                    <div class="contact-icon">
+    padding: 16px;
 
-                        <i class="fa-solid fa-envelope"></i>
+    border: 1px solid #eeeeee;
 
-                    </div>
+    border-radius: 16px;
 
+    background: #ffffff;
 
-                    <div class="contact-details">
+    color: inherit;
 
-                        <h3>
-                            Email
-                        </h3>
+    text-decoration: none;
 
-                        <span>
-                            danishrather041@gmail.com
-                        </span>
+    cursor: pointer;
 
-                    </div>
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
 
 
-                    <i
-                        class="fa-solid fa-arrow-right contact-arrow"
-                    ></i>
+.contact-item:last-child {
+    margin-bottom: 0;
+}
 
-                </a>
 
+.contact-item:hover {
+    transform: translateY(-4px);
 
+    border-color: #d8c58f;
 
-                <!-- ================= LOCATION ================= -->
+    background: #fffdf7;
 
-                <a
-                    href="https://maps.app.goo.gl/rPCPKxDmuQR2C9sz6"
-                    class="contact-item"
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="Open our location in Google Maps"
-                >
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.08);
+}
 
-                    <div class="contact-icon">
 
-                        <i class="fa-solid fa-location-dot"></i>
+/* =========================================================
+   CONTACT ICON
+   ========================================================= */
 
-                    </div>
+.contact-icon {
+    width: 53px;
+    height: 53px;
 
+    min-width: 53px;
 
-                    <div class="contact-details">
+    display: flex;
 
-                        <h3>
-                            Our Location
-                        </h3>
+    align-items: center;
+    justify-content: center;
 
-                        <span>
-                            Pampora, Pulwama, Kashmir, India
-                        </span>
+    border-radius: 50%;
 
-                    </div>
+    background:
+        linear-gradient(
+            145deg,
+            #faf2d9,
+            #f0dfb1
+        );
 
+    color: #a67c00;
 
-                    <i
-                        class="fa-solid fa-arrow-right contact-arrow"
-                    ></i>
+    font-size: 19px;
 
-                </a>
+    border: 1px solid rgba(166, 124, 0, 0.18);
 
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease;
+}
 
-            </div>
 
+.contact-item:hover .contact-icon {
+    transform: scale(1.08) rotate(-4deg);
 
+    background: #a67c00;
 
-            <!-- =================================================
-                 RIGHT SIDE — CONTACT FORM
-            ================================================== -->
+    color: #ffffff;
+}
 
-            <div class="contact-form-container">
 
+/* =========================================================
+   WHATSAPP ICON
+   ========================================================= */
 
-                <!-- ================= FORM HEADING ================= -->
+.whatsapp-icon {
+    background: #e9f9ef;
 
-                <div class="form-heading">
+    color: #25d366;
 
-                    <h2>
-                        Send Us A Message
-                    </h2>
+    border-color: rgba(37, 211, 102, 0.15);
+}
 
-                    <p>
-                        Fill in the details below and we'll
-                        get back to you as soon as possible.
-                    </p>
 
-                </div>
+.contact-item:hover .whatsapp-icon {
+    background: #25d366;
 
+    color: #ffffff;
+}
 
 
-                <!-- =================================================
-                     CONTACT FORM
-                ================================================== -->
+/* =========================================================
+   CONTACT DETAILS
+   ========================================================= */
 
-                <form
-                    id="contactForm"
-                    action="#"
-                    method="POST"
-                >
+.contact-details {
+    flex: 1;
 
+    min-width: 0;
+}
 
-                    <!-- ================= NAME ================= -->
 
-                    <div class="form-group">
+.contact-details h3 {
+    margin: 0 0 5px;
 
-                        <label for="name">
-                            Your Name
-                        </label>
+    font-size: 16px;
 
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            placeholder="Enter your name"
-                            autocomplete="name"
-                            required
-                        >
+    font-weight: 700;
 
-                    </div>
+    color: #263746;
+}
 
 
+.contact-details span {
+    display: block;
 
-                    <!-- ================= EMAIL ================= -->
+    font-size: 13px;
 
-                    <div class="form-group">
+    line-height: 1.6;
 
-                        <label for="email">
-                            Email Address
-                        </label>
+    color: #666;
 
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Enter your email"
-                            autocomplete="email"
-                            required
-                        >
+    word-break: break-word;
+}
 
-                    </div>
 
+/* =========================================================
+   CONTACT ARROW
+   ========================================================= */
 
+.contact-arrow {
+    margin-left: auto;
 
-                    <!-- ================= PHONE ================= -->
+    font-size: 12px;
 
-                    <div class="form-group">
+    color: #aaaaaa;
 
-                        <label for="phone">
-                            Phone Number
-                        </label>
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease;
+}
 
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            placeholder="Enter your phone number"
-                            autocomplete="tel"
-                        >
 
-                    </div>
+.contact-item:hover .contact-arrow {
+    transform: translateX(5px);
 
+    color: #a67c00;
+}
 
 
-                    <!-- ================= SUBJECT ================= -->
+/* =========================================================
+   KEYBOARD FOCUS
+   ========================================================= */
 
-                    <div class="form-group">
+.contact-item:focus-visible {
+    outline: 2px solid #a67c00;
 
-                        <label for="subject">
-                            Subject
-                        </label>
+    outline-offset: 3px;
+}
 
-                        <input
-                            type="text"
-                            id="subject"
-                            name="subject"
-                            placeholder="What is your message about?"
-                        >
 
-                    </div>
+/* =========================================================
+   CONTACT FORM CARD
+   ========================================================= */
 
+.contact-form-container {
+    width: 100%;
 
+    padding: 45px;
 
-                    <!-- ================= MESSAGE ================= -->
+    border-radius: 25px;
 
-                    <div class="form-group">
+    background: rgba(255, 255, 255, 0.97);
 
-                        <label for="message">
-                            Your Message
-                        </label>
+    border: 1px solid rgba(196, 154, 39, 0.14);
 
-                        <textarea
-                            id="message"
-                            name="message"
-                            rows="6"
-                            placeholder="Write your message here..."
-                            required
-                        ></textarea>
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.08);
 
-                    </div>
+    position: relative;
 
+    overflow: hidden;
+}
 
 
-                    <!-- ================= SEND BUTTON ================= -->
+/* Gold top line */
 
-                    <button
-                        type="submit"
-                        class="send-btn"
-                    >
+.contact-form-container::before {
+    content: "";
 
-                        <i class="fa-solid fa-paper-plane"></i>
+    position: absolute;
 
-                        <span>
-                            Send Message
-                        </span>
+    top: 0;
+    left: 35px;
+    right: 35px;
 
-                    </button>
+    height: 3px;
 
+    border-radius: 0 0 10px 10px;
 
+    background:
+        linear-gradient(
+            to right,
+            transparent,
+            #c49a27,
+            transparent
+        );
+}
 
-                    <!-- ================= FORM MESSAGE ================= -->
 
-                    <div
-                        id="formMessage"
-                        class="form-message"
-                        aria-live="polite"
-                    ></div>
+/* =========================================================
+   FORM HEADING
+   ========================================================= */
 
+.form-heading {
+    margin-bottom: 30px;
+}
 
-                </form>
 
-            </div>
+.form-heading h2 {
+    margin: 0 0 10px;
 
-        </div>
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-    </section>
+    font-size: 32px;
 
-</main>
+    line-height: 1.2;
 
+    font-weight: 500;
 
+    color: #263746;
+}
 
-<!-- =====================================================
-     FOOTER
-====================================================== -->
 
-<footer class="footer">
+.form-heading p {
+    font-size: 14px;
 
+    line-height: 1.7;
 
-    <!-- ================= FOOTER CONTAINER ================= -->
+    color: #777;
+}
 
-    <div class="footer-container">
 
+/* =========================================================
+   FORM
+   ========================================================= */
 
-        <!-- ================= CUSTOMER SERVICE ================= -->
+#contactForm {
+    width: 100%;
+}
 
-        <div class="footer-column">
 
-            <h3>
-                Customer Service
-            </h3>
+.form-group {
+    width: 100%;
 
-            <ul>
+    margin-bottom: 19px;
+}
 
 
-                <li>
+/* =========================================================
+   LABEL
+   ========================================================= */
 
-                    <a href="contact.html">
-                        Contact Us
-                    </a>
+.form-group label {
+    display: block;
 
-                </li>
+    margin-bottom: 8px;
 
+    font-size: 13px;
 
-                <li>
+    font-weight: 700;
 
-                    <a
-                        href="#"
-                        class="app-link"
-                        data-app="whatsapp"
-                        data-phone="917051713047"
-                        data-android-store="https://play.google.com/store/apps/details?id=com.whatsapp"
-                        data-ios-store="https://apps.apple.com/app/whatsapp-messenger/id310633997"
-                    >
-                        WhatsApp
-                    </a>
+    color: #333;
+}
 
-                </li>
 
+/* =========================================================
+   INPUT + TEXTAREA
+   ========================================================= */
 
-                <li>
+.form-group input,
+.form-group textarea {
+    width: 100%;
 
-                    <a href="mailto:danishrather041@gmail.com">
-                        Email
-                    </a>
+    border: 1px solid #dddddd;
 
-                </li>
+    border-radius: 11px;
 
+    outline: none;
 
-                <li>
+    background: #fafafa;
 
-                    <a href="shipping.html">
-                        Shipping &amp; Delivery
-                    </a>
+    color: #222;
 
-                </li>
+    font-family: inherit;
 
+    font-size: 14px;
 
-                <li>
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
 
-                    <a href="returns.html">
-                        Returns &amp; Refunds
-                    </a>
 
-                </li>
+/* =========================================================
+   INPUT
+   ========================================================= */
 
+.form-group input {
+    height: 50px;
 
-                <li>
+    padding: 14px 16px;
+}
 
-                    <a href="terms.html">
-                        Terms &amp; Conditions
-                    </a>
 
-                </li>
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
 
+.form-group textarea {
+    min-height: 145px;
 
-                <li>
+    padding: 14px 16px;
 
-                    <a href="privacy.html">
-                        Privacy Policy
-                    </a>
+    resize: vertical;
+}
 
-                </li>
 
-            </ul>
+/* =========================================================
+   PLACEHOLDER
+   ========================================================= */
 
-        </div>
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #999999;
+}
 
 
+/* =========================================================
+   INPUT FOCUS
+   ========================================================= */
 
-        <!-- ================= FOLLOW US ================= -->
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #a67c00;
 
-        <div class="footer-column social-column">
+    background: #ffffff;
 
-            <h3>
-                Follow Us
-            </h3>
+    box-shadow:
+        0 0 0 3px rgba(166, 124, 0, 0.10);
+}
 
 
-            <div class="social-links">
+/* =========================================================
+   SEND BUTTON
+   ========================================================= */
 
+.send-btn {
+    width: 100%;
 
-                <!-- ================= INSTAGRAM ================= -->
+    min-height: 53px;
 
-                <a
-                    href="#"
-                    class="app-link"
-                    data-app="instagram"
-                    data-android-store="https://play.google.com/store/apps/details?id=com.instagram.android"
-                    data-ios-store="https://apps.apple.com/app/instagram/id389801252"
-                    aria-label="Open Instagram"
-                >
+    display: flex;
 
-                    <i class="fab fa-instagram"></i>
+    align-items: center;
 
-                    <span>
-                        Instagram
-                    </span>
+    justify-content: center;
 
-                </a>
+    gap: 10px;
 
+    margin-top: 8px;
 
+    padding: 14px 25px;
 
-                <!-- ================= FACEBOOK ================= -->
+    border: none;
 
-                <a
-                    href="#"
-                    class="app-link"
-                    data-app="facebook"
-                    data-android-store="https://play.google.com/store/apps/details?id=com.facebook.katana"
-                    data-ios-store="https://apps.apple.com/app/facebook/id284882215"
-                    aria-label="Open Facebook"
-                >
+    border-radius: 30px;
 
-                    <i class="fab fa-facebook-f"></i>
+    background:
+        linear-gradient(
+            135deg,
+            #c49a27,
+            #a67c00
+        );
 
-                    <span>
-                        Facebook
-                    </span>
+    color: #ffffff;
 
-                </a>
+    font-family: inherit;
 
+    font-size: 14px;
 
+    font-weight: 700;
 
-                <!-- ================= WHATSAPP ================= -->
+    letter-spacing: 0.5px;
 
-                <a
-                    href="#"
-                    class="app-link"
-                    data-app="whatsapp"
-                    data-phone="917051713047"
-                    data-android-store="https://play.google.com/store/apps/details?id=com.whatsapp"
-                    data-ios-store="https://apps.apple.com/app/whatsapp-messenger/id310633997"
-                    aria-label="Open WhatsApp"
-                >
+    cursor: pointer;
 
-                    <i class="fab fa-whatsapp"></i>
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
 
-                    <span>
-                        WhatsApp
-                    </span>
 
-                </a>
+.send-btn:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #d3ad3e,
+            #8d6900
+        );
 
-            </div>
+    transform: translateY(-3px);
 
-        </div>
+    box-shadow:
+        0 12px 28px rgba(166, 124, 0, 0.25);
+}
 
-    </div>
 
+.send-btn:active {
+    transform: translateY(0);
+}
 
 
-    <!-- ================= DIVIDER ================= -->
+.send-btn i {
+    font-size: 15px;
+}
 
-    <div class="footer-divider"></div>
 
+/* =========================================================
+   FORM MESSAGE
+   ========================================================= */
 
+.form-message {
+    display: none;
 
-    <!-- ================= DESIGNER CREDIT ================= -->
+    width: 100%;
 
-    <div class="designer-credit">
+    margin-top: 18px;
 
-        <p>
-            Designed &amp; Developed by
-        </p>
+    padding: 12px 15px;
 
-        <h3>
-            Danish Khursheed
-        </h3>
+    border-radius: 9px;
 
-        <span>
-            Crafted with ❤️ &amp; creativity
-        </span>
+    font-size: 14px;
 
-    </div>
+    line-height: 1.5;
 
+    text-align: center;
+}
 
 
-    <!-- ================= DIVIDER ================= -->
+/* =========================================================
+   SUCCESS MESSAGE
+   ========================================================= */
 
-    <div class="footer-divider"></div>
+.form-message.success {
+    display: block;
 
+    background: #eaf8ee;
 
+    border: 1px solid #b9e4c4;
 
-    <!-- ================= COPYRIGHT ================= -->
+    color: #23753a;
+}
 
-    <div class="footer-bottom">
 
-        <p>
-            © 2026 The Friends Heritage
-        </p>
+/* =========================================================
+   ERROR MESSAGE
+   ========================================================= */
 
-        <p>
-            All Rights Reserved
-        </p>
+.form-message.error {
+    display: block;
 
-    </div>
+    background: #fff0f0;
 
-</footer>
+    border: 1px solid #f0c2c2;
 
+    color: #a33333;
+}
 
 
-<!-- =====================================================
-     EMAILJS
-====================================================== -->
+/* =========================================================
+   TABLET
+   ========================================================= */
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+@media (max-width: 1000px) {
 
-<script>
-    emailjs.init({
-        publicKey: "18orRcmHkRy0Z--QL"
-    });
-</script>
+    .contact-section {
+        padding: 75px 5% 85px;
+    }
 
-<script src="contact.js"></script>
 
-<script src="script.js"></script>
+    .contact-container {
+        grid-template-columns: 1fr;
 
+        gap: 35px;
 
-</body>
+        max-width: 750px;
+    }
 
-</html>
+
+    .contact-heading {
+        margin-bottom: 50px;
+    }
+
+
+    .contact-heading h1 {
+        font-size: 44px;
+    }
+
+
+    .contact-info,
+    .contact-form-container {
+        padding: 40px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .contact-section {
+        padding: 55px 20px 65px;
+    }
+
+
+    /* Heading */
+
+    .contact-heading {
+        margin-bottom: 40px;
+    }
+
+
+    .contact-label {
+        font-size: 11px;
+
+        letter-spacing: 2px;
+    }
+
+
+    .contact-heading h1 {
+        font-size: 36px;
+    }
+
+
+    .contact-heading p {
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+
+    /* Cards */
+
+    .contact-info,
+    .contact-form-container {
+        padding: 30px 22px;
+
+        border-radius: 20px;
+    }
+
+
+    /* Contact Info */
+
+    .contact-info h2 {
+        font-size: 27px;
+    }
+
+
+    .contact-description {
+        font-size: 14px;
+
+        margin-bottom: 28px;
+    }
+
+
+    /* Contact Buttons */
+
+    .contact-item {
+        gap: 13px;
+
+        padding: 14px 12px;
+    }
+
+
+    .contact-icon {
+        width: 45px;
+        height: 45px;
+
+        min-width: 45px;
+
+        font-size: 17px;
+    }
+
+
+    .contact-details h3 {
+        font-size: 15px;
+    }
+
+
+    .contact-details span {
+        font-size: 13px;
+    }
+
+
+    .contact-arrow {
+        font-size: 11px;
+    }
+
+
+    /* Form */
+
+    .form-heading {
+        margin-bottom: 25px;
+    }
+
+
+    .form-heading h2 {
+        font-size: 26px;
+    }
+
+
+    .form-heading p {
+        font-size: 13px;
+    }
+
+
+    .form-group {
+        margin-bottom: 17px;
+    }
+
+
+    .form-group label {
+        font-size: 13px;
+    }
+
+
+    .form-group input {
+        height: 48px;
+    }
+
+
+    .form-group input,
+    .form-group textarea {
+        padding: 12px 14px;
+
+        font-size: 13px;
+    }
+
+
+    .form-group textarea {
+        min-height: 130px;
+    }
+
+
+    .send-btn {
+        min-height: 50px;
+
+        font-size: 14px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .contact-section {
+        padding-left: 15px;
+
+        padding-right: 15px;
+    }
+
+
+    .contact-heading h1 {
+        font-size: 31px;
+    }
+
+
+    .contact-info,
+    .contact-form-container {
+        padding: 25px 18px;
+    }
+
+
+    .contact-info h2 {
+        font-size: 24px;
+    }
+
+
+    .form-heading h2 {
+        font-size: 23px;
+    }
+
+
+    .contact-item {
+        padding: 13px 10px;
+    }
+
+
+    .contact-icon {
+        width: 42px;
+        height: 42px;
+
+        min-width: 42px;
+    }
+}
