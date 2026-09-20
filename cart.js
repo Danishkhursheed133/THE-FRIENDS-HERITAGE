@@ -1,10 +1,12 @@
 /* =========================================================
-   friendsHeritageCart
+   THE FRIENDS HERITAGE
+   CART.JS
+   ---------------------------------------------------------
+   Delivery charges removed.
+   Final Total = Subtotal
 ========================================================= */
 
-
 document.addEventListener("DOMContentLoaded", function () {
-
 
     /* =====================================================
        GET CART FROM LOCAL STORAGE
@@ -43,13 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       DELIVERY CHARGE
-    ===================================================== */
-
-    const DELIVERY_CHARGE = 60;
-
-
-    /* =====================================================
        SAVE CART
     ===================================================== */
 
@@ -76,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
        ESCAPE HTML
-       Prevents product data from breaking the HTML
     ===================================================== */
 
     function escapeHTML(value) {
@@ -156,11 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
             Number(item.price || 0);
 
 
-        /*
-           Only show original price when it is
-           actually higher than the selling price.
-        */
-
         if (
             oldPrice > currentPrice &&
             currentPrice > 0
@@ -181,7 +170,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ===================================================== */
 
     function displayCart() {
-
 
         /* =================================================
            SAFETY CHECK
@@ -222,7 +210,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             updateCartTotals();
-
             updateCartBadge();
 
             return;
@@ -231,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* =================================================
-           HIDE EMPTY CART MESSAGE
+           HIDE EMPTY CART
         ================================================= */
 
         if (emptyCart) {
@@ -249,7 +236,6 @@ document.addEventListener("DOMContentLoaded", function () {
         cartItemsContainer.innerHTML =
             cart.map(
                 (item, index) => {
-
 
                     /* -------------------------------------
                        PRODUCT DATA
@@ -306,7 +292,6 @@ document.addEventListener("DOMContentLoaded", function () {
                             data-index="${index}"
                         >
 
-
                             <!-- PRODUCT IMAGE -->
 
                             <div class="cart-product-image">
@@ -345,7 +330,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                                 <p class="cart-product-price">
 
-
                                     <span class="cart-current-price">
                                         ${formatPrice(price)}
                                     </span>
@@ -363,7 +347,6 @@ document.addEventListener("DOMContentLoaded", function () {
                                         : ""
                                     }
 
-
                                 </p>
 
 
@@ -373,7 +356,6 @@ document.addEventListener("DOMContentLoaded", function () {
                             <!-- CART ACTIONS -->
 
                             <div class="cart-item-actions">
-
 
                                 <!-- ITEM TOTAL -->
 
@@ -387,7 +369,6 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <!-- QUANTITY CONTROL -->
 
                                 <div class="quantity-control">
-
 
                                     <button
                                         type="button"
@@ -413,7 +394,6 @@ document.addEventListener("DOMContentLoaded", function () {
                                         +
                                     </button>
 
-
                                 </div>
 
 
@@ -430,9 +410,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                                 </button>
 
-
                             </div>
-
 
                         </div>
 
@@ -512,7 +490,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     "click",
                     function () {
 
-
                         const index =
                             Number(
                                 button.dataset.index
@@ -553,7 +530,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 button.addEventListener(
                     "click",
                     function () {
-
 
                         const index =
                             Number(
@@ -611,7 +587,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     "click",
                     function () {
 
-
                         const index =
                             Number(
                                 button.dataset.index
@@ -645,10 +620,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
        UPDATE CART TOTALS
+       -----------------------------------------------------
+       DELIVERY CHARGE REMOVED
+       FINAL TOTAL = SUBTOTAL
     ===================================================== */
 
     function updateCartTotals() {
-
 
         let subtotal = 0;
 
@@ -675,12 +652,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         /* =================================================
            DELIVERY
+           -------------------------------------------------
+           No delivery charges
         ================================================= */
 
-        const delivery =
-            cart.length > 0
-                ? DELIVERY_CHARGE
-                : 0;
+        const delivery = 0;
 
 
         /* =================================================
@@ -688,7 +664,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ================================================= */
 
         const total =
-            subtotal + delivery;
+            subtotal;
 
 
         /* =================================================
@@ -733,13 +709,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (checkoutBtn) {
 
-
             if (cart.length === 0) {
 
                 checkoutBtn.classList.add(
                     "disabled"
                 );
-
 
                 checkoutBtn.setAttribute(
                     "aria-disabled",
@@ -751,7 +725,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 checkoutBtn.classList.remove(
                     "disabled"
                 );
-
 
                 checkoutBtn.removeAttribute(
                     "aria-disabled"
@@ -774,7 +747,6 @@ document.addEventListener("DOMContentLoaded", function () {
             "click",
             function (event) {
 
-
                 /* -----------------------------------------
                    PREVENT EMPTY CART CHECKOUT
                 ----------------------------------------- */
@@ -783,11 +755,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     event.preventDefault();
 
-
                     alert(
                         "Your cart is empty. Please add a product before proceeding to checkout."
                     );
-
 
                     return;
 
@@ -802,7 +772,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 /* -----------------------------------------
-                   GO TO CHECKOUT PAGE
+                   GO TO CHECKOUT
                 ----------------------------------------- */
 
                 window.location.href =
@@ -826,7 +796,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ===================================================== */
 
     updateCartBadge();
-
 
 });
 
