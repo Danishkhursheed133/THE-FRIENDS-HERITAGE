@@ -1,9 +1,6 @@
 /* =========================================================
    THE FRIENDS HERITAGE
    CART.JS
-   ---------------------------------------------------------
-   Delivery charges removed.
-   Final Total = Subtotal
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
