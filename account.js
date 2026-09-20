@@ -1,11 +1,27 @@
 /* =========================================================
    THE FRIENDS HERITAGE
-   account.js
+   ACCOUNT.JS
+
+   Handles:
+   1. Login
+   2. Create Account
+   3. Logout
+   4. Password visibility
+   5. Dashboard
+   6. My Orders
+   7. Profile
+   8. Address
+   9. Change Password
+   10. Forgot Password
+   11. Cart Count
+   12. Order synchronization
+
+   IMPORTANT:
+   This file controls the existing account.html.
+   It does NOT replace the HTML structure.
 ========================================================= */
 
-
 document.addEventListener("DOMContentLoaded", function () {
-
 
     /* =====================================================
        STORAGE KEYS
@@ -14,25 +30,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const USERS_KEY = "friendsHeritageUsers";
     const CURRENT_USER_KEY = "friendsHeritageCurrentUser";
     const CART_KEY = "friendsHeritageCart";
+    const LATEST_ORDER_KEY = "friendsHeritageLatestOrder";
 
 
     /* =====================================================
-       GET ELEMENTS
+       LOGIN ELEMENTS
     ===================================================== */
 
     const loginSection =
         document.getElementById("loginSection");
-
-    const registerSection =
-        document.getElementById("registerSection");
-
-    const dashboardSection =
-        document.getElementById("dashboardSection");
-
-
-    /* =====================================================
-       LOGIN
-    ===================================================== */
 
     const loginForm =
         document.getElementById("loginForm");
@@ -46,10 +52,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginMessage =
         document.getElementById("loginMessage");
 
+    const loginPasswordToggle =
+        document.getElementById("loginPasswordToggle");
+
+    const forgotPasswordBtn =
+        document.getElementById("forgotPasswordBtn");
+
+    const showRegisterBtn =
+        document.getElementById("showRegisterBtn");
+
 
     /* =====================================================
-       REGISTER
+       REGISTER ELEMENTS
     ===================================================== */
+
+    const registerSection =
+        document.getElementById("registerSection");
 
     const registerForm =
         document.getElementById("registerForm");
@@ -69,63 +87,49 @@ document.addEventListener("DOMContentLoaded", function () {
     const registerMessage =
         document.getElementById("registerMessage");
 
+    const registerPasswordToggle =
+        document.getElementById("registerPasswordToggle");
 
-    /* =====================================================
-       ACCOUNT NAVIGATION
-    ===================================================== */
-
-    const showRegisterBtn =
-        document.getElementById("showRegisterBtn");
+    const confirmPasswordToggle =
+        document.getElementById("confirmPasswordToggle");
 
     const backToLoginBtn =
         document.getElementById("backToLoginBtn");
 
-    const logoutBtn =
-        document.getElementById("logoutBtn");
+
+    /* =====================================================
+       DASHBOARD ELEMENTS
+    ===================================================== */
+
+    const dashboardSection =
+        document.getElementById("dashboardSection");
 
     const welcomeUser =
         document.getElementById("welcomeUser");
 
+    const logoutBtn =
+        document.getElementById("logoutBtn");
+
 
     /* =====================================================
-       FORGOT PASSWORD
+       DASHBOARD PANELS
     ===================================================== */
 
-    const forgotPasswordBtn =
-        document.getElementById("forgotPasswordBtn");
+    const ordersPanel =
+        document.getElementById("ordersPanel");
 
-    const forgotModal =
-        document.getElementById("forgotModal");
+    const profilePanel =
+        document.getElementById("profilePanel");
 
-    const closeForgotModal =
-        document.getElementById("closeForgotModal");
+    const addressPanel =
+        document.getElementById("addressPanel");
 
-    const forgotForm =
-        document.getElementById("forgotForm");
-
-    const forgotContact =
-        document.getElementById("forgotContact");
-
-    const forgotMessage =
-        document.getElementById("forgotMessage");
+    const passwordPanel =
+        document.getElementById("passwordPanel");
 
 
     /* =====================================================
-       DASHBOARD
-    ===================================================== */
-
-    const dashboardCards =
-        document.querySelectorAll(".dashboard-card");
-
-    const dashboardPanels =
-        document.querySelectorAll(".dashboard-panel");
-
-    const closePanelButtons =
-        document.querySelectorAll(".close-panel");
-
-
-    /* =====================================================
-       PROFILE
+       PROFILE ELEMENTS
     ===================================================== */
 
     const profileForm =
@@ -142,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       ADDRESS
+       ADDRESS ELEMENTS
     ===================================================== */
 
     const addressForm =
@@ -171,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       PASSWORD
+       PASSWORD ELEMENTS
     ===================================================== */
 
     const passwordForm =
@@ -191,6 +195,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
+       FORGOT PASSWORD ELEMENTS
+    ===================================================== */
+
+    const forgotModal =
+        document.getElementById("forgotModal");
+
+    const closeForgotModal =
+        document.getElementById("closeForgotModal");
+
+    const forgotForm =
+        document.getElementById("forgotForm");
+
+    const forgotContact =
+        document.getElementById("forgotContact");
+
+    const forgotMessage =
+        document.getElementById("forgotMessage");
+
+
+    /* =====================================================
+       CART
+    ===================================================== */
+
+    const cartCount =
+        document.getElementById("cartCount");
+
+
+    /* =====================================================
        STORAGE FUNCTIONS
     ===================================================== */
 
@@ -198,15 +230,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         try {
 
-            const savedUsers =
+            const data =
                 localStorage.getItem(USERS_KEY);
 
-            if (!savedUsers) {
+            if (!data) {
                 return [];
             }
 
             const users =
-                JSON.parse(savedUsers);
+                JSON.parse(data);
 
             return Array.isArray(users)
                 ? users
@@ -215,14 +247,12 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (error) {
 
             console.error(
-                "Unable to read users:",
+                "Error reading users:",
                 error
             );
 
             return [];
-
         }
-
     }
 
 
@@ -240,14 +270,12 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (error) {
 
             console.error(
-                "Unable to save users:",
+                "Error saving users:",
                 error
             );
 
             return false;
-
         }
-
     }
 
 
@@ -255,28 +283,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
         try {
 
-            const savedUser =
+            const data =
                 localStorage.getItem(
                     CURRENT_USER_KEY
                 );
 
-            if (!savedUser) {
+            if (!data) {
                 return null;
             }
 
-            return JSON.parse(savedUser);
+            return JSON.parse(data);
 
         } catch (error) {
 
             console.error(
-                "Unable to read current user:",
+                "Error reading current user:",
                 error
             );
 
             return null;
-
         }
-
     }
 
 
@@ -294,14 +320,12 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (error) {
 
             console.error(
-                "Unable to save current user:",
+                "Error saving current user:",
                 error
             );
 
             return false;
-
         }
-
     }
 
 
@@ -310,54 +334,147 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.removeItem(
             CURRENT_USER_KEY
         );
-
     }
 
 
     /* =====================================================
-       GENERAL HELPERS
+       CONTACT NORMALIZATION
     ===================================================== */
 
     function normalizeContact(value) {
 
         return String(value || "")
             .trim()
-            .toLowerCase();
-
+            .toLowerCase()
+            .replace(/\s+/g, "");
     }
 
 
-    function isEmail(value) {
+    /* =====================================================
+       FIND USER
+       ID FIRST
+       CONTACT SECOND
+    ===================================================== */
 
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-            value
+    function findUserIndex(
+        users,
+        currentUser
+    ) {
+
+        if (
+            !Array.isArray(users) ||
+            !currentUser
+        ) {
+            return -1;
+        }
+
+
+        /* Find by ID */
+
+        if (currentUser.id) {
+
+            const idIndex =
+                users.findIndex(
+                    function (user) {
+
+                        return String(user.id) ===
+                            String(currentUser.id);
+
+                    }
+                );
+
+
+            if (idIndex !== -1) {
+                return idIndex;
+            }
+        }
+
+
+        /* Find by contact */
+
+        const currentContact =
+            normalizeContact(
+                currentUser.contact ||
+                currentUser.email
+            );
+
+
+        if (!currentContact) {
+            return -1;
+        }
+
+
+        return users.findIndex(
+            function (user) {
+
+                const userContact =
+                    normalizeContact(
+                        user.contact ||
+                        user.email
+                    );
+
+                return (
+                    userContact &&
+                    userContact === currentContact
+                );
+            }
+        );
+    }
+
+
+    /* =====================================================
+       SYNC CURRENT USER
+    ===================================================== */
+
+    function refreshCurrentUserFromUsers() {
+
+        const currentUser =
+            getCurrentUser();
+
+
+        if (!currentUser) {
+            return null;
+        }
+
+
+        const users =
+            getUsers();
+
+
+        const userIndex =
+            findUserIndex(
+                users,
+                currentUser
+            );
+
+
+        if (userIndex === -1) {
+            return currentUser;
+        }
+
+
+        if (
+            !Array.isArray(
+                users[userIndex].orders
+            )
+        ) {
+
+            users[userIndex].orders = [];
+        }
+
+
+        saveCurrentUser(
+            users[userIndex]
         );
 
+
+        return users[userIndex];
     }
 
 
-    function isMobile(value) {
-
-        const cleaned =
-            String(value || "")
-                .replace(/\s+/g, "");
-
-        return /^[+]?[0-9]{10,15}$/.test(
-            cleaned
-        );
-
-    }
-
-
-    function isValidContact(value) {
-
-        return (
-            isEmail(value) ||
-            isMobile(value)
-        );
-
-    }
-
+    /* =====================================================
+       MESSAGE
+    ===================================================== */
 
     function showMessage(
         element,
@@ -369,59 +486,68 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+
         element.textContent =
             message;
+
 
         element.classList.remove(
             "success",
             "error"
         );
+
 
         if (type) {
 
             element.classList.add(
                 type
             );
-
         }
-
-    }
-
-
-    function clearMessage(element) {
-
-        if (!element) {
-            return;
-        }
-
-        element.textContent = "";
-
-        element.classList.remove(
-            "success",
-            "error"
-        );
-
     }
 
 
     /* =====================================================
-       PASSWORD SHOW / HIDE
+       VALIDATION
+    ===================================================== */
+
+    function isEmail(value) {
+
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            .test(value);
+    }
+
+
+    function isMobile(value) {
+
+        const digits =
+            String(value || "")
+                .replace(/\D/g, "");
+
+
+        return (
+            digits.length >= 10 &&
+            digits.length <= 15
+        );
+    }
+
+
+    function isValidContact(value) {
+
+        return (
+            isEmail(value) ||
+            isMobile(value)
+        );
+    }
+
+
+    /* =====================================================
+       PASSWORD TOGGLE
     ===================================================== */
 
     function setupPasswordToggle(
-        buttonId,
-        inputId
+        button,
+        input
     ) {
-
-        const button =
-            document.getElementById(
-                buttonId
-            );
-
-        const input =
-            document.getElementById(
-                inputId
-            );
 
         if (!button || !input) {
             return;
@@ -433,13 +559,17 @@ document.addEventListener("DOMContentLoaded", function () {
             function () {
 
                 if (
-                    input.type === "password"
+                    input.type ===
+                    "password"
                 ) {
 
-                    input.type = "text";
+                    input.type =
+                        "text";
+
 
                     button.innerHTML =
                         '<i class="fa-regular fa-eye-slash"></i>';
+
 
                     button.setAttribute(
                         "aria-label",
@@ -448,37 +578,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 } else {
 
-                    input.type = "password";
+                    input.type =
+                        "password";
+
 
                     button.innerHTML =
                         '<i class="fa-regular fa-eye"></i>';
+
 
                     button.setAttribute(
                         "aria-label",
                         "Show password"
                     );
-
                 }
 
             }
         );
-
     }
 
 
     setupPasswordToggle(
-        "loginPasswordToggle",
-        "loginPassword"
+        loginPasswordToggle,
+        loginPassword
     );
 
-    setupPasswordToggle(
-        "registerPasswordToggle",
-        "registerPassword"
-    );
 
     setupPasswordToggle(
-        "confirmPasswordToggle",
-        "confirmPassword"
+        registerPasswordToggle,
+        registerPassword
+    );
+
+
+    setupPasswordToggle(
+        confirmPasswordToggle,
+        confirmPassword
     );
 
 
@@ -494,11 +627,13 @@ document.addEventListener("DOMContentLoaded", function () {
             );
         }
 
+
         if (registerSection) {
             registerSection.classList.add(
                 "hidden"
             );
         }
+
 
         if (dashboardSection) {
             dashboardSection.classList.add(
@@ -506,13 +641,15 @@ document.addEventListener("DOMContentLoaded", function () {
             );
         }
 
+
+        if (forgotModal) {
+            forgotModal.classList.add(
+                "hidden"
+            );
+        }
+
+
         closeAllPanels();
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
     }
 
 
@@ -528,11 +665,13 @@ document.addEventListener("DOMContentLoaded", function () {
             );
         }
 
+
         if (registerSection) {
             registerSection.classList.remove(
                 "hidden"
             );
         }
+
 
         if (dashboardSection) {
             dashboardSection.classList.add(
@@ -540,14 +679,19 @@ document.addEventListener("DOMContentLoaded", function () {
             );
         }
 
-        clearMessage(loginMessage);
-        clearMessage(registerMessage);
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+        showMessage(
+            loginMessage,
+            "",
+            ""
+        );
 
+
+        showMessage(
+            registerMessage,
+            "",
+            ""
+        );
     }
 
 
@@ -558,8 +702,18 @@ document.addEventListener("DOMContentLoaded", function () {
     function showDashboard(user) {
 
         if (!user) {
+            showLogin();
             return;
         }
+
+
+        if (
+            !Array.isArray(user.orders)
+        ) {
+
+            user.orders = [];
+        }
+
 
         if (loginSection) {
             loginSection.classList.add(
@@ -567,11 +721,13 @@ document.addEventListener("DOMContentLoaded", function () {
             );
         }
 
+
         if (registerSection) {
             registerSection.classList.add(
                 "hidden"
             );
         }
+
 
         if (dashboardSection) {
             dashboardSection.classList.remove(
@@ -579,16 +735,19 @@ document.addEventListener("DOMContentLoaded", function () {
             );
         }
 
-        closeAllPanels();
+
+        const name =
+            String(
+                user.name ||
+                user.profile?.name ||
+                "Customer"
+            ).trim();
 
 
         if (welcomeUser) {
 
             welcomeUser.textContent =
-                "Welcome, " +
-                (user.name || "Customer") +
-                "!";
-
+                "Welcome, " + name;
         }
 
 
@@ -596,463 +755,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
         loadAddress(user);
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+        loadOrders(user);
 
+        closeAllPanels();
     }
 
 
     /* =====================================================
-       CREATE ACCOUNT BUTTON
+       CLOSE ALL PANELS
     ===================================================== */
 
-    if (showRegisterBtn) {
+    function closeAllPanels() {
 
-        showRegisterBtn.addEventListener(
-            "click",
-            function () {
+        document
+            .querySelectorAll(
+                ".dashboard-panel"
+            )
+            .forEach(
+                function (panel) {
 
-                showRegister();
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       BACK TO LOGIN
-    ===================================================== */
-
-    if (backToLoginBtn) {
-
-        backToLoginBtn.addEventListener(
-            "click",
-            function () {
-
-                showLogin();
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       REGISTER ACCOUNT
-    ===================================================== */
-
-    if (registerForm) {
-
-        registerForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-                clearMessage(
-                    registerMessage
-                );
-
-
-                const name =
-                    registerName
-                        ? registerName.value.trim()
-                        : "";
-
-                const contact =
-                    registerEmail
-                        ? registerEmail.value.trim()
-                        : "";
-
-                const password =
-                    registerPassword
-                        ? registerPassword.value
-                        : "";
-
-                const confirm =
-                    confirmPassword
-                        ? confirmPassword.value
-                        : "";
-
-
-                /* -----------------------------------------
-                   NAME
-                ----------------------------------------- */
-
-                if (name.length < 2) {
-
-                    showMessage(
-                        registerMessage,
-                        "Please enter your full name.",
-                        "error"
+                    panel.classList.add(
+                        "hidden"
                     );
-
-                    return;
 
                 }
-
-
-                /* -----------------------------------------
-                   EMAIL / MOBILE
-                ----------------------------------------- */
-
-                if (!isValidContact(contact)) {
-
-                    showMessage(
-                        registerMessage,
-                        "Please enter a valid email address or mobile number.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   PASSWORD
-                ----------------------------------------- */
-
-                if (password.length < 6) {
-
-                    showMessage(
-                        registerMessage,
-                        "Password must contain at least 6 characters.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   CONFIRM PASSWORD
-                ----------------------------------------- */
-
-                if (password !== confirm) {
-
-                    showMessage(
-                        registerMessage,
-                        "Passwords do not match.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   GET USERS
-                ----------------------------------------- */
-
-                const users =
-                    getUsers();
-
-                const normalizedContact =
-                    normalizeContact(
-                        contact
-                    );
-
-
-                /* -----------------------------------------
-                   DUPLICATE ACCOUNT
-                ----------------------------------------- */
-
-                const existingUser =
-                    users.find(
-                        function (user) {
-
-                            return (
-                                normalizeContact(
-                                    user.contact
-                                ) ===
-                                normalizedContact
-                            );
-
-                        }
-                    );
-
-
-                if (existingUser) {
-
-                    showMessage(
-                        registerMessage,
-                        "An account already exists with this email or mobile number.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   CREATE USER
-                ----------------------------------------- */
-
-                const newUser = {
-
-                    id:
-                        Date.now().toString(),
-
-                    name:
-                        name,
-
-                    contact:
-                        contact,
-
-                    password:
-                        password,
-
-                    profile: {
-
-                        name:
-                            name,
-
-                        contact:
-                            contact
-
-                    },
-
-                    address: {
-
-                        name: "",
-
-                        phone: "",
-
-                        line: "",
-
-                        city: "",
-
-                        state: "",
-
-                        pincode: ""
-
-                    },
-
-                    orders: [],
-
-                    createdAt:
-                        new Date().toISOString()
-
-                };
-
-
-                users.push(
-                    newUser
-                );
-
-
-                const saved =
-                    saveUsers(users);
-
-
-                if (!saved) {
-
-                    showMessage(
-                        registerMessage,
-                        "Account could not be saved. Please try again.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   SUCCESS
-                ----------------------------------------- */
-
-                showMessage(
-                    registerMessage,
-                    "Account created successfully. You can now login.",
-                    "success"
-                );
-
-
-                registerForm.reset();
-
-
-                setTimeout(
-                    function () {
-
-                        showLogin();
-
-                        if (loginEmail) {
-
-                            loginEmail.value =
-                                contact;
-
-                        }
-
-                        showMessage(
-                            loginMessage,
-                            "Your account has been created. Please login.",
-                            "success"
-                        );
-
-                    },
-                    1200
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       LOGIN
-    ===================================================== */
-
-    if (loginForm) {
-
-        loginForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-                clearMessage(
-                    loginMessage
-                );
-
-
-                const contact =
-                    loginEmail
-                        ? loginEmail.value.trim()
-                        : "";
-
-                const password =
-                    loginPassword
-                        ? loginPassword.value
-                        : "";
-
-
-                if (!contact || !password) {
-
-                    showMessage(
-                        loginMessage,
-                        "Please enter your email/mobile and password.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                const users =
-                    getUsers();
-
-                const normalizedContact =
-                    normalizeContact(
-                        contact
-                    );
-
-
-                const user =
-                    users.find(
-                        function (account) {
-
-                            return (
-                                normalizeContact(
-                                    account.contact
-                                ) ===
-                                normalizedContact
-                                &&
-                                account.password ===
-                                password
-                            );
-
-                        }
-                    );
-
-
-                if (!user) {
-
-                    showMessage(
-                        loginMessage,
-                        "Invalid email/mobile number or password.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   SAVE LOGIN SESSION
-                ----------------------------------------- */
-
-                saveCurrentUser(user);
-
-
-                showMessage(
-                    loginMessage,
-                    "Login successful.",
-                    "success"
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        loginForm.reset();
-
-                        showDashboard(
-                            user
-                        );
-
-                    },
-                    500
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       LOGOUT
-    ===================================================== */
-
-    if (logoutBtn) {
-
-        logoutBtn.addEventListener(
-            "click",
-            function () {
-
-                clearCurrentUser();
-
-                closeAllPanels();
-
-
-                if (loginForm) {
-                    loginForm.reset();
-                }
-
-
-                showLogin();
-
-
-                showMessage(
-                    loginMessage,
-                    "You have been logged out successfully.",
-                    "success"
-                );
-
-            }
-        );
-
+            );
     }
 
 
@@ -1060,31 +787,41 @@ document.addEventListener("DOMContentLoaded", function () {
        DASHBOARD CARDS
     ===================================================== */
 
-    dashboardCards.forEach(
-        function (card) {
+    document
+        .querySelectorAll(
+            ".dashboard-card"
+        )
+        .forEach(
+            function (card) {
 
-            card.addEventListener(
-                "click",
-                function () {
+                card.addEventListener(
+                    "click",
+                    function () {
 
-                    const panelId =
-                        card.getAttribute(
-                            "data-panel"
+                        const panelId =
+                            card.getAttribute(
+                                "data-panel"
+                            );
+
+
+                        if (!panelId) {
+                            return;
+                        }
+
+
+                        openPanel(
+                            panelId
                         );
 
-                    openPanel(
-                        panelId
-                    );
+                    }
+                );
 
-                }
-            );
-
-        }
-    );
+            }
+        );
 
 
     /* =====================================================
-       OPEN DASHBOARD PANEL
+       OPEN PANEL
     ===================================================== */
 
     function openPanel(panelId) {
@@ -1108,37 +845,40 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-        setTimeout(
-            function () {
-
-                panel.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-
-            },
-            100
-        );
-
-    }
+        const user =
+            refreshCurrentUserFromUsers();
 
 
-    /* =====================================================
-       CLOSE ALL PANELS
-    ===================================================== */
+        if (!user) {
+            return;
+        }
 
-    function closeAllPanels() {
 
-        dashboardPanels.forEach(
-            function (panel) {
+        if (
+            panelId ===
+            "ordersPanel"
+        ) {
 
-                panel.classList.add(
-                    "hidden"
-                );
+            loadOrders(user);
+        }
 
-            }
-        );
 
+        if (
+            panelId ===
+            "profilePanel"
+        ) {
+
+            loadProfile(user);
+        }
+
+
+        if (
+            panelId ===
+            "addressPanel"
+        ) {
+
+            loadAddress(user);
+        }
     }
 
 
@@ -1146,918 +886,72 @@ document.addEventListener("DOMContentLoaded", function () {
        CLOSE PANEL BUTTONS
     ===================================================== */
 
-    closePanelButtons.forEach(
-        function (button) {
+    document
+        .querySelectorAll(
+            ".close-panel"
+        )
+        .forEach(
+            function (button) {
 
-            button.addEventListener(
-                "click",
-                function () {
+                button.addEventListener(
+                    "click",
+                    function () {
 
-                    closeAllPanels();
+                        closeAllPanels();
 
-                }
-            );
+                    }
+                );
 
-        }
-    );
-
-
-    /* =====================================================
-       LOAD PROFILE
-    ===================================================== */
-
-    function loadProfile(user) {
-
-        if (!user) {
-            return;
-        }
-
-
-        if (profileName) {
-
-            profileName.value =
-                user.profile?.name ||
-                user.name ||
-                "";
-
-        }
-
-
-        if (profileContact) {
-
-            profileContact.value =
-                user.profile?.contact ||
-                user.contact ||
-                "";
-
-        }
-
-    }
+            }
+        );
 
 
     /* =====================================================
-       SAVE PROFILE
+       REGISTER
     ===================================================== */
 
-    if (profileForm) {
+    if (registerForm) {
 
-        profileForm.addEventListener(
+        registerForm.addEventListener(
             "submit",
             function (event) {
 
                 event.preventDefault();
 
-                clearMessage(
-                    profileMessage
-                );
-
-
-                const user =
-                    getCurrentUser();
-
-
-                if (!user) {
-
-                    showMessage(
-                        profileMessage,
-                        "Please login first.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
 
                 const name =
-                    profileName
-                        ? profileName.value.trim()
-                        : "";
+                    registerName.value.trim();
+
 
                 const contact =
-                    profileContact
-                        ? profileContact.value.trim()
-                        : "";
+                    registerEmail.value.trim();
 
 
-                /* -----------------------------------------
-                   VALIDATION
-                ----------------------------------------- */
+                const password =
+                    registerPassword.value;
+
+
+                const confirm =
+                    confirmPassword.value;
+
+
+                showMessage(
+                    registerMessage,
+                    "",
+                    ""
+                );
+
 
                 if (name.length < 2) {
 
                     showMessage(
-                        profileMessage,
-                        "Please enter a valid name.",
+                        registerMessage,
+                        "Please enter your full name.",
                         "error"
                     );
 
                     return;
-
                 }
-
-
-                if (!isValidContact(contact)) {
-
-                    showMessage(
-                        profileMessage,
-                        "Please enter a valid email or mobile number.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                const users =
-                    getUsers();
-
-
-                const index =
-                    users.findIndex(
-                        function (account) {
-
-                            return (
-                                account.id ===
-                                user.id
-                            );
-
-                        }
-                    );
-
-
-                if (index === -1) {
-
-                    showMessage(
-                        profileMessage,
-                        "Account could not be found.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   DUPLICATE CONTACT
-                ----------------------------------------- */
-
-                const duplicate =
-                    users.find(
-                        function (account) {
-
-                            return (
-                                account.id !==
-                                user.id
-                                &&
-                                normalizeContact(
-                                    account.contact
-                                ) ===
-                                normalizeContact(
-                                    contact
-                                )
-                            );
-
-                        }
-                    );
-
-
-                if (duplicate) {
-
-                    showMessage(
-                        profileMessage,
-                        "This email or mobile number is already used by another account.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   UPDATE USER
-                ----------------------------------------- */
-
-                users[index].name =
-                    name;
-
-                users[index].contact =
-                    contact;
-
-
-                users[index].profile = {
-
-                    name:
-                        name,
-
-                    contact:
-                        contact
-
-                };
-
-
-                const saved =
-                    saveUsers(users);
-
-
-                if (!saved) {
-
-                    showMessage(
-                        profileMessage,
-                        "Profile could not be saved. Please try again.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                saveCurrentUser(
-                    users[index]
-                );
-
-
-                if (welcomeUser) {
-
-                    welcomeUser.textContent =
-                        "Welcome, " +
-                        name +
-                        "!";
-
-                }
-
-
-                showMessage(
-                    profileMessage,
-                    "Profile updated successfully.",
-                    "success"
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       LOAD ADDRESS
-    ===================================================== */
-
-    function loadAddress(user) {
-
-        if (
-            !user ||
-            !user.address
-        ) {
-            return;
-        }
-
-
-        if (addressName) {
-
-            addressName.value =
-                user.address.name ||
-                "";
-
-        }
-
-
-        if (addressPhone) {
-
-            addressPhone.value =
-                user.address.phone ||
-                "";
-
-        }
-
-
-        if (addressLine) {
-
-            addressLine.value =
-                user.address.line ||
-                "";
-
-        }
-
-
-        if (addressCity) {
-
-            addressCity.value =
-                user.address.city ||
-                "";
-
-        }
-
-
-        if (addressState) {
-
-            addressState.value =
-                user.address.state ||
-                "";
-
-        }
-
-
-        if (addressPincode) {
-
-            addressPincode.value =
-                user.address.pincode ||
-                "";
-
-        }
-
-    }
-
-
-    /* =====================================================
-       SAVE ADDRESS
-    ===================================================== */
-
-    if (addressForm) {
-
-        addressForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-                clearMessage(
-                    addressMessage
-                );
-
-
-                const user =
-                    getCurrentUser();
-
-
-                if (!user) {
-
-                    showMessage(
-                        addressMessage,
-                        "Please login first.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                const name =
-                    addressName
-                        ? addressName.value.trim()
-                        : "";
-
-                const phone =
-                    addressPhone
-                        ? addressPhone.value.trim()
-                        : "";
-
-                const line =
-                    addressLine
-                        ? addressLine.value.trim()
-                        : "";
-
-                const city =
-                    addressCity
-                        ? addressCity.value.trim()
-                        : "";
-
-                const state =
-                    addressState
-                        ? addressState.value.trim()
-                        : "";
-
-                const pincode =
-                    addressPincode
-                        ? addressPincode.value.trim()
-                        : "";
-
-
-                /* -----------------------------------------
-                   REQUIRED FIELDS
-                ----------------------------------------- */
-
-                if (
-                    !name ||
-                    !phone ||
-                    !line ||
-                    !city ||
-                    !state ||
-                    !pincode
-                ) {
-
-                    showMessage(
-                        addressMessage,
-                        "Please fill in all address fields.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   PHONE VALIDATION
-                ----------------------------------------- */
-
-                if (!isMobile(phone)) {
-
-                    showMessage(
-                        addressMessage,
-                        "Please enter a valid mobile number.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   PINCODE VALIDATION
-                ----------------------------------------- */
-
-                if (
-                    !/^[0-9]{6}$/.test(
-                        pincode
-                    )
-                ) {
-
-                    showMessage(
-                        addressMessage,
-                        "Please enter a valid 6-digit pincode.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                const users =
-                    getUsers();
-
-
-                const index =
-                    users.findIndex(
-                        function (account) {
-
-                            return (
-                                account.id ===
-                                user.id
-                            );
-
-                        }
-                    );
-
-
-                if (index === -1) {
-
-                    showMessage(
-                        addressMessage,
-                        "Account could not be found.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   SAVE ADDRESS
-                ----------------------------------------- */
-
-                users[index].address = {
-
-                    name:
-                        name,
-
-                    phone:
-                        phone,
-
-                    line:
-                        line,
-
-                    city:
-                        city,
-
-                    state:
-                        state,
-
-                    pincode:
-                        pincode
-
-                };
-
-
-                const saved =
-                    saveUsers(users);
-
-
-                if (!saved) {
-
-                    showMessage(
-                        addressMessage,
-                        "Address could not be saved. Please try again.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                saveCurrentUser(
-                    users[index]
-                );
-
-
-                showMessage(
-                    addressMessage,
-                    "Delivery address saved successfully.",
-                    "success"
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       CHANGE PASSWORD
-    ===================================================== */
-
-    if (passwordForm) {
-
-        passwordForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-                clearMessage(
-                    passwordMessage
-                );
-
-
-                const user =
-                    getCurrentUser();
-
-
-                if (!user) {
-
-                    showMessage(
-                        passwordMessage,
-                        "Please login first.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                const current =
-                    currentPassword
-                        ? currentPassword.value
-                        : "";
-
-                const newPass =
-                    newPassword
-                        ? newPassword.value
-                        : "";
-
-                const confirm =
-                    confirmNewPassword
-                        ? confirmNewPassword.value
-                        : "";
-
-
-                /* -----------------------------------------
-                   CURRENT PASSWORD
-                ----------------------------------------- */
-
-                if (
-                    current !==
-                    user.password
-                ) {
-
-                    showMessage(
-                        passwordMessage,
-                        "Current password is incorrect.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   NEW PASSWORD
-                ----------------------------------------- */
-
-                if (
-                    newPass.length < 6
-                ) {
-
-                    showMessage(
-                        passwordMessage,
-                        "New password must contain at least 6 characters.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   CONFIRM PASSWORD
-                ----------------------------------------- */
-
-                if (
-                    newPass !==
-                    confirm
-                ) {
-
-                    showMessage(
-                        passwordMessage,
-                        "New passwords do not match.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   DIFFERENT PASSWORD
-                ----------------------------------------- */
-
-                if (
-                    newPass ===
-                    current
-                ) {
-
-                    showMessage(
-                        passwordMessage,
-                        "New password must be different from your current password.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                const users =
-                    getUsers();
-
-
-                const index =
-                    users.findIndex(
-                        function (account) {
-
-                            return (
-                                account.id ===
-                                user.id
-                            );
-
-                        }
-                    );
-
-
-                if (index === -1) {
-
-                    showMessage(
-                        passwordMessage,
-                        "Account could not be found.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   UPDATE PASSWORD
-                ----------------------------------------- */
-
-                users[index].password =
-                    newPass;
-
-
-                const saved =
-                    saveUsers(users);
-
-
-                if (!saved) {
-
-                    showMessage(
-                        passwordMessage,
-                        "Password could not be updated. Please try again.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                saveCurrentUser(
-                    users[index]
-                );
-
-
-                passwordForm.reset();
-
-
-                showMessage(
-                    passwordMessage,
-                    "Password updated successfully.",
-                    "success"
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       OPEN FORGOT PASSWORD MODAL
-    ===================================================== */
-
-    if (forgotPasswordBtn) {
-
-        forgotPasswordBtn.addEventListener(
-            "click",
-            function () {
-
-                if (!forgotModal) {
-                    return;
-                }
-
-
-                forgotModal.classList.remove(
-                    "hidden"
-                );
-
-
-                clearMessage(
-                    forgotMessage
-                );
-
-
-                if (forgotForm) {
-                    forgotForm.reset();
-                }
-
-
-                setTimeout(
-                    function () {
-
-                        if (forgotContact) {
-                            forgotContact.focus();
-                        }
-
-                    },
-                    100
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       CLOSE FORGOT PASSWORD MODAL
-    ===================================================== */
-
-    function closeForgotPasswordModal() {
-
-        if (!forgotModal) {
-            return;
-        }
-
-
-        forgotModal.classList.add(
-            "hidden"
-        );
-
-
-        clearMessage(
-            forgotMessage
-        );
-
-    }
-
-
-    if (closeForgotModal) {
-
-        closeForgotModal.addEventListener(
-            "click",
-            function () {
-
-                closeForgotPasswordModal();
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       MODAL OVERLAY
-    ===================================================== */
-
-    const forgotOverlay =
-        document.querySelector(
-            ".modal-overlay"
-        );
-
-
-    if (forgotOverlay) {
-
-        forgotOverlay.addEventListener(
-            "click",
-            function () {
-
-                closeForgotPasswordModal();
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       ESCAPE KEY
-    ===================================================== */
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (
-                event.key !==
-                "Escape"
-            ) {
-                return;
-            }
-
-
-            if (
-                forgotModal &&
-                !forgotModal.classList.contains(
-                    "hidden"
-                )
-            ) {
-
-                closeForgotPasswordModal();
-
-            }
-
-
-            closeAllPanels();
-
-        }
-    );
-
-
-    /* =====================================================
-       FORGOT PASSWORD
-    ===================================================== */
-
-    if (forgotForm) {
-
-        forgotForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-                clearMessage(
-                    forgotMessage
-                );
-
-
-                const contact =
-                    forgotContact
-                        ? forgotContact.value.trim()
-                        : "";
 
 
                 if (
@@ -2067,13 +961,215 @@ document.addEventListener("DOMContentLoaded", function () {
                 ) {
 
                     showMessage(
-                        forgotMessage,
-                        "Please enter a valid email address or mobile number.",
+                        registerMessage,
+                        "Please enter a valid email or mobile number.",
                         "error"
                     );
 
                     return;
+                }
 
+
+                if (
+                    password.length < 6
+                ) {
+
+                    showMessage(
+                        registerMessage,
+                        "Password must contain at least 6 characters.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    password !== confirm
+                ) {
+
+                    showMessage(
+                        registerMessage,
+                        "Passwords do not match.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                const users =
+                    getUsers();
+
+
+                const normalizedContact =
+                    normalizeContact(
+                        contact
+                    );
+
+
+                const existingUser =
+                    users.find(
+                        function (user) {
+
+                            return (
+                                normalizeContact(
+                                    user.contact ||
+                                    user.email
+                                ) ===
+                                normalizedContact
+                            );
+
+                        }
+                    );
+
+
+                if (existingUser) {
+
+                    showMessage(
+                        registerMessage,
+                        "An account with this email or mobile number already exists.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* Create new account */
+
+                const newUser = {
+
+                    id:
+                        Date.now().toString(),
+
+                    name:
+                        name,
+
+                    contact:
+                        contact,
+
+                    password:
+                        password,
+
+                    profile: {
+
+                        name:
+                            name,
+
+                        contact:
+                            contact
+                    },
+
+                    address: {
+
+                        name: "",
+                        phone: "",
+                        line: "",
+                        city: "",
+                        state: "",
+                        pincode: ""
+                    },
+
+                    orders: [],
+
+                    createdAt:
+                        new Date().toISOString()
+                };
+
+
+                users.push(
+                    newUser
+                );
+
+
+                if (
+                    !saveUsers(users)
+                ) {
+
+                    showMessage(
+                        registerMessage,
+                        "Unable to create your account. Please try again.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                saveCurrentUser(
+                    newUser
+                );
+
+
+                showMessage(
+                    registerMessage,
+                    "Account created successfully.",
+                    "success"
+                );
+
+
+                registerForm.reset();
+
+
+                setTimeout(
+                    function () {
+
+                        showDashboard(
+                            newUser
+                        );
+
+                    },
+                    400
+                );
+
+            }
+        );
+    }
+
+
+    /* =====================================================
+       LOGIN
+    ===================================================== */
+
+    if (loginForm) {
+
+        loginForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const contact =
+                    loginEmail.value.trim();
+
+
+                const password =
+                    loginPassword.value;
+
+
+                if (!contact) {
+
+                    showMessage(
+                        loginMessage,
+                        "Please enter your email or mobile number.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (!password) {
+
+                    showMessage(
+                        loginMessage,
+                        "Please enter your password.",
+                        "error"
+                    );
+
+                    return;
                 }
 
 
@@ -2093,7 +1189,884 @@ document.addEventListener("DOMContentLoaded", function () {
 
                             return (
                                 normalizeContact(
-                                    account.contact
+                                    account.contact ||
+                                    account.email
+                                ) ===
+                                normalizedContact
+                            );
+
+                        }
+                    );
+
+
+                if (!user) {
+
+                    showMessage(
+                        loginMessage,
+                        "Account not found. Please check your email or mobile number.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    user.password !==
+                    password
+                ) {
+
+                    showMessage(
+                        loginMessage,
+                        "Incorrect password. Please try again.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    !Array.isArray(
+                        user.orders
+                    )
+                ) {
+
+                    user.orders = [];
+                }
+
+
+                saveCurrentUser(
+                    user
+                );
+
+
+                showMessage(
+                    loginMessage,
+                    "Login successful.",
+                    "success"
+                );
+
+
+                loginForm.reset();
+
+
+                setTimeout(
+                    function () {
+
+                        showDashboard(
+                            user
+                        );
+
+                    },
+                    300
+                );
+
+            }
+        );
+    }
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    if (logoutBtn) {
+
+        logoutBtn.addEventListener(
+            "click",
+            function () {
+
+                clearCurrentUser();
+
+                closeAllPanels();
+
+                showLogin();
+
+
+                showMessage(
+                    loginMessage,
+                    "You have been logged out successfully.",
+                    "success"
+                );
+
+            }
+        );
+    }
+
+
+    /* =====================================================
+       SHOW REGISTER
+    ===================================================== */
+
+    if (showRegisterBtn) {
+
+        showRegisterBtn.addEventListener(
+            "click",
+            function () {
+
+                showRegister();
+
+            }
+        );
+    }
+
+
+    /* =====================================================
+       BACK TO LOGIN
+    ===================================================== */
+
+    if (backToLoginBtn) {
+
+        backToLoginBtn.addEventListener(
+            "click",
+            function () {
+
+                showLogin();
+
+            }
+        );
+    }
+
+
+    /* =====================================================
+       PROFILE
+    ===================================================== */
+
+    function loadProfile(user) {
+
+        if (!user) {
+            return;
+        }
+
+
+        const profile =
+            user.profile || {};
+
+
+        if (profileName) {
+
+            profileName.value =
+                profile.name ||
+                user.name ||
+                "";
+        }
+
+
+        if (profileContact) {
+
+            profileContact.value =
+                profile.contact ||
+                user.contact ||
+                user.email ||
+                "";
+        }
+    }
+
+
+    if (profileForm) {
+
+        profileForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const currentUser =
+                    getCurrentUser();
+
+
+                if (!currentUser) {
+                    return;
+                }
+
+
+                const name =
+                    profileName.value.trim();
+
+
+                const contact =
+                    profileContact.value.trim();
+
+
+                if (name.length < 2) {
+
+                    showMessage(
+                        profileMessage,
+                        "Please enter your full name.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    !isValidContact(
+                        contact
+                    )
+                ) {
+
+                    showMessage(
+                        profileMessage,
+                        "Please enter a valid email or mobile number.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                const users =
+                    getUsers();
+
+
+                const userIndex =
+                    findUserIndex(
+                        users,
+                        currentUser
+                    );
+
+
+                if (userIndex === -1) {
+
+                    showMessage(
+                        profileMessage,
+                        "Account could not be found.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                const normalizedContact =
+                    normalizeContact(
+                        contact
+                    );
+
+
+                const duplicate =
+                    users.some(
+                        function (
+                            user,
+                            index
+                        ) {
+
+                            if (
+                                index ===
+                                userIndex
+                            ) {
+                                return false;
+                            }
+
+
+                            return (
+                                normalizeContact(
+                                    user.contact ||
+                                    user.email
+                                ) ===
+                                normalizedContact
+                            );
+
+                        }
+                    );
+
+
+                if (duplicate) {
+
+                    showMessage(
+                        profileMessage,
+                        "This email or mobile number is already used by another account.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                users[userIndex].name =
+                    name;
+
+
+                users[userIndex].contact =
+                    contact;
+
+
+                if (
+                    !users[userIndex].profile
+                ) {
+
+                    users[userIndex].profile =
+                        {};
+                }
+
+
+                users[userIndex]
+                    .profile
+                    .name =
+                    name;
+
+
+                users[userIndex]
+                    .profile
+                    .contact =
+                    contact;
+
+
+                if (
+                    !saveUsers(users)
+                ) {
+
+                    showMessage(
+                        profileMessage,
+                        "Unable to save changes.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                saveCurrentUser(
+                    users[userIndex]
+                );
+
+
+                if (welcomeUser) {
+
+                    welcomeUser.textContent =
+                        "Welcome, " + name;
+                }
+
+
+                showMessage(
+                    profileMessage,
+                    "Profile updated successfully.",
+                    "success"
+                );
+
+            }
+        );
+    }
+
+
+    /* =====================================================
+       ADDRESS
+    ===================================================== */
+
+    function loadAddress(user) {
+
+        if (!user) {
+            return;
+        }
+
+
+        const address =
+            user.address || {};
+
+
+        if (addressName) {
+
+            addressName.value =
+                address.name || "";
+        }
+
+
+        if (addressPhone) {
+
+            addressPhone.value =
+                address.phone || "";
+        }
+
+
+        if (addressLine) {
+
+            addressLine.value =
+                address.line || "";
+        }
+
+
+        if (addressCity) {
+
+            addressCity.value =
+                address.city || "";
+        }
+
+
+        if (addressState) {
+
+            addressState.value =
+                address.state || "";
+        }
+
+
+        if (addressPincode) {
+
+            addressPincode.value =
+                address.pincode || "";
+        }
+    }
+
+
+    if (addressForm) {
+
+        addressForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const currentUser =
+                    getCurrentUser();
+
+
+                if (!currentUser) {
+                    return;
+                }
+
+
+                const users =
+                    getUsers();
+
+
+                const userIndex =
+                    findUserIndex(
+                        users,
+                        currentUser
+                    );
+
+
+                if (userIndex === -1) {
+
+                    showMessage(
+                        addressMessage,
+                        "Account could not be found.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                const name =
+                    addressName.value.trim();
+
+
+                const phone =
+                    addressPhone.value.trim();
+
+
+                const line =
+                    addressLine.value.trim();
+
+
+                const city =
+                    addressCity.value.trim();
+
+
+                const state =
+                    addressState.value.trim();
+
+
+                const pincode =
+                    addressPincode.value.trim();
+
+
+                if (!name) {
+
+                    showMessage(
+                        addressMessage,
+                        "Please enter the full name.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (!phone) {
+
+                    showMessage(
+                        addressMessage,
+                        "Please enter the mobile number.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (!line) {
+
+                    showMessage(
+                        addressMessage,
+                        "Please enter your address.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (!city) {
+
+                    showMessage(
+                        addressMessage,
+                        "Please enter your city.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (!state) {
+
+                    showMessage(
+                        addressMessage,
+                        "Please enter your state.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (!pincode) {
+
+                    showMessage(
+                        addressMessage,
+                        "Please enter your pincode.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                users[userIndex].address = {
+
+                    name:
+                        name,
+
+                    phone:
+                        phone,
+
+                    line:
+                        line,
+
+                    city:
+                        city,
+
+                    state:
+                        state,
+
+                    pincode:
+                        pincode
+                };
+
+
+                if (
+                    !saveUsers(users)
+                ) {
+
+                    showMessage(
+                        addressMessage,
+                        "Unable to save address.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                saveCurrentUser(
+                    users[userIndex]
+                );
+
+
+                showMessage(
+                    addressMessage,
+                    "Address saved successfully.",
+                    "success"
+                );
+
+            }
+        );
+    }
+
+
+    /* =====================================================
+       CHANGE PASSWORD
+    ===================================================== */
+
+    if (passwordForm) {
+
+        passwordForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const currentUser =
+                    getCurrentUser();
+
+
+                if (!currentUser) {
+                    return;
+                }
+
+
+                const oldPassword =
+                    currentPassword.value;
+
+
+                const newPass =
+                    newPassword.value;
+
+
+                const confirmPass =
+                    confirmNewPassword.value;
+
+
+                if (!oldPassword) {
+
+                    showMessage(
+                        passwordMessage,
+                        "Please enter your current password.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    oldPassword !==
+                    currentUser.password
+                ) {
+
+                    showMessage(
+                        passwordMessage,
+                        "Current password is incorrect.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    newPass.length < 6
+                ) {
+
+                    showMessage(
+                        passwordMessage,
+                        "New password must contain at least 6 characters.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    newPass !==
+                    confirmPass
+                ) {
+
+                    showMessage(
+                        passwordMessage,
+                        "New passwords do not match.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                const users =
+                    getUsers();
+
+
+                const userIndex =
+                    findUserIndex(
+                        users,
+                        currentUser
+                    );
+
+
+                if (userIndex === -1) {
+
+                    showMessage(
+                        passwordMessage,
+                        "Account could not be found.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                users[userIndex].password =
+                    newPass;
+
+
+                if (
+                    !saveUsers(users)
+                ) {
+
+                    showMessage(
+                        passwordMessage,
+                        "Unable to update password.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                saveCurrentUser(
+                    users[userIndex]
+                );
+
+
+                passwordForm.reset();
+
+
+                showMessage(
+                    passwordMessage,
+                    "Password updated successfully.",
+                    "success"
+                );
+
+            }
+        );
+    }
+
+
+    /* =====================================================
+       FORGOT PASSWORD
+    ===================================================== */
+
+    if (forgotPasswordBtn) {
+
+        forgotPasswordBtn.addEventListener(
+            "click",
+            function () {
+
+                if (!forgotModal) {
+                    return;
+                }
+
+
+                forgotModal.classList.remove(
+                    "hidden"
+                );
+
+
+                if (forgotContact) {
+                    forgotContact.focus();
+                }
+
+            }
+        );
+    }
+
+
+    if (closeForgotModal) {
+
+        closeForgotModal.addEventListener(
+            "click",
+            function () {
+
+                if (forgotModal) {
+
+                    forgotModal.classList.add(
+                        "hidden"
+                    );
+                }
+
+            }
+        );
+    }
+
+
+    if (forgotModal) {
+
+        const overlay =
+            forgotModal.querySelector(
+                ".modal-overlay"
+            );
+
+
+        if (overlay) {
+
+            overlay.addEventListener(
+                "click",
+                function () {
+
+                    forgotModal.classList.add(
+                        "hidden"
+                    );
+
+                }
+            );
+        }
+    }
+
+
+    if (forgotForm) {
+
+        forgotForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const contact =
+                    forgotContact.value.trim();
+
+
+                if (
+                    !isValidContact(
+                        contact
+                    )
+                ) {
+
+                    showMessage(
+                        forgotMessage,
+                        "Please enter a valid email or mobile number.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                const users =
+                    getUsers();
+
+
+                const normalizedContact =
+                    normalizeContact(
+                        contact
+                    );
+
+
+                const user =
+                    users.find(
+                        function (account) {
+
+                            return (
+                                normalizeContact(
+                                    account.contact ||
+                                    account.email
                                 ) ===
                                 normalizedContact
                             );
@@ -2111,32 +2084,1145 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
 
                     return;
-
                 }
 
 
-                /*
-                   FRONTEND DEMO ONLY
-
-                   Do not display the password.
-
-                   Real password recovery should use:
-                   - Backend
-                   - OTP
-                   - Email verification
-                   - Password reset token
-                */
-
                 showMessage(
                     forgotMessage,
-                    "Account found. Password recovery will be available after backend and OTP setup.",
+                    "Your account was found. Secure password recovery requires backend verification.",
                     "success"
                 );
 
             }
         );
-
     }
+
+
+    /* =====================================================
+       HTML ESCAPE
+    ===================================================== */
+
+    function escapeHTML(value) {
+
+        return String(
+            value ?? ""
+        )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+    }
+
+
+    /* =====================================================
+       PRICE FORMAT
+    ===================================================== */
+
+    function formatPrice(value) {
+
+        const number =
+            Number(value) || 0;
+
+
+        return (
+            "₹" +
+            number.toLocaleString(
+                "en-IN"
+            )
+        );
+    }
+
+
+    /* =====================================================
+       ORDER DATE
+    ===================================================== */
+
+    function formatOrderDate(value) {
+
+        if (!value) {
+            return "Date unavailable";
+        }
+
+
+        const date =
+            new Date(value);
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return "Date unavailable";
+        }
+
+
+        return date.toLocaleString(
+            "en-IN",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
+    }
+
+
+    /* =====================================================
+       LOAD ORDERS
+    ===================================================== */
+
+    function loadOrders(user) {
+
+        if (
+            !ordersPanel ||
+            !user
+        ) {
+            return;
+        }
+
+
+        const orders =
+            Array.isArray(user.orders)
+                ? user.orders
+                : [];
+
+
+        /*
+           Create a dedicated container
+           inside the existing orders panel.
+        */
+
+        let ordersContainer =
+            ordersPanel.querySelector(
+                ".orders-container"
+            );
+
+
+        if (!ordersContainer) {
+
+            ordersContainer =
+                document.createElement(
+                    "div"
+                );
+
+            ordersContainer.className =
+                "orders-container";
+
+            ordersPanel.appendChild(
+                ordersContainer
+            );
+        }
+
+
+        ordersContainer.innerHTML =
+            "";
+
+
+        const emptyState =
+            ordersPanel.querySelector(
+                ".empty-state"
+            );
+
+
+        /* =================================================
+           NO ORDERS
+        ================================================= */
+
+        if (orders.length === 0) {
+
+            if (emptyState) {
+
+                emptyState.style.display =
+                    "flex";
+            }
+
+
+            return;
+        }
+
+
+        /* =================================================
+           HAS ORDERS
+        ================================================= */
+
+        if (emptyState) {
+
+            emptyState.style.display =
+                "none";
+        }
+
+
+        orders.forEach(
+            function (order) {
+
+                const orderCard =
+                    createOrderCard(
+                        order
+                    );
+
+
+                ordersContainer.appendChild(
+                    orderCard
+                );
+
+            }
+        );
+    }
+
+
+    /* =====================================================
+       CREATE ORDER CARD
+    ===================================================== */
+
+    function createOrderCard(order) {
+
+        const card =
+            document.createElement(
+                "article"
+            );
+
+
+        card.className =
+            "order-card";
+
+
+        /* =================================================
+           BASIC ORDER DATA
+        ================================================= */
+
+        const orderId =
+            escapeHTML(
+                order.orderId ||
+                "N/A"
+            );
+
+
+        const orderDate =
+            formatOrderDate(
+                order.orderDate ||
+                order.timestamp
+            );
+
+
+        const status =
+            escapeHTML(
+                order.status ||
+                "Order Placed"
+            );
+
+
+        const paymentMethod =
+            String(
+                order.paymentMethod ||
+                "cod"
+            ).toLowerCase();
+
+
+        const paymentText =
+            paymentMethod === "online"
+                ? "Online Payment"
+                : "Cash on Delivery";
+
+
+        /* =================================================
+           CUSTOMER
+        ================================================= */
+
+        const customer =
+            order.customer || {};
+
+
+        const customerName =
+            escapeHTML(
+                customer.fullName ||
+                customer.name ||
+                ""
+            );
+
+
+        const customerPhone =
+            escapeHTML(
+                customer.phone ||
+                ""
+            );
+
+
+        const customerEmail =
+            escapeHTML(
+                customer.email ||
+                ""
+            );
+
+
+        /* =================================================
+           ADDRESS
+        ================================================= */
+
+        const address =
+            order.address || {};
+
+
+        const addressLine =
+            escapeHTML(
+                address.address ||
+                address.line ||
+                ""
+            );
+
+
+        const town =
+            escapeHTML(
+                address.town ||
+                address.city ||
+                ""
+            );
+
+
+        const state =
+            escapeHTML(
+                address.state ||
+                ""
+            );
+
+
+        const pincode =
+            escapeHTML(
+                address.pincode ||
+                ""
+            );
+
+
+        const landmark =
+            escapeHTML(
+                address.landmark ||
+                ""
+            );
+
+
+        /* =================================================
+           ITEMS
+        ================================================= */
+
+        const items =
+            Array.isArray(order.items)
+                ? order.items
+                : [];
+
+
+        let itemsHTML = "";
+
+
+        items.forEach(
+            function (item) {
+
+                const name =
+                    escapeHTML(
+                        item.name ||
+                        "Product"
+                    );
+
+
+                const variant =
+                    escapeHTML(
+                        item.variant ||
+                        ""
+                    );
+
+
+                const image =
+                    escapeHTML(
+                        item.image ||
+                        "logo.png"
+                    );
+
+
+                const quantity =
+                    Number(
+                        item.quantity
+                    ) || 1;
+
+
+                const price =
+                    Number(
+                        item.price
+                    ) || 0;
+
+
+                const originalPrice =
+                    Number(
+                        item.originalPrice
+                    ) || 0;
+
+
+                const itemTotal =
+                    price * quantity;
+
+
+                itemsHTML += `
+
+                    <div class="order-product">
+
+                        <div class="order-product-image">
+
+                            <img
+                                src="${image}"
+                                alt="${name}"
+                            >
+
+                        </div>
+
+
+                        <div class="order-product-info">
+
+                            <h4>
+                                ${name}
+                            </h4>
+
+                            ${
+                                variant
+                                    ? `
+                                        <span class="order-product-variant">
+                                            ${variant}
+                                        </span>
+                                    `
+                                    : ""
+                            }
+
+                            <div class="order-product-meta">
+
+                                <span>
+                                    Qty: ${quantity}
+                                </span>
+
+                                <span>
+                                    ${formatPrice(price)}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="order-product-total">
+
+                            ${
+                                originalPrice > price
+                                    ? `
+                                        <small>
+                                            ${formatPrice(
+                                                originalPrice *
+                                                quantity
+                                            )}
+                                        </small>
+                                    `
+                                    : ""
+                            }
+
+                            <strong>
+                                ${formatPrice(
+                                    itemTotal
+                                )}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                `;
+            }
+        );
+
+
+        if (!itemsHTML) {
+
+            itemsHTML = `
+
+                <div class="order-no-items">
+
+                    Order item information
+                    is unavailable.
+
+                </div>
+
+            `;
+        }
+
+
+        /* =================================================
+           TOTALS
+        ===================================================== */
+
+        const subtotal =
+            Number(
+                order.subtotal
+            ) || 0;
+
+
+        const delivery =
+            Number(
+                order.deliveryCharge
+            ) || 0;
+
+
+        const total =
+            Number(
+                order.total
+            ) ||
+            (
+                subtotal +
+                delivery
+            );
+
+
+        /* =================================================
+           ORDER NOTE
+        ===================================================== */
+
+        const orderNote =
+            escapeHTML(
+                order.orderNote ||
+                ""
+            );
+
+
+        /* =================================================
+           CARD HTML
+        ===================================================== */
+
+        card.innerHTML = `
+
+            <!-- =========================================
+                 ORDER HEADER
+            ========================================== -->
+
+            <div class="order-card-header">
+
+                <div class="order-header-left">
+
+                    <span class="order-label">
+                        ORDER
+                    </span>
+
+                    <h3>
+                        #${orderId}
+                    </h3>
+
+                    <p>
+                        ${orderDate}
+                    </p>
+
+                </div>
+
+
+                <div class="order-header-right">
+
+                    <span class="order-status">
+                        ${status}
+                    </span>
+
+                    <button
+                        type="button"
+                        class="order-details-btn"
+                    >
+
+                        <span>
+                            View Details
+                        </span>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================================
+                 QUICK SUMMARY
+            ========================================== -->
+
+            <div class="order-quick-summary">
+
+                <div>
+
+                    <span>
+                        Items
+                    </span>
+
+                    <strong>
+                        ${items.length}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Payment
+                    </span>
+
+                    <strong>
+                        ${paymentText}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Order Total
+                    </span>
+
+                    <strong>
+                        ${formatPrice(total)}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================================
+                 DETAILS
+            ========================================== -->
+
+            <div class="order-details hidden">
+
+
+                <!-- PRODUCTS -->
+
+                <div class="order-section">
+
+                    <div class="order-section-title">
+
+                        <i class="fa-solid fa-bag-shopping"></i>
+
+                        <h4>
+                            Ordered Products
+                        </h4>
+
+                    </div>
+
+
+                    <div class="order-products">
+
+                        ${itemsHTML}
+
+                    </div>
+
+                </div>
+
+
+                <!-- CUSTOMER -->
+
+                <div class="order-section">
+
+                    <div class="order-section-title">
+
+                        <i class="fa-regular fa-user"></i>
+
+                        <h4>
+                            Customer Information
+                        </h4>
+
+                    </div>
+
+
+                    <div class="order-info-grid">
+
+                        ${
+                            customerName
+                                ? `
+                                    <div class="order-info-item">
+
+                                        <span>
+                                            Full Name
+                                        </span>
+
+                                        <strong>
+                                            ${customerName}
+                                        </strong>
+
+                                    </div>
+                                `
+                                : ""
+                        }
+
+
+                        ${
+                            customerPhone
+                                ? `
+                                    <div class="order-info-item">
+
+                                        <span>
+                                            Mobile Number
+                                        </span>
+
+                                        <strong>
+                                            ${customerPhone}
+                                        </strong>
+
+                                    </div>
+                                `
+                                : ""
+                        }
+
+
+                        ${
+                            customerEmail
+                                ? `
+                                    <div class="order-info-item">
+
+                                        <span>
+                                            Email
+                                        </span>
+
+                                        <strong>
+                                            ${customerEmail}
+                                        </strong>
+
+                                    </div>
+                                `
+                                : ""
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <!-- ADDRESS -->
+
+                <div class="order-section">
+
+                    <div class="order-section-title">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <h4>
+                            Delivery Address
+                        </h4>
+
+                    </div>
+
+
+                    <div class="order-address">
+
+                        ${
+                            addressLine
+                                ? `
+                                    <p>
+                                        ${addressLine}
+                                    </p>
+                                `
+                                : ""
+                        }
+
+
+                        ${
+                            town
+                                ? `
+                                    <p>
+                                        ${town}
+
+                                        ${
+                                            state
+                                                ? `, ${state}`
+                                                : ""
+                                        }
+
+                                        ${
+                                            pincode
+                                                ? ` - ${pincode}`
+                                                : ""
+                                        }
+
+                                    </p>
+                                `
+                                : ""
+                        }
+
+
+                        ${
+                            landmark
+                                ? `
+                                    <p>
+                                        Landmark:
+                                        ${landmark}
+                                    </p>
+                                `
+                                : ""
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <!-- PAYMENT -->
+
+                <div class="order-section">
+
+                    <div class="order-section-title">
+
+                        <i class="fa-solid fa-credit-card"></i>
+
+                        <h4>
+                            Payment Information
+                        </h4>
+
+                    </div>
+
+
+                    <div class="order-payment-box">
+
+                        <span>
+                            Payment Method
+                        </span>
+
+                        <strong>
+                            ${paymentText}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ORDER NOTE -->
+
+                ${
+                    orderNote
+                        ? `
+                            <div class="order-section">
+
+                                <div class="order-section-title">
+
+                                    <i class="fa-regular fa-note-sticky"></i>
+
+                                    <h4>
+                                        Order Note
+                                    </h4>
+
+                                </div>
+
+                                <p class="order-note">
+                                    ${orderNote}
+                                </p>
+
+                            </div>
+                        `
+                        : ""
+                }
+
+
+                <!-- PRICE SUMMARY -->
+
+                <div class="order-price-summary">
+
+                    <div>
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong>
+                            ${formatPrice(
+                                subtotal
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Delivery
+                        </span>
+
+                        <strong>
+                            ${formatPrice(
+                                delivery
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="order-grand-total">
+
+                        <span>
+                            Grand Total
+                        </span>
+
+                        <strong>
+                            ${formatPrice(
+                                total
+                            )}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        /* =================================================
+           VIEW / HIDE DETAILS
+        ===================================================== */
+
+        const detailsButton =
+            card.querySelector(
+                ".order-details-btn"
+            );
+
+
+        const details =
+            card.querySelector(
+                ".order-details"
+            );
+
+
+        if (
+            detailsButton &&
+            details
+        ) {
+
+            detailsButton.addEventListener(
+                "click",
+                function () {
+
+                    const isHidden =
+                        details.classList.contains(
+                            "hidden"
+                        );
+
+
+                    const icon =
+                        detailsButton.querySelector(
+                            "i"
+                        );
+
+
+                    const text =
+                        detailsButton.querySelector(
+                            "span"
+                        );
+
+
+                    if (isHidden) {
+
+                        details.classList.remove(
+                            "hidden"
+                        );
+
+
+                        if (text) {
+
+                            text.textContent =
+                                "Hide Details";
+                        }
+
+
+                        if (icon) {
+
+                            icon.style.transform =
+                                "rotate(180deg)";
+                        }
+
+                    } else {
+
+                        details.classList.add(
+                            "hidden"
+                        );
+
+
+                        if (text) {
+
+                            text.textContent =
+                                "View Details";
+                        }
+
+
+                        if (icon) {
+
+                            icon.style.transform =
+                                "rotate(0deg)";
+                        }
+                    }
+
+                }
+            );
+        }
+
+
+        return card;
+    }
+
+
+    /* =====================================================
+       SAVE ORDER TO ACCOUNT
+
+       Checkout can use this function if needed.
+    ===================================================== */
+
+    window.saveOrderToAccount =
+        function (order) {
+
+            try {
+
+                if (!order) {
+                    return false;
+                }
+
+
+                const currentUser =
+                    getCurrentUser();
+
+
+                if (!currentUser) {
+                    return false;
+                }
+
+
+                const users =
+                    getUsers();
+
+
+                const userIndex =
+                    findUserIndex(
+                        users,
+                        currentUser
+                    );
+
+
+                if (userIndex === -1) {
+                    return false;
+                }
+
+
+                if (
+                    !Array.isArray(
+                        users[userIndex].orders
+                    )
+                ) {
+
+                    users[userIndex].orders =
+                        [];
+                }
+
+
+                const orderId =
+                    String(
+                        order.orderId ||
+                        ""
+                    ).trim();
+
+
+                /* Prevent duplicate */
+
+                if (orderId) {
+
+                    const exists =
+                        users[userIndex]
+                            .orders
+                            .some(
+                                function (
+                                    existingOrder
+                                ) {
+
+                                    return (
+                                        String(
+                                            existingOrder.orderId ||
+                                            ""
+                                        ).trim() ===
+                                        orderId
+                                    );
+
+                                }
+                            );
+
+
+                    if (exists) {
+
+                        saveCurrentUser(
+                            users[userIndex]
+                        );
+
+                        return true;
+                    }
+                }
+
+
+                /* Add newest order first */
+
+                users[userIndex]
+                    .orders
+                    .unshift(order);
+
+
+                if (
+                    !saveUsers(users)
+                ) {
+
+                    return false;
+                }
+
+
+                /* Update current user */
+
+                saveCurrentUser(
+                    users[userIndex]
+                );
+
+
+                /* Latest order */
+
+                localStorage.setItem(
+                    LATEST_ORDER_KEY,
+                    JSON.stringify(order)
+                );
+
+
+                return true;
+
+            } catch (error) {
+
+                console.error(
+                    "Unable to save order:",
+                    error
+                );
+
+                return false;
+            }
+        };
 
 
     /* =====================================================
@@ -2145,12 +3231,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateCartCount() {
 
-        const cartCount =
-            document.getElementById(
-                "cartCount"
-            );
-
-
         if (!cartCount) {
             return;
         }
@@ -2158,26 +3238,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
         try {
 
-            const savedCart =
+            const data =
                 localStorage.getItem(
                     CART_KEY
                 );
 
 
-            if (!savedCart) {
+            if (!data) {
 
                 cartCount.textContent =
                     "0";
 
                 return;
-
             }
 
 
             const cart =
-                JSON.parse(
-                    savedCart
-                );
+                JSON.parse(data);
 
 
             if (!Array.isArray(cart)) {
@@ -2186,7 +3263,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     "0";
 
                 return;
-
             }
 
 
@@ -2199,8 +3275,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         return (
                             total +
-                            Number(
-                                item.quantity || 0
+                            (
+                                Number(
+                                    item.quantity
+                                ) || 0
                             )
                         );
 
@@ -2210,49 +3288,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             cartCount.textContent =
-                totalQuantity;
+                String(
+                    totalQuantity
+                );
 
         } catch (error) {
 
-            console.error(
-                "Unable to read cart:",
-                error
-            );
-
             cartCount.textContent =
                 "0";
-
         }
-
     }
 
 
     /* =====================================================
-       CART STORAGE UPDATE
-    ===================================================== */
-
-    window.addEventListener(
-        "storage",
-        function (event) {
-
-            if (
-                event.key === CART_KEY
-            ) {
-
-                updateCartCount();
-
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       INITIAL ACCOUNT STATE
+       INITIAL STATE
     ===================================================== */
 
     const currentUser =
-        getCurrentUser();
+        refreshCurrentUserFromUsers();
 
 
     if (currentUser) {
@@ -2264,15 +3317,62 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
 
         showLogin();
-
     }
 
 
-    /* =====================================================
-       INITIAL CART COUNT
-    ===================================================== */
+    /* Initial cart count */
 
     updateCartCount();
 
+
+    /* =====================================================
+       STORAGE EVENT
+    ===================================================== */
+
+    window.addEventListener(
+        "storage",
+        function (event) {
+
+            if (
+                event.key === CART_KEY
+            ) {
+
+                updateCartCount();
+            }
+
+
+            if (
+                event.key === USERS_KEY ||
+                event.key === CURRENT_USER_KEY
+            ) {
+
+                const updatedUser =
+                    refreshCurrentUserFromUsers();
+
+
+                if (
+                    updatedUser &&
+                    dashboardSection &&
+                    !dashboardSection.classList.contains(
+                        "hidden"
+                    )
+                ) {
+
+                    loadOrders(
+                        updatedUser
+                    );
+
+                    loadProfile(
+                        updatedUser
+                    );
+
+                    loadAddress(
+                        updatedUser
+                    );
+                }
+            }
+
+        }
+    );
 
 });
