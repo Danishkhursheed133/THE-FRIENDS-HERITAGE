@@ -1,30 +1,6 @@
 /* =========================================================
    THE FRIENDS HERITAGE
    ACCOUNT.JS
-
-   Works with:
-   - account.html
-   - account.css
-   - checkout.js
-
-   Handles:
-   1. Login
-   2. Create Account
-   3. Password Visibility
-   4. Forgot Password
-   5. Dashboard
-   6. Profile
-   7. Address
-   8. Change Password
-   9. My Orders
-   10. Order Details
-   11. Logout
-   12. Cart Count
-   13. LocalStorage Synchronization
-
-   IMPORTANT:
-   This is a FRONTEND / LOCALSTORAGE account system.
-   Real authentication should be moved to a backend later.
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
