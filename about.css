@@ -1,0 +1,1691 @@
+/* =========================================================
+   THE FRIENDS HERITAGE
+   ABOUT PAGE — PREMIUM CIRCULAR IMAGE DESIGN
+   ========================================================= */
+
+
+/* =========================================================
+   ABOUT PAGE VARIABLES
+   ========================================================= */
+
+:root {
+    --about-dark: #263746;
+    --about-dark-2: #1d2a35;
+
+    --about-gold: #c49a27;
+    --about-gold-light: #e7cc78;
+    --about-gold-soft: #f1df9b;
+
+    --about-cream: #fbf7ed;
+    --about-cream-2: #f4ead7;
+
+    --about-white: #ffffff;
+
+    --about-text: #55565a;
+    --about-muted: #777;
+
+    --about-shadow:
+        0 18px 45px rgba(30, 40, 48, 0.15);
+
+    --about-shadow-heavy:
+        0 25px 65px rgba(25, 35, 42, 0.22);
+}
+
+
+/* =========================================================
+   GLOBAL ABOUT PAGE
+   ========================================================= */
+
+.about-intro,
+.our-story,
+.kashmir-heritage,
+.why-us,
+.about-cta {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-intro *,
+.our-story *,
+.kashmir-heritage *,
+.why-us *,
+.about-cta * {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SECTION LABEL
+   ========================================================= */
+
+.section-label {
+    display: inline-block;
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+
+    color: var(--about-gold);
+
+    margin-bottom: 14px;
+
+    position: relative;
+}
+
+
+/* =========================================================
+   GOLD DIVIDER
+   ========================================================= */
+
+.gold-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin: 8px 0 24px;
+}
+
+.gold-divider span {
+    width: 65px;
+    height: 1px;
+
+    background: linear-gradient(
+        to right,
+        transparent,
+        var(--about-gold)
+    );
+}
+
+.gold-divider span:last-child {
+    background: linear-gradient(
+        to left,
+        transparent,
+        var(--about-gold)
+    );
+}
+
+.gold-divider i {
+    color: var(--about-gold);
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   ABOUT INTRO
+   ========================================================= */
+
+.about-intro {
+    min-height: 760px;
+
+    padding: 110px 7% 100px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(220px, 1fr)
+        minmax(360px, 1.2fr)
+        minmax(220px, 1fr);
+
+    align-items: center;
+
+    gap: 55px;
+
+    background:
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(196, 154, 39, 0.08),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(196, 154, 39, 0.07),
+            transparent 28%
+        ),
+        var(--about-cream);
+}
+
+
+/* =========================================================
+   DECORATIVE BACKGROUND CIRCLES
+   ========================================================= */
+
+.about-intro::before,
+.about-intro::after {
+    content: "";
+    position: absolute;
+
+    border: 1px solid rgba(196, 154, 39, 0.16);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.about-intro::before {
+    width: 300px;
+    height: 300px;
+
+    top: -130px;
+    left: -120px;
+}
+
+.about-intro::after {
+    width: 240px;
+    height: 240px;
+
+    right: -90px;
+    bottom: -90px;
+}
+
+
+/* =========================================================
+   MAIN IMAGE FRAME
+   ========================================================= */
+
+.about-image {
+    position: relative;
+
+    width: min(100%, 360px);
+
+    margin: auto;
+
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    isolation: isolate;
+}
+
+
+/* GOLD OUTER FRAME */
+
+.about-image::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -15px;
+
+    border: 1px solid var(--about-gold);
+
+    border-radius: 46% 54% 52% 48% / 52% 47% 53% 48%;
+
+    transform: rotate(-4deg);
+
+    z-index: -1;
+
+    opacity: 0.8;
+
+    transition:
+        transform 0.7s ease,
+        border-radius 0.7s ease;
+}
+
+
+/* SECOND FRAME */
+
+.about-image::after {
+    content: "";
+
+    position: absolute;
+
+    inset: -7px;
+
+    border: 1px solid rgba(196, 154, 39, 0.35);
+
+    border-radius: 52% 48% 46% 54% / 48% 55% 45% 52%;
+
+    transform: rotate(4deg);
+
+    z-index: -1;
+
+    transition:
+        transform 0.7s ease,
+        border-radius 0.7s ease;
+}
+
+
+/* =========================================================
+   IMAGE ITSELF
+   ========================================================= */
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius:
+        48% 52% 50% 50% /
+        52% 47% 53% 48%;
+
+    border: 7px solid rgba(255, 255, 255, 0.95);
+
+    box-shadow:
+        0 18px 45px rgba(30, 40, 48, 0.18),
+        0 0 0 1px rgba(196, 154, 39, 0.25);
+
+    transition:
+        transform 0.7s cubic-bezier(.2,.8,.2,1),
+        border-radius 0.7s ease,
+        box-shadow 0.7s ease;
+}
+
+
+/* =========================================================
+   IMAGE HOVER
+   ========================================================= */
+
+.about-image:hover img {
+    transform: scale(1.045);
+
+    border-radius:
+        50% 50% 47% 53% /
+        48% 53% 47% 52%;
+
+    box-shadow:
+        0 25px 60px rgba(30, 40, 48, 0.25),
+        0 0 0 2px rgba(196, 154, 39, 0.35);
+}
+
+.about-image:hover::before {
+    transform: rotate(7deg) scale(1.02);
+
+    border-radius:
+        52% 48% 46% 54% /
+        48% 53% 47% 52%;
+}
+
+.about-image:hover::after {
+    transform: rotate(-6deg) scale(1.02);
+
+    border-radius:
+        46% 54% 52% 48% /
+        53% 46% 54% 47%;
+}
+
+
+/* =========================================================
+   LEFT IMAGE
+   ========================================================= */
+
+.about-image-left::before {
+    transform: rotate(-6deg);
+}
+
+.about-image-left::after {
+    transform: rotate(5deg);
+}
+
+
+/* =========================================================
+   RIGHT IMAGE
+   ========================================================= */
+
+.about-image-right::before {
+    transform: rotate(6deg);
+}
+
+.about-image-right::after {
+    transform: rotate(-5deg);
+}
+
+
+/* =========================================================
+   IMAGE BADGES
+   FULLY CIRCULAR
+   ========================================================= */
+
+.image-badge {
+    position: absolute;
+
+    width: 105px;
+    height: 105px;
+
+    right: -35px;
+    bottom: 25px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--about-gold),
+            #a97d17
+        );
+
+    color: white;
+
+    border: 5px solid var(--about-cream);
+
+    box-shadow:
+        0 12px 30px rgba(40, 35, 20, 0.2);
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    z-index: 5;
+
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+}
+
+.image-badge:hover {
+    transform: translateY(-8px) rotate(5deg);
+
+    box-shadow:
+        0 18px 40px rgba(40, 35, 20, 0.3);
+}
+
+.image-badge i {
+    font-size: 18px;
+
+    margin-bottom: 5px;
+
+    color: #fff8dc;
+}
+
+.image-badge strong {
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+}
+
+.image-badge span {
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    margin-top: 3px;
+
+    opacity: 0.9;
+}
+
+
+/* RIGHT BADGE */
+
+.right-badge {
+    left: -35px;
+    right: auto;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--about-dark),
+            #18232c
+        );
+}
+
+.right-badge i {
+    color: var(--about-gold-light);
+}
+
+
+/* =========================================================
+   INTRO CONTENT
+   ========================================================= */
+
+.about-intro-content {
+    text-align: center;
+
+    max-width: 570px;
+
+    margin: auto;
+}
+
+.about-intro-content h1 {
+    margin: 0;
+
+    color: var(--about-dark);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(38px, 4vw, 58px);
+
+    line-height: 1.12;
+
+    font-weight: 500;
+
+    letter-spacing: -1px;
+}
+
+.about-intro-content h1 span {
+    display: block;
+
+    color: var(--about-gold);
+
+    font-style: italic;
+
+    margin-top: 5px;
+}
+
+.intro-lead {
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    color: #555;
+
+    margin: 25px auto 20px;
+
+    max-width: 520px;
+}
+
+.intro-divider {
+    width: 55px;
+    height: 2px;
+
+    background: var(--about-gold);
+
+    margin: 24px auto;
+}
+
+.about-intro-content p:not(.intro-lead) {
+    color: var(--about-text);
+
+    font-size: 14px;
+
+    line-height: 1.85;
+
+    margin: 13px auto;
+
+    max-width: 510px;
+}
+
+
+/* =========================================================
+   OUR STORY
+   ========================================================= */
+
+.our-story {
+    padding: 105px 7% 115px;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(196, 154, 39, 0.1),
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(196, 154, 39, 0.08),
+            transparent 25%
+        ),
+        linear-gradient(
+            135deg,
+            var(--about-dark),
+            var(--about-dark-2)
+        );
+
+    color: white;
+}
+
+
+/* DECORATIVE CIRCLE */
+
+.our-story::before {
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    border: 1px solid rgba(255,255,255,0.07);
+
+    border-radius: 50%;
+
+    left: -180px;
+    top: 40px;
+}
+
+.our-story::after {
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    border: 1px solid rgba(196,154,39,0.12);
+
+    border-radius: 50%;
+
+    right: -140px;
+    bottom: 40px;
+}
+
+
+/* =========================================================
+   STORY HEADING
+   ========================================================= */
+
+.story-wrapper {
+    max-width: 900px;
+
+    margin: 0 auto 70px;
+
+    text-align: center;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.story-heading h2 {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(36px, 4vw, 53px);
+
+    font-weight: 500;
+
+    line-height: 1.15;
+
+    margin: 0;
+
+    color: white;
+}
+
+.story-heading h2 span {
+    display: block;
+
+    color: var(--about-gold-light);
+
+    font-style: italic;
+
+    margin-top: 5px;
+}
+
+.story-decoration {
+    margin-top: 25px;
+}
+
+.story-decoration i {
+    width: 48px;
+    height: 48px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border: 1px solid var(--about-gold);
+
+    color: var(--about-gold-light);
+
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   STORY CONTENT
+   ========================================================= */
+
+.story-content {
+    max-width: 780px;
+
+    margin: 35px auto 0;
+
+    text-align: center;
+}
+
+.story-content p {
+    color: rgba(255,255,255,0.75);
+
+    font-size: 15px;
+
+    line-height: 1.9;
+
+    margin: 18px 0;
+}
+
+
+/* =========================================================
+   HERITAGE VALUES
+   ========================================================= */
+
+.heritage-values {
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 22px;
+
+    position: relative;
+
+    z-index: 3;
+}
+
+.value-card {
+    padding: 35px 28px;
+
+    min-height: 300px;
+
+    text-align: center;
+
+    background:
+        rgba(255,255,255,0.055);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    border-radius: 22px;
+
+    backdrop-filter: blur(8px);
+
+    transition:
+        transform 0.4s ease,
+        border-color 0.4s ease,
+        background 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-10px);
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border-color:
+        rgba(196,154,39,0.55);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,0.18);
+}
+
+
+/* =========================================================
+   VALUE ICON — FULL CIRCLE
+   ========================================================= */
+
+.value-icon {
+    width: 76px;
+    height: 76px;
+
+    margin: 0 auto 22px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(196,154,39,0.6);
+
+    background:
+        rgba(196,154,39,0.08);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--about-gold-light);
+
+    font-size: 22px;
+
+    transition:
+        transform 0.5s ease,
+        background 0.5s ease;
+}
+
+.value-card:hover .value-icon {
+    transform: rotate(8deg) scale(1.08);
+
+    background:
+        rgba(196,154,39,0.16);
+}
+
+.value-content > span {
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color: var(--about-gold-light);
+
+    font-weight: 800;
+}
+
+.value-content h3 {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 22px;
+
+    font-weight: 500;
+
+    margin: 10px 0 13px;
+
+    color: white;
+}
+
+.value-content p {
+    color: rgba(255,255,255,0.67);
+
+    font-size: 13px;
+
+    line-height: 1.75;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   KASHMIR HERITAGE IMAGE SECTION
+   ========================================================= */
+
+.kashmir-heritage {
+    min-height: 650px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    background: #1e2930;
+}
+
+
+/* IMAGE */
+
+.heritage-image {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+}
+
+.heritage-image::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(20,30,35,0.25),
+            rgba(20,30,35,0.72)
+        );
+}
+
+.heritage-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 1.2s ease;
+}
+
+.kashmir-heritage:hover
+.heritage-image img {
+    transform: scale(1.04);
+}
+
+
+/* GOLD INNER FRAME */
+
+.kashmir-heritage::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 25px;
+
+    border: 1px solid rgba(255,215,0,0.38);
+
+    pointer-events: none;
+}
+
+
+/* HERITAGE TEXT */
+
+.heritage-overlay {
+    position: relative;
+
+    z-index: 3;
+
+    max-width: 750px;
+
+    padding: 40px 25px;
+}
+
+.heritage-overlay .section-label {
+    color: var(--about-gold-light);
+}
+
+.heritage-overlay h2 {
+    margin: 0;
+
+    color: white;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(42px, 6vw, 70px);
+
+    font-weight: 500;
+
+    line-height: 1.05;
+}
+
+.heritage-overlay h2 span {
+    display: block;
+
+    color: var(--about-gold-light);
+
+    font-style: italic;
+
+    margin-top: 7px;
+}
+
+.heritage-overlay p {
+    max-width: 560px;
+
+    margin: 25px auto 0;
+
+    color: rgba(255,255,255,0.85);
+
+    line-height: 1.8;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   WHY US
+   ========================================================= */
+
+.why-us {
+    padding: 105px 7%;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--about-cream),
+            #fffdf7
+        );
+}
+
+.why-heading {
+    text-align: center;
+
+    margin-bottom: 55px;
+}
+
+
+/* =========================================================
+   WHY GRID
+   ========================================================= */
+
+.why-grid {
+    max-width: 1050px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 22px;
+}
+
+
+/* =========================================================
+   WHY ITEM
+   ========================================================= */
+
+.why-item {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    padding: 28px 30px;
+
+    background: white;
+
+    border: 1px solid rgba(196,154,39,0.15);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 10px 30px rgba(30,40,48,0.06);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.why-item::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 3px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            var(--about-gold),
+            transparent
+        );
+
+    transform: scaleY(0);
+
+    transform-origin: bottom;
+
+    transition:
+        transform 0.35s ease;
+}
+
+.why-item:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 18px 40px rgba(30,40,48,0.11);
+}
+
+.why-item:hover::before {
+    transform: scaleY(1);
+}
+
+
+/* =========================================================
+   WHY ICON — FULL CIRCLE
+   ========================================================= */
+
+.why-icon {
+    flex-shrink: 0;
+
+    width: 68px;
+    height: 68px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff9e8,
+            #f3e4bd
+        );
+
+    border: 1px solid rgba(196,154,39,0.45);
+
+    color: var(--about-gold);
+
+    font-size: 21px;
+
+    transition:
+        transform 0.45s ease,
+        background 0.45s ease;
+}
+
+.why-item:hover .why-icon {
+    transform: rotate(-8deg) scale(1.08);
+
+    background:
+        linear-gradient(
+            145deg,
+            #f9edc9,
+            #ead49b
+        );
+}
+
+.why-item span {
+    display: block;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    font-weight: 800;
+
+    color: var(--about-gold);
+}
+
+.why-item p {
+    color: var(--about-text);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    margin: 8px 0 0;
+}
+
+
+/* =========================================================
+   CTA SECTION
+   ========================================================= */
+
+.about-cta {
+    min-height: 600px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 330px;
+
+    align-items: center;
+
+    gap: 50px;
+
+    padding: 90px 9%;
+
+    background: var(--about-dark);
+
+    color: white;
+}
+
+
+/* CTA BACKGROUND */
+
+.cta-background {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 0;
+}
+
+.cta-background::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(24,34,42,0.96),
+            rgba(24,34,42,0.72),
+            rgba(24,34,42,0.35)
+        );
+}
+
+.cta-background img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   CTA CONTENT
+   ========================================================= */
+
+.cta-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 650px;
+}
+
+.cta-content .section-label {
+    color: var(--about-gold-light);
+}
+
+.cta-content h2 {
+    margin: 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(42px, 5vw, 65px);
+
+    font-weight: 500;
+
+    line-height: 1.05;
+}
+
+.cta-content h2 span {
+    display: block;
+
+    color: var(--about-gold-light);
+
+    font-style: italic;
+
+    margin-top: 6px;
+}
+
+.cta-content p {
+    color: rgba(255,255,255,0.78);
+
+    max-width: 540px;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    margin: 25px 0 30px;
+}
+
+
+/* =========================================================
+   CTA BUTTON
+   ========================================================= */
+
+.cta-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 14px 23px;
+
+    color: var(--about-dark);
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--about-gold-light),
+            var(--about-gold)
+        );
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    border-radius: 40px;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.2);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.cta-btn span {
+    font-size: 19px;
+
+    line-height: 1;
+
+    transition:
+        transform 0.3s ease;
+}
+
+.cta-btn:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 18px 38px rgba(0,0,0,0.28);
+}
+
+.cta-btn:hover span {
+    transform: translateX(5px);
+}
+
+
+/* =========================================================
+   CTA PRODUCT IMAGE
+   FULLY CIRCULAR
+   ========================================================= */
+
+.cta-product {
+    position: relative;
+
+    z-index: 3;
+
+    width: 300px;
+    height: 300px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* GOLD CIRCLE FRAME */
+
+.cta-product::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -15px;
+
+    border: 1px solid var(--about-gold-light);
+
+    border-radius: 50%;
+
+    transform: rotate(8deg);
+
+    transition:
+        transform 0.6s ease;
+}
+
+
+/* SECOND CIRCLE */
+
+.cta-product::after {
+    content: "";
+
+    position: absolute;
+
+    inset: -7px;
+
+    border: 1px solid rgba(255,255,255,0.35);
+
+    border-radius: 50%;
+
+    transform: rotate(-7deg);
+
+    transition:
+        transform 0.6s ease;
+}
+
+
+/* IMAGE */
+
+.cta-product img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 7px solid rgba(255,255,255,0.9);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.35);
+
+    transition:
+        transform 0.6s ease;
+}
+
+.about-cta:hover .cta-product img {
+    transform: scale(1.04);
+}
+
+.about-cta:hover .cta-product::before {
+    transform: rotate(-5deg) scale(1.03);
+}
+
+.about-cta:hover .cta-product::after {
+    transform: rotate(6deg) scale(1.03);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .about-intro {
+        grid-template-columns:
+            1fr 1.2fr;
+
+        gap: 45px;
+
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .about-image-right {
+        grid-column: 1 / -1;
+
+        margin-top: 30px;
+    }
+
+    .about-image-right img {
+        width: 280px;
+        height: 280px;
+    }
+
+    .heritage-values {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+    }
+
+    .value-card {
+        min-height: auto;
+    }
+
+    .about-cta {
+        grid-template-columns: 1fr 280px;
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
+    .cta-product {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .about-intro {
+        display: flex;
+
+        flex-direction: column;
+
+        padding: 80px 6% 85px;
+
+        gap: 55px;
+    }
+
+    .about-image {
+        width: min(78vw, 330px);
+    }
+
+    .about-image-right {
+        margin-top: 5px;
+    }
+
+    .about-image-right img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .about-intro-content {
+        order: -1;
+    }
+
+    .about-intro-content h1 {
+        font-size: 39px;
+    }
+
+    .intro-lead {
+        font-size: 15px;
+    }
+
+    .image-badge {
+        width: 88px;
+        height: 88px;
+
+        right: -15px;
+        bottom: 10px;
+    }
+
+    .right-badge {
+        left: -15px;
+        right: auto;
+    }
+
+    .our-story {
+        padding: 80px 6% 90px;
+    }
+
+    .story-heading h2 {
+        font-size: 38px;
+    }
+
+    .story-content p {
+        font-size: 14px;
+    }
+
+    .why-us {
+        padding: 80px 6%;
+    }
+
+    .why-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .kashmir-heritage {
+        min-height: 550px;
+    }
+
+    .kashmir-heritage::after {
+        inset: 15px;
+    }
+
+    .heritage-overlay {
+        padding: 30px 20px;
+    }
+
+    .heritage-overlay h2 {
+        font-size: 46px;
+    }
+
+    .about-cta {
+        min-height: auto;
+
+        display: flex;
+
+        flex-direction: column;
+
+        text-align: center;
+
+        padding: 80px 6%;
+
+        gap: 55px;
+    }
+
+    .cta-content {
+        max-width: 600px;
+    }
+
+    .cta-content h2 {
+        font-size: 45px;
+    }
+
+    .cta-content p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cta-product {
+        width: 240px;
+        height: 240px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 500px) {
+
+    .about-intro {
+        padding-top: 65px;
+    }
+
+    .about-image {
+        width: 70vw;
+        max-width: 280px;
+    }
+
+    .about-image img {
+        border-width: 5px;
+    }
+
+    .about-image::before {
+        inset: -10px;
+    }
+
+    .about-image::after {
+        inset: -5px;
+    }
+
+    .image-badge {
+        width: 76px;
+        height: 76px;
+
+        border-width: 4px;
+
+        right: -12px;
+    }
+
+    .right-badge {
+        left: -12px;
+    }
+
+    .image-badge i {
+        font-size: 14px;
+    }
+
+    .image-badge strong {
+        font-size: 8px;
+    }
+
+    .image-badge span {
+        font-size: 6px;
+    }
+
+    .about-intro-content h1 {
+        font-size: 34px;
+    }
+
+    .about-intro-content p:not(.intro-lead) {
+        font-size: 13px;
+    }
+
+    .story-heading h2 {
+        font-size: 33px;
+    }
+
+    .value-card {
+        padding: 30px 22px;
+    }
+
+    .why-item {
+        padding: 22px 18px;
+
+        gap: 15px;
+    }
+
+    .why-icon {
+        width: 58px;
+        height: 58px;
+
+        font-size: 18px;
+    }
+
+    .why-item span {
+        font-size: 9px;
+    }
+
+    .why-item p {
+        font-size: 12px;
+    }
+
+    .kashmir-heritage {
+        min-height: 480px;
+    }
+
+    .heritage-overlay h2 {
+        font-size: 39px;
+    }
+
+    .heritage-overlay p {
+        font-size: 13px;
+    }
+
+    .cta-content h2 {
+        font-size: 38px;
+    }
+
+    .cta-product {
+        width: 210px;
+        height: 210px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .about-image {
+        width: 65vw;
+    }
+
+    .about-intro-content h1 {
+        font-size: 30px;
+    }
+
+    .story-heading h2 {
+        font-size: 29px;
+    }
+
+    .heritage-overlay h2 {
+        font-size: 34px;
+    }
+
+    .cta-content h2 {
+        font-size: 33px;
+    }
+
+    .cta-product {
+        width: 185px;
+        height: 185px;
+    }
+
+    .image-badge {
+        width: 68px;
+        height: 68px;
+    }
+}

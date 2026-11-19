@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="View authentic products from The Friends Heritage."
+    >
+
+    <!-- Favicon -->
+    <link
+        rel="icon"
+        href="logo.png"
+        type="image/png"
+    >
+
+    <!-- Main Website CSS -->
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <!-- Product Page CSS -->
+    <link
+        rel="stylesheet"
+        href="product.css"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <title>
+        Product | The Friends Heritage
+    </title>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<header class="header">
+
+    <nav class="navbar">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+
+            <img
+                src="logo.png"
+                alt="The Friends Heritage Logo"
+            >
+
+            <span>
+                THE FRIENDS HERITAGE
+            </span>
+
+        </a>
+
+
+
+        <!-- NAVIGATION -->
+
+        <div
+            class="nav-links"
+            id="navLinks"
+        >
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a
+                href="shop.html"
+                class="active"
+            >
+                Shop
+            </a>
+
+            <a href="index.html#benefits">
+                Benefits
+            </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+            <a href="contact.html">
+                Contact Us
+            </a>
+
+        </div>
+
+
+
+        <!-- NAV ICONS -->
+
+        <div class="nav-icons">
+
+            <a
+                href="account.html"
+                aria-label="My Account"
+                title="My Account"
+            >
+
+                <i class="fa-solid fa-user"></i>
+
+            </a>
+
+
+            <a
+                href="cart.html"
+                class="cart-icon"
+                aria-label="Shopping Cart"
+                title="Shopping Cart"
+            >
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span id="cartCount">
+                    0
+                </span>
+
+            </a>
+
+        </div>
+
+
+
+        <!-- MOBILE MENU -->
+
+        <button
+            type="button"
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Open Menu"
+        >
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================================================
+     PRODUCT PAGE
+========================================================= -->
+
+<main class="product-page">
+
+
+    <!-- =====================================================
+         BREADCRUMB
+    ====================================================== -->
+
+    <section class="product-breadcrumb-section">
+
+        <div class="product-container">
+
+            <div
+                class="product-breadcrumb"
+                id="breadcrumbProduct"
+            >
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <span>/</span>
+
+                <a href="shop.html">
+                    Shop
+                </a>
+
+                <span>/</span>
+
+                <span id="breadcrumbName">
+                    Product
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MAIN PRODUCT
+    ====================================================== -->
+
+    <section class="product-main-section">
+
+        <div class="product-container">
+
+            <div class="product-main-grid">
+
+
+                <!-- =================================================
+                     PRODUCT IMAGE
+                ================================================== -->
+
+                <div class="product-gallery">
+
+                    <div class="product-main-image-wrapper">
+
+                        <img
+                            id="mainProductImage"
+                            class="product-main-image"
+                            src="logo.png"
+                            alt="Product Image"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PRODUCT DETAILS
+                ================================================== -->
+
+                <div class="product-details">
+
+
+                    <!-- CATEGORY -->
+
+                    <span
+                        id="productCategory"
+                        class="product-category"
+                    >
+                        KASHMIR COLLECTION
+                    </span>
+
+
+
+                    <!-- PRODUCT NAME -->
+
+                    <h1
+                        id="productName"
+                        class="product-title"
+                    >
+                        Loading Product...
+                    </h1>
+
+
+
+                    <!-- RATING -->
+
+                    <div class="product-rating">
+
+                        <span class="rating-stars">
+
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+
+                        </span>
+
+                        <span>
+                            Premium Quality
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         PRICE
+                    ================================================== -->
+
+                    <div class="product-price-box">
+
+                        <!-- SALE PRICE -->
+
+                        <span
+                            id="productPrice"
+                            class="product-price"
+                        >
+                            ₹—
+                        </span>
+
+
+                        <!-- ORIGINAL PRICE -->
+
+                        <span
+                            id="productOldPrice"
+                            class="product-old-price"
+                        >
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- SHORT DESCRIPTION -->
+
+                    <p
+                        id="productShortDescription"
+                        class="product-short-description"
+                    >
+                        Loading product information...
+                    </p>
+
+
+
+                    <!-- =================================================
+                         VARIANTS
+                    ================================================== -->
+
+                    <div class="product-variant-section">
+
+                        <h3>
+                            Select Weight / Size
+                        </h3>
+
+
+                        <div
+                            id="productVariants"
+                            class="product-variants"
+                        >
+                        </div>
+
+
+                        <div
+                            id="selectedVariantText"
+                            class="selected-variant-display"
+                        >
+                            Select an option
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         QUANTITY
+                    ================================================== -->
+
+                    <div class="product-quantity-section">
+
+                        <h3>
+                            Quantity
+                        </h3>
+
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                id="decreaseQuantity"
+                                aria-label="Decrease quantity"
+                            >
+                                −
+                            </button>
+
+
+                            <input
+                                type="number"
+                                id="productQuantity"
+                                value="1"
+                                min="1"
+                                readonly
+                                aria-label="Product quantity"
+                            >
+
+
+                            <button
+                                type="button"
+                                id="increaseQuantity"
+                                aria-label="Increase quantity"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         ADD TO CART
+                    ================================================== -->
+
+                    <button
+                        type="button"
+                        id="addProductToCart"
+                        class="add-to-cart-btn"
+                    >
+
+                        <i class="fa-solid fa-cart-shopping"></i>
+
+                        Add to Cart
+
+                    </button>
+
+
+                    <div
+                        id="productCartMessage"
+                        class="product-cart-message"
+                    >
+                    </div>
+
+
+
+                    <!-- =================================================
+                         TRUST INFORMATION
+                    ================================================== -->
+
+                    <div class="product-trust-info">
+
+                        <div class="product-trust-item">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                            <span>
+                                Quality Checked
+                            </span>
+
+                        </div>
+
+
+                        <div class="product-trust-item">
+
+                            <i class="fa-solid fa-truck-fast"></i>
+
+                            <span>
+                                Fast Delivery
+                            </span>
+
+                        </div>
+
+
+                        <div class="product-trust-item">
+
+                            <i class="fa-solid fa-leaf"></i>
+
+                            <span>
+                                Premium Selection
+                            </span>
+
+                        </div>
+
+
+                        <div class="product-trust-item">
+
+                            <i class="fa-solid fa-box-open"></i>
+
+                            <span>
+                                Secure Packaging
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PRODUCT INFORMATION
+    ====================================================== -->
+
+    <section class="product-information-section">
+
+        <div class="product-container">
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="product-info-card">
+
+                <div class="product-info-heading">
+
+                    <i class="fa-solid fa-align-left"></i>
+
+                    <h2>
+                        Product Description
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="productDescription"
+                    class="product-description-content"
+                >
+
+                    <p>
+                        Loading product description...
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BENEFITS -->
+
+            <div class="product-info-card">
+
+                <div class="product-info-heading">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <h2>
+                        Benefits
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="productBenefits"
+                    class="product-benefits-content"
+                >
+                </div>
+
+            </div>
+
+
+
+            <!-- SPECIFICATIONS -->
+
+            <div class="product-info-card">
+
+                <div class="product-info-heading">
+
+                    <i class="fa-solid fa-list-check"></i>
+
+                    <h2>
+                        Product Specifications
+                    </h2>
+
+                </div>
+
+
+                <div class="product-specifications">
+
+                    <div class="spec-row">
+
+                        <div class="spec-label">
+                            Product
+                        </div>
+
+                        <div
+                            id="specProductName"
+                            class="spec-value"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="spec-row">
+
+                        <div class="spec-label">
+                            Category
+                        </div>
+
+                        <div
+                            id="specCategory"
+                            class="spec-value"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="spec-row">
+
+                        <div class="spec-label">
+                            Origin
+                        </div>
+
+                        <div
+                            id="specOrigin"
+                            class="spec-value"
+                        >
+                            Kashmir
+                        </div>
+
+                    </div>
+
+
+                    <div class="spec-row">
+
+                        <div class="spec-label">
+                            Available Sizes
+                        </div>
+
+                        <div
+                            id="specSizes"
+                            class="spec-value"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="spec-row">
+
+                        <div class="spec-label">
+                            Availability
+                        </div>
+
+                        <div
+                            id="specStock"
+                            class="spec-value"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- HOW TO USE -->
+
+            <div class="product-info-card">
+
+                <div class="product-info-heading">
+
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+
+                    <h2>
+                        How to Use
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="productHowToUse"
+                    class="product-text-content"
+                >
+
+                    <p>
+                        Loading...
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STORAGE -->
+
+            <div class="product-info-card">
+
+                <div class="product-info-heading">
+
+                    <i class="fa-solid fa-box"></i>
+
+                    <h2>
+                        Storage
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="productStorage"
+                    class="product-text-content"
+                >
+
+                    <p>
+                        Store in a cool, dry place away
+                        from direct sunlight and moisture.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DELIVERY & RETURNS -->
+
+            <div class="product-info-card">
+
+                <div class="product-info-heading">
+
+                    <i class="fa-solid fa-truck"></i>
+
+                    <h2>
+                        Delivery & Returns
+                    </h2>
+
+                </div>
+
+
+                <div class="delivery-return-grid">
+
+                    <div class="delivery-item">
+
+                        <h3>
+
+                            <i class="fa-solid fa-truck-fast"></i>
+
+                            Delivery
+
+                        </h3>
+
+                        <p>
+                            Orders are carefully packed
+                            and dispatched for delivery.
+                        </p>
+
+                    </div>
+
+
+                    <div class="return-item">
+
+                        <h3>
+
+                            <i class="fa-solid fa-rotate-left"></i>
+
+                            Returns
+
+                        </h3>
+
+                        <p>
+                            Contact our support team if
+                            there is an issue with your order.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FAQ -->
+
+            <div class="product-info-card">
+
+                <div class="product-info-heading">
+
+                    <i class="fa-solid fa-circle-question"></i>
+
+                    <h2>
+                        Frequently Asked Questions
+                    </h2>
+
+                </div>
+
+
+                <details class="product-faq-item">
+
+                    <summary>
+                        Is this product authentic?
+                    </summary>
+
+                    <div
+                        id="faqAuthenticity"
+                        class="faq-answer"
+                    >
+
+                        <p>
+                            The Friends Heritage focuses
+                            on carefully selected products.
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+                <details class="product-faq-item">
+
+                    <summary>
+                        What sizes are available?
+                    </summary>
+
+                    <div
+                        id="faqSizes"
+                        class="faq-answer"
+                    >
+
+                        <p>
+                            Loading...
+                        </p>
+
+                    </div>
+
+                </details>
+
+
+                <details class="product-faq-item">
+
+                    <summary>
+                        How can I order this product?
+                    </summary>
+
+                    <div class="faq-answer">
+
+                        <p>
+                            Select your preferred size,
+                            choose the quantity and click
+                            Add to Cart.
+                        </p>
+
+                    </div>
+
+                </details>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         BACK TO SHOP
+    ====================================================== -->
+
+    <section class="back-to-shop-section">
+
+        <div class="product-container">
+
+            <a
+                href="shop.html"
+                class="back-to-shop-btn"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Shop
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     PRODUCT TOAST
+========================================================= -->
+
+<div
+    id="productToast"
+    class="product-toast"
+>
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script src="script.js"></script>
+
+<script src="product.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin | The Friends Heritage</title>
+<style>
+  :root {
+    --maroon: #8b0000;
+    --maroon-dark: #650000;
+    --maroon-soft: #f7e9e9;
+    --brass: #b98a3e;
+    --ink: #241f1d;
+    --muted: #6d655f;
+    --line: #e5e0db;
+    --surface: #ffffff;
+    --page: #f4f2ef;
+    --ok: #1f6b3a;
+    --bad: #a12020;
+    --serif: Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body { font-family: var(--sans); color: var(--ink); background: var(--page); font-size: 15px; line-height: 1.5; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 700; margin: 0; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  .hidden { display: none !important; }
+  :focus-visible { outline: 3px solid #d99a9a; outline-offset: 2px; }
+  .muted { color: var(--muted); }
+  .right { text-align: right; }
+
+  /* ---------- Sign in ---------- */
+  #login-screen { min-height: 100vh; display: grid; grid-template-columns: 1.1fr 1fr; }
+  .login-art { background: var(--maroon); color: #fff; padding: 56px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+  .login-art::after { content: ""; position: absolute; right: -120px; bottom: -120px; width: 420px; height: 420px; border-radius: 50%; border: 56px solid rgba(255,255,255,.07); }
+  .login-art .mark { font-family: var(--serif); font-size: 22px; }
+  .login-art h1 { font-size: 46px; line-height: 1.12; max-width: 420px; }
+  .login-art p { max-width: 380px; opacity: .85; margin: 16px 0 0; }
+  .login-form-side { display: grid; place-items: center; padding: 32px; background: var(--surface); }
+  .login-box { width: 100%; max-width: 360px; }
+  .login-box h2 { font-size: 28px; margin-bottom: 6px; }
+  .login-box .sub { color: var(--muted); margin: 0 0 28px; }
+  .pw-wrap { position: relative; }
+  .pw-wrap input { padding-right: 76px; }
+  .pw-toggle { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: 0; color: var(--maroon); font-weight: 600; padding: 6px 10px; cursor: pointer; border-radius: 6px; }
+  .pw-toggle:hover { background: var(--maroon-soft); }
+  .form-error { color: var(--bad); font-size: 14px; min-height: 22px; margin: 10px 0 14px; }
+
+  /* ---------- Form controls ---------- */
+  label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+  .field { margin-bottom: 16px; }
+  .hint { font-weight: 400; color: var(--muted); font-size: 13px; margin-top: 4px; }
+  input[type=text], input[type=password], input[type=number], input[type=search], select, textarea {
+    width: 100%; padding: 11px 12px; border: 1px solid #cdc6bf; border-radius: 8px; background: #fff;
+  }
+  textarea { min-height: 96px; resize: vertical; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 18px; border-radius: 8px; border: 1px solid var(--maroon); background: var(--maroon); color: #fff; font-weight: 600; cursor: pointer; }
+  .btn:hover { background: var(--maroon-dark); }
+  .btn:disabled { opacity: .6; cursor: wait; }
+  .btn.block { width: 100%; padding: 12px 18px; }
+  .btn.ghost { background: transparent; color: var(--maroon); }
+  .btn.ghost:hover { background: var(--maroon-soft); }
+  .btn.small { padding: 6px 12px; font-size: 13px; }
+  .btn.danger { background: #fff; color: var(--bad); border-color: #dbb4b4; }
+  .btn.danger:hover { background: #fbeeee; }
+
+  /* ---------- App shell ---------- */
+  #app { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+  aside { background: var(--maroon); color: #fff; padding: 24px 14px; display: flex; flex-direction: column; gap: 4px; position: sticky; top: 0; height: 100vh; }
+  .brand { font-family: var(--serif); font-size: 20px; line-height: 1.25; padding: 0 12px 22px; }
+  .brand small { display: block; font-family: var(--sans); font-size: 13px; opacity: .75; margin-top: 2px; }
+  .nav-btn { display: flex; align-items: center; justify-content: space-between; width: 100%; text-align: left; background: transparent; border: 0; color: #fff; padding: 11px 12px; border-radius: 8px; cursor: pointer; font-weight: 500; text-decoration: none; }
+  .nav-btn:hover { background: rgba(255,255,255,.12); }
+  .nav-btn[aria-current="page"] { background: #fff; color: var(--maroon); font-weight: 700; }
+  .count { background: var(--brass); color: #fff; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 1px 8px; }
+  .nav-btn[aria-current="page"] .count { background: var(--maroon); }
+  aside .spacer { flex: 1; }
+
+  main { padding: 32px 36px 48px; min-width: 0; }
+  .page-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 22px; }
+  .page-head h2 { font-size: 28px; }
+  .page-head .date { color: var(--muted); font-size: 14px; margin-top: 2px; }
+  .head-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+  .card h3 { font-size: 18px; margin-bottom: 14px; }
+  .pad { padding: 20px 22px; }
+
+  /* Overview */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 20px; }
+  .stat { padding: 18px 20px; }
+  .stat .n { font-family: var(--serif); font-size: 32px; font-weight: 700; line-height: 1.15; }
+  .stat .l { color: var(--muted); font-size: 14px; }
+  .stat.alert .n { color: var(--maroon); }
+  .two-col { display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px; margin-bottom: 20px; }
+  #chart svg { width: 100%; height: auto; display: block; }
+  #chart .bar { fill: var(--maroon); }
+  #chart .bar.today { fill: var(--brass); }
+  #chart text { font-family: var(--sans); fill: var(--muted); font-size: 12px; }
+  #chart text.val { fill: var(--ink); font-weight: 600; }
+  #chart line { stroke: var(--line); }
+  .status-row { display: grid; grid-template-columns: 96px 1fr 28px; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 14px; }
+  .meter { height: 8px; background: #eee9e4; border-radius: 99px; overflow: hidden; }
+  .meter > span { display: block; height: 100%; background: var(--maroon); border-radius: 99px; }
+
+  /* Tables */
+  .toolbar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+  .toolbar input[type=search] { max-width: 320px; }
+  .toolbar select { max-width: 200px; }
+  .toolbar .grow { flex: 1; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 700px; }
+  th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  th { font-size: 13px; color: var(--muted); font-weight: 600; background: #faf9f7; white-space: nowrap; }
+  th:first-child { border-top-left-radius: 12px; }
+  th:last-child { border-top-right-radius: 12px; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:hover td { background: #fcfbfa; }
+  .empty { padding: 44px 16px; text-align: center; color: var(--muted); }
+  .thumb { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; background: #eee; border: 1px solid var(--line); display: block; }
+  .strike { color: var(--muted); text-decoration: line-through; font-size: 13px; margin-left: 6px; }
+  .row-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #eee; color: #444; white-space: nowrap; }
+  .pill.pending { background: #fcf0d4; color: #805300; }
+  .pill.confirmed { background: #e1ecf8; color: #1d4f8c; }
+  .pill.shipped { background: #ebe4f6; color: #54379a; }
+  .pill.delivered { background: #dcf0e3; color: #1f6b3a; }
+  .pill.cancelled { background: #f8e0e0; color: #a12020; }
+  .pill.home { background: var(--maroon-soft); color: var(--maroon); }
+
+  /* Dialogs */
+  dialog { border: 0; border-radius: 14px; padding: 0; width: min(640px, calc(100vw - 24px)); max-height: calc(100vh - 32px); color: var(--ink); box-shadow: 0 24px 60px rgba(0,0,0,.28); }
+  dialog::backdrop { background: rgba(36, 31, 29, .55); }
+  .dlg-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: #fff; z-index: 1; }
+  .dlg-head h3 { font-size: 21px; }
+  .x { background: none; border: 0; font-size: 26px; line-height: 1; cursor: pointer; color: var(--muted); padding: 2px 8px; border-radius: 6px; }
+  .x:hover { background: var(--maroon-soft); color: var(--maroon); }
+  .dlg-body { padding: 22px 24px; }
+  .dlg-foot { display: flex; gap: 10px; justify-content: flex-end; padding: 16px 24px; border-top: 1px solid var(--line); background: #faf9f7; flex-wrap: wrap; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+  dl.info { margin: 0 0 18px; display: grid; grid-template-columns: 150px 1fr; gap: 8px 14px; }
+  dl.info dt { color: var(--muted); }
+  dl.info dd { margin: 0; overflow-wrap: anywhere; }
+  .check { display: flex; align-items: center; gap: 10px; font-weight: 500; }
+  .check input { width: 18px; height: 18px; }
+  #preview { width: 120px; height: 120px; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); margin-top: 10px; display: block; }
+  .status-edit { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding: 14px; background: var(--maroon-soft); border-radius: 10px; }
+  .status-edit select { max-width: 200px; background: #fff; }
+
+  .pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+  .pcard { overflow: hidden; display: flex; flex-direction: column; }
+  .pcard img { width: 100%; aspect-ratio: 4/3; object-fit: cover; background: #eee; display: block; cursor: pointer; }
+  .pcard .pb { padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .pcard h4 { margin: 0; font-size: 16px; }
+  .pcard .row-actions { margin-top: auto; padding-top: 8px; justify-content: flex-start; }
+  .off { color: var(--ok); font-weight: 600; font-size: 13px; margin-left: 6px; }
+  table.items { min-width: 0; margin: 0 0 18px; border: 1px solid var(--line); border-radius: 8px; }
+  table.items th, table.items td { padding: 8px 12px; font-size: 14px; }
+  .notify { margin-top: 12px; }
+  .notify textarea { min-height: 64px; margin-top: 8px; }
+
+  .seg { display: inline-flex; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 3px; gap: 2px; flex-wrap: wrap; }
+  .seg button { border: 0; background: transparent; padding: 6px 12px; border-radius: 7px; font-weight: 600; font-size: 13px; cursor: pointer; color: var(--muted); }
+  .seg button:hover { color: var(--maroon); }
+  .seg button[aria-pressed="true"] { background: var(--maroon); color: #fff; }
+
+  #confirm-dialog { width: min(460px, calc(100vw - 24px)); }
+  .role-card { display: block; width: 100%; text-align: left; padding: 16px 18px; margin-bottom: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; cursor: pointer; }
+  .role-card:hover { border-color: var(--maroon); background: var(--maroon-soft); }
+  .role-card strong { display: block; font-family: var(--serif); font-size: 18px; }
+  .role-card span { color: var(--muted); font-size: 14px; }
+  .link-back { background: none; border: 0; color: var(--maroon); font-weight: 600; cursor: pointer; padding: 0; margin-bottom: 18px; }
+  body.role-staff .owner-only { display: none !important; }
+  body:not(.role-staff) .staff-only { display: none !important; }
+
+  /* Live-on-website banner (Products page) */
+  .live-banner { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--ok); border-radius: 12px; padding: 14px 18px; margin: 0 0 18px; }
+  .live-badge { display: inline-flex; align-items: center; gap: 7px; background: #dcf0e3; color: var(--ok); font-weight: 700; font-size: 13px; padding: 4px 12px; border-radius: 999px; }
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); animation: livePulse 1.8s ease-out infinite; }
+  @keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(31,107,58,.5); } 70% { box-shadow: 0 0 0 7px rgba(31,107,58,0); } 100% { box-shadow: 0 0 0 0 rgba(31,107,58,0); } }
+  @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+  .live-banner p { margin: 0; flex: 1 1 280px; font-size: 14px; }
+  .live-links { display: flex; gap: 8px; flex-wrap: wrap; }
+  .live-links a { text-decoration: none; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { position: relative; }
+  .chip input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+  .chip span { display: inline-block; padding: 6px 14px; border: 1px solid #cdc6bf; border-radius: 999px; font-size: 14px; font-weight: 600; background: #fff; }
+  .chip input:checked + span { background: var(--maroon); border-color: var(--maroon); color: #fff; }
+  .chip input:focus-visible + span { outline: 3px solid #d99a9a; outline-offset: 2px; }
+  .size-add { display: flex; gap: 8px; margin-top: 10px; }
+  .size-add input { max-width: 220px; }
+  .pcard .sizes { color: var(--muted); font-size: 13px; }
+  .money { position: relative; }
+  .money span { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); font-weight: 600; }
+  .money input { padding-left: 30px; }
+  .ptag { font-weight: 500; font-size: 12px; color: var(--muted); margin-left: 6px; }
+  .ptag.sale { color: var(--ok); }
+  .price-preview { margin-top: 14px; padding: 12px 14px; background: var(--maroon-soft); border-radius: 10px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .price-preview.bad { background: #fbeeee; color: var(--bad); font-weight: 600; }
+  .pp-sale { font-family: var(--serif); font-size: 24px; font-weight: 700; }
+  .pp-orig { color: var(--muted); text-decoration: line-through; }
+  .pp-off { color: var(--ok); font-weight: 700; font-size: 14px; }
+  .size-head { display: grid; grid-template-columns: 1.2fr 1fr 1fr 38px; gap: 8px; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+  .drop { display: block; border: 2px dashed #cdc6bf; border-radius: 12px; padding: 22px 16px; text-align: center; cursor: pointer; background: #faf9f7; }
+  .drop:hover, .drop.over, .drop:focus-within { border-color: var(--maroon); background: var(--maroon-soft); }
+  .drop strong { color: var(--maroon); }
+  .drop span { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+  .img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; margin-top: 14px; }
+  .img-tile { position: relative; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #eee; aspect-ratio: 1; }
+  .img-tile.main { border: 2px solid var(--maroon); }
+  .img-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .img-badge { position: absolute; left: 6px; bottom: 6px; background: var(--maroon); color: #fff; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+  .img-main { position: absolute; left: 6px; bottom: 6px; background: #fff; border: 1px solid var(--line); border-radius: 999px; font-size: 12px; font-weight: 600; padding: 2px 8px; cursor: pointer; }
+  .img-x { position: absolute; top: 6px; right: 6px; width: 26px; height: 26px; border-radius: 50%; border: 0; background: rgba(36,31,29,.75); color: #fff; font-size: 16px; line-height: 1; cursor: pointer; }
+  .link-add { display: flex; gap: 8px; }
+  .link-add input { flex: 1; }
+  .pimg { position: relative; }
+  .pcount { position: absolute; right: 8px; bottom: 8px; background: rgba(36,31,29,.8); color: #fff; font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 999px; pointer-events: none; }
+  .sz { display: inline-block; background: #f4eee1; border-radius: 999px; padding: 2px 10px; font-size: 13px; margin: 0 6px 6px 0; }
+  .sz b { margin-left: 4px; }
+  .sz s { color: var(--muted); font-size: 12px; margin-left: 4px; }
+  .pv-thumbs { display: flex; gap: 8px; flex-wrap: wrap; margin: -6px 0 16px; }
+  .pv-thumb { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 2px solid transparent; cursor: pointer; }
+  .pv-thumb.on { border-color: var(--maroon); }
+  #version-banner { position: sticky; top: 0; z-index: 300; background: #a12020; color: #fff; padding: 10px 16px; font-size: 14px; text-align: center; }
+  .pform { max-width: 820px; }
+  .pform .card { margin-bottom: 16px; }
+  .pform h3 { margin-bottom: 14px; font-size: 18px; }
+  .pform-actions { display: flex; gap: 10px; justify-content: flex-end; position: sticky; bottom: 0; padding: 14px 0; background: var(--page); }
+  .size-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr auto; gap: 8px; margin-bottom: 8px; }
+  .size-row .s-del { font-size: 18px; line-height: 1; padding: 6px 12px; }
+  @media (max-width: 520px) { .size-head { display: none; } .size-row { grid-template-columns: 1fr 1fr auto; } .size-row .s-name { grid-column: 1 / -1; } }
+  .cf { text-align: center; padding: 28px 28px 8px; }
+  .cf-icon { width: 54px; height: 54px; border-radius: 50%; background: var(--maroon-soft); color: var(--maroon); font: 700 26px var(--serif); display: grid; place-items: center; margin: 0 auto 14px; }
+  .cf-icon.danger { background: #f8e0e0; color: var(--bad); }
+  .cf h3 { font-size: 22px; margin-bottom: 8px; }
+  .cf p { margin: 0 0 12px; color: var(--muted); }
+  .cf-list { text-align: left; margin: 0 0 14px; padding: 12px 16px 12px 34px; background: #faf9f7; border: 1px solid var(--line); border-radius: 10px; }
+  .cf-list li { margin: 3px 0; }
+  #cf-extra { text-align: left; padding-bottom: 8px; }
+  #cf-extra textarea { min-height: 70px; margin-top: 10px; }
+  .btn.danger-solid { background: var(--bad); border-color: var(--bad); color: #fff; }
+  .btn.danger-solid:hover { background: #7e1717; }
+
+  /* Toast */
+  #toast { position: fixed; right: 20px; bottom: 20px; background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 10px; max-width: 360px; z-index: 100; box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+  #toast.error { background: var(--bad); }
+
+  @media (max-width: 900px) {
+    #login-screen { grid-template-columns: 1fr; }
+    .login-art { padding: 32px; min-height: 220px; }
+    .login-art h1 { font-size: 32px; }
+    #app { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; flex-direction: row; flex-wrap: wrap; align-items: center; padding: 12px; }
+    .brand { width: 100%; padding-bottom: 8px; }
+    aside .spacer { display: none; }
+    .nav-btn { width: auto; gap: 8px; }
+    main { padding: 22px 16px 40px; }
+    .two-col { grid-template-columns: 1fr; }
+    .grid2 { grid-template-columns: 1fr; }
+    dl.info { grid-template-columns: 1fr; gap: 2px 0; }
+    dl.info dd { margin-bottom: 8px; }
+  }
+</style>
+</head>
+<body>
+<div id="version-banner" class="hidden" role="alert">Your server is older than this dashboard, so some buttons will not work. Copy the newest <strong>server.js</strong> into your project folder, then double-click <strong>start-server.bat</strong>.</div>
+
+<!-- ============ SIGN IN (password only) ============ -->
+<div id="login-screen" class="hidden">
+  <div class="login-art">
+    <div class="mark">The Friends Heritage</div>
+    <div>
+      <h1>Store admin</h1>
+      <p>Orders, products and customers, all in one place.</p>
+    </div>
+  </div>
+  <div class="login-form-side">
+    <div class="login-box" id="role-pick">
+      <h2>Sign in</h2>
+      <p class="sub">Choose how you want to sign in.</p>
+      <p class="form-error" id="pick-note" role="alert"></p>
+      <button type="button" class="role-card" data-role="owner"><strong>Owner</strong><span>Full dashboard: revenue, customers, products and staff.</span></button>
+      <button type="button" class="role-card" data-role="staff"><strong>Staff</strong><span>Orders and delivery details only.</span></button>
+    </div>
+    <form class="login-box hidden" id="login-form">
+      <button type="button" class="link-back" data-back>&larr; Back</button>
+      <h2>Owner sign in</h2>
+      <p class="sub">Only the store owner can open the dashboard.</p>
+      <div class="field">
+        <label for="admin-password">Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="admin-password" autocomplete="current-password" required>
+          <button type="button" class="pw-toggle" id="pw-toggle" aria-label="Show password">Show</button>
+        </div>
+      </div>
+      <p class="form-error" id="login-error" role="alert"></p>
+      <button class="btn block" type="submit" id="login-submit">Open dashboard</button>
+    </form>
+    <form class="login-box hidden" id="staff-login-form">
+      <button type="button" class="link-back" data-back>&larr; Back</button>
+      <h2>Staff sign in</h2>
+      <p class="sub">Use the username and password the owner gave you.</p>
+      <div class="field"><label for="staff-username">Username</label><input type="text" id="staff-username" autocomplete="username" required></div>
+      <div class="field"><label for="staff-password">Password</label><input type="password" id="staff-password" autocomplete="current-password" required></div>
+      <p class="form-error" id="staff-login-error" role="alert"></p>
+      <button class="btn block" type="submit" id="staff-login-submit">Sign in</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ DASHBOARD ============ -->
+<div id="app" class="hidden">
+  <aside>
+    <div class="brand">The Friends Heritage<small>Store admin</small></div>
+    <button class="nav-btn owner-only" data-view="overview" aria-current="page">Overview</button>
+    <button class="nav-btn staff-only" data-view="soverview">Overview</button>
+    <button class="nav-btn" data-view="orders">Orders <span class="count hidden" id="pending-count">0</span></button>
+    <button class="nav-btn owner-only" data-view="payments">Payments <span class="count hidden" id="recv-count">0</span></button>
+    <button class="nav-btn staff-only" data-view="spayments">My payments</button>
+    <button class="nav-btn staff-only" data-view="products">Products</button>
+    <button class="nav-btn owner-only" data-view="customers">Customers</button>
+    <button class="nav-btn staff-only" id="nav-add-product" type="button">Add product</button>
+    <button class="nav-btn owner-only" data-view="staff">Staff</button>
+    <div class="spacer"></div>
+    <a class="nav-btn" href="/" target="_blank" rel="noopener">View shop</a>
+    <button class="nav-btn" id="logout-btn" type="button">Sign out</button>
+  </aside>
+
+  <main>
+    <!-- Overview -->
+    <section id="view-overview">
+      <div class="page-head">
+        <div>
+          <h2>Overview</h2>
+          <div class="date" id="today-label"></div>
+        </div>
+        <div class="head-actions"><div class="seg" id="range-seg" role="group" aria-label="Time range"><button type="button" data-range="1d" aria-pressed="false">1D</button><button type="button" data-range="7d" aria-pressed="true">7D</button><button type="button" data-range="1m" aria-pressed="false">1M</button><button type="button" data-range="3m" aria-pressed="false">3M</button><button type="button" data-range="6m" aria-pressed="false">6M</button><button type="button" data-range="1y" aria-pressed="false">1Y</button><button type="button" data-range="5y" aria-pressed="false">5Y</button><button type="button" data-range="all" aria-pressed="false">All</button></div><button class="btn ghost small" type="button" data-refresh>Refresh</button></div>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="two-col">
+        <div class="card pad"><h3 id="chart-title">Revenue</h3><div id="chart"></div></div>
+        <div class="card pad"><h3>Orders by status</h3><div id="status-breakdown"></div></div>
+      </div>
+      <div class="card" style="margin-bottom:20px">
+        <div class="pad" style="padding-bottom:0"><h3>Daily summary</h3><p class="muted" style="margin:-8px 0 8px;font-size:14px">One row for every day with orders. The staff only see "Today"; each day is kept here.</p></div>
+        <div class="table-wrap" style="max-height:340px;overflow-y:auto"><table><thead><tr><th>Date</th><th>Orders</th><th>Revenue</th></tr></thead><tbody id="daily-body"></tbody></table></div>
+      </div>
+      <div class="card">
+        <div class="pad" style="padding-bottom:0"><h3>Recent orders</h3></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th><th></th></tr></thead>
+            <tbody id="recent-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Orders -->
+    <section id="view-orders" class="hidden">
+      <div class="page-head">
+        <h2>Orders</h2>
+        <div class="head-actions"><button class="btn ghost small owner-only" type="button" id="export-orders">Export CSV</button><button class="btn ghost small" type="button" data-refresh>Refresh</button></div>
+      </div>
+      <div class="toolbar">
+        <input type="search" id="order-search" placeholder="Search by order ID, name, phone or city" aria-label="Search orders">
+        <select id="order-filter" aria-label="Filter by status"></select>
+        <span class="muted grow right" id="order-count"></span>
+      </div>
+      <div class="card table-wrap">
+        <table style="min-width:1150px">
+          <thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Payment</th><th>Date</th><th>Status</th><th></th></tr></thead>
+          <tbody id="orders-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section id="view-products" class="hidden">
+      <div class="page-head">
+        <h2>Products</h2>
+        <div class="head-actions"><button class="btn" type="button" id="add-product-btn">Add product</button></div>
+      </div>
+      <div class="live-banner">
+        <span class="live-badge"><span class="live-dot"></span>Live</span>
+        <p>Products added or edited here appear on your website. Products marked "homepage only" show on the home page, and all others show on the shop page.</p>
+        <div class="live-links"><a class="btn ghost small" href="/shop.html" target="_blank" rel="noopener">Open shop page</a><a class="btn ghost small" href="/" target="_blank" rel="noopener">Open home page</a></div>
+      </div>
+      <div class="toolbar">
+        <input type="search" id="product-search" placeholder="Search products" aria-label="Search products">
+        <span class="muted grow right" id="product-count"></span>
+      </div>
+      <div class="pgrid" id="products-grid"></div>
+    </section>
+
+    <!-- Customers -->
+    <section id="view-addproduct" class="hidden">
+      <div class="page-head">
+        <div><h2 id="product-dialog-title">Add product</h2><div class="date">Fill in the details. The product goes live on your website when you save.</div></div>
+        <div class="head-actions"><button class="btn ghost small" type="button" id="product-back">&larr; Back to products</button></div>
+      </div>
+      <form id="product-form" class="pform">
+        <input type="hidden" id="p-id">
+        <input type="hidden" id="p-orig" name="original_price">
+        <input type="hidden" id="p-sale" name="sale_price">
+        <div class="card pad">
+          <h3>Basic details</h3>
+          <div class="field"><label for="p-name">Product name</label><input type="text" id="p-name" name="name" required></div>
+          <div class="grid2">
+            <div class="field">
+              <label for="p-category">Category</label>
+              <select id="p-category" name="category" required></select>
+              <input type="text" id="p-category-new" class="hidden" placeholder="Type the new category" style="margin-top:8px">
+            </div>
+            <div class="field">
+              <label for="p-badge">Badge</label>
+              <select id="p-badge" name="badge"></select>
+              <input type="text" id="p-badge-new" class="hidden" placeholder="Type the new badge" style="margin-top:8px">
+            </div>
+          </div>
+          <div class="field" style="margin-bottom:0"><label for="p-desc">Description</label><textarea id="p-desc" name="description"></textarea></div>
+        </div>
+        <div class="card pad">
+          <h3>Sizes and prices</h3>
+          <div id="size-rows"></div>
+          <button class="btn ghost small" type="button" id="size-add">+ Add size</button>
+          <p class="hint">Write each size yourself, like 1g, 2g or 5g, and set its sale price. Original price is optional and shows crossed out. For an item sold as one piece, add a single size such as "1 piece".</p>
+          <p class="hint" id="legacy-price"></p>
+        </div>
+        <div class="card pad">
+          <h3>Photos <span class="hint" style="display:inline;font-family:var(--sans)">(up to 10)</span></h3>
+          <label class="drop" id="drop" for="p-image"><strong>Choose photos</strong> or drop them here<span>JPG or PNG, up to 5 MB each. The first photo is the main one.</span></label>
+          <input type="file" id="p-image" name="images" accept="image/*" multiple class="visually-hidden">
+          <div class="img-grid" id="img-grid"></div>
+          <p class="hint" id="img-count"></p>
+          <div class="field" style="margin:14px 0 0"><label for="p-url">Or add a photo by link</label><div class="link-add"><input type="text" id="p-url" placeholder="/uploads/example.jpg or https://..."><button class="btn ghost small" type="button" id="img-link-add">Add link</button></div></div>
+        </div>
+        <div class="card pad">
+          <h3>Where it shows</h3>
+          <label class="check"><input type="checkbox" id="p-home"> Show on the homepage only</label>
+          <p class="hint">Leave unticked to list the product on the shop page.</p>
+        </div>
+        <div class="pform-actions">
+          <button class="btn ghost" type="button" id="product-cancel">Cancel</button>
+          <button class="btn" type="submit" id="product-submit">Save product</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="view-soverview" class="hidden">
+      <div class="page-head"><div><h2>Today</h2><div class="date" id="so-date"></div></div><div class="head-actions"><button class="btn ghost small" type="button" data-refresh>Refresh</button></div></div>
+      <div class="stats" id="so-stats"></div>
+      <div class="card pad" style="margin-bottom:16px"><h3>Orders by status</h3><div id="so-status"></div></div>
+      <p class="muted">Today's count starts again tomorrow. A new order shows for every staff member until one of them confirms it. After that, only that person (and the owner) sees it.</p>
+    </section>
+
+    
+
+    <section id="view-payments" class="hidden">
+      <div class="page-head"><div><h2>Payments</h2><div class="date">Money your staff collected from customers and handed to you</div></div><div class="head-actions"><button class="btn ghost small" type="button" data-refresh>Refresh</button></div></div>
+      <div class="stats" id="pay-stats"></div>
+      <div id="pay-groups"></div>
+    </section>
+
+    <section id="view-spayments" class="hidden">
+      <div class="page-head"><div><h2>My payments</h2><div class="date">Payments you confirmed on orders</div></div><div class="head-actions"><button class="btn ghost small" type="button" data-refresh>Refresh</button></div></div>
+      <div class="stats" id="sp-stats"></div>
+      <div class="card table-wrap"><table><thead><tr><th>Order</th><th>Customer</th><th>Amount</th><th>Confirmed on</th><th>Status</th></tr></thead><tbody id="sp-body"></tbody></table></div>
+      <p class="muted" style="margin-top:14px">When you hand the money to the owner, the owner confirms it here and the status changes to Received.</p>
+    </section>
+
+    <section id="view-staff" class="hidden">
+      <div class="page-head"><h2>Staff</h2><div class="head-actions"><button class="btn" type="button" id="add-staff-btn">Add staff</button></div></div>
+      <p class="muted" style="margin:-8px 0 16px">Staff see only orders and delivery details. They can sign in only while their account is Active.</p>
+      <div class="card table-wrap"><table><thead><tr><th>Name</th><th>Username</th><th>Status</th><th>Last sign-in</th><th>Orders confirmed</th><th>Payment confirmed</th><th>Delivered</th><th>Cash to receive</th><th></th></tr></thead><tbody id="staff-body"></tbody></table></div>
+    </section>
+
+    <section id="view-customers" class="hidden">
+      <div class="page-head">
+        <h2>Customers</h2>
+        <div class="head-actions"><button class="btn ghost small" type="button" data-refresh>Refresh</button></div>
+      </div>
+      <div class="toolbar">
+        <div class="seg" id="cust-seg" role="group" aria-label="Customer status"><button type="button" data-ctab="active" aria-pressed="true">Active</button><button type="button" data-ctab="removed" aria-pressed="false">Removed</button><button type="button" data-ctab="deleted" aria-pressed="false">Deleted</button></div><input type="search" id="customer-search" placeholder="Search by name, email, phone or city" aria-label="Search customers">
+        <span class="muted grow right" id="customer-count"></span>
+      </div>
+      <div class="card table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>City</th><th>Orders</th><th>Spent</th><th></th></tr></thead>
+          <tbody id="customers-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Order details -->
+<dialog id="order-dialog" aria-labelledby="order-dialog-title">
+  <div class="dlg-head"><h3 id="order-dialog-title">Order</h3><button class="x" type="button" data-close aria-label="Close">&times;</button></div>
+  <div class="dlg-body" id="order-dialog-body"></div>
+  <div class="dlg-foot">
+    <button class="btn ghost owner-only" type="button" id="order-wa">WhatsApp bill</button>
+    <button class="btn ghost owner-only" type="button" id="order-email-bill">Email bill</button>
+    <button class="btn ghost" type="button" id="order-print">Print bill</button>
+    <button class="btn ghost" type="button" data-close>Close</button>
+  </div>
+</dialog>
+
+<!-- Add / edit product -->
+<!-- Confirmation box -->
+<dialog id="confirm-dialog" aria-labelledby="cf-title">
+  <div class="dlg-body cf">
+    <div class="cf-icon" id="cf-icon">!</div>
+    <h3 id="cf-title"></h3>
+    <p id="cf-msg"></p>
+    <ul class="cf-list hidden" id="cf-list"></ul>
+    <div id="cf-extra"></div>
+  </div>
+  <div class="dlg-foot"><button class="btn ghost" type="button" id="cf-cancel">Cancel</button><button class="btn" type="button" id="cf-ok">Confirm</button></div>
+</dialog>
+
+<!-- Customer details -->
+<dialog id="cust-dialog" aria-labelledby="cust-title">
+  <div class="dlg-head"><h3 id="cust-title">Customer</h3><button class="x" type="button" data-close aria-label="Close">&times;</button></div>
+  <div class="dlg-body" id="cust-body"></div>
+  <div class="dlg-foot"><button class="btn danger owner-only" type="button" id="cust-delete">Delete account</button><button class="btn ghost owner-only" type="button" id="cust-remove">Remove customer</button><button class="btn ghost" type="button" data-close>Close</button></div>
+</dialog>
+
+<!-- Product details -->
+<dialog id="pview-dialog" aria-labelledby="pview-title">
+  <div class="dlg-head"><h3 id="pview-title">Product</h3><button class="x" type="button" data-close aria-label="Close">&times;</button></div>
+  <div class="dlg-body" id="pview-body"></div>
+  <div class="dlg-foot"><button class="btn" type="button" id="pview-edit">Edit product</button><button class="btn ghost" type="button" data-close>Close</button></div>
+</dialog>
+
+<dialog id="staff-dialog" aria-labelledby="staff-dlg-title">
+  <form id="staff-form">
+    <div class="dlg-head"><h3 id="staff-dlg-title">Add staff</h3><button class="x" type="button" data-close aria-label="Close">&times;</button></div>
+    <div class="dlg-body">
+      <div class="field" id="staff-name-field"><label for="s-name">Full name</label><input type="text" id="s-name" required></div>
+      <div class="field" id="staff-user-field"><label for="s-user">Username</label><input type="text" id="s-user" autocomplete="off" required><p class="hint">3 to 30 letters, numbers, dots, dashes or underscores.</p></div>
+      <div class="field" style="margin-bottom:0"><label for="s-pass">Password</label><input type="text" id="s-pass" autocomplete="off" required minlength="8"><p class="hint">At least 8 characters. Share it with your staff member privately.</p></div>
+    </div>
+    <div class="dlg-foot"><button class="btn ghost" type="button" data-close>Cancel</button><button class="btn" type="submit" id="staff-submit">Create account</button></div>
+  </form>
+</dialog>
+
+<div id="toast" class="hidden" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var STATUSES = ['Pending', 'Confirmed', 'Shipped', 'Delivered', 'Cancelled'];
+  var STAFF_STATUSES = ['Pending', 'Confirmed', 'Shipped', 'Delivered'];
+  var state = { orders: [], products: [], users: [], deleted: [], stats: {}, view: 'overview', range: '7d', custTab: 'active', role: 'owner', staff: [], payments: { staff: [], owner: { collected: 0, rows: [] } }, mypay: { payments: [], collected: 0, received: 0, pending: 0 } };
+
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+
+  // Everything that comes from the database is escaped before going into HTML
+  function esc(v) {
+    return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function rupee(n) { return '₹' + Number(n || 0).toLocaleString('en-IN'); }
+  function compact(n) {
+    n = Number(n || 0);
+    if (n >= 100000) return '₹' + (n / 100000).toFixed(1).replace(/\.0$/, '') + 'L';
+    if (n >= 1000) return '₹' + (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+    return '₹' + Math.round(n);
+  }
+  function orderDate(o) { return o.created_at || o.createdAt || o.updated_at || o.updatedAt; }
+  function fmtDate(v) {
+    var d = new Date(v);
+    if (!v || isNaN(d.getTime())) return '';
+    return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+  function dayKey(d) { return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
+  // New orders from the shop start as "Order Placed": the dashboard treats that exactly like Pending
+  function normStatus(s) { s = String(s || '').trim(); return !s || /^(pending|order placed)$/i.test(s) ? 'Pending' : s; }
+  function isNew(s) { return normStatus(s) === 'Pending'; }
+  function statusClass(s) { return normStatus(s).toLowerCase().replace(/[^a-z]/g, ''); }
+  function pill(s) { var label = String(s || '').trim() || 'Pending'; return '<span class="pill ' + esc(statusClass(s)) + '">' + esc(label) + '</span>'; }
+
+  var toastTimer;
+  function toast(msg, isError) {
+    var t = $('#toast');
+    t.textContent = msg;
+    t.className = isError ? 'error' : '';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.className = 'hidden'; }, 4200);
+  }
+
+  function api(url, options) {
+    options = options || {};
+    options.credentials = 'same-origin';
+    return fetch(url, options).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (data) {
+        if (res.status === 401 && url.indexOf('/login') === -1) {
+          showLogin(/not active/i.test(data.message || '') ? data.message : '');
+          var e401 = new Error('Please sign in again.');
+          e401.status = 401;
+          throw e401;
+        }
+        if (!res.ok || data.success === false) {
+          var outdated = res.status === 404 && !data.message && !data.error;
+          var err = new Error(data.message || data.error || (outdated
+            ? 'The server needs updating: copy the newest server.js into your project folder and start it again (node server.js).'
+            : 'Request failed (' + res.status + ')'));
+          err.status = res.status;
+          throw err;
+        }
+        return data;
+      });
+    });
+  }
+
+  // ---------- Confirmation box (replaces the plain browser pop-ups) ----------
+  function confirmBox(o) {
+    return new Promise(function (resolve) {
+      var d = $('#confirm-dialog'), ok = $('#cf-ok'), cancel = $('#cf-cancel'), settled = false, typed;
+      $('#cf-title').textContent = o.title || 'Are you sure?';
+      $('#cf-msg').textContent = o.message || '';
+      var list = $('#cf-list');
+      list.innerHTML = (o.bullets || []).map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('');
+      list.classList.toggle('hidden', !(o.bullets && o.bullets.length));
+      var icon = $('#cf-icon');
+      icon.className = 'cf-icon' + (o.danger ? ' danger' : '');
+      icon.textContent = o.danger ? '!' : '?';
+      var extra = '';
+      if (o.notify) {
+        extra += '<label class="check"><input type="checkbox" id="cf-notify"' + (o.notify.disabled ? ' disabled' : ' checked') + '> ' + esc(o.notify.label) + '</label>';
+        if (!o.notify.disabled) extra += '<textarea id="cf-note" placeholder="' + esc(o.notify.placeholder || '') + '"></textarea>';
+      }
+      if (o.type) extra += '<label for="cf-type" style="margin-top:14px">Type <strong>' + esc(o.type) + '</strong> to confirm</label><input type="text" id="cf-type" autocomplete="off">';
+      $('#cf-extra').innerHTML = extra;
+      ok.textContent = o.confirmLabel || 'Confirm';
+      ok.className = 'btn' + (o.danger ? ' danger-solid' : '');
+      ok.disabled = !!o.type;
+      typed = $('#cf-type');
+
+      function cleanup() {
+        ok.removeEventListener('click', onOk);
+        cancel.removeEventListener('click', onCancel);
+        d.removeEventListener('close', onCancel);
+        d.removeEventListener('keydown', onKey);
+        if (typed) typed.removeEventListener('input', onInput);
+      }
+      function finish(val) { if (settled) return; settled = true; cleanup(); if (d.open) d.close(); resolve(val); }
+      function onOk() { var n = $('#cf-notify'), t = $('#cf-note'); finish({ notify: !!(n && n.checked), note: t ? t.value : '' }); }
+      function onCancel() { finish(null); }
+      function onInput() { ok.disabled = typed.value.trim().toUpperCase() !== String(o.type).toUpperCase(); }
+      function onKey(e) { if (e.key === 'Enter' && !ok.disabled && e.target.tagName !== 'TEXTAREA') { e.preventDefault(); onOk(); } }
+
+      ok.addEventListener('click', onOk);
+      cancel.addEventListener('click', onCancel);
+      d.addEventListener('close', onCancel);
+      d.addEventListener('keydown', onKey);
+      if (typed) typed.addEventListener('input', onInput);
+      d.showModal();
+      setTimeout(function () { (typed || cancel).focus(); }, 0);
+    });
+  }
+
+  // ---------- Screens ----------
+  function showLogin(note) {
+    document.body.classList.remove('role-staff');
+    $('#app').classList.add('hidden');
+    $('#login-screen').classList.remove('hidden');
+    closeDialogs();
+    showPick(note);
+  }
+  function showPick(note) {
+    $('#login-form').classList.add('hidden');
+    $('#staff-login-form').classList.add('hidden');
+    $('#role-pick').classList.remove('hidden');
+    $('#pick-note').textContent = note || '';
+  }
+  function showRoleForm(role) {
+    $('#role-pick').classList.add('hidden');
+    $('#login-form').classList.toggle('hidden', role !== 'owner');
+    $('#staff-login-form').classList.toggle('hidden', role !== 'staff');
+    setTimeout(function () { $(role === 'owner' ? '#admin-password' : '#staff-username').focus(); }, 0);
+  }
+  function showApp() {
+    $('#login-screen').classList.add('hidden');
+    $('#app').classList.remove('hidden');
+  }
+  function closeDialogs() {
+    $all('dialog').forEach(function (d) { if (d.open) d.close(); });
+  }
+
+  var VIEWS = ['overview', 'soverview', 'orders', 'products', 'addproduct', 'customers', 'payments', 'spayments', 'staff'];
+  function showView(name) {
+    state.view = name;
+    VIEWS.forEach(function (v) { $('#view-' + v).classList.toggle('hidden', v !== name); });
+    $all('.nav-btn[data-view]').forEach(function (b) {
+      if (b.getAttribute('data-view') === name) b.setAttribute('aria-current', 'page');
+      else b.removeAttribute('aria-current');
+    });
+    var addNav = $('#nav-add-product');
+    if (addNav) { if (name === 'addproduct') addNav.setAttribute('aria-current', 'page'); else addNav.removeAttribute('aria-current'); }
+    window.scrollTo(0, 0);
+  }
+
+  // ---------- Sign in / out ----------
+  $('#pw-toggle').addEventListener('click', function () {
+    var input = $('#admin-password');
+    var show = input.type === 'password';
+    input.type = show ? 'text' : 'password';
+    this.textContent = show ? 'Hide' : 'Show';
+    this.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+  });
+
+  $('#login-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = $('#login-submit');
+    var errBox = $('#login-error');
+    errBox.textContent = '';
+    btn.disabled = true;
+    btn.textContent = 'Checking...';
+    api('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: $('#admin-password').value })
+    }).then(function () {
+      $('#admin-password').value = '';
+      return enter();
+    }).catch(function (err) {
+      errBox.textContent = err.message;
+      $('#admin-password').select();
+    }).then(function () {
+      btn.disabled = false;
+      btn.textContent = 'Open dashboard';
+    });
+  });
+
+  $('#logout-btn').addEventListener('click', function () {
+    api(state.role === 'staff' ? '/api/staff/logout' : '/api/admin/logout', { method: 'POST' }).catch(function () {}).then(function () {
+      state.orders = []; state.products = []; state.users = []; state.deleted = []; state.staff = [];
+      showLogin();
+    });
+  });
+
+  // ---------- Loading ----------
+  function loadAll() {
+    return Promise.all([
+      api('/api/admin/dashboard'),
+      api('/api/admin/products').catch(function () { return { products: [] }; }),
+      api('/api/admin/users').catch(function () { return { users: [] }; }),
+      api('/api/admin/staff').catch(function () { return { staff: [] }; }),
+      api('/api/admin/payments').catch(function () { return { staff: [], owner: { collected: 0, rows: [] } }; })
+    ]).then(function (r) {
+      state.orders = r[0].orders || [];
+      notifyNewOrders();
+      state.stats = r[0].stats || {};
+      state.products = r[1].products || [];
+      state.users = r[2].users || [];
+      state.deleted = r[2].deleted_users || [];
+      state.staff = r[3].staff || [];
+      state.payments = { staff: r[4].staff || [], owner: r[4].owner || { collected: 0, rows: [] } };
+      renderAll();
+    });
+  }
+
+  function enter() {
+    state.role = 'owner';
+    knownOrders = null;
+    document.body.classList.remove('role-staff');
+    return loadAll().then(function () {
+      showApp();
+      showView('overview');
+    });
+  }
+
+  function updatePending() {
+    var pending = state.orders.filter(function (o) { return isNew(o.status); }).length;
+    var badge = $('#pending-count');
+    badge.textContent = pending;
+    badge.classList.toggle('hidden', pending === 0);
+  }
+  function loadStaffOrders() {
+    return Promise.all([
+      api('/api/staff/orders'),
+      api('/api/admin/products').catch(function () { return { products: [] }; }),
+      api('/api/staff/payments').catch(function () { return { payments: [], collected: 0, received: 0, pending: 0 }; })
+    ]).then(function (r) {
+      state.orders = r[0].orders || [];
+      notifyNewOrders();
+      state.products = r[1].products || [];
+      state.mypay = r[2];
+      var got = Number(r[2].received) || 0;
+      if (knownReceived != null && got > knownReceived) toast('The owner confirmed receiving ' + rupee(got - knownReceived) + ' from you.');
+      knownReceived = got;
+      renderOrderFilter();
+      renderOrders();
+      renderProducts();
+      renderMyPayments();
+      renderStaffOverview();
+      updatePending();
+    });
+  }
+  function enterStaff() {
+    state.role = 'staff';
+    knownOrders = null;
+    knownReceived = null;
+    document.body.classList.add('role-staff');
+    return loadStaffOrders().then(function () {
+      showApp();
+      showView('soverview');
+    });
+  }
+
+  $all('[data-refresh]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      (state.role === 'staff' ? loadStaffOrders() : loadAll()).then(toastUpdated).catch(function (e) { if (e.status !== 401) toast(e.message, true); });
+    });
+  });
+
+  function renderAll() {
+    renderOverview();
+    renderOrderFilter();
+    renderOrders();
+    renderProducts();
+    renderCustomers();
+    renderStaff();
+    renderPayments();
+    renderDaily();
+    var pending = state.orders.filter(function (o) { return isNew(o.status); }).length;
+    var badge = $('#pending-count');
+    badge.textContent = pending;
+    badge.classList.toggle('hidden', pending === 0);
+  }
+
+  // ---------- Overview ----------
+  var RANGES = { '1d': 'last 24 hours', '7d': 'last 7 days', '1m': 'last 30 days', '3m': 'last 3 months', '6m': 'last 6 months', '1y': 'last year', '5y': 'last 5 years', 'all': 'all time' };
+  var MON = { month: 'short' };
+
+  function buckets(r) {
+    var now = new Date(), b = [], i, s, e, n;
+    var day = new Date(now); day.setHours(0, 0, 0, 0);
+    if (r === '1d') {
+      var h = new Date(now); h.setMinutes(0, 0, 0);
+      for (i = 23; i >= 0; i--) {
+        s = new Date(h); s.setHours(h.getHours() - i);
+        e = new Date(s); e.setHours(s.getHours() + 1);
+        b.push({ s: s, e: e, label: s.toLocaleTimeString('en-IN', { hour: 'numeric', hour12: true }) });
+      }
+    } else if (r === '7d' || r === '1m') {
+      n = r === '7d' ? 7 : 30;
+      for (i = n - 1; i >= 0; i--) {
+        s = new Date(day); s.setDate(day.getDate() - i);
+        e = new Date(s); e.setDate(s.getDate() + 1);
+        b.push({ s: s, e: e, label: n === 7 ? s.toLocaleDateString('en-IN', { weekday: 'short' }) : s.getDate() + ' ' + s.toLocaleDateString('en-IN', MON) });
+      }
+    } else if (r === '3m') {
+      var end = new Date(day); end.setDate(day.getDate() + 1);
+      for (i = 12; i >= 0; i--) {
+        e = new Date(end); e.setDate(end.getDate() - 7 * i);
+        s = new Date(e); s.setDate(e.getDate() - 7);
+        b.push({ s: s, e: e, label: s.getDate() + ' ' + s.toLocaleDateString('en-IN', MON) });
+      }
+    } else if (r === '6m' || r === '1y') {
+      n = r === '6m' ? 6 : 12;
+      for (i = n - 1; i >= 0; i--) {
+        s = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        e = new Date(now.getFullYear(), now.getMonth() - i + 1, 1);
+        b.push({ s: s, e: e, label: s.toLocaleDateString('en-IN', MON) });
+      }
+    } else {
+      var y = now.getFullYear(), first = y - 4;
+      if (r === 'all') {
+        first = y;
+        state.orders.forEach(function (o) { var d = new Date(orderDate(o)); if (!isNaN(d.getTime()) && d.getFullYear() < first) first = d.getFullYear(); });
+      }
+      for (i = first; i <= y; i++) b.push({ s: new Date(i, 0, 1), e: new Date(i + 1, 0, 1), label: String(i) });
+    }
+    return b;
+  }
+
+  function drawChart(bs) {
+    var W = 560, H = 230, base = 190, maxH = 140, n = bs.length, left = 16;
+    var max = Math.max.apply(null, bs.map(function (x) { return x.total; })) || 1;
+    var step = (W - 32) / n, bw = Math.max(4, step * 0.62);
+    var every = n <= 8 ? 1 : n <= 14 ? 2 : Math.ceil(n / 7);
+    var out = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Revenue chart"><line x1="8" y1="' + base + '" x2="' + (W - 8) + '" y2="' + base + '"></line>';
+    bs.forEach(function (x, idx) {
+      var h = x.total > 0 ? Math.max(4, (x.total / max) * maxH) : 2;
+      var bx = left + idx * step + (step - bw) / 2, cx = bx + bw / 2;
+      out += '<rect class="bar' + (idx === n - 1 ? ' today' : '') + '" x="' + bx + '" y="' + (base - h) + '" width="' + bw + '" height="' + h + '" rx="3"><title>' + esc(x.label + ': ' + rupee(x.total)) + '</title></rect>';
+      if (n <= 8 && x.total > 0) out += '<text class="val" x="' + cx + '" y="' + (base - h - 8) + '" text-anchor="middle">' + esc(compact(x.total)) + '</text>';
+      if ((n - 1 - idx) % every === 0) out += '<text x="' + cx + '" y="' + (base + 22) + '" text-anchor="middle">' + esc(x.label) + '</text>';
+    });
+    return out + '</svg>';
+  }
+
+  function renderOverview() {
+    $('#today-label').textContent = new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    $all('#range-seg button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-range') === state.range ? 'true' : 'false'); });
+
+    var bs = buckets(state.range);
+    bs.forEach(function (x) { x.total = 0; });
+    var inRange = [], revenue = 0;
+    state.orders.forEach(function (o) {
+      var d = new Date(orderDate(o));
+      if (isNaN(d.getTime()) || d < bs[0].s || d >= bs[bs.length - 1].e) return;
+      inRange.push(o);
+      if (o.status === 'Cancelled') return;
+      revenue += Number(o.total) || 0;
+      bs.forEach(function (x) { if (d >= x.s && d < x.e) x.total += Number(o.total) || 0; });
+    });
+    var pending = state.orders.filter(function (o) { return isNew(o.status); }).length;
+    var label = RANGES[state.range];
+    var tiles = [
+      { n: rupee(revenue), l: 'Revenue, ' + label },
+      { n: inRange.length, l: 'Orders, ' + label },
+      { n: pending, l: 'Pending orders (all time)', alert: pending > 0 },
+      { n: state.users.filter(function (u) { return !u.removed; }).length, l: 'Active customers' },
+      { n: state.products.length || state.stats.totalProducts || 0, l: 'Products' }
+    ];
+    $('#stats').innerHTML = tiles.map(function (t) {
+      return '<div class="card stat' + (t.alert ? ' alert' : '') + '"><div class="n">' + esc(t.n) + '</div><div class="l">' + esc(t.l) + '</div></div>';
+    }).join('');
+    $('#chart-title').textContent = 'Revenue, ' + label;
+    $('#chart').innerHTML = drawChart(bs);
+
+    var total = inRange.length || 1;
+    var list = STATUSES.slice();
+    inRange.forEach(function (o) { var s2 = normStatus(o.status); if (list.indexOf(s2) === -1) list.push(s2); });
+    $('#status-breakdown').innerHTML = list.map(function (s2) {
+      var c = inRange.filter(function (o) { return normStatus(o.status) === s2; }).length;
+      return '<div class="status-row"><span>' + esc(s2) + '</span><div class="meter"><span style="width:' + Math.round((c / total) * 100) + '%"></span></div><strong class="right">' + c + '</strong></div>';
+    }).join('');
+
+    var recent = state.orders.slice(0, 5);
+    $('#recent-body').innerHTML = recent.length ? recent.map(function (o) {
+      return '<tr><td><strong>#' + esc(o.order_id) + '</strong></td><td>' + esc(o.customer_name) + '</td><td>' + rupee(o.total) + '</td><td>' + pill(o.status) + '</td>' +
+        '<td class="right"><button class="btn ghost small" type="button" data-open-order="' + esc(o.order_id) + '">View</button></td></tr>';
+    }).join('') : '<tr><td colspan="5" class="empty">No orders yet. New orders will show up here.</td></tr>';
+  }
+
+  $('#range-seg').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-range]');
+    if (!b) return;
+    state.range = b.getAttribute('data-range');
+    renderOverview();
+  });
+
+  // ---------- Orders ----------
+  function renderOrderFilter() {
+    var sel = $('#order-filter');
+    var current = sel.value;
+    var list = STATUSES.slice();
+    state.orders.forEach(function (o) { var s = normStatus(o.status); if (list.indexOf(s) === -1) list.push(s); });
+    sel.innerHTML = '<option value="">All statuses</option>' + list.map(function (s) {
+      return '<option value="' + esc(s) + '">' + esc(s) + '</option>';
+    }).join('');
+    sel.value = current;
+  }
+
+  function payName(m) { return /^cod$/i.test(m || '') ? 'Cash on Delivery' : (m || ''); }
+  function payPill(o) { return o.payment_confirmed ? '<span class="pill delivered">Paid</span>' : '<span class="pill pending">Not confirmed</span>'; }
+
+  function itemsCell(o) {
+    var items = o.items || [];
+    if (!items.length) return '<span class="muted">Not recorded</span>';
+    return items.map(function (i) {
+      return esc(i.name) + (i.variant ? ' <span class="pill">' + esc(i.variant) + '</span>' : '') + ' &times; ' + (Number(i.quantity) || 1) +
+        (i.price != null ? ' <span class="muted">@ ' + rupee(i.price) + '</span>' : '');
+    }).join('<br>');
+  }
+
+  function renderOrders() {
+    var q = $('#order-search').value.trim().toLowerCase();
+    var f = $('#order-filter').value;
+    var rows = state.orders.filter(function (o) {
+      if (f && normStatus(o.status) !== f) return false;
+      if (!q) return true;
+      var names = (o.items || []).map(function (i) { return i.name + ' ' + (i.variant || ''); }).join(' ');
+      return [o.order_id, o.customer_name, o.customer_phone, o.city, names].join(' ').toLowerCase().indexOf(q) !== -1;
+    });
+    $('#order-count').textContent = rows.length + (rows.length === 1 ? ' order' : ' orders');
+    $('#orders-body').innerHTML = rows.length ? rows.map(function (o) {
+      var who = o.details_removed
+        ? esc(o.customer_name || 'Customer') + '<div class="hint">Details removed after delivery</div>'
+        : esc(o.customer_name) + '<div class="hint">' + esc(o.customer_phone || '') + '</div>' +
+          (o.customer_email ? '<div class="hint">' + esc(o.customer_email) + '</div>' : '') +
+          '<div class="hint">' + esc([o.address, o.city, o.state].filter(Boolean).join(', ')) + (o.pincode ? ' - ' + esc(o.pincode) : '') + '</div>';
+      return '<tr>' +
+        '<td><strong>#' + esc(o.order_id) + '</strong></td>' +
+        '<td>' + who + '</td>' +
+        '<td>' + itemsCell(o) + '</td>' +
+        '<td><strong>' + rupee(o.total) + '</strong></td>' +
+        '<td>' + esc(payName(o.payment_method)) + '<div style="margin-top:4px">' + payPill(o) + '</div></td>' +
+        '<td>' + esc(fmtDate(orderDate(o))) + '</td>' +
+        '<td>' + pill(o.status) + (state.role === 'staff' ? (o.mine ? '<div class="hint">Yours</div>' : '') : (o.handled_by ? '<div class="hint">By ' + esc(o.handled_by) + '</div>' : '')) + '</td>' +
+        '<td class="right"><button class="btn ghost small" type="button" data-open-order="' + esc(o.order_id) + '">View</button></td>' +
+        '</tr>';
+    }).join('') : '<tr><td colspan="8" class="empty">' + (state.orders.length ? 'No orders match your search.' : 'No orders yet. New orders will show up here.') + '</td></tr>';
+  }
+
+  $('#order-search').addEventListener('input', renderOrders);
+  $('#order-filter').addEventListener('change', renderOrders);
+
+  var openOrderId = null;
+  function findOrder(id) { return state.orders.filter(function (o) { return String(o.order_id) === String(id); })[0]; }
+
+  function openOrder(id) {
+    var o = findOrder(id);
+    if (!o) return;
+    openOrderId = o.order_id;
+    var staff = state.role === 'staff';
+    var status = normStatus(o.status);
+    var locked = status === 'Delivered';
+    var opts = (staff ? STAFF_STATUSES : STATUSES).slice();
+    if (opts.indexOf(status) === -1) opts.unshift(status);
+    var canEmail = staff ? !!o.has_email : !!o.customer_email;
+    var canPay = status !== 'Cancelled' && (!staff || !o.payment_confirmed || !!o.payment_by_me);
+    $('#order-print').textContent = staff ? 'Print packing slip' : 'Print bill';
+    $('#order-wa').disabled = !o.customer_phone;
+    $('#order-email-bill').disabled = !o.customer_email;
+    $('#order-dialog-title').textContent = 'Order #' + o.order_id;
+
+    var items = o.items || [];
+    var itemsHtml = items.length
+      ? '<table class="items"><thead><tr><th>Item</th><th class="right">Rate</th><th>Qty</th><th class="right">Amount</th></tr></thead><tbody>' + items.map(function (i) {
+          var known = i.price != null, rate = Number(i.price) || 0, qty = Number(i.quantity) || 1;
+          return '<tr><td>' + esc(i.name) + (i.variant ? ' <span class="pill">' + esc(i.variant) + '</span>' : '') + '</td><td class="right">' + (known ? rupee(rate) : '&mdash;') + '</td><td>' + qty + '</td><td class="right">' + (known ? rupee(rate * qty) : '&mdash;') + '</td></tr>';
+        }).join('') + '<tr><td colspan="3" class="right"><strong>Total</strong></td><td class="right"><strong>' + rupee(o.total) + '</strong></td></tr></tbody></table>'
+      : '<p class="muted">Items were not recorded for this order. Orders placed from now on show their items here.</p>';
+
+    var person = o.details_removed
+      ? '<dt>Customer</dt><dd>' + esc(o.customer_name || 'Customer') + '</dd><dt>Other details</dt><dd class="muted">Removed after delivery. The owner keeps them.</dd>'
+      : '<dt>Customer</dt><dd>' + esc(o.customer_name) + '</dd>' +
+        '<dt>Phone</dt><dd>' + esc(o.customer_phone || 'Not provided') + '</dd>' +
+        '<dt>Email</dt><dd>' + esc(o.customer_email || 'Not provided') + '</dd>' +
+        '<dt>Delivery address</dt><dd>' + esc([o.address, o.city, o.state].filter(Boolean).join(', ')) + (o.pincode ? ' - ' + esc(o.pincode) : '') + '</dd>';
+
+    var statusBox = locked
+      ? '<div class="status-edit"><strong>Status: Delivered</strong><span class="muted">Locked. A delivered order can never be changed.</span></div>'
+      : '<div class="status-edit"><label for="order-status" style="margin:0">Status</label>' +
+          '<select id="order-status">' + opts.map(function (st) { return '<option value="' + esc(st) + '"' + (st === status ? ' selected' : '') + '>' + esc(st) + '</option>'; }).join('') + '</select>' +
+          (status === 'Pending' ? '<button class="btn small" type="button" id="order-confirm">Confirm order</button>' : '') +
+          '<button class="btn small" type="button" id="order-status-save">Save status</button></div>' +
+        '<div class="notify"><label class="check"><input type="checkbox" id="order-notify"' + (canEmail ? ' checked' : ' disabled') + '> Email the customer about this update</label>' +
+          '<textarea id="order-note" placeholder="Optional message, e.g. courier name and tracking number"></textarea></div>';
+
+    $('#order-dialog-body').innerHTML =
+      '<dl class="info">' + person +
+        '<dt>Placed on</dt><dd>' + esc(fmtDate(orderDate(o))) + '</dd>' +
+        '<dt>Payment</dt><dd>' + esc(payName(o.payment_method)) + (o.payment_reference ? ' (ref: ' + esc(o.payment_reference) + ')' : '') + '</dd>' +
+        '<dt>Payment status</dt><dd>' + payPill(o) + (o.payment_confirmed ? ' <span class="muted">confirmed by ' + esc(o.payment_confirmed_by || 'staff') + '</span>' : '') +
+          (canPay ? ' <button class="btn ghost small" type="button" id="order-pay">' + (o.payment_confirmed ? 'Undo' : 'Confirm payment received') + '</button>' : '') + '</dd>' +
+        (o.handled_by && !staff ? '<dt>Handled by</dt><dd>' + esc(o.handled_by) + ' <button class="btn ghost small" type="button" id="order-release">Release to all staff</button></dd>' : '') +
+      '</dl>' + itemsHtml + statusBox;
+    $('#order-dialog').showModal();
+  }
+
+  $('#order-dialog-body').addEventListener('click', function (e) {
+    var btn = e.target.closest('#order-status-save, #order-confirm');
+    if (!btn) return;
+    if (btn.id === 'order-confirm') $('#order-status').value = 'Confirmed';
+    var next = $('#order-status').value;
+    var notify = $('#order-notify').checked;
+    var o = findOrder(openOrderId);
+    btn.disabled = true;
+    api((state.role === 'staff' ? '/api/staff/orders/' : '/api/admin/orders/') + encodeURIComponent(openOrderId), {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: next, notify: notify, note: $('#order-note').value })
+    }).then(function (r) {
+      if (o) o.status = next;
+      if (state.role === 'staff') loadStaffOrders(); else renderAll();
+      $('#order-dialog').close();
+      toast('Order #' + openOrderId + ' marked as ' + next + (notify ? (r.emailed ? ' and the customer was emailed.' : '. The email could not be sent.') : '.'), notify && !r.emailed);
+    }).catch(function (err) {
+      if (err.status !== 401) toast(err.message, true);
+      if (state.role === 'staff' && (err.status === 403 || err.status === 409)) { $('#order-dialog').close(); loadStaffOrders(); }
+    }).then(function () { btn.disabled = false; });
+  });
+
+  $('#order-print').addEventListener('click', function () {
+    var o = findOrder(openOrderId);
+    if (!o) return;
+    var slip = state.role === 'staff';
+    var rows = (o.items || []).map(function (i) {
+      return '<tr><td>' + esc(i.name) + (i.variant ? ' (' + esc(i.variant) + ')' : '') + '</td><td>' + esc(i.quantity) + '</td>' + (slip ? '' : '<td>' + rupee(i.price) + '</td><td style="text-align:right">' + rupee(Number(i.price) * Number(i.quantity)) + '</td>') + '</tr>';
+    }).join('');
+    var w = window.open('', '_blank');
+    if (!w) { toast('Allow pop-ups for this page to print the invoice.', true); return; }
+    w.document.write('<!DOCTYPE html><html><head><title>' + (slip ? 'Packing slip' : 'Bill') + ' #' + esc(o.order_id) + '</title><style>body{font-family:Arial,sans-serif;max-width:720px;margin:32px auto;color:#222}h1{color:#8b0000;font-family:Georgia,serif;margin:0}table{width:100%;border-collapse:collapse;margin:20px 0}th,td{padding:8px;border-bottom:1px solid #ddd;text-align:left}.t{text-align:right;font-size:18px}</style></head><body>' +
+      '<h1>The Friends Heritage</h1><p>' + (slip ? 'Packing slip' : 'Bill') + ' for order <strong>#' + esc(o.order_id) + '</strong><br>' + esc(fmtDate(orderDate(o))) + '</p>' +
+      '<p><strong>' + esc(o.customer_name) + '</strong><br>' + esc([o.address, o.city, o.state].filter(Boolean).join(', ')) + (o.pincode ? ' - ' + esc(o.pincode) : '') + '<br>Phone: ' + esc(o.customer_phone || '') + '</p>' +
+      '<table><thead><tr><th>Item</th><th>Qty</th>' + (slip ? '' : '<th>Price</th><th style="text-align:right">Amount</th>') + '</tr></thead><tbody>' + (rows || '<tr><td colspan="4">Items not recorded for this order.</td></tr>') + '</tbody></table>' +
+      '<p class="t">Total: <strong>' + rupee(o.total) + '</strong></p><p>Payment: ' + esc(payName(o.payment_method)) + (slip ? '' : ' - ' + (o.payment_confirmed ? 'Paid' : 'Payment pending')) + '</p><p>Thank you for shopping with us.</p></body></html>');
+    w.document.close();
+    w.focus();
+    setTimeout(function () { w.print(); }, 300);
+  });
+
+  $('#export-orders').addEventListener('click', function () {
+    var cols = ['order_id', 'customer_name', 'customer_phone', 'customer_email', 'address', 'city', 'state', 'pincode', 'total', 'payment_method', 'status'];
+    function cell(v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; }
+    var csv = [cols.concat(['date', 'items']).join(',')].concat(state.orders.map(function (o) {
+      var items = (o.items || []).map(function (i) { return i.name + ' x' + i.quantity; }).join('; ');
+      return cols.map(function (c) { return cell(o[c]); }).concat([cell(fmtDate(orderDate(o))), cell(items)]).join(',');
+    })).join('\r\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' }));
+    a.download = 'orders-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-open-order]');
+    if (b) openOrder(b.getAttribute('data-open-order'));
+  });
+
+  // ---------- Products ----------
+  function sizeChips(p) {
+    return (p.variants || []).map(function (v) {
+      var more = Number(v.original_price) > Number(v.sale_price);
+      return '<span class="sz">' + esc(v.name) + '<b>' + rupee(v.sale_price) + '</b>' + (more ? '<s>' + rupee(v.original_price) + '</s>' : '') + '</span>';
+    }).join('');
+  }
+  function priceLine(p) {
+    var vs = p.variants || [];
+    if (vs.length) {
+      var lo = vs.reduce(function (a, b) { return Number(b.sale_price) < Number(a.sale_price) ? b : a; });
+      return '<span class="muted">From </span><strong>' + rupee(lo.sale_price) + '</strong>' + (Number(lo.original_price) > Number(lo.sale_price) ? '<span class="strike">' + rupee(lo.original_price) + '</span>' : '');
+    }
+    var off = discount(p);
+    return '<strong>' + rupee(p.sale_price) + '</strong>' + (off ? '<span class="strike">' + rupee(p.original_price) + '</span><span class="off">' + off + '% off</span>' : '');
+  }
+  function renderProducts() {
+    var q = $('#product-search').value.trim().toLowerCase();
+    var rows = state.products.filter(function (p) {
+      return !q || [p.name, p.category, p.badge].join(' ').toLowerCase().indexOf(q) !== -1;
+    });
+    $('#product-count').textContent = rows.length + (rows.length === 1 ? ' product' : ' products');
+    $('#products-grid').innerHTML = rows.length ? rows.map(function (p) {
+      var n = (p.images || []).length;
+      return '<div class="card pcard"><div class="pimg"><img src="' + esc(p.image || '/logo.png') + '" alt="" data-view-product="' + esc(p.id) + '">' + (n > 1 ? '<span class="pcount">' + n + ' photos</span>' : '') + '</div>' +
+        '<div class="pb"><h4>' + esc(p.name) + '</h4>' +
+        '<div class="muted">' + esc(p.category) + '</div>' +
+        '<div>' + priceLine(p) + '</div>' +
+        '<div class="sizes"><div class="muted" style="font-size:12px;margin-bottom:4px">Sizes and prices</div>' + ((p.variants && p.variants.length) ? sizeChips(p) : '<span class="muted">No sizes added (single price)</span>') + '</div>' +
+        '<div>' + (p.badge ? '<span class="pill">' + esc(p.badge) + '</span> ' : '') + '<span class="pill' + (p.homepage_only ? ' home' : '') + '">' + (p.homepage_only ? 'Homepage' : 'Shop') + '</span></div>' +
+        '<div class="row-actions"><button class="btn ghost small" type="button" data-view-product="' + esc(p.id) + '">Details</button>' +
+        '<button class="btn ghost small" type="button" data-edit="' + esc(p.id) + '">Edit</button>' +
+        '<button class="btn danger small" type="button" data-delete="' + esc(p.id) + '">Delete</button></div></div></div>';
+    }).join('') : '<div class="card empty" style="grid-column:1/-1">' + (state.products.length ? 'No products match your search.' : 'No products yet. Click "Add product" to create the first one.') + '</div>';
+  }
+  function discount(p) {
+    var o = Number(p.original_price), s2 = Number(p.sale_price);
+    return o > s2 && o > 0 ? Math.round((1 - s2 / o) * 100) : 0;
+  }
+  var viewProductId = null;
+  function viewProduct(p) {
+    viewProductId = p.id;
+    var off = discount(p);
+    var imgs = (p.images && p.images.length) ? p.images : [p.image || '/logo.png'];
+    var vars = (p.variants || []).map(function (v) {
+      var o = Number(v.original_price), s2 = Number(v.sale_price);
+      var d = o > s2 && o > 0 ? Math.round((1 - s2 / o) * 100) : 0;
+      return '<tr><td>' + esc(v.name) + '</td><td><strong>' + rupee(s2) + '</strong></td><td>' + (o > s2 ? '<span class="strike" style="margin:0">' + rupee(o) + '</span>' : '<span class="muted">-</span>') + '</td><td>' + (d ? '<span class="off" style="margin:0">' + d + '% off</span>' : '') + '</td></tr>';
+    }).join('');
+    $('#pview-title').textContent = p.name;
+    $('#pview-body').innerHTML =
+      '<img id="pv-main" src="' + esc(imgs[0]) + '" alt="" style="width:100%;max-height:300px;object-fit:cover;border-radius:10px;margin-bottom:16px">' +
+      (imgs.length > 1 ? '<div class="pv-thumbs">' + imgs.map(function (u, i) { return '<img class="pv-thumb' + (i === 0 ? ' on' : '') + '" src="' + esc(u) + '" data-pv="' + esc(u) + '" alt="">'; }).join('') + '</div>' : '') +
+      '<dl class="info"><dt>Category</dt><dd>' + esc(p.category) + '</dd>' +
+      ((p.variants || []).length ? '' : '<dt>Price</dt><dd><strong>' + rupee(p.sale_price) + '</strong>' + (off ? '<span class="strike">' + rupee(p.original_price) + '</span><span class="off">' + off + '% off</span>' : '') + '</dd>') +
+      '<dt>Badge</dt><dd>' + esc(p.badge || 'None') + '</dd>' +
+      '<dt>Shown on</dt><dd>' + (p.homepage_only ? '<a href="/" target="_blank" rel="noopener">Home page</a>' : '<a href="/shop.html" target="_blank" rel="noopener">Shop page</a>') + '</dd>' +
+      '<dt>Description</dt><dd>' + esc(p.description || 'No description yet.') + '</dd></dl>' +
+      (vars ? '<h3 style="font-size:17px;margin-bottom:8px">Sizes and prices</h3><table class="items"><thead><tr><th>Size</th><th>Sale price</th><th>Original price</th><th>Discount</th></tr></thead><tbody>' + vars + '</tbody></table>' : '');
+    $('#pview-dialog').showModal();
+  }
+  $('#pview-body').addEventListener('click', function (e) {
+    var t = e.target.closest('[data-pv]');
+    if (!t) return;
+    $('#pv-main').src = t.getAttribute('data-pv');
+    $all('.pv-thumb').forEach(function (x) { x.classList.toggle('on', x === t); });
+  });
+  $('#pview-edit').addEventListener('click', function () {
+    var p = findProduct(viewProductId);
+    $('#pview-dialog').close();
+    if (p) openProduct(p);
+  });
+  $('#product-search').addEventListener('input', renderProducts);
+
+  function findProduct(id) { return state.products.filter(function (p) { return String(p.id) === String(id); })[0]; }
+
+  var BADGE_PRESETS = ['New', 'Best seller', 'Sale', 'Limited edition'];
+
+  function uniq(list) {
+    var seen = {};
+    return list.filter(function (x) {
+      var k = String(x || '').toLowerCase();
+      if (!k || seen[k]) return false;
+      seen[k] = true;
+      return true;
+    });
+  }
+  function fillSelect(sel, values, firstOption, newLabel, current) {
+    var list = uniq(values.concat(current ? [current] : []));
+    sel.innerHTML = firstOption + list.map(function (v) { return '<option value="' + esc(v) + '">' + esc(v) + '</option>'; }).join('') + '<option value="__new__">' + esc(newLabel) + '</option>';
+    sel.value = current || '';
+  }
+  function fillProductOptions(p) {
+    var cats = state.products.map(function (x) { return x.category; }).sort();
+    var badges = BADGE_PRESETS.concat(state.products.map(function (x) { return x.badge; }));
+    fillSelect($('#p-category'), cats, '<option value="" disabled>Select a category</option>', '+ Add a new category', p ? p.category : '');
+    fillSelect($('#p-badge'), badges, '<option value="">No badge</option>', '+ Add a new badge', p ? p.badge : '');
+    ['#p-category-new', '#p-badge-new'].forEach(function (id) { $(id).value = ''; $(id).classList.add('hidden'); });
+  }
+  $('#p-category').addEventListener('change', function () { $('#p-category-new').classList.toggle('hidden', this.value !== '__new__'); });
+  $('#p-badge').addEventListener('change', function () { $('#p-badge-new').classList.toggle('hidden', this.value !== '__new__'); });
+
+  var SIZE_HEAD = '<div class="size-head"><span>Size</span><span>Sale price ₹</span><span>Original price ₹</span><span></span></div>';
+  function sizeRowHtml(v) {
+    v = v || {};
+    var hasOrig = v.original_price != null && Number(v.original_price) > Number(v.sale_price || 0);
+    return '<div class="size-row">' +
+      '<input type="text" class="s-name" placeholder="e.g. 5g" value="' + esc(v.name || '') + '" aria-label="Size">' +
+      '<input type="number" class="s-price" min="0" step="0.01" placeholder="Sale price" value="' + esc(v.sale_price != null ? v.sale_price : '') + '" aria-label="Sale price">' +
+      '<input type="number" class="s-orig" min="0" step="0.01" placeholder="Original price" value="' + esc(hasOrig ? v.original_price : '') + '" aria-label="Original price (optional)">' +
+      '<button type="button" class="btn ghost small s-del" aria-label="Remove size">&times;</button></div>';
+  }
+  function renderSizeRows(list) { $('#size-rows').innerHTML = (list && list.length ? SIZE_HEAD : '') + (list || []).map(sizeRowHtml).join(''); }
+  $('#size-add').addEventListener('click', function () {
+    if (!$('#size-rows .size-head')) $('#size-rows').insertAdjacentHTML('afterbegin', SIZE_HEAD);
+    $('#size-rows').insertAdjacentHTML('beforeend', sizeRowHtml());
+    var names = $all('#size-rows .s-name');
+    names[names.length - 1].focus();
+  });
+  $('#size-rows').addEventListener('click', function (e) {
+    var d = e.target.closest('.s-del');
+    if (!d) return;
+    d.closest('.size-row').remove();
+    if (!$('#size-rows .size-row')) $('#size-rows').innerHTML = '';
+  });
+  $('#size-rows').addEventListener('keydown', function (e) { if (e.key === 'Enter') e.preventDefault(); });
+
+
+  // Photos: several per product, the first one is the main photo
+  var imgList = [];
+  function renderImgGrid() {
+    $('#img-grid').innerHTML = imgList.map(function (it, i) {
+      return '<div class="img-tile' + (i === 0 ? ' main' : '') + '"><img src="' + esc(it.file ? it.preview : it.url) + '" alt="">' +
+        (i === 0 ? '<span class="img-badge">Main photo</span>' : '<button type="button" class="img-main" data-img-main="' + i + '">Make main</button>') +
+        '<button type="button" class="img-x" data-img-del="' + i + '" aria-label="Remove photo">&times;</button></div>';
+    }).join('');
+    $('#img-count').textContent = imgList.length ? imgList.length + ' of 10 photos' : 'No photos yet. The logo is used if you add none.';
+  }
+  function addFiles(files) {
+    Array.prototype.slice.call(files).forEach(function (f) {
+      if (!/^image\//.test(f.type)) return;
+      if (f.size > 5 * 1024 * 1024) { toast('"' + f.name + '" is over 5 MB and was skipped.', true); return; }
+      if (imgList.length >= 10) { toast('You can add up to 10 photos.', true); return; }
+      imgList.push({ file: f, preview: URL.createObjectURL(f) });
+    });
+    renderImgGrid();
+  }
+  function addImageLink() {
+    var v = $('#p-url').value.trim();
+    if (!v) return;
+    if (!/^(\/|https?:\/\/)/.test(v)) { toast('The image link must start with / or https://', true); return; }
+    if (imgList.length >= 10) { toast('You can add up to 10 photos.', true); return; }
+    imgList.push({ url: v });
+    $('#p-url').value = '';
+    renderImgGrid();
+  }
+  $('#p-image').addEventListener('change', function () { addFiles(this.files); this.value = ''; });
+  $('#img-link-add').addEventListener('click', addImageLink);
+  $('#p-url').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); addImageLink(); } });
+  $('#img-grid').addEventListener('click', function (e) {
+    var m = e.target.closest('[data-img-main]'), d = e.target.closest('[data-img-del]');
+    if (m) { imgList.unshift(imgList.splice(+m.getAttribute('data-img-main'), 1)[0]); renderImgGrid(); }
+    else if (d) { imgList.splice(+d.getAttribute('data-img-del'), 1); renderImgGrid(); }
+  });
+  ['dragenter', 'dragover'].forEach(function (ev) { $('#drop').addEventListener(ev, function (e) { e.preventDefault(); this.classList.add('over'); }); });
+  ['dragleave', 'drop'].forEach(function (ev) { $('#drop').addEventListener(ev, function (e) { e.preventDefault(); this.classList.remove('over'); }); });
+  $('#drop').addEventListener('drop', function (e) { addFiles(e.dataTransfer.files); });
+
+  function openProduct(p) {
+    var form = $('#product-form');
+    form.reset();
+    fillProductOptions(p);
+    renderSizeRows(p ? (p.variants || []) : [{}]);
+    $('#p-id').value = p ? p.id : '';
+    $('#product-dialog-title').textContent = p ? 'Edit product' : 'Add product';
+    $('#product-submit').textContent = p ? 'Save changes' : 'Save product';
+    var urls = [];
+    if (p) {
+      $('#p-name').value = p.name || '';
+      $('#p-desc').value = p.description || '';
+      $('#p-orig').value = p.original_price != null ? p.original_price : '';
+      $('#p-sale').value = p.sale_price != null ? p.sale_price : '';
+      $('#p-home').checked = !!p.homepage_only;
+      urls = (p.images && p.images.length) ? p.images : (p.image && p.image !== '/logo.png' ? [p.image] : []);
+    }
+    imgList = urls.map(function (u) { return { url: u }; });
+    renderImgGrid();
+    var vs = p ? (p.variants || []) : [];
+    $('#legacy-price').textContent = (p && !vs.length && Number(p.sale_price) > 0)
+      ? 'This product currently sells at ' + rupee(p.sale_price) + (Number(p.original_price) > Number(p.sale_price) ? ' (was ' + rupee(p.original_price) + ')' : '') + '. Add sizes above to give each size its own price.'
+      : '';
+    showView('addproduct');
+  }
+
+  $('#add-product-btn').addEventListener('click', function () { openProduct(null); });
+
+  $('#products-grid').addEventListener('click', function (e) {
+    var view = e.target.closest('[data-view-product]');
+    if (view) { var vp = findProduct(view.getAttribute('data-view-product')); if (vp) viewProduct(vp); return; }
+    var edit = e.target.closest('[data-edit]');
+    if (edit) { var p = findProduct(edit.getAttribute('data-edit')); if (p) openProduct(p); return; }
+    var del = e.target.closest('[data-delete]');
+    if (!del) return;
+    var id = del.getAttribute('data-delete');
+    var prod = findProduct(id);
+    confirmBox({ title: 'Delete "' + (prod ? prod.name : 'this product') + '"?', message: 'The product is removed from your shop, along with its variants. It cannot be undone.', danger: true, confirmLabel: 'Delete product' }).then(function (r) {
+      if (!r) return;
+      del.disabled = true;
+      api('/api/admin/products/' + encodeURIComponent(id), { method: 'DELETE' }).then(function () {
+        state.products = state.products.filter(function (x) { return String(x.id) !== String(id); });
+        renderAll();
+        toast('Product deleted.');
+      }).catch(function (err) {
+        del.disabled = false;
+        if (err.status !== 401) toast(err.message, true);
+      });
+    });
+  });
+
+  $('#product-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var id = $('#p-id').value;
+    var btn = $('#product-submit');
+    var label = btn.textContent;
+    var fd = new FormData(e.target);
+    fd.set('homepage_only', $('#p-home').checked ? 'true' : 'false');
+    fd.delete('images'); fd.delete('image'); fd.delete('image_url');
+    var order = [], fileNo = 0;
+    imgList.forEach(function (it) {
+      if (it.file) { fd.append('images', it.file); order.push({ file: fileNo++ }); } else order.push({ url: it.url });
+    });
+    fd.set('image_order', JSON.stringify(order));
+    var catPick = $('#p-category').value, badgePick = $('#p-badge').value;
+    var cat = catPick === '__new__' ? $('#p-category-new').value.trim() : catPick;
+    var badge = badgePick === '__new__' ? $('#p-badge-new').value.trim() : badgePick;
+    if (!cat) { toast('Please choose a category.', true); return; }
+    fd.set('category', cat);
+    fd.set('badge', badge);
+    var sizes = [], missing = '', tooHigh = '';
+    $all('#size-rows .size-row').forEach(function (row) {
+      var n = $('.s-name', row).value.trim(), pr = $('.s-price', row).value, og = $('.s-orig', row).value;
+      if (!n) return;
+      if (pr === '' && !missing) missing = n;
+      if (og !== '' && pr !== '' && parseFloat(pr) > parseFloat(og) && !tooHigh) tooHigh = n;
+      sizes.push({ name: n, sale_price: parseFloat(pr) || 0, original_price: parseFloat(og) || parseFloat(pr) || 0 });
+    });
+    if (missing) { toast('Add a price for the size "' + missing + '".', true); return; }
+    if (tooHigh) { toast('The sale price of "' + tooHigh + '" is higher than its original price.', true); return; }
+    if (sizes.length) {
+      var low = sizes.reduce(function (a, b) { return b.sale_price < a.sale_price ? b : a; });
+      fd.set('sale_price', low.sale_price);
+      fd.set('original_price', low.original_price || low.sale_price);
+    } else if (!fd.get('sale_price')) {
+      toast('Add at least one size with its price.', true); return;
+    }
+    fd.set('sizes', JSON.stringify(sizes));
+
+    btn.disabled = true;
+    btn.textContent = 'Saving...';
+    api(id ? '/api/admin/products/' + encodeURIComponent(id) : '/api/admin/products', {
+      method: id ? 'PUT' : 'POST',
+      body: fd
+    }).then(function () {
+      showView('products');
+      return api('/api/admin/products').then(function (r) {
+        state.products = r.products || [];
+        renderAll();
+        toast(id ? 'Product updated.' : 'Product added.');
+      });
+    }).catch(function (err) {
+      if (err.status !== 401) toast(err.message, true);
+    }).then(function () {
+      btn.disabled = false;
+      btn.textContent = label;
+    });
+  });
+
+  // ---------- Customers ----------
+  function ordersOf(u) {
+    var em = (u.email || '').toLowerCase();
+    return state.orders.filter(function (o) {
+      return (em && String(o.customer_email || '').toLowerCase() === em) || (u.phone && o.customer_phone === u.phone);
+    });
+  }
+  function spent(list) {
+    return list.reduce(function (t, o) { return o.status === 'Cancelled' ? t : t + (Number(o.total) || 0); }, 0);
+  }
+  function addressOf(u) {
+    var a = [u.address, u.city, u.state].filter(Boolean).join(', ');
+    return a ? a + (u.pincode ? ' - ' + u.pincode : '') : '';
+  }
+
+  function renderCustomers() {
+    var q = $('#customer-search').value.trim().toLowerCase();
+    var tab = state.custTab;
+    var removedN = state.users.filter(function (u) { return u.removed; }).length;
+    $('#cust-seg [data-ctab="active"]').textContent = 'Active (' + (state.users.length - removedN) + ')';
+    $('#cust-seg [data-ctab="removed"]').textContent = 'Removed (' + removedN + ')';
+    $('#cust-seg [data-ctab="deleted"]').textContent = 'Deleted (' + state.deleted.length + ')';
+    $all('#cust-seg button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-ctab') === tab ? 'true' : 'false'); });
+
+    var source = tab === 'deleted' ? state.deleted : state.users;
+    var rows = source.filter(function (u) {
+      if (tab !== 'deleted' && (tab === 'removed') !== !!u.removed) return false;
+      return !q || [u.name, u.email, u.phone, u.city, u.address].join(' ').toLowerCase().indexOf(q) !== -1;
+    });
+    $('#customer-count').textContent = rows.length + (rows.length === 1 ? ' customer' : ' customers');
+    $('#customers-body').innerHTML = rows.length ? rows.map(function (u) {
+      var os = ordersOf(u), id = esc(u.id), btns;
+      if (tab === 'deleted') {
+        btns = '<button class="btn ghost small" type="button" data-cact="view" data-id="' + id + '">View</button>' +
+               '<button class="btn danger small" type="button" data-cact="erase" data-id="' + id + '">Erase</button>';
+      } else {
+        btns = '<button class="btn ghost small" type="button" data-cact="view" data-id="' + id + '">View</button>' +
+          (u.removed ? '<button class="btn ghost small" type="button" data-cact="restore" data-id="' + id + '">Restore</button>'
+                     : '<button class="btn ghost small" type="button" data-cact="remove" data-id="' + id + '">Remove</button>') +
+          '<button class="btn danger small" type="button" data-cact="delete" data-id="' + id + '">Delete</button>';
+      }
+      return '<tr><td><strong>' + esc(u.name) + '</strong></td><td>' + esc(u.email || '') + '</td><td>' + esc(u.phone || '') + '</td><td>' + esc(u.city || '') + '</td>' +
+        '<td>' + os.length + '</td><td>' + rupee(spent(os)) + '</td><td><div class="row-actions">' + btns + '</div></td></tr>';
+    }).join('') : '<tr><td colspan="7" class="empty">' + (source.length ? 'No ' + tab + ' customers match.' : (tab === 'deleted' ? 'No deleted customers.' : 'No customers yet.')) + '</td></tr>';
+  }
+
+  function findDeleted(id) { return state.deleted.filter(function (u) { return String(u.id) === String(id); })[0]; }
+  function findUser(id) { return state.users.filter(function (u) { return String(u.id) === String(id); })[0]; }
+  var openCustId = null;
+
+  var openCustDeleted = false;
+  function openCustomer(u, isDeleted) {
+    openCustId = u.id;
+    openCustDeleted = !!isDeleted;
+    var os = ordersOf(u);
+    $('#cust-title').textContent = u.name || 'Customer';
+    $('#cust-remove').classList.toggle('hidden', !!isDeleted);
+    $('#cust-remove').textContent = u.removed ? 'Restore customer' : 'Remove customer';
+    $('#cust-delete').textContent = isDeleted ? 'Erase data' : 'Delete account';
+    var acct = isDeleted ? '<span class="pill cancelled">Deleted</span>' : (u.removed ? '<span class="pill cancelled">Removed</span>' : '<span class="pill delivered">Active</span>');
+    $('#cust-body').innerHTML =
+      '<dl class="info">' +
+        (state.role === 'staff' ? '' : '<dt>Account</dt><dd>' + acct + '</dd>') +
+        (isDeleted ? '<dt>Deleted on</dt><dd>' + esc(fmtDate(u.deleted_at) || 'Unknown') + '</dd>' : '') +
+        '<dt>Email</dt><dd>' + esc(u.email || 'Not provided') + '</dd>' +
+        '<dt>Phone</dt><dd>' + esc(u.phone || 'Not provided') + '</dd>' +
+        '<dt>Address</dt><dd>' + esc(addressOf(u) || 'Not added yet (saved when they place an order)') + '</dd>' +
+        (state.role === 'staff' ? '' : '<dt>Joined</dt><dd>' + esc(fmtDate(u.joined_at || u.created_at || u.createdAt) || 'Unknown') + '</dd>') +
+        '<dt>Orders</dt><dd>' + os.length + '</dd>' +
+        (state.role === 'staff' ? '' : '<dt>Total spent</dt><dd><strong>' + rupee(spent(os)) + '</strong></dd>') +
+      '</dl>' +
+      (os.length ? '<h3 style="font-size:17px;margin-bottom:8px">Orders</h3><table class="items"><thead><tr><th>Order</th><th>Date</th><th>Total</th><th>Status</th></tr></thead><tbody>' +
+        os.slice(0, 10).map(function (o) { return '<tr><td>#' + esc(o.order_id) + '</td><td>' + esc(fmtDate(orderDate(o))) + '</td><td>' + rupee(o.total) + '</td><td>' + pill(o.status) + '</td></tr>'; }).join('') + '</tbody></table>' : '<p class="muted">No orders yet.</p>');
+    $('#cust-dialog').showModal();
+  }
+
+  function finishCustomer(msg) {
+    if ($('#cust-dialog').open) $('#cust-dialog').close();
+    renderAll();
+    toast(msg);
+  }
+  function failCustomer(err) { if (err.status !== 401) toast(err.message, true); }
+
+  function removeCustomer(id) {
+    var u = findUser(id);
+    if (!u) return;
+    confirmBox({
+      title: 'Remove ' + (u.name || 'this customer') + '?',
+      message: 'They are signed out of the website right away.',
+      bullets: ['They can log in again any time', 'They show as Active again automatically when they do', 'Until then their details stay here under Removed'],
+      confirmLabel: 'Remove customer'
+    }).then(function (r) {
+      if (!r) return;
+      api('/api/admin/users/' + encodeURIComponent(id) + '/remove', { method: 'POST' }).then(function () {
+        u.removed = true;
+        finishCustomer('Customer removed and signed out.');
+      }).catch(failCustomer);
+    });
+  }
+
+  function restoreCustomer(id) {
+    var u = findUser(id);
+    if (!u) return;
+    api('/api/admin/users/' + encodeURIComponent(id) + '/restore', { method: 'POST' }).then(function () {
+      u.removed = false;
+      finishCustomer('Customer marked as active.');
+    }).catch(failCustomer);
+  }
+
+  function deleteCustomer(id) {
+    var u = findUser(id);
+    if (!u) return;
+    confirmBox({
+      title: 'Delete ' + (u.name || 'this customer') + '?',
+      message: 'Their website account is deleted and they can no longer log in.',
+      bullets: ['Their account, saved address and cart are removed', 'Their details and orders move to the Deleted section here', 'Your revenue figures stay the same'],
+      danger: true, type: 'DELETE', confirmLabel: 'Delete account',
+      notify: u.email
+        ? { label: 'Email ' + u.email + ' to tell them the account was deleted', placeholder: 'Optional message to include in the email' }
+        : { label: 'No email on file, so no email will be sent', disabled: true }
+    }).then(function (r) {
+      if (!r) return;
+      toast('Deleting the account...');
+      api('/api/admin/users/' + encodeURIComponent(id), {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ notify: r.notify, note: r.note })
+      }).then(function (res) {
+        return loadAll().then(function () {
+          finishCustomer('Account deleted and moved to Deleted' + (res.emailing ? '. A confirmation email is being sent to the customer.' : '.'));
+        });
+      }).catch(failCustomer);
+    });
+  }
+
+  function eraseDeleted(id) {
+    var u = findDeleted(id);
+    if (!u) return;
+    var gone = ordersOf(u).map(function (o) { return o.order_id; });
+    confirmBox({
+      title: 'Erase ' + (u.name || 'this customer') + ' for good?',
+      message: 'This removes their saved customer record. Orders are never deleted. It cannot be undone.',
+      bullets: ['Their saved name, email, phone and address in this list', 'Their ' + gone.length + ' order(s) stay in your Orders list', 'Your revenue figures do not change'],
+      danger: true, type: 'DELETE', confirmLabel: 'Erase permanently'
+    }).then(function (r) {
+      if (!r) return;
+      api('/api/admin/deleted-users/' + encodeURIComponent(id), { method: 'DELETE' }).then(function (res) {
+        state.deleted = state.deleted.filter(function (x) { return String(x.id) !== String(id); });
+        if (!res.ordersKept) state.orders = state.orders.filter(function (o) { return gone.indexOf(o.order_id) === -1; });
+        finishCustomer('Saved details erased. Their orders stay in your Orders list.');
+      }).catch(failCustomer);
+    });
+  }
+
+  $('#customers-body').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-cact]');
+    if (!b) return;
+    var id = b.getAttribute('data-id'), act = b.getAttribute('data-cact');
+    if (act === 'view') { var isDel = state.custTab === 'deleted'; var u = isDel ? findDeleted(id) : findUser(id); if (u) openCustomer(u, isDel); }
+    else if (act === 'erase') eraseDeleted(id);
+    else if (act === 'remove') removeCustomer(id);
+    else if (act === 'restore') restoreCustomer(id);
+    else if (act === 'delete') deleteCustomer(id);
+  });
+  $('#cust-remove').addEventListener('click', function () {
+    var u = findUser(openCustId);
+    if (u && u.removed) restoreCustomer(openCustId); else removeCustomer(openCustId);
+  });
+  $('#cust-delete').addEventListener('click', function () { if (openCustDeleted) eraseDeleted(openCustId); else deleteCustomer(openCustId); });
+  $('#cust-seg').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-ctab]');
+    if (!b) return;
+    state.custTab = b.getAttribute('data-ctab');
+    renderCustomers();
+  });
+
+  $('#customer-search').addEventListener('input', renderCustomers);
+
+  // ---------- Shared UI ----------
+  $all('.nav-btn[data-view]').forEach(function (b) {
+    b.addEventListener('click', function () { showView(b.getAttribute('data-view')); });
+  });
+  $all('dialog').forEach(function (d) {
+    d.addEventListener('click', function (e) {
+      if (e.target === d || e.target.closest('[data-close]')) d.close();
+    });
+  });
+
+  // ---------- Role picker + staff sign in ----------
+  var JSON_HEAD = { 'Content-Type': 'application/json' };
+  $all('.role-card').forEach(function (b) { b.addEventListener('click', function () { showRoleForm(b.getAttribute('data-role')); }); });
+  $all('[data-back]').forEach(function (b) { b.addEventListener('click', function () { showPick(''); }); });
+
+  $('#staff-login-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = $('#staff-login-submit'), errBox = $('#staff-login-error');
+    errBox.textContent = '';
+    btn.disabled = true;
+    btn.textContent = 'Checking...';
+    api('/api/staff/login', {
+      method: 'POST', headers: JSON_HEAD,
+      body: JSON.stringify({ username: $('#staff-username').value.trim(), password: $('#staff-password').value })
+    }).then(function () {
+      $('#staff-password').value = '';
+      return enterStaff();
+    }).catch(function (err) {
+      errBox.textContent = err.message;
+    }).then(function () {
+      btn.disabled = false;
+      btn.textContent = 'Sign in';
+    });
+  });
+
+  // ---------- Staff accounts (owner only) ----------
+  function renderStaff() {
+    $('#staff-body').innerHTML = state.staff.length ? state.staff.map(function (st) {
+      var id = esc(st.id);
+      return '<tr><td><strong>' + esc(st.name) + '</strong></td><td>' + esc(st.username) + '</td>' +
+        '<td>' + (st.active ? '<span class="pill delivered">Active</span>' : '<span class="pill cancelled">Removed</span>') + '</td>' +
+        '<td>' + esc(fmtDate(st.last_login_at) || 'Never') + '</td>' +
+        '<td>' + (st.orders_taken || 0) + '</td><td>' + (st.orders_with_payment || 0) + '</td><td>' + (st.delivered || 0) + '</td>' +
+        '<td>' + (st.to_receive > 0 ? '<strong>' + rupee(st.to_receive) + '</strong>' : '<span class="muted">&mdash;</span>') + '</td>' +
+        '<td><div class="row-actions"><button class="btn ghost small" type="button" data-sact="toggle" data-id="' + id + '">' + (st.active ? 'Remove' : 'Activate') + '</button>' +
+        '<button class="btn ghost small" type="button" data-sact="password" data-id="' + id + '">Reset password</button>' +
+        '<button class="btn danger small" type="button" data-sact="delete" data-id="' + id + '">Delete</button></div></td></tr>';
+    }).join('') : '<tr><td colspan="9" class="empty">No staff accounts yet. Click "Add staff" to create one.</td></tr>';
+  }
+  function findStaff(id) { return state.staff.filter(function (x) { return String(x.id) === String(id); })[0]; }
+  function loadStaffList() {
+    return api('/api/admin/staff').then(function (r) { state.staff = r.staff || []; renderStaff(); });
+  }
+
+  var staffMode = 'add', staffEditId = null;
+  function openStaffDialog(mode, st) {
+    staffMode = mode;
+    staffEditId = st ? st.id : null;
+    var reset = mode === 'reset';
+    $('#staff-form').reset();
+    $('#staff-dlg-title').textContent = reset ? 'Reset password for ' + st.name : 'Add staff';
+    $('#staff-submit').textContent = reset ? 'Save password' : 'Create account';
+    $('#staff-name-field').classList.toggle('hidden', reset);
+    $('#staff-user-field').classList.toggle('hidden', reset);
+    $('#s-name').required = !reset;
+    $('#s-user').required = !reset;
+    $('#staff-dialog').showModal();
+  }
+  $('#add-staff-btn').addEventListener('click', function () { openStaffDialog('add'); });
+
+  $('#staff-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = $('#staff-submit'), label = btn.textContent, pass = $('#s-pass').value;
+    var call = staffMode === 'reset'
+      ? api('/api/admin/staff/' + encodeURIComponent(staffEditId), { method: 'PUT', headers: JSON_HEAD, body: JSON.stringify({ password: pass }) })
+      : api('/api/admin/staff', { method: 'POST', headers: JSON_HEAD, body: JSON.stringify({ name: $('#s-name').value.trim(), username: $('#s-user').value.trim(), password: pass }) });
+    btn.disabled = true;
+    btn.textContent = 'Saving...';
+    call.then(function () {
+      $('#staff-dialog').close();
+      return loadStaffList().then(function () { toast(staffMode === 'reset' ? 'Password updated.' : 'Staff account created.'); });
+    }).catch(function (err) {
+      if (err.status !== 401) toast(err.message, true);
+    }).then(function () { btn.disabled = false; btn.textContent = label; });
+  });
+
+  $('#staff-body').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-sact]');
+    if (!b) return;
+    var st = findStaff(b.getAttribute('data-id')), act = b.getAttribute('data-sact');
+    if (!st) return;
+    function fail(err) { if (err.status !== 401) toast(err.message, true); }
+    if (act === 'password') return openStaffDialog('reset', st);
+    if (act === 'toggle') {
+      var next = !st.active;
+      var go = function () {
+        api('/api/admin/staff/' + encodeURIComponent(st.id), { method: 'PUT', headers: JSON_HEAD, body: JSON.stringify({ active: next }) })
+          .then(function () { st.active = next; renderStaff(); toast(next ? st.name + ' is active and can sign in.' : st.name + ' was removed and signed out.'); })
+          .catch(fail);
+      };
+      if (next) return go();
+      return confirmBox({ title: 'Remove ' + st.name + '?', message: 'They are signed out right away and cannot sign in until you activate them again.', danger: true, confirmLabel: 'Remove access' }).then(function (r) { if (r) go(); });
+    }
+    if (act === 'delete') {
+      confirmBox({ title: 'Delete ' + st.name + '?', message: 'Their staff account is deleted for good.', danger: true, confirmLabel: 'Delete account' }).then(function (r) {
+        if (!r) return;
+        api('/api/admin/staff/' + encodeURIComponent(st.id), { method: 'DELETE' }).then(function () {
+          state.staff = state.staff.filter(function (x) { return x.id !== st.id; });
+          renderStaff();
+          toast('Staff account deleted.');
+        }).catch(fail);
+      });
+    }
+  });
+
+  $('#nav-add-product').addEventListener('click', function () { showView('products'); openProduct(null); });
+
+  // ---------- Daily totals (staff see today only, owner keeps every day) ----------
+  function dailyTotals(orders) {
+    var days = {};
+    orders.forEach(function (o) {
+      if (o.status === 'Cancelled') return;
+      var d = new Date(orderDate(o));
+      if (isNaN(d.getTime())) return;
+      var k = dayKey(d);
+      if (!days[k]) days[k] = { date: new Date(d.getFullYear(), d.getMonth(), d.getDate()), orders: 0, revenue: 0 };
+      days[k].orders += 1;
+      days[k].revenue += Number(o.total) || 0;
+    });
+    return days;
+  }
+
+  function renderDaily() {
+    var days = dailyTotals(state.orders);
+    var list = Object.keys(days).map(function (k) { return days[k]; }).sort(function (a, b) { return b.date - a.date; });
+    var today = dayKey(new Date()), yest = new Date(); yest.setDate(yest.getDate() - 1);
+    $('#daily-body').innerHTML = list.length ? list.map(function (r) {
+      var k = dayKey(r.date);
+      var label = k === today ? 'Today' : (k === dayKey(yest) ? 'Yesterday' : fmtDate(r.date));
+      return '<tr><td>' + esc(label) + '</td><td>' + r.orders + '</td><td><strong>' + rupee(r.revenue) + '</strong></td></tr>';
+    }).join('') : '<tr><td colspan="3" class="empty">No orders yet.</td></tr>';
+  }
+
+  function renderStaffOverview() {
+    var now = new Date();
+    $('#so-date').textContent = now.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    var today = (dailyTotals(state.orders)[dayKey(now)] || { orders: 0 }).orders;
+    var fresh = state.orders.filter(function (o) { return isNew(o.status); }).length;
+    $('#so-stats').innerHTML =
+      '<div class="card stat"><div class="n">' + today + '</div><div class="l">Orders today</div></div>' +
+      '<div class="card stat' + (fresh ? ' alert' : '') + '"><div class="n">' + fresh + '</div><div class="l">Waiting to be confirmed</div></div>';
+    var total = state.orders.length || 1;
+    $('#so-status').innerHTML = STATUSES.map(function (st) {
+      var c = state.orders.filter(function (o) { return normStatus(o.status) === st; }).length;
+      return '<div class="status-row"><span>' + esc(st) + '</span><div class="meter"><span style="width:' + Math.round((c / total) * 100) + '%"></span></div><strong class="right">' + c + '</strong></div>';
+    }).join('');
+  }
+  setInterval(function () { if (state.role === 'staff') renderStaffOverview(); }, 60000);
+
+  $('#product-cancel').addEventListener('click', function () { showView('products'); });
+  $('#product-back').addEventListener('click', function () { showView('products'); });
+
+  // ---------- New orders show up for everyone without a refresh ----------
+  var knownOrders = null;
+  var knownReceived = null;
+  function notifyNewOrders() {
+    var ids = state.orders.map(function (o) { return o.order_id; });
+    if (knownOrders) {
+      var fresh = state.orders.filter(function (o) { return knownOrders.indexOf(o.order_id) === -1 && isNew(o.status); });
+      if (fresh.length) toast(fresh.length === 1 ? 'New order #' + fresh[0].order_id + ' received.' : fresh.length + ' new orders received.');
+    }
+    knownOrders = ids;
+  }
+  function refreshOwnerOrders() {
+    return Promise.all([
+      api('/api/admin/dashboard'),
+      api('/api/admin/payments').catch(function () { return { staff: [], owner: { collected: 0, rows: [] } }; })
+    ]).then(function (r) {
+      state.orders = r[0].orders || [];
+      state.stats = r[0].stats || {};
+      state.payments = { staff: r[1].staff || [], owner: r[1].owner || { collected: 0, rows: [] } };
+      notifyNewOrders();
+      renderAll();
+    });
+  }
+  setInterval(function () {
+    if (document.hidden || $('#app').classList.contains('hidden') || document.querySelector('dialog[open]')) return;
+    (state.role === 'staff' ? loadStaffOrders() : refreshOwnerOrders()).catch(function () {});
+  }, 20000);
+
+  $('#order-dialog-body').addEventListener('click', function (e) {
+    var b = e.target.closest('#order-release');
+    if (!b) return;
+    b.disabled = true;
+    api('/api/admin/orders/' + encodeURIComponent(openOrderId) + '/release', { method: 'POST' }).then(function () {
+      var o = findOrder(openOrderId);
+      if (o) o.handled_by = null;
+      $('#order-dialog').close();
+      renderAll();
+      toast('Order released. Every staff member can see it again.');
+    }).catch(function (err) {
+      b.disabled = false;
+      if (err.status !== 401) toast(err.message, true);
+    });
+  });
+
+  // ---------- Payment confirmation (owner and staff) ----------
+  $('#order-dialog-body').addEventListener('click', function (e) {
+    var b = e.target.closest('#order-pay');
+    if (!b) return;
+    var o = findOrder(openOrderId);
+    if (!o) return;
+    var paid = !o.payment_confirmed, staff = state.role === 'staff';
+    b.disabled = true;
+    api((staff ? '/api/staff/orders/' : '/api/admin/orders/') + encodeURIComponent(openOrderId) + '/payment', {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ paid: paid })
+    }).then(function () {
+      $('#order-dialog').close();
+      toast(paid ? 'Payment confirmed for order #' + openOrderId + '.' : 'Payment confirmation removed.');
+      return staff ? loadStaffOrders() : refreshOwnerOrders();
+    }).catch(function (err) {
+      b.disabled = false;
+      if (err.status !== 401) toast(err.message, true);
+      if (staff && (err.status === 403 || err.status === 409)) { $('#order-dialog').close(); loadStaffOrders(); }
+    });
+  });
+
+  // ---------- Bill: WhatsApp or email (owner) ----------
+  function billText(o) {
+    var lines = (o.items || []).map(function (i, n) {
+      var r = Number(i.price) || 0, q = Number(i.quantity) || 1;
+      return (n + 1) + '. ' + i.name + (i.variant ? ' (' + i.variant + ')' : '') + ' - ' + rupee(r) + ' x ' + q + ' = ' + rupee(r * q);
+    });
+    return ['*The Friends Heritage*', 'Bill for order #' + o.order_id + ' (' + fmtDate(orderDate(o)) + ')', '', 'Hello ' + (o.customer_name || '') + ',', '']
+      .concat(lines.length ? lines : ['Order total'], ['', '*Total: ' + rupee(o.total) + '*', 'Payment: ' + payName(o.payment_method) + ' - ' + (o.payment_confirmed ? 'Paid' : 'Payment pending'), '', 'Thank you for shopping with us.'])
+      .join('\n');
+  }
+  $('#order-wa').addEventListener('click', function () {
+    var o = findOrder(openOrderId);
+    if (!o) return;
+    var num = String(o.customer_phone || '').replace(/\D/g, '');
+    if (num.length === 10) num = '91' + num;
+    else if (num.length === 11 && num.charAt(0) === '0') num = '91' + num.slice(1);
+    if (num.length < 11) { toast('This customer has no valid phone number.', true); return; }
+    window.open('https://wa.me/' + num + '?text=' + encodeURIComponent(billText(o)), '_blank', 'noopener');
+  });
+  $('#order-email-bill').addEventListener('click', function () {
+    var b = this, o = findOrder(openOrderId);
+    if (!o) return;
+    b.disabled = true;
+    toast('Sending the bill...');
+    api('/api/admin/orders/' + encodeURIComponent(o.order_id) + '/bill', { method: 'POST' })
+      .then(function () { toast('Bill emailed to ' + o.customer_email + '.'); })
+      .catch(function (err) { if (err.status !== 401) toast(err.message, true); })
+      .then(function () { b.disabled = !o.customer_email; });
+  });
+
+  // ---------- Tell the owner when the running server is older than this page ----------
+  var EXPECTED_SERVER = 13;
+  fetch('/api/version').then(function (r) { return r.json(); }).then(function (d) {
+    if (!d || Number(d.version) < EXPECTED_SERVER) throw new Error('old');
+  }).catch(function () { $('#version-banner').classList.remove('hidden'); });
+
+  // "Updated." must not hide a more useful message such as "The owner confirmed receiving ..."
+  function toastUpdated() {
+    var t = $('#toast');
+    if (t.classList.contains('hidden') || !/confirmed receiving|new order/i.test(t.textContent)) toast('Updated.');
+  }
+
+  // ---------- Payments handed over to the owner ----------
+  function tile(n, label, alert) { return '<div class="card stat' + (alert ? ' alert' : '') + '"><div class="n">' + esc(n) + '</div><div class="l">' + esc(label) + '</div></div>'; }
+
+  function renderPayments() {
+    var P = state.payments || { staff: [], owner: { collected: 0, rows: [] } };
+    var c = 0, r = 0, openCount = 0;
+    P.staff.forEach(function (g) { c += g.collected; r += g.received; openCount += g.rows.filter(function (x) { return !x.received_at; }).length; });
+    $('#pay-stats').innerHTML = tile(rupee(c), 'Collected by staff') + tile(rupee(r), 'Received by you') + tile(rupee(c - r), 'Still to receive', c - r > 0) + tile(rupee(P.owner.collected), 'Collected by you');
+    var badge = $('#recv-count');
+    badge.textContent = openCount;
+    badge.classList.toggle('hidden', openCount === 0);
+
+    var groups = P.staff.map(function (g) {
+      var rows = g.rows.map(function (x) {
+        return '<tr><td><strong>#' + esc(x.order_id) + '</strong></td><td>' + esc(x.customer_name) + '</td><td><strong>' + rupee(x.amount) + '</strong></td><td>' + esc(fmtDate(x.confirmed_at)) + '</td><td>' +
+          (x.received_at
+            ? '<span class="pill delivered">Received ' + esc(fmtDate(x.received_at)) + '</span> <button class="btn ghost small" type="button" data-pay-undo="' + esc(x.order_id) + '">Undo</button>'
+            : '<span class="pill pending">With ' + esc(g.staff_name) + '</span> <button class="btn small" type="button" data-pay-recv="' + esc(x.order_id) + '">Confirm received</button>') + '</td></tr>';
+      }).join('');
+      return '<div class="card" style="margin-bottom:16px"><div class="pad" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">' +
+        '<div><h3 style="margin:0 0 4px">' + esc(g.staff_name) + '</h3><div class="muted">Collected ' + rupee(g.collected) + ' &middot; Received ' + rupee(g.received) + ' &middot; <strong>To receive ' + rupee(g.pending) + '</strong></div></div>' +
+        (g.pending > 0 ? '<button class="btn small" type="button" data-pay-all="' + esc(g.staff_id) + '" data-pay-name="' + esc(g.staff_name) + '" data-pay-amount="' + g.pending + '">Receive all ' + rupee(g.pending) + '</button>' : '<span class="pill delivered">All received</span>') + '</div>' +
+        '<div class="table-wrap"><table><thead><tr><th>Order</th><th>Customer</th><th>Amount</th><th>Confirmed on</th><th>Status</th></tr></thead><tbody>' + rows + '</tbody></table></div></div>';
+    }).join('');
+    var mine = P.owner.rows.length
+      ? '<div class="card" style="margin-bottom:16px"><div class="pad" style="padding-bottom:0"><h3>Collected by you</h3></div><div class="table-wrap"><table><thead><tr><th>Order</th><th>Customer</th><th>Amount</th><th>Confirmed on</th></tr></thead><tbody>' +
+        P.owner.rows.map(function (x) { return '<tr><td><strong>#' + esc(x.order_id) + '</strong></td><td>' + esc(x.customer_name) + '</td><td><strong>' + rupee(x.amount) + '</strong></td><td>' + esc(fmtDate(x.confirmed_at)) + '</td></tr>'; }).join('') + '</tbody></table></div></div>'
+      : '';
+    $('#pay-groups').innerHTML = (groups || '<div class="card empty">No staff member has confirmed a payment yet. When one does, it appears here so you can confirm receiving the money.</div>') + mine;
+  }
+
+  function reloadOwnerPayments() {
+    return Promise.all([
+      api('/api/admin/payments'),
+      api('/api/admin/staff').catch(function () { return { staff: state.staff }; })
+    ]).then(function (r) {
+      state.payments = { staff: r[0].staff || [], owner: r[0].owner || { collected: 0, rows: [] } };
+      state.staff = r[1].staff || [];
+      renderPayments();
+      renderStaff();
+    });
+  }
+
+  $('#pay-groups').addEventListener('click', function (e) {
+    var one = e.target.closest('[data-pay-recv]'), undo = e.target.closest('[data-pay-undo]'), all = e.target.closest('[data-pay-all]');
+    function fail(err) { if (err.status !== 401) toast(err.message, true); }
+    if (one || undo) {
+      var btn = one || undo, id = btn.getAttribute(one ? 'data-pay-recv' : 'data-pay-undo');
+      btn.disabled = true;
+      api('/api/admin/payments/' + encodeURIComponent(id) + '/received', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ received: !!one }) })
+        .then(function () { toast(one ? 'Payment received.' : 'Marked as not received.'); return reloadOwnerPayments(); })
+        .catch(function (err) { btn.disabled = false; fail(err); });
+    } else if (all) {
+      var name = all.getAttribute('data-pay-name'), amount = Number(all.getAttribute('data-pay-amount')), staffId = all.getAttribute('data-pay-all');
+      confirmBox({ title: 'Receive ' + rupee(amount) + ' from ' + name + '?', message: 'This confirms that ' + name + ' handed you all the payments they collected.', confirmLabel: 'Yes, I received it' }).then(function (r) {
+        if (!r) return;
+        api('/api/admin/payments/staff/' + encodeURIComponent(staffId) + '/received', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: '{}' })
+          .then(function () { toast('Received ' + rupee(amount) + ' from ' + name + '.'); return reloadOwnerPayments(); })
+          .catch(fail);
+      });
+    }
+  });
+
+  function renderMyPayments() {
+    var P = state.mypay || { payments: [], collected: 0, received: 0, pending: 0 };
+    $('#sp-stats').innerHTML = tile(rupee(P.collected), 'Collected by you') + tile(rupee(P.received), 'Received by the owner') + tile(rupee(P.pending), 'Still with you', P.pending > 0);
+    $('#sp-body').innerHTML = (P.payments || []).length ? P.payments.map(function (x) {
+      return '<tr><td><strong>#' + esc(x.order_id) + '</strong></td><td>' + esc(x.customer_name) + '</td><td><strong>' + rupee(x.amount) + '</strong></td><td>' + esc(fmtDate(x.confirmed_at)) + '</td><td>' +
+        (x.received_at ? '<span class="pill delivered">Received by owner ' + esc(fmtDate(x.received_at)) + '</span>' : '<span class="pill pending">With you - hand it to the owner</span>') + '</td></tr>';
+    }).join('') : '<tr><td colspan="5" class="empty">No payments yet. When you confirm a payment on an order, it is added here.</td></tr>';
+  }
+
+  // ---------- Start ----------
+  api('/api/admin/me').then(function () { return enter(); }).catch(function () {
+    return api('/api/staff/me').then(function () { return enterStaff(); }).catch(function () { showLogin(); });
+  });
+})();
+</script>
+</body>
+</html>
